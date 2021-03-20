@@ -1,0 +1,86 @@
+.wrapper-header {
+    position: relative;
+}
+.Header {
+    display: "flex"
+}
+.imageLogo {
+    width: 65%
+}
+.text-right a{
+  font-size: 14px;
+  color: #a0a3a7;
+}
+.btn-toolbar {
+    display: contents !important;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.skip-links {
+    display: none;
+}
+
+.find-header {
+    position: absolute;
+    width: 20%;
+    left: 50%;
+    bottom: 55%;
+    transform: translateX(-50%);
+}
+
+@media only screen and (max-width: 767px) {
+    .imageLogo {
+        width: 120%
+    }
+    .skip-links {
+        display: flex;
+        align-content: center;
+        color: #f26b38;
+        border-top: 1px solid #EDEDED;
+        border-bottom: 1px solid #EDEDED;
+    }
+    
+    .skip-links-item {
+        flex: 25%;
+        text-align: center;
+        border-right: 1px solid #EDEDED;
+    }
+
+    .skip-links-item:hover {
+        background-color: #EDEDED;
+    }
+    
+    .linkItem i, .linkItem i:hover {
+        color: #f26b38;
+    }
+    
+    .skip-links span.label {
+        display: none;
+       
+    }
+
+   
+    
+
+    .hideSearch {
+        display: none;
+        transition: visibility 0.5s, opacity 0.5s linear;
+
+    }
+
+    .showSearch {
+        display: block;
+        transition: visibility 0.5s, opacity 0.5s linear;
+    }
+
+    .find-header {
+        width: 100%;
+        position: static;
+        bottom: 0;
+        left: 0;
+        transform: none;
+        padding: 20px;
+        background-color: #EDEDED
+    }
+}
