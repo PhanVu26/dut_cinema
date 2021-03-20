@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "bootstrap": "^4.6.0",
     "cra-template": "1.1.2",
     "font-awesome": "^4.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-fontawesome": "^1.7.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3"
   },

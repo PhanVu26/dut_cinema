@@ -1,12 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
 
-import HomePage from "./pages/admin/HomePage"
+import AdminPage from "./pages/admin/AdminPage"
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import routes from "./routes/index.route";
+import AccountManagementPage from "./pages/admin/AccounManagementPage";
 
 function App() {
   return (
     <div className="App">
-      <HomePage></HomePage>
+      <Router>
+        <Switch>
+          <Route exact path="/admin"> 
+            <AdminPage></AdminPage>
+          </Route>
+          <Route exact path="/admin/account"> 
+            <AccountManagementPage></AccountManagementPage>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

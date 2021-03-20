@@ -13,14 +13,12 @@ import Footer from "../../components/admin/Footer";
 import Modal from "../../components/admin/Modal";
 import MainContent from "../../components/admin/MainContent";
 import Navbar from "../../components/admin/Navbar";
-import Menu from "../../components/admin/Menu";
 
-const HomePage = (props) => {
+const AdminPage = (props) => {
     return (
         <Router>
             <Navbar></Navbar>        
             <Modal></Modal>
-            <Menu></Menu>
             <MainContent></MainContent>
             <Footer></Footer>
         </Router>
@@ -28,4 +26,4 @@ const HomePage = (props) => {
     )
 }
 
-export default HomePage;
+export default AdminPage;
