@@ -1,7 +1,7 @@
 import React from "react";
 
-import SlideBar from "../admin/SlideBar"
-import TopNavbar from "../admin/TopNavbar"
+import SlideBar from "../SlideBar/SlideBar"
+import TopNavbar from "../TopNavbar/TopNavbar"
 
 const Navbar  = (props) => {
     return (

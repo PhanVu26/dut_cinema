@@ -9,10 +9,10 @@ import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "../../components/admin/style.css";
-import Footer from "../../components/admin/Footer";
-import Modal from "../../components/admin/Modal";
-import MainContent from "../../components/admin/MainContent";
-import Navbar from "../../components/admin/Navbar";
+import Footer from "../../components/admin/Footer/Footer";
+import Modal from "../../components/admin/Modal/Modal";
+import MainContent from "../../components/admin/MainContain/MainContent";
+import Navbar from "../../components/admin/Navbar/Navbar";
 
 const AdminPage = (props) => {
     return (
