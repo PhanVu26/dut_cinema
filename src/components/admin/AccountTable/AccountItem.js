@@ -9,17 +9,20 @@ class AccountItem extends Component {
     onHandleModal = () => {
         this.props.onToggleForm()
     }
+    onDeleteUser = () => {
+        this.props.onDeleteUser(this.props.user.id);
+    }
     render() {
-        const {index, id, username, status, role, createdAt} = this.props;
+        const {index, user} = this.props;
         const {isDisplayForm} = this.props;
         return (
             <tr>
                 <td className="text-center">{index}</td>
-                <td className="text-center">{id}</td>
-                <td className="text-center">{username}</td>
-                <td className="text-center">{role}</td>
-                <td className="text-center">{createdAt}</td>
-                <td className="text-center">{status}</td>
+                <td className="text-center">{user.id}</td>
+                <td className="text-center">{user.username}</td>
+                <td className="text-center">{user.role}</td>
+                <td className="text-center">{user.createdAt}</td>
+                <td className="text-center">{user.status}</td>
                 <td className="text-center">
                     <button onClick={this.onHandleModal} type="button" className="btn btn-warning">
                         <span className="fa fa-pencil mr-2"></span>Sửa
@@ -39,16 +42,17 @@ class AccountItem extends Component {
                         </Modal.Footer>
                     </Modal>
                     &nbsp;
-                    <button type="button" className="btn btn-danger">
+                    <button onClick={() => {if(window.confirm('Bạn có muốn xóa user này?')){this.onDeleteUser()};}} type="button" className="btn btn-danger">
                         <span className="fa fa-trash mr-2"></span>Xóa
                     </button>
                 </td>
             </tr>
+            
         );
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
 
     }
@@ -58,6 +62,9 @@ const mapDispatchToProps = (dispatch, props) =>{
     return {
         onToggleForm: () => {
             dispatch(actions.toggleForm())
+        },
+        onDeleteUser: (id) => {
+            dispatch(actions.deleteUser(id))
         }
     }
 }

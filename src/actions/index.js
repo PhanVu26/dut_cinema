@@ -17,3 +17,10 @@ export const toggleForm = () => {
         type: types.TOGGEL_FORM,
     }
 }
+
+export const deleteUser = (id) => {
+    return {
+        type: types.DELETE_USER,
+        id
+    }
+}
