@@ -1,28 +1,26 @@
 import React, { Component } from 'react';
 import AccountSearchControl from './AccountSearchControl';
 import AccountSortControl from './AccountSortControl';
-import {Button, Modal} from "react-bootstrap";
-import { faHandHoldingMedical } from '@fortawesome/free-solid-svg-icons';
 import AccountForm from './AccountForm';
+import {Modal, Button, ThemeProvider} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import * as actions from '../../../actions/index';
 
 class AccountControl extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            show: false
-        }       
-    }
-    handleModal = () => {
-        this.setState({
-            show: !this.state.show
-        });
+
+    onHandleModal = () => {
+        console.log(this.props)
+        this.props.onToggleForm();
     }
     onSubmit = (event) => {
         event.preventDefault();
     }
+
+    onCloseForm = () => {
+        this.props.onCloseForm();
+    }
     render() {
+        const {isDisplayForm} = this.props;
         return (
             <div className="row mb-3">
                 <div className="col-md-8">
@@ -37,23 +35,9 @@ class AccountControl extends Component {
                             <button onClick={this.onHandleModal} type="button" className="btn btn-primary">
                                 <span className="fas fa-plus mr-2"></span>Thêm Account
                             </button>
-                            <Modal show={this.state.show}>
-                                <Modal.Header>Quản lý tài khoản</Modal.Header>
-                                <Modal.Body>
-                                    <AccountForm
-                                        onAddUser = {this.props.onAddUser}
-                                    ></AccountForm>
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <Button onClick = {this.onSubmit}>
-                                        Save
-                                    </Button>
-                                    <Button onClick = {this.handleModal}>
-                                        Close
-                                    </Button>
-                                </Modal.Footer>
+                            <Modal show={isDisplayForm}>
+                                <AccountForm></AccountForm>
                             </Modal>
-                            
                         </div>
                     </div>
                 </div>
@@ -64,15 +48,19 @@ class AccountControl extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        addUser : state.addUser
+        isDisplayForm : state.isDisplayForm
     }
+
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
         onAddUser:  (user) =>{
             dispatch(actions.addUser(user))
-        }
+        },
+        onToggleForm: ()=>{
+            dispatch(actions.toggleForm())
+        },
     }
 } 
 
