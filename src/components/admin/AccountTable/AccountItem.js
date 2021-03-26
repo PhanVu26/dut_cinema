@@ -19,13 +19,15 @@ class AccountItem extends Component {
         })
     }
     render() {
+        const {index, id, username, status, role, createdAt} = this.props;
         return (
             <tr>
-                <td className="text-center">1</td>
-                <td className="text-center">1123</td>
-                <td className="text-center">PhanVu</td>
-                <td className="text-center">10/10/2019</td>
-                <td className="text-center">Actived</td>
+                <td className="text-center">{index}</td>
+                <td className="text-center">{id}</td>
+                <td className="text-center">{username}</td>
+                <td className="text-center">{role}</td>
+                <td className="text-center">{createdAt}</td>
+                <td className="text-center">{status}</td>
                 <td className="text-center">
                     <button onClick={this.onHandleModal} type="button" className="btn btn-warning">
                         <span className="fa fa-pencil mr-2"></span>Sửa
