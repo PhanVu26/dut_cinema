@@ -30,6 +30,19 @@ var userReducer = (state = initialState, action) => {
     switch(action.type){
         case types.LIST_ALL_USERS:
             return state;
+        case types.ADD_USER:
+
+            var today = new Date();
+            var newUser = {
+                id: 1,
+                username: action.user.username,
+                role: action.user.role,
+                createdAt : + today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
+                status: action.user.status === true ? 'actived' : 'InActived'
+            }
+            state.push(newUser);
+            console.log(action);
+            return [...state];    
         default: return state;     
     }
     return state;

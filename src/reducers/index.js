@@ -1,8 +1,10 @@
 import {combineReducers} from "redux";
 import users from "./users";
+import isDisplayForm from './isDisplayForm'
 
 const myReducer = combineReducers({
-    users  
+    users,
+    isDisplayForm 
 })
 
 export default myReducer;

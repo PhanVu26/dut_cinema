@@ -1,25 +1,17 @@
 import React, { Component } from 'react';
 import {Modal, Button} from "react-bootstrap";
 import AccountForm from './AccountForm';
+import {connect} from 'react-redux';
+import * as actions from '../../../actions/index';
 
 class AccountItem extends Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            show : false,
-            showDelete: false
-        }
-    }
-
     onHandleModal = () => {
-        this.setState({
-            show: !this.state.show,
-            showdelete: !this.state.showDelete
-        })
+        this.props.onToggleForm()
     }
     render() {
         const {index, id, username, status, role, createdAt} = this.props;
+        const {isDisplayForm} = this.props;
         return (
             <tr>
                 <td className="text-center">{index}</td>
@@ -32,11 +24,10 @@ class AccountItem extends Component {
                     <button onClick={this.onHandleModal} type="button" className="btn btn-warning">
                         <span className="fa fa-pencil mr-2"></span>Sửa
                     </button>
-                    <Modal show={this.state.show}>
+                    <Modal show={isDisplayForm}>
                         <Modal.Header><h2>Quản lý tài khoản</h2></Modal.Header>
                         <Modal.Body>
-                            <AccountForm></AccountForm>
-                            
+                            <AccountForm></AccountForm>                          
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick = {this.onhandleModal}>
@@ -57,4 +48,18 @@ class AccountItem extends Component {
     }
 }
 
-export default AccountItem;
+const mapStateToProps = state => {
+    return {
+
+    }
+}
+
+const mapDispatchToProps = (dispatch, props) =>{
+    return {
+        onToggleForm: () => {
+            dispatch(actions.toggleForm())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountItem);

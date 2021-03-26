@@ -11,3 +11,9 @@ export const addUser = (user) => {
         user
     }
 }
+
+export const toggleForm = () => {
+    return {
+        type: types.TOGGEL_FORM,
+    }
+}
