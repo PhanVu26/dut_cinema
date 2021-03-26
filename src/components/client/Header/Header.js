@@ -1,41 +1,82 @@
 import React, { Component } from "react";
-import Navigation from "../Navigation/Navigation";
+import "./styles/Header.css";
+import Logo from "../../../assets/images/logo.png";
+import NavigationBar from "../NavigationBar/NavigationBar";
 import SearchBox from "../SearchBox/SearchBox";
 import Login from "./Login";
 import Register from "./Register";
-import "./styleHeader.css";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
-
-import Logo from "../../../assets/images/logo.png";
-
-
+// this is a header component to show the header and navigation to viewer
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    // state openMenu and openSearch use to know when to show menu and search in mobile screen
+    this.state = {
+      openMenu: false,
+      openSearch: false,
+    };
+  }
+
+  // make a alert to customer to confirm that they want to log out
+  onDelete = () => {
+    let result = window.confirm("Bạn có muốn đăng xuất ?");
+    if (result === true) {
+      window.localStorage.removeItem("account");
+    }
+  };
+
+  // toggle the Menu, if the Search is opened that close the search
+  handleToggleMenu() {
+    this.setState({
+      openMenu: !this.state.openMenu,
+    });
+    if (this.state.openSearch) {
+      this.setState({
+        openSearch: !this.state.openSearch,
+      });
+    }
+  }
+
+  // toggle the Search, if the Menu is opened that close the menu
+  handlerToggleSearch() {
+    this.setState({
+      openSearch: !this.state.openSearch,
+    });
+    if (this.state.openMenu) {
+      this.setState({
+        openMenu: !this.state.openMenu,
+      });
+    }
+  }
+
+  // keyCode equals 13 represented for Enter button
+  handlerOnEnter = (e, keyword) => {
+    if (e.keyCode === 13) {
+    }
+  };
 
   render() {
+    let showMenu = this.state.openMenu ? "showMenu" : "hideMenu";
+    let showSearch = this.state.openSearch ? "showSearch" : "hideSearch";
     return (
       <div className="wrapper-header">
-        {/* Header banner */}
-        <div className=" container-fluid">
+        <div className="container-fluid">
           <div className="container">
             <div className="wrap-header row d-flex align-items-center">
-              <div className="col-4 col-md-4 col-lg-3">
-                <Link to="/">
-                  <img className="imageLogo" src={Logo} alt="logo"></img>
-                </Link>
+              <div className="col-4 col-md4 col-lg-3">
+                <img className="imageLogo" src={Logo} alt="logo" />
               </div>
               <div className="col-8 col-md-8 col-lg-9 text-right text-secondary">
+                <Login /> <span>/</span> <Register />
               </div>
             </div>
           </div>
         </div>
-
-        {/* menu mobile */}
-        <div className={`skip-links`}>
+        <div className="skip-links">
           <span
             className="skip-links-item"
+            onClick={this.handleToggleMenu.bind(this)}
           >
-            <a href="/#" className="linkItem">
+            <a href="#" className="linkItem">
               <span className="icon">
                 <span>
                   <i className="fas fa-bars"></i>
@@ -46,8 +87,9 @@ class Header extends Component {
           </span>
           <span
             className="skip-links-item"
+            onClick={this.handlerToggleSearch.bind(this)}
           >
-            <a href="/#" className=" linkItem skip-link skip-search">
+            <a href="#" className="linkItem skip-link skip-search">
               <span className="icon">
                 <span>
                   <i className="fas fa-search"></i>
@@ -57,13 +99,8 @@ class Header extends Component {
             </a>
           </span>
         </div>
-
-        {/* Navigation */}
-        <Navigation />
-
-        {/* Search */}
-        <SearchBox
-        />
+        <NavigationBar status={showMenu} />
+        <SearchBox status={showSearch} />
       </div>
     );
   }

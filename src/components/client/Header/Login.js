@@ -1,12 +1,93 @@
-import React from "react";
+import React, { Component } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Button, ButtonToolbar } from "react-bootstrap";
+import "./styles/LoginStyles.css";
 
+class Login extends Component {
+  constructor(props, context) {
+    super(props, context);
 
-class Login extends React.Component {
+    this.handleShow = this.handleShow.bind(this);
+    this.handleHide = this.handleHide.bind(this);
 
+    this.state = {
+      isShow: false,
+      password: {
+        value: "",
+        isValid: true,
+        errorMessage: "",
+      },
+      email: {
+        value: "",
+        isValid: true,
+        errorMessage: "",
+      },
+    };
+  }
+
+  handleShow() {
+    this.setState({ isShow: true });
+  }
+
+  handleHide() {
+    this.setState({ isShow: false });
+  }
+
+  handleInput = (event) => {
+    const { name, value } = event.target;
+    const newState = { ...this.state[name] }; /* dummy object */
+    newState.value = value;
+    this.setState({ [name]: newState });
+  };
+
+  handleInputValidation = (event) => {
+    const { name } = event.target;
+    const { isValid, errorMessage } = validateInput(
+      name,
+      this.state[name].value
+    );
+    const newState = { ...this.state[name] }; /* dummy object */
+    newState.isValid = isValid;
+    newState.errorMessage = errorMessage;
+    this.setState({ [name]: newState });
+  };
+
+  onSave = (e) => {
+    e.preventDefault();
+    let { password, email } = this.state;
+
+    if (
+      password.value !== "" &&
+      password.isValid === true &&
+      email.value !== "" &&
+      email.isValid === true
+    ) {
+      let account = {
+        password: password.value,
+        email: email.value,
+      };
+
+      //   actLoginAccountRequest(account).then((res) => {
+      //     let dataAccount = res.data;
+      //     console.log(dataAccount);
+      //     if (!dataAccount.success) {
+      //       alert(dataAccount.message);
+      //     } else {
+      //       if (Object.keys(dataAccount).length !== 0) {
+      //         localStorage.setItem("account", JSON.stringify(dataAccount));
+      //       }
+      //       alert("Logged in successfully");
+      //       this.setState({ show: false });
+      //       window.location.reload();
+      //     }
+      //   });
+    } else {
+      alert("Vui lòng nhập đúng định dạng.");
+    }
+  };
 
   render() {
+    let { password, email } = this.state;
 
     let toolbar = {
       display: "content",
@@ -35,12 +116,16 @@ class Login extends React.Component {
     return (
       <ButtonToolbar style={toolbar}>
         <div
+          className="pl-2 text-secondary text-decoration-none"
+          onClick={this.handleShow}
           style={link}
-          className="pl-2 text-secondary text-decoration-none "
         >
           <i className="fas fa-user mr-1"></i> Đăng nhập
         </div>
         <Modal
+          {...this.props}
+          show={this.state.isShow}
+          onHide={this.handleHide}
           dialogClassName="custom-modal"
         >
           <Modal.Header closeButton style={modalHeader}>
@@ -57,7 +142,7 @@ class Login extends React.Component {
                 </p>
               </div>
             </div>
-            <form id="loginForm">
+            <form onSubmit={this.onSave} id="loginForm">
               <div className="row">
                 <div className="col-md-12">
                   <input
@@ -65,9 +150,16 @@ class Login extends React.Component {
                     className="form-control"
                     id="email"
                     placeholder="Email"
-                    name="txtEmail"
+                    name="email"
+                    value={email.value}
+                    onChange={this.handleInput}
+                    onBlur={this.handleInputValidation}
                   />
-                  
+                  <FormError
+                    type="email"
+                    isHidden={this.state.email.isValid}
+                    errorMessage={this.state.email.errorMessage}
+                  ></FormError>
                 </div>
               </div>
               <div className="row mt-3">
@@ -77,15 +169,22 @@ class Login extends React.Component {
                     className="form-control"
                     id="password"
                     placeholder="Mật khẩu"
-                    name="txtPassword"
+                    name="password"
+                    value={password.value}
+                    onChange={this.handleInput}
+                    onBlur={this.handleInputValidation}
                   />
-                  
+                  <FormError
+                    type="password"
+                    isHidden={this.state.password.isValid}
+                    errorMessage={this.state.password.errorMessage}
+                  ></FormError>
                 </div>
               </div>
             </form>
             <div className="row mt-3">
               <div className="col-md-12">
-                <a href="/#" style={text}>
+                <a href="#" style={text}>
                   Quên mật khẩu ?
                 </a>
               </div>
@@ -93,7 +192,7 @@ class Login extends React.Component {
           </Modal.Body>
           <Modal.Footer>
             <Button type="submit" form="loginForm" style={Buttonn}>
-              Đăng Nhập
+              Đăng nhập
             </Button>
           </Modal.Footer>
         </Modal>
@@ -102,5 +201,40 @@ class Login extends React.Component {
   }
 }
 
+function FormError(props) {
+  if (props.isHidden) {
+    return null;
+  }
+  return (
+    <div className="m-1" style={{ color: "red" }}>
+      {props.errorMessage}
+    </div>
+  );
+}
+
+const validateInput = (type, checkingText) => {
+  if (type === "email") {
+    if (checkingText !== "") {
+      return { isInputValid: true, errorMessage: "" };
+    } else {
+      return {
+        isValid: false,
+        errorMessage: "Email không được để trống.",
+      };
+    }
+  }
+  if (type === "password") {
+    const regexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const checkingResult = regexp.exec(checkingText);
+    if (checkingResult !== null) {
+      return { isInputValid: true, errorMessage: "" };
+    } else {
+      return {
+        isValid: false,
+        errorMessage: "Mật khẩu từ 8 kí tự bao gồm chữ và số",
+      };
+    }
+  }
+};
 
 export default Login;

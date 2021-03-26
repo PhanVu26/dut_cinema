@@ -1,28 +1,22 @@
 import React, { Component } from "react";
+import "./styles/SearchBoxStyles.css";
 
 class SearchBox extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      keyword: "",
+      word: "",
     };
   }
-
-  handleOnChange = (e) => {
-    this.setState({
-      keyword: e.target.value,
-    });
-  };
   render() {
-    const { styleSearch } = this.props;
     return (
-      <div className={`${styleSearch} find-header`}>
+      <div className={`${this.props.status} find-header`}>
         <input
+          type="text"
           className="form-control mx-auto"
-          placeholder="Tìm tên phim, diễn viên..."
-          value={this.state.search}
-          onChange={this.handleOnChange}
-          onKeyUp={(e) => this.props.handleOnEnter(e, this.state.keyword)}
+          placeholder="Search"
+          value={this.state.word}
+          onChange={(e) => this.setState({ word: e.target.value })}
         />
       </div>
     );
