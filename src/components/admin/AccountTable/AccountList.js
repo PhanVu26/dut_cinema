@@ -25,11 +25,12 @@ class AccountList extends Component {
                             return (
                                 <AccountItem
                                     index = {index + 1}
-                                    id = {user.id}
-                                    username = {user.username}
-                                    role = {user.role}
-                                    createdAt = {user.createdAt}
-                                    status = {user.status}
+                                    //id = {user.id}
+                                    // username = {user.username}
+                                    // role = {user.role}
+                                    // createdAt = {user.createdAt}
+                                    // status = {user.status}
+                                    user = {user}
                                     >
                                 </AccountItem>
                             )      

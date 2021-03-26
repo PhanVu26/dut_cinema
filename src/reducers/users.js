@@ -9,14 +9,14 @@ var initialState = [
     },
 
     {
-        id: 1,
+        id: 2,
         username: "PhanVu",
         role: "Movie-Manager",
         status: "actived",
         createdAt: "26/01/2018"
     },
     {
-        id: 1,
+        id: 3,
         username: "PhanVu",
         role: "Movie-Manager",
         status: "actived",
@@ -24,7 +24,15 @@ var initialState = [
     }
 ];
 
-
+const findIndex = (users, id) => {
+    var result = -1;
+    users.forEach((user, index) => {
+        if(user.id === id ){
+            result = index;
+        }
+    });
+    return result;
+}
 
 var userReducer = (state = initialState, action) => {
     switch(action.type){
@@ -43,6 +51,11 @@ var userReducer = (state = initialState, action) => {
             state.push(newUser);
             console.log(action);
             return [...state];    
+        case types.DELETE_USER:
+            const index = findIndex(state, action.id)
+            state.splice(index, 1);
+            console.log(action);
+            return [...state];        
         default: return state;     
     }
     return state;
