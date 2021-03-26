@@ -4,6 +4,8 @@ import AccountSortControl from './AccountSortControl';
 import {Button, Modal} from "react-bootstrap";
 import { faHandHoldingMedical } from '@fortawesome/free-solid-svg-icons';
 import AccountForm from './AccountForm';
+import {connect} from 'react-redux';
+import * as actions from '../../../actions/index';
 
 class AccountControl extends Component {
     constructor(props){
@@ -17,6 +19,9 @@ class AccountControl extends Component {
             show: !this.state.show
         });
     }
+    onSubmit = (event) => {
+        event.preventDefault();
+    }
     render() {
         return (
             <div className="row mb-3">
@@ -29,14 +34,18 @@ class AccountControl extends Component {
                             <AccountSortControl/>
                         </div>
                         <div className="col-md-6">
-                            <Button onClick = {this.handleModal}>Thêm tài khoản</Button>
+                            <button onClick={this.onHandleModal} type="button" className="btn btn-primary">
+                                <span className="fas fa-plus mr-2"></span>Thêm Account
+                            </button>
                             <Modal show={this.state.show}>
                                 <Modal.Header>Quản lý tài khoản</Modal.Header>
                                 <Modal.Body>
-                                    <AccountForm></AccountForm>
+                                    <AccountForm
+                                        onAddUser = {this.props.onAddUser}
+                                    ></AccountForm>
                                 </Modal.Body>
                                 <Modal.Footer>
-                                    <Button onClick = {this.handleModal}>
+                                    <Button onClick = {this.onSubmit}>
                                         Save
                                     </Button>
                                     <Button onClick = {this.handleModal}>
@@ -53,4 +62,18 @@ class AccountControl extends Component {
     }
 }
 
-export default AccountControl;
+const mapStateToProps = (state) => {
+    return {
+        addUser : state.addUser
+    }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onAddUser:  (user) =>{
+            dispatch(actions.addUser(user))
+        }
+    }
+} 
+
+export default connect(mapStateToProps, mapDispatchToProps ) (AccountControl);
