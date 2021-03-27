@@ -18,7 +18,7 @@ class Movies extends Component {
 
   render() {
     // let { movies } = this.props;
-    let { movies } = data;
+    let movies = data.movie;
     console.log(movies);
     let movieShowing = movies.filter((item) =>
       this.isMovieShowing(item.premiereDate)

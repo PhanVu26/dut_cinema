@@ -1,5 +1,5 @@
 export const data = {
-  movies: [
+  movie: [
     {
       id: "Movie001",
       name: "Nắng 3: lời hứa của cha",
