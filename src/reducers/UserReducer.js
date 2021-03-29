@@ -35,6 +35,7 @@ const findIndex = (users, id) => {
 }
 
 var userReducer = (state = initialState, action) => {
+    var index = -1;
     switch(action.type){
         case types.LIST_ALL_USERS:
             return state;
@@ -52,10 +53,18 @@ var userReducer = (state = initialState, action) => {
             console.log(action);
             return [...state];    
         case types.DELETE_USER:
-            const index = findIndex(state, action.id)
+            index = findIndex(state, action.id)
             state.splice(index, 1);
             console.log(action);
-            return [...state];        
+            return [...state];       
+        case types.UPDATE_USER_STATUS:
+            index = findIndex(state, action.id);
+            state[index] = {
+                ...state[index],
+                status: !state[index].status
+            }
+            console.log(action);
+            return [...state];            
         default: return state;     
     }
     return state;

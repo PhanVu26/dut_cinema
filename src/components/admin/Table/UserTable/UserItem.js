@@ -6,15 +6,22 @@ import * as actions from '../../../../actions/index';
 
 class UserItem extends Component {
 
+    constructor(props){
+        super(props);
+    }
     onHandleModal = () => {
         this.props.onToggleUserForm()
     }
     onDeleteUser = () => {
         this.props.onDeleteUser(this.props.user.id);
     }
+    toggleUserStatus = () => {
+        this.props.onUpdateUserStatus(this.props.user.id)
+    }
     render() {
         const {index, user} = this.props;
         const {isDisplayUserForm} = this.props;
+        const status = user.status ? ' ẩn ' : ' kích hoạt ';
         return (
             <tr>
                 <td className="text-center">{index}</td>
@@ -22,7 +29,13 @@ class UserItem extends Component {
                 <td className="text-center">{user.username}</td>
                 <td className="text-center">{user.role}</td>
                 <td className="text-center">{user.createdAt}</td>
-                <td className="text-center">{user.status}</td>
+                <td className="text-center">
+                    <i 
+                        className= {user.status ? 'fas fa-toggle-on': 'fas fa-toggle-off' }
+                        onClick={() => {if(window.confirm('Bạn có muốn'+ status +'user này?')){this.toggleUserStatus()};}}>
+                            
+                    </i>
+                </td>
                 <td className="text-center">
                     <button onClick={this.onHandleModal} type="button" className="btn btn-warning">
                         <span className="fa fa-pencil mr-2"></span>Sửa
@@ -65,7 +78,10 @@ const mapDispatchToProps = (dispatch, props) =>{
         },
         onDeleteUser: (id) => {
             dispatch(actions.deleteUser(id))
-        }
+        },
+        onUpdateUserStatus: (id) => {
+            dispatch(actions.updateUserStatus(id))
+        },
     }
 }
 
