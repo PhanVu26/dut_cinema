@@ -24,3 +24,10 @@ export const deleteUser = (id) => {
         id
     }
 }
+
+export const updateUserStatus = (id) => {
+    return {
+        type: types.UPDATE_USER_STATUS,
+        id
+    }
+}
