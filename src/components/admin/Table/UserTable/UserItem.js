@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import {Modal, Button} from "react-bootstrap";
-import AccountForm from './AccountForm';
+import UserForm from '../../Form/UserForm/UserForm';
 import {connect} from 'react-redux';
-import * as actions from '../../../actions/index';
+import * as actions from '../../../../actions/index';
 
-class AccountItem extends Component {
+class UserItem extends Component {
 
     onHandleModal = () => {
-        this.props.onToggleForm()
+        this.props.onToggleUserForm()
     }
     onDeleteUser = () => {
         this.props.onDeleteUser(this.props.user.id);
     }
     render() {
         const {index, user} = this.props;
-        const {isDisplayForm} = this.props;
+        const {isDisplayUserForm} = this.props;
         return (
             <tr>
                 <td className="text-center">{index}</td>
@@ -27,10 +27,10 @@ class AccountItem extends Component {
                     <button onClick={this.onHandleModal} type="button" className="btn btn-warning">
                         <span className="fa fa-pencil mr-2"></span>Sửa
                     </button>
-                    <Modal show={isDisplayForm}>
+                    <Modal show={isDisplayUserForm}>
                         <Modal.Header><h2>Quản lý tài khoản</h2></Modal.Header>
                         <Modal.Body>
-                            <AccountForm></AccountForm>                          
+                            <UserForm></UserForm>                          
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick = {this.onhandleModal}>
@@ -43,7 +43,7 @@ class AccountItem extends Component {
                     </Modal>
                     &nbsp;
                     <button onClick={() => {if(window.confirm('Bạn có muốn xóa user này?')){this.onDeleteUser()};}} type="button" className="btn btn-danger">
-                        <span className="fa fa-trash mr-2"></span>Xóa
+                        <span className="far fa-trash-alt mr-2"></span>Xóa
                     </button>
                 </td>
             </tr>
@@ -60,8 +60,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) =>{
     return {
-        onToggleForm: () => {
-            dispatch(actions.toggleForm())
+        onToggleUserForm: () => {
+            dispatch(actions.toggleUserForm())
         },
         onDeleteUser: (id) => {
             dispatch(actions.deleteUser(id))
@@ -69,4 +69,4 @@ const mapDispatchToProps = (dispatch, props) =>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountItem);
+export default connect(mapStateToProps, mapDispatchToProps)(UserItem);
