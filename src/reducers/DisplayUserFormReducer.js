@@ -3,7 +3,7 @@ var initialState = false;
 
 var DisplayFormReducer = (state = initialState, action) => {
     switch(action.type){
-        case types.TOGGEL_FORM:
+        case types.TOGGLE_USER_FORM:
             return !state;   
         default: return state;     
     }

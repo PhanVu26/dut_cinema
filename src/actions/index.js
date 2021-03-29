@@ -12,9 +12,9 @@ export const addUser = (user) => {
     }
 }
 
-export const toggleForm = () => {
+export const toggleUserForm = () => {
     return {
-        type: types.TOGGEL_FORM,
+        type: types.TOGGLE_USER_FORM,
     }
 }
 

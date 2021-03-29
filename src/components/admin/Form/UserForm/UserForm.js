@@ -1,9 +1,9 @@
 import { Button, Modal } from 'react-bootstrap';
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../../actions/index';
+import * as actions from '../../../../actions/index';
 
-class AccountForm extends Component {
+class UserForm extends Component {
 
     constructor(props){
         super(props);
@@ -16,7 +16,7 @@ class AccountForm extends Component {
     }
 
     onCloseForm = () => {
-        this.props.onToggleForm();
+        this.props.onToggleUserForm();
     }
     onHandleChange = (event) => {
         var target = event.target;
@@ -33,13 +33,13 @@ class AccountForm extends Component {
         const user = this.state;
         console.log(this.state)
         this.props.onAddUser(user);
-        this.props.onToggleForm();
+        this.props.onToggleUserForm();
     }
     render() {
         return (
             <div>
                 <form onSubmit = {this.onSubmit} >
-                    <Modal.Header>Quản lý tài khoản</Modal.Header>
+                    <Modal.Header>Quản lý người dùng</Modal.Header>
                     <Modal.Body>
                         <div className="panel-body">
                             <div className="form-group">
@@ -106,8 +106,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        onToggleForm: ()=>{
-            dispatch(actions.toggleForm())
+        onToggleUserForm: ()=>{
+            dispatch(actions.toggleUserForm())
         },
         onAddUser: (user) => {
             dispatch(actions.addUser(user))
@@ -115,4 +115,4 @@ const mapDispatchToProps = (dispatch, props) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountForm);
+export default connect(mapStateToProps, mapDispatchToProps)(UserForm);

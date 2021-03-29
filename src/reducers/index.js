@@ -1,10 +1,10 @@
 import {combineReducers} from "redux";
-import users from "./users";
-import isDisplayForm from './isDisplayForm'
+import users from "./UserReducer";
+import isDisplayUserForm from './DisplayUserFormReducer'
 
 const myReducer = combineReducers({
     users,
-    isDisplayForm 
+    isDisplayUserForm 
 })
 
 export default myReducer;

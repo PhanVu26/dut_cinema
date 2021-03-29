@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import AccountItem from './AccountItem';
+import UserItem from './UserItem';
 import {connect} from 'react-redux';
 
-class AccountList extends Component {
+class UserList extends Component {
 
     render() {
         console.log(this.props.users);
@@ -23,7 +23,7 @@ class AccountList extends Component {
                     {
                         this.props.users.map((user, index) => {
                             return (
-                                <AccountItem
+                                <UserItem
                                     index = {index + 1}
                                     //id = {user.id}
                                     // username = {user.username}
@@ -32,7 +32,7 @@ class AccountList extends Component {
                                     // status = {user.status}
                                     user = {user}
                                     >
-                                </AccountItem>
+                                </UserItem>
                             )      
                         })
                     }
@@ -47,4 +47,4 @@ const mapStateToProps = (state) => {
         users: state.users
     }
 }
-export default connect(mapStateToProps, null) (AccountList);
+export default connect(mapStateToProps, null) (UserList);
