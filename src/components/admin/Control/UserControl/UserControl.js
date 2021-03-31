@@ -9,8 +9,20 @@ import * as actions from '../../../../actions/index'
 class UserControl extends Component {
 
     onHandleModal = () => {
-        console.log(this.props)
-        this.props.onToggleUserForm();
+        console.log("user editing: ", this.props.userEditing)
+        if(this.props.userEditing.id === '' ){
+            this.props.onToggleUserForm();
+        }else {
+            this.props.onClearUser({
+                id: '',
+                username :'',
+                password: '',
+                status: false,
+                role: ''
+
+            })
+            this.props.onToggleUserForm();
+        }
     }
     onSubmit = (event) => {
         event.preventDefault();
@@ -48,19 +60,20 @@ class UserControl extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isDisplayUserForm : state.isDisplayUserForm
+        isDisplayUserForm : state.isDisplayUserForm,
+        userEditing : state.userEditing
     }
 
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        onAddUser:  (user) =>{
-            dispatch(actions.addUser(user))
-        },
         onToggleUserForm: ()=>{
             dispatch(actions.toggleUserForm())
         },
+        onClearUser: (user) => {
+            dispatch(actions.getUserEditing(user))
+        }
     }
 } 
 
