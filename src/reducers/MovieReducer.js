@@ -1,4 +1,4 @@
-import * as Types from "../constants/ActionTypes";
+import * as Types from "../constants/ActionType";
 
 const stateDefault = {
   movie: [],
