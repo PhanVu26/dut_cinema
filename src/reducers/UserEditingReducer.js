@@ -9,8 +9,7 @@ var initialState = {
 
 var myReducer = (state = initialState, action) => {
     switch(action.type){
-        case types.GET_USER_EDITING: 
-            console.log("user editting ", action.user)            
+        case types.GET_USER_EDITING:        
             return action.user
         default: return state;     
     }

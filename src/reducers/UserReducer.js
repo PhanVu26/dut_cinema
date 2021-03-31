@@ -4,7 +4,7 @@ var initialState = [
         id: 1,
         username: "PhanVu",
         role: "Movie-Manager",
-        status: "actived",
+        status: true,
         createdAt: "26/01/2018"
     },
 
@@ -12,14 +12,58 @@ var initialState = [
         id: 2,
         username: "PhanVu",
         role: "Movie-Manager",
-        status: "actived",
+        status: true,
         createdAt: "26/01/2018"
     },
     {
         id: 3,
         username: "PhanVu",
         role: "Movie-Manager",
-        status: "actived",
+        status: true,
+        createdAt: "26/01/2018"
+    },
+    {
+        id: 4,
+        username: "PhanVu",
+        role: "Movie-Manager",
+        status: true,
+        createdAt: "26/01/2018"
+    },
+
+    {
+        id: 5,
+        username: "PhanVu",
+        role: "Movie-Manager",
+        status: false,
+        createdAt: "26/01/2018"
+    },
+    {
+        id: 6,
+        username: "PhanVu",
+        role: "Movie-Manager",
+        status: false,
+        createdAt: "26/01/2018"
+    },
+    {
+        id: 8,
+        username: "PhanVu",
+        role: "Movie-Manager",
+        status: false,
+        createdAt: "26/01/2018"
+    },
+
+    {
+        id: 9,
+        username: "PhanVu",
+        role: "Movie-Manager",
+        status: false,
+        createdAt: "26/01/2018"
+    },
+    {
+        id: 10,
+        username: "PhanVu",
+        role: "Movie-Manager",
+        status: false,
         createdAt: "26/01/2018"
     }
 ];
@@ -51,7 +95,7 @@ var userReducer = (state = initialState, action) => {
                 password: action.user.password,
                 role: action.user.role,
                 createdAt : + today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
-                status: action.user.status
+                status: action.user.status === 'true' ? true: false
             }
             if(!newUser.id){
                 newUser.id = randomId();
@@ -63,7 +107,6 @@ var userReducer = (state = initialState, action) => {
                 editUser.role = newUser.role;
                 editUser.status = newUser.status;
                 state[index] = editUser;
-                console.log("update state", index, state);
                 //return state;
             }
             return [...state];    

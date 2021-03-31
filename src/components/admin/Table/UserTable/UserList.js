@@ -20,6 +20,7 @@ class UserList extends Component {
                     </tr>
                 </thead>
                 <tbody>
+                    
                     {
                         this.props.users.map((user, index) => {
                             return (
