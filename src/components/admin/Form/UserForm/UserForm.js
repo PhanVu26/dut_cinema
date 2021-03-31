@@ -14,7 +14,7 @@ class UserForm extends Component {
             username : '',
             password: '',
             role: '',
-            status: true,
+            status: false,
         }
     }
 
@@ -29,18 +29,17 @@ class UserForm extends Component {
         this.setState({
             [name] : value
         })
+        console.log("handleCHange:", this.state)
     }
 
     onSubmit = (event) => {
         event.preventDefault();
         const user = this.state;
-        console.log("state edit", this.state)
         this.props.onSaveUser(user);
         this.props.onToggleUserForm();
     }
 
     componentDidMount(){
-        console.log("props",  this.props.userEditing)
         if(this.props.userEditing && this.props.userEditing.id !== ''){
             this.setState({
                 id: this.props.userEditing.id,
@@ -52,7 +51,6 @@ class UserForm extends Component {
         }
     }
     render() {
-        console.log("id ", this.props.userEditing.id)
         return (
             <div>
                 <form onSubmit = {this.onSubmit} >
@@ -132,7 +130,6 @@ const mapDispatchToProps = (dispatch, props) => {
             dispatch(actions.toggleUserForm())
         },
         onSaveUser: (user) => {
-            console.log("update: ", user)
             dispatch(actions.saveUser(user))
         }
     }
