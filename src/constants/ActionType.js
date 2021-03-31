@@ -1,6 +1,7 @@
 export const LIST_ALL_USERS = 'LIST_ALL_USERS';
-export const ADD_USER = 'ADD_USER';
+export const SAVE_USER = 'SAVE_USER';
 export const TOGGLE_USER_FORM = 'TOGGLE_USER_FORM';
 export const DELETE_USER = 'DELETE_USER';
+export const GET_USER_EDITING = 'GET_USER_EDITING';
 export const UPDATE_USER_STATUS = 'UPDATE_USER_STATUS';
 

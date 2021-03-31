@@ -18,6 +18,10 @@ class UserItem extends Component {
     toggleUserStatus = () => {
         this.props.onUpdateUserStatus(this.props.user.id)
     }
+    getUserEditing = () => {
+        this.props.onToggleUserForm();
+        this.props.getUserEditing(this.props.user)
+    }
     render() {
         const {index, user} = this.props;
         const {isDisplayUserForm} = this.props;
@@ -37,22 +41,11 @@ class UserItem extends Component {
                     </i>
                 </td>
                 <td className="text-center">
-                    <button onClick={this.onHandleModal} type="button" className="btn btn-warning">
+                    <button onClick={this.getUserEditing} type="button" className="btn btn-warning">
                         <span className="fa fa-pencil mr-2"></span>Sửa
                     </button>
                     <Modal show={isDisplayUserForm}>
-                        <Modal.Header><h2>Quản lý tài khoản</h2></Modal.Header>
-                        <Modal.Body>
-                            <UserForm></UserForm>                          
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button onClick = {this.onhandleModal}>
-                                Save
-                            </Button>
-                            <Button onClick = {this.onHandleModal}>
-                                Close
-                            </Button>
-                        </Modal.Footer>
+                        <UserForm></UserForm>
                     </Modal>
                     &nbsp;
                     <button onClick={() => {if(window.confirm('Bạn có muốn xóa user này?')){this.onDeleteUser()};}} type="button" className="btn btn-danger">
@@ -67,7 +60,7 @@ class UserItem extends Component {
 
 const mapStateToProps = (state) => {
     return {
-
+        userEditing : state.userEditing
     }
 }
 
@@ -82,6 +75,9 @@ const mapDispatchToProps = (dispatch, props) =>{
         onUpdateUserStatus: (id) => {
             dispatch(actions.updateUserStatus(id))
         },
+        getUserEditing : (user) => {
+            dispatch(actions.getUserEditing(user))
+        }
     }
 }
 

@@ -5,9 +5,9 @@ export const listAllUsers = () => {
     }
 }
 
-export const addUser = (user) => {
+export const saveUser = (user) => {
     return {
-        type: types.ADD_USER,
+        type: types.SAVE_USER,
         user
     }
 }
@@ -29,5 +29,12 @@ export const updateUserStatus = (id) => {
     return {
         type: types.UPDATE_USER_STATUS,
         id
+    }
+}
+
+export const getUserEditing = (user) => {
+    return {
+        type: types.GET_USER_EDITING,
+        user
     }
 }

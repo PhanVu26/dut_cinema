@@ -23,7 +23,7 @@ class UserList extends Component {
                     {
                         this.props.users.map((user, index) => {
                             return (
-                                <UserItem
+                                <UserItem key={user.id}
                                     index = {index + 1}
                                     //id = {user.id}
                                     // username = {user.username}
