@@ -26,13 +26,14 @@ class UserItem extends Component {
     render() {
         const {index, user} = this.props;
         const {isDisplayUserForm} = this.props;
-        const status = user.status ? ' ẩn ' : ' kích hoạt ';
+        const status = user.status ? ' ẩn ' : ' kích hoạt ';  
+        var role = user.role === 1 ? 'Quản lý phim' : user.role === 2 ? 'Quản lý lịch chiếu' : 'Người dùng';
         return (
             <tr>
                 <td className="text-center">{index}</td>
                 <td className="text-center">{user.id}</td>
                 <td className="text-center">{user.username}</td>
-                <td className="text-center">{user.role}</td>
+                <td className="text-center">{role}</td>
                 <td className="text-center">{user.createdAt}</td>
                 <td className="text-center">
                     <i 

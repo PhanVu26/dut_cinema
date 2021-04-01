@@ -4,4 +4,4 @@ export const TOGGLE_USER_FORM = 'TOGGLE_USER_FORM';
 export const DELETE_USER = 'DELETE_USER';
 export const GET_USER_EDITING = 'GET_USER_EDITING';
 export const UPDATE_USER_STATUS = 'UPDATE_USER_STATUS';
-
+export const FILTER_USER = 'FILTER_USER';

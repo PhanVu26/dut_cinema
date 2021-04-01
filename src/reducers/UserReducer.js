@@ -2,30 +2,30 @@ import * as types from "../constants/ActionType";
 var initialState = [
     {
         id: 1,
-        username: "PhanVu",
-        role: "Movie-Manager",
+        username: "Anh",
+        role: 1,
         status: true,
         createdAt: "26/01/2018"
     },
 
     {
         id: 2,
-        username: "PhanVu",
-        role: "Movie-Manager",
+        username: "Nam",
+        role: 1,
         status: true,
         createdAt: "26/01/2018"
     },
     {
         id: 3,
         username: "PhanVu",
-        role: "Movie-Manager",
+        role: 1,
         status: true,
         createdAt: "26/01/2018"
     },
     {
         id: 4,
         username: "PhanVu",
-        role: "Movie-Manager",
+        role: 2,
         status: true,
         createdAt: "26/01/2018"
     },
@@ -33,21 +33,21 @@ var initialState = [
     {
         id: 5,
         username: "PhanVu",
-        role: "Movie-Manager",
+        role: 3,
         status: false,
         createdAt: "26/01/2018"
     },
     {
         id: 6,
         username: "PhanVu",
-        role: "Movie-Manager",
+        role: 2,
         status: false,
         createdAt: "26/01/2018"
     },
     {
         id: 8,
         username: "PhanVu",
-        role: "Movie-Manager",
+        role: 2,
         status: false,
         createdAt: "26/01/2018"
     },
@@ -55,14 +55,14 @@ var initialState = [
     {
         id: 9,
         username: "PhanVu",
-        role: "Movie-Manager",
+        role: 3,
         status: false,
         createdAt: "26/01/2018"
     },
     {
         id: 10,
         username: "PhanVu",
-        role: "Movie-Manager",
+        role: 1,
         status: false,
         createdAt: "26/01/2018"
     }
@@ -89,11 +89,12 @@ var userReducer = (state = initialState, action) => {
             return state;
         case types.SAVE_USER:
             var today = new Date();
+            var role = parseInt(action.user.role);
             var newUser = {
                 id: action.user.id,
                 username: action.user.username,
                 password: action.user.password,
-                role: action.user.role,
+                role: role,
                 createdAt : + today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
                 status: action.user.status === 'true' ? true: false
             }

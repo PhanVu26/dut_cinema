@@ -13,8 +13,8 @@ class UserForm extends Component {
             id: '',
             username : '',
             password: '',
-            role: '',
-            status: false,
+            role: 1,
+            status: true,
         }
     }
 
@@ -88,9 +88,9 @@ class UserForm extends Component {
                                 onChange={ this.onHandleChange }
                                 name="role"
                             >
-                                <option value="movie-manager">Quản lý phim</option>
-                                <option value="movie-showtime-manager">Quản lý lịch chiếu</option>
-                                <option value="user">Người dùng</option>
+                                <option selected value={1}>Quản lý phim</option>
+                                <option value={2}>Quản lý lịch chiếu</option>
+                                <option value={3}>Người dùng</option>
                             </select><br/>
                             <label>Trạng thái :</label>
                             <select
@@ -99,8 +99,8 @@ class UserForm extends Component {
                                 onChange={ this.onHandleChange }
                                 name="status"
                             >
-                                <option value={true}>Active</option>
-                                <option value={false}>Inactive</option>
+                                <option selected value={true}>Đang hoạt động</option>
+                                <option value={false}>Ẩn</option>
                             </select><br/>
                         </div>
                     </Modal.Body>
