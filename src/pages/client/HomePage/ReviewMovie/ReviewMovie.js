@@ -9,7 +9,7 @@ function ReviewMovie() {
   const dispatch = useDispatch();
 
   const reviewMovie =
-    useSelector((state) => state.reducerMovie.reviewMovie, []) || [];
+    useSelector((state) => state.MovieReducer.reviewMovie, []) || [];
 
   useEffect(() => {
     dispatch(actFetchDataReviewMovieRequest());

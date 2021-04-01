@@ -8,6 +8,7 @@ import AccountManagementPage from "./pages/admin/AccounManagementPage";
 import Header from "./components/client/Header/Header";
 import Footer from "./components/client/Footer/Footer";
 import HomePage from "./pages/client/HomePage/HomePage";
+import MoviePage from "./pages/client/MoviePage/MoviePage";
 
 function App() {
   return (
@@ -25,6 +26,32 @@ function App() {
             <HomePage />
             <Footer />
           </Route>
+          <Route
+            exact
+            path="/coming-soon"
+            component={({ match }) => {
+              return (
+                <>
+                  <Header />
+                  <MoviePage match={match} />
+                  <Footer />
+                </>
+              );
+            }}
+          ></Route>
+          <Route
+            exact
+            path="/now-showing"
+            component={({ match }) => {
+              return (
+                <>
+                  <Header />
+                  <MoviePage match={match} />
+                  <Footer />
+                </>
+              );
+            }}
+          ></Route>
         </Switch>
       </Router>
     </div>

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import "./styles/Header.css";
-import Logo from "../../../assets/images/logo.png";
+import Logo from "../../../assets/images/DUTlogo.png";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import SearchBox from "../SearchBox/SearchBox";
 import Login from "./Login";
 import Register from "./Register";
+import { Link } from "react-router-dom";
 // this is a header component to show the header and navigation to viewer
 class Header extends Component {
   constructor(props) {
@@ -63,7 +64,9 @@ class Header extends Component {
           <div className="container">
             <div className="wrap-header row d-flex align-items-center">
               <div className="col-4 col-md4 col-lg-3">
-                <img className="imageLogo" src={Logo} alt="logo" />
+                <Link to="/">
+                  <img className="imageLogo" src={Logo} alt="logo" />
+                </Link>
               </div>
               <div className="col-8 col-md-8 col-lg-9 text-right text-secondary">
                 <Login /> <span>/</span> <Register />

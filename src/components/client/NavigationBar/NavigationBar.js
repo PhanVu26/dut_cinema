@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./styles/NavigationBarStyles.css";
+import { Link } from "react-router-dom";
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -96,12 +97,20 @@ class NavigationBar extends Component {
                     className={`dropdown-menu-right dropdown-menu dropdown-c ${styleFilmMenu}`}
                     aria-labelledby="navbarDropdown"
                   >
-                    <div className="nav-link-sub text-uppercase dropdown-item">
+                    <Link
+                      to="/now-showing"
+                      className="nav-link-sub text-uppercase dropdown-item"
+                      href="portfolio-1-col.html"
+                    >
                       Phim đang chiếu
-                    </div>
-                    <div className="nav-link-sub text-uppercase dropdown-item">
+                    </Link>
+                    <Link
+                      to="/coming-soon"
+                      className="nav-link-sub text-uppercase dropdown-item"
+                      href="portfolio-2-col.html"
+                    >
                       Phim sắp chiếu
-                    </div>
+                    </Link>
                   </div>
                 </li>
                 <li

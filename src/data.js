@@ -114,7 +114,7 @@ export const data = {
       actor: "Tom Holland, Chris Pratt",
       time: "105 minute",
       nation: "Mỹ",
-      premiereDate: "Wed Mar 10 2020 00:00:00 GMT+0700 (Indochina Time)",
+      premiereDate: "Wed Aug 10 2021 00:00:00 GMT+0700 (Indochina Time)",
       date: [
         {
           id: "movie002_15032020",
