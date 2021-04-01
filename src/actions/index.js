@@ -38,3 +38,10 @@ export const getUserEditing = (user) => {
         user
     }
 }
+
+export const filterUser = (filter) => {
+    return {
+        type: types.FILTER_USER,
+        filter
+    }
+}
