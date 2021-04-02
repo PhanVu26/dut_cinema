@@ -13,9 +13,9 @@ const AntTabs = withStyles({
     borderBottom: "1px solid #ddd",
   },
   indicator: {
-    backgroundColor: "#f26b38",
+    backgroundColor: "#4267B2",
     "&:hover": {
-      backgroundColor: "#f26b38",
+      backgroundColor: "#4267B2",
     },
   },
 })(Tabs);
@@ -46,7 +46,7 @@ const AntTab = withStyles((theme) => ({
     },
     indicator: {
       "&:hover": {
-        backgroundColor: "#f26b38",
+        backgroundColor: "#4267B2",
       },
     },
   },

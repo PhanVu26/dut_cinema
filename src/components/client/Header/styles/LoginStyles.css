@@ -2,8 +2,8 @@
   display: "content";
 }
 .header {
-  color: "#f26b38";
-  border-bottom: "2px solid #f26b38";
+  color: "#4267B2";
+  border-bottom: "2px solid #4267B2";
 }
 .modalHeader {
   border-bottom: "none";
@@ -13,8 +13,8 @@
   color: "#a0a3a7";
 }
 .Buttonn {
-  background-color: #f26b38;
-  border: "1px solid #f26b38";
+  background-color: #4267b2;
+  border: "1px solid #4267B2";
 }
 .link {
   display: "inline";

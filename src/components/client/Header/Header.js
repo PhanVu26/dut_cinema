@@ -5,7 +5,10 @@ import NavigationBar from "../NavigationBar/NavigationBar";
 import SearchBox from "../SearchBox/SearchBox";
 import Login from "./Login";
 import Register from "./Register";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import history from "../../../commons/history";
+import { compose } from "redux";
+import { connect } from "react-redux";
 // this is a header component to show the header and navigation to viewer
 class Header extends Component {
   constructor(props) {
@@ -52,6 +55,8 @@ class Header extends Component {
   // keyCode equals 13 represented for Enter button
   handlerOnEnter = (e, keyword) => {
     if (e.keyCode === 13) {
+      this.props.searchMovie(keyword);
+      history.push("/search");
     }
   };
 
@@ -69,7 +74,10 @@ class Header extends Component {
                 </Link>
               </div>
               <div className="col-8 col-md-8 col-lg-9 text-right text-secondary">
-                <Login /> <span>/</span> <Register />
+                <Decentralization
+                  account={this.props}
+                  onDelete={this.onDelete}
+                />
               </div>
             </div>
           </div>
@@ -103,10 +111,104 @@ class Header extends Component {
           </span>
         </div>
         <NavigationBar status={showMenu} />
-        <SearchBox status={showSearch} />
+        <SearchBox status={showSearch} handleOnEnter={this.handleOnEnter} />
       </div>
     );
   }
 }
 
+function Decentralization(props) {
+  let { onDelete } = props;
+  if (!localStorage.getItem("account")) {
+    localStorage.setItem("account", JSON.stringify(""));
+  }
+  let account = JSON.parse(localStorage.getItem("account"));
+  if (Object.keys(account).length === 0) {
+    return (
+      <div>
+        <Login /> <span>/</span> <Register />
+      </div>
+    );
+  } else if (Object.keys(account).length !== 0) {
+    let role = account.role;
+    if (role === "admin") {
+      return (
+        <div>
+          <span>
+            Admin:
+            <Link to="/admin" className="mx-1">
+              {account.userName}
+            </Link>{" "}
+            |{" "}
+          </span>
+
+          <Link to="/" onClick={() => onDelete()}>
+            Thoát
+          </Link>
+        </div>
+      );
+    } else if (role === "movie-manager") {
+      return (
+        <div>
+          <span>
+            Quản lý phim:
+            <Link to="/movie-manager" className="mx-1">
+              {account.userName}
+            </Link>{" "}
+            |{" "}
+          </span>
+
+          <Link to="/" onClick={() => onDelete()}>
+            Thoát
+          </Link>
+        </div>
+      );
+    } else if (role === "showtime-manager") {
+      return (
+        <div>
+          <span>
+            Quản lý lịch chiếu:
+            <Link to="/showtime-manager" className="mx-1">
+              {account.userName}
+            </Link>{" "}
+            |{" "}
+          </span>
+
+          <Link to="/" onClick={() => onDelete()}>
+            Thoát
+          </Link>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <span>
+            {" "}
+            User:
+            <Link to="/user-page" className="mx-1">
+              {account.userName}
+            </Link>{" "}
+            |{" "}
+          </span>
+
+          <Link to="/" onClick={() => onDelete()}>
+            Thoát
+          </Link>
+        </div>
+      );
+    }
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    searchMovie: (keyword) => {
+      // dispatch(actSearchMovie(keyword));
+    },
+  };
+};
+
+// const withConnect = connect(null, mapDispatchToProps);
+
+// export default compose(withRouter, withConnect)(Header);
 export default Header;

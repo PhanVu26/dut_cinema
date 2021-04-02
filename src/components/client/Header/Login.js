@@ -93,8 +93,8 @@ class Login extends Component {
       display: "content",
     };
     let header = {
-      color: "#f26b38",
-      borderBottom: "2px solid #f26b38",
+      color: "#4267B2",
+      borderBottom: "2px solid #4267B2",
     };
     let modalHeader = {
       borderBottom: "none",
@@ -104,8 +104,8 @@ class Login extends Component {
       color: "#a0a3a7",
     };
     let Buttonn = {
-      backgroundColor: "#f26b38",
-      border: "1px solid #f26b38",
+      backgroundColor: "#4267B2",
+      border: "1px solid #4267B2",
     };
     let link = {
       display: "inline",

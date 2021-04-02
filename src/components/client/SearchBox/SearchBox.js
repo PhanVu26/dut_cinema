@@ -8,6 +8,7 @@ class SearchBox extends Component {
       word: "",
     };
   }
+
   render() {
     return (
       <div className={`${this.props.status} find-header`}>
@@ -27,6 +28,7 @@ class SearchBox extends Component {
             aria-describedby="search-addon"
             value={this.state.word}
             onChange={(e) => this.setState({ word: e.target.value })}
+            onKeyUp={(e) => this.props.handleOnEnter(e, this.state.keyword)}
           />
           <span class="input-group-text border-0" id="search-addon">
             <i class="fas fa-search"></i>

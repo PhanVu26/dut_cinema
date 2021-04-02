@@ -30,7 +30,7 @@
 }
 
 .nav-link-c:hover {
-  color: #f26b38 !important;
+  color: #4267b2 !important;
   transition: all 0.5s;
   cursor: pointer;
 }
@@ -49,7 +49,7 @@
 }
 
 .dropdown-c .nav-link-sub:hover {
-  color: #f26b38;
+  color: #4267b2;
   transition: all 0.5s;
   background-color: black;
 }
@@ -95,7 +95,7 @@
 
   .nav-link-c,
   .dropdown-c .nav-link-sub {
-    color: #f26b38 !important;
+    color: #4267b2 !important;
     text-align: left !important;
     margin-left: 20%;
   }

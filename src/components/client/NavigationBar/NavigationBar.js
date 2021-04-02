@@ -182,12 +182,72 @@ class NavigationBar extends Component {
                     Hỗ trợ
                   </div>
                 </li>
+                <Decentralization />
               </ul>
             </div>
           </div>
         </nav>
       </div>
     );
+  }
+}
+
+function Decentralization() {
+  let account = JSON.parse(localStorage.getItem("account"));
+
+  if (Object.keys(account).length === 0) {
+    return <span></span>;
+  } else if (Object.keys(account).length !== 0) {
+    let role = account.role;
+    if (role === "admin") {
+      return (
+        <li className="nav-item-c nav-item">
+          <Link
+            to="/admin"
+            className="nav-link-c text-uppercase nav-link"
+            href="contact.html"
+          >
+            Admin
+          </Link>
+        </li>
+      );
+    } else if (role === "movie-manager") {
+      return (
+        <li className="nav-item-c nav-item">
+          <Link
+            to="/movie-manager"
+            className="nav-link-c text-uppercase nav-link"
+            href="contact.html"
+          >
+            Quản lý phim
+          </Link>
+        </li>
+      );
+    } else if (role === "showtime-manager") {
+      return (
+        <li className="nav-item-c nav-item">
+          <Link
+            to="/showtime-manager"
+            className="nav-link-c text-uppercase nav-link"
+            href="contact.html"
+          >
+            Quản lý lịch chiếu
+          </Link>
+        </li>
+      );
+    } else {
+      return (
+        <li className="nav-item-c nav-item">
+          <Link
+            to="/profile"
+            className="nav-link-c text-uppercase nav-link"
+            href="contact.html"
+          >
+            Thành viên
+          </Link>
+        </li>
+      );
+    }
   }
 }
 
