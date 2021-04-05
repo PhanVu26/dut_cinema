@@ -164,9 +164,13 @@ class NavigationBar extends Component {
                     className={`dropdown-menu-right dropdown-menu dropdown-c ${styleEvent}`}
                     aria-labelledby="navbarDropdownEvent"
                   >
-                    <div className="nav-link-sub text-uppercase dropdown-item">
+                    <Link
+                      to="/promotion"
+                      className="nav-link-sub text-uppercase dropdown-item"
+                      href="portfolio-1-col.html"
+                    >
                       Ưu đãi
-                    </div>
+                    </Link>
                     <div className="nav-link-sub text-uppercase dropdown-item">
                       Phim hay tháng
                     </div>
