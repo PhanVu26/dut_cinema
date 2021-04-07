@@ -34,25 +34,13 @@ class UserControl extends Component {
     render() {
         const {isDisplayUserForm} = this.props;
         return (
-            <div className="row mb-3">
-                <div className="col-md-8">
-                    <UserSearchControl />
-                </div>
-                <div className="col-md-4">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <UserSortControl/>
-                        </div>
-                        <div className="col-md-6">
-                            <button onClick={this.onHandleModal} type="button" className="btn btn-primary">
-                                <span className="fas fa-plus mr-2"></span>Thêm User
-                            </button>
-                            <Modal show={isDisplayUserForm}>
-                                <UserForm></UserForm>
-                            </Modal>
-                        </div>
-                    </div>
-                </div>
+            <div className = "mb-2 float-left">
+                <button onClick={this.onHandleModal} type="button" className="btn btn-primary">
+                    <span className="fas fa-plus mr-2"></span>Thêm User
+                </button>
+                <Modal show={isDisplayUserForm}>
+                    <UserForm></UserForm>
+                </Modal>
             </div>
         );
     }

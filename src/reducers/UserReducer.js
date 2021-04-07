@@ -65,6 +65,72 @@ var initialState = [
         role: 1,
         status: false,
         createdAt: "26/01/2018"
+    },
+    {
+        id: 1,
+        username: "Anh",
+        role: 1,
+        status: true,
+        createdAt: "26/01/2018"
+    },
+
+    {
+        id: 2,
+        username: "Nam",
+        role: 1,
+        status: true,
+        createdAt: "26/01/2018"
+    },
+    {
+        id: 3,
+        username: "PhanVu",
+        role: 1,
+        status: true,
+        createdAt: "26/01/2018"
+    },
+    {
+        id: 4,
+        username: "PhanVu",
+        role: 2,
+        status: true,
+        createdAt: "26/01/2018"
+    },
+
+    {
+        id: 5,
+        username: "PhanVu",
+        role: 3,
+        status: false,
+        createdAt: "26/01/2018"
+    },
+    {
+        id: 6,
+        username: "PhanVu",
+        role: 2,
+        status: false,
+        createdAt: "26/01/2018"
+    },
+    {
+        id: 8,
+        username: "PhanVu",
+        role: 2,
+        status: false,
+        createdAt: "26/01/2018"
+    },
+
+    {
+        id: 9,
+        username: "PhanVu",
+        role: 3,
+        status: false,
+        createdAt: "26/01/2018"
+    },
+    {
+        id: 10,
+        username: "PhanVu",
+        role: 1,
+        status: false,
+        createdAt: "26/01/2018"
     }
 ];
 
