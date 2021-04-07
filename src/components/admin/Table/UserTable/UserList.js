@@ -14,6 +14,16 @@ class UserList extends Component {
         }
     }
 
+    showUsers = users => {
+        var result = null;
+        if (users.length > 0) {
+          result = users.map((user, index) => {
+            return <UserItem key={user.id} user={user} index={index + 1} />;
+          });
+        }
+        return result;
+      };
+
     handleChange = (e) => {
         var target = e.target;
         var name = target.name;
@@ -31,31 +41,31 @@ class UserList extends Component {
     }
 
     render() {
-        console.log(this.props.users);
-        var{users, userFilter} = this.props;
+
+        var{rowsPerPage, userFilter} = this.props;
         if(userFilter.username){
-            users = users.filter((user) => {
+            rowsPerPage = rowsPerPage.filter((user) => {
                 return user.username.toLowerCase().indexOf(userFilter.username.toLowerCase()) !== -1
             })
         }
-        users = users.filter((user) => {
+        rowsPerPage = rowsPerPage.filter((user) => {
             if(userFilter.status === -1){
-                return users;
+                return rowsPerPage;
             }else {
                 return user.status === (userFilter.status === 0 ? true : false)
             }
         })
 
-        users = users.filter((user) => {
+        rowsPerPage = rowsPerPage.filter((user) => {
             switch(userFilter.role){
                 case 0: return user.role === 1; break;
                 case 1: return user.role === 2; break;
                 case 2: return user.role === 3; break;
-                default: return users;
+                default: return rowsPerPage;
             }
             
         })
-        console.log("list users ", users)
+        console.log("list users ", rowsPerPage)
         return (
             <table className="table table-bordered table-hover">
                 <thead>
@@ -70,15 +80,17 @@ class UserList extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                <tr>
+                    <tr>
                         <td></td>
                         <td></td>
                         <td>
                             <input 
                                 type="text"
                                 name="nameFilter"
+                                placeholder='Nhập username'
                                 onChange={this.handleChange}
-                                value={this.state.nameFilter}></input>
+                                value={this.state.nameFilter}>
+                            </input>
                         </td>
                         <td>
                             <select 
@@ -104,22 +116,8 @@ class UserList extends Component {
                         </td>
                         <td></td>
                     </tr>
-                    {
-                        users.map((user, index) => {
-                            return (
-                                <UserItem key={user.id}
-                                    index = {index + 1}
-                                    //id = {user.id}
-                                    // username = {user.username}
-                                    // role = {user.role}
-                                    // createdAt = {user.createdAt}
-                                    // status = {user.status}
-                                    user = {user}
-                                    >
-                                </UserItem>
-                            )      
-                        })
-                    }
+                    {this.showUsers(rowsPerPage)}
+                    
                 </tbody>
             </table>
         );
@@ -129,7 +127,8 @@ class UserList extends Component {
 const mapStateToProps = (state) => {
     return {
         users: state.users,
-        userFilter : state.userFilter
+        userFilter : state.userFilter,
+        pageInfo: state.pageInfo
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
