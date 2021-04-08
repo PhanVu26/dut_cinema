@@ -3,6 +3,9 @@ import {Modal, Button} from "react-bootstrap";
 import {connect} from 'react-redux';
 import * as actions from '../../../actions/movieManager/index'
 
+import testImage from '../../../assets/images/logo.png'
+import MovieModal from '../../Modal/MovieModal/MovieDetail'
+
 class MovieItem extends Component {
 
     constructor(props){
@@ -22,6 +25,11 @@ class MovieItem extends Component {
     //     this.props.onToggleUserForm();
     //     this.props.getUserEditing(this.props.user)
     // }
+    getMovieInfo = () => {
+        this.props.onToggleModal();
+        this.props.getMovieInfo(this.props.movie)
+        console.log("xem movie:", this.props.movie)
+    }
     showGenres(genres){
         var result = null;
         result = genres.map(genre => {
@@ -55,7 +63,10 @@ class MovieItem extends Component {
                 <td className="text-center">{movie.id}</td>
                 <td className="text-center">{movie.name}</td>
                 <td className="text-center">
-                    <ul>
+                    <img src={testImage} height="80px" width="80px"></img>
+                </td>
+                <td className="text-center">
+                    <ul className='list-unstyled'>
                         {
                             this.showGenres(movie.genreIds)
                         }
@@ -63,13 +74,6 @@ class MovieItem extends Component {
                 </td>
                 <td className="text-center">{movie.author}</td>
                 <td className="text-center">{movie.producer}</td>
-                <td className="text-center">
-                    <ul>
-                        {
-                            this.showActors(movie.actorIds)
-                        }
-                    </ul>
-                </td>
                 <td className="text-center">{movie.releaseDate}</td>
                 {/* <td className="text-center">
                     <i 
@@ -79,18 +83,21 @@ class MovieItem extends Component {
                     </i>
                 </td> */}
                 <td className="text-center">
-                    <button type="button" className="btn btn-warning">
+                    <button 
+                        type="button" 
+                        className="btn btn-warning">
                         <span className="fa fa-pencil"></span>
                     </button>
-                    {/* <Modal show={isDisplayUserForm}>
-                        <UserForm></UserForm>
-                    </Modal> */}
+                    <MovieModal movie={movie}></MovieModal>
                     &nbsp;
                     <button type="button" className="btn btn-danger">
                         <span className="far fa-trash-alt"></span>
                     </button>
                     &nbsp;
-                    <button type="button" className="btn btn-danger">
+                    <button 
+                        type="button" 
+                        className="btn btn-danger"
+                        onClick={this.getMovieInfo}>
                         <span className="fas fa-eye"></span>
                     </button>
                 </td>
@@ -100,16 +107,19 @@ class MovieItem extends Component {
 }
 
 const mapStateToProps = (state) => {
-    // return {
-    //     userEditing : state.userEditing
-    // }
+    return {
+        isDisplayMovieModal : state.isDisplayMovieModal
+    }
 }
 
 const mapDispatchToProps = (dispatch, props) =>{
     return {
-        // onToggleUserForm: () => {
-        //     dispatch(actions.toggleUserForm())
-        // },
+        onToggleModal: () => {
+            dispatch(actions.toggleModal())
+        },
+        getMovieInfo : (movie) => {
+            dispatch(actions.getMovieInfo(movie))
+        }
         // onDeleteUser: (id) => {
         //     dispatch(actions.deleteUser(id))
         // },
