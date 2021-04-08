@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import UserSearchControl from './UserSearchControl';
 import UserSortControl from './UserSortControl';
-import UserForm from '../../Form/UserForm/UserForm';
 import {Modal, Button, ThemeProvider} from 'react-bootstrap';
 import {connect} from 'react-redux';
-import * as actions from '../../../../actions/index'
+import * as actions from "../../../actions/index"
+import UserForm from '../../Form/UserForm/UserForm';
 
 class UserControl extends Component {
 
