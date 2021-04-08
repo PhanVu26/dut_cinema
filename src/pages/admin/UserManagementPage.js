@@ -12,11 +12,11 @@ import "../../components/admin/style.css";
 import Footer from "../../components/admin/Footer/Footer";
 import Modal from "../../components/admin/Modal/Modal";
 import Navbar from "../../components/admin/Navbar/Navbar";
-import UserControl from "../../components/admin/Control/UserControl/UserControl";
-import UserList from "../../components/admin/Table/UserTable/UserList";
-import Pagination from "../../components/admin/Pagination/Pagination";
 import {connect} from 'react-redux';
 import * as actions from '../../actions/index';
+import UserControl from "../../components/Control/UserControl/UserControl";
+import UserList from "../../components/Table/UserTable/UserList";
+import Pagination from "../../components/Pagination/Pagination";
 
 class UserManagementPage extends Component{
     constructor(props) {

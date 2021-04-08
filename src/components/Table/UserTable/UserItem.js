@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Modal, Button} from "react-bootstrap";
-import UserForm from '../../Form/UserForm/UserForm';
 import {connect} from 'react-redux';
-import * as actions from '../../../../actions/index';
+import * as actions from '../../../actions/index'
+import UserForm from '../../Form/UserForm/UserForm';
 
 class UserItem extends Component {
 

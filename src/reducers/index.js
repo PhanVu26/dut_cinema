@@ -1,14 +1,16 @@
 import {combineReducers} from "redux";
-import users from "./UserReducer";
-import isDisplayUserForm from './DisplayUserFormReducer';
-import userEditing from './UserEditingReducer';
-import userFilter from './FilterUserReducer';
+import users from "./UserReducer/UserReducer";
+import isDisplayUserForm from './UserReducer/DisplayUserFormReducer';
+import userEditing from './UserReducer/UserEditingReducer';
+import userFilter from './UserReducer/FilterUserReducer';
+import movies from './MovieReducer/MovieReducer'
 
 const myReducer = combineReducers({
     users,
     isDisplayUserForm ,
     userEditing,
-    userFilter
+    userFilter,
+    movies
 
 })
 

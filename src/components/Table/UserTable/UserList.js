@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UserItem from './UserItem';
 import {connect} from 'react-redux';
-import * as actions from '../../../../actions/index';
+import * as actions from '../../../actions/index'
 
 class UserList extends Component {
     constructor(props){
