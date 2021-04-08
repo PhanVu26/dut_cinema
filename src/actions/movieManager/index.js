@@ -11,3 +11,16 @@ export const saveMovie = (movie) => {
         movie
     }
 }
+
+export const toggleModal = () => {
+    return {
+        type: types.TOGGLE_MOVIE_MODAL,
+    }
+}
+
+export const getMovieInfo = (movie) => {
+    return {
+        type: types.GET_MOVIE_INFO,
+        movie
+    }
+}

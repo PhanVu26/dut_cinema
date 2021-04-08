@@ -11,8 +11,8 @@ export const FILTER_USER = 'FILTER_USER';
 
 export const LIST_ALL_MOVIES = 'LIST_ALL_MOVIES';
 export const SAVE_MOVIE = 'SAVE_MOVIE';
-export const TOGGLE_MOVIE_FORM = 'TOGGLE_MOVIE_FORM';
+export const TOGGLE_MOVIE_MODAL = 'TOGGLE_MOVIE_MODAL';
 export const DELETE_MOVIE = 'DELETE_MOVIE';
-export const GET_MOVIE_EDITING = 'GET_MOVIE_EDITING';
+export const GET_MOVIE_INFO = 'GET_MOVIE_INFO';
 export const UPDATE_MOVIE = 'UPDATE_MOVIE';
 export const FILTER_MOVIE = 'FILTER_MOVIE';
