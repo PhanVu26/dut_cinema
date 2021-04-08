@@ -4,7 +4,7 @@ const Footer = (props) =>{
 
     return (
         <footer class="bg-dark text-white">
-            <div class="container-fluid mt-5">
+            <div class="container-fluid mt-2">
                 <div class="row">
                     <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
                         <div class="row">

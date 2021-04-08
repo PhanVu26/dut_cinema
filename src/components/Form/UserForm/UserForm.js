@@ -1,7 +1,7 @@
 import { Button, Modal } from 'react-bootstrap';
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../../../actions/index';
+import * as actions from '../../../actions/index'
 import { random } from 'lodash';
 import { ThreeSixtySharp } from '@material-ui/icons';
 

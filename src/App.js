@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import routes from "./routes/index.route";
 import HomePage from "./pages/HomePage/HomePage"
 import UserManagementPage from './pages/admin/UserManagementPage';
+import MovieManager from './pages/manager/movie manager';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route exact path="/"> 
             <HomePage></HomePage>
+          </Route>
+          <Route exact path="/manager/movies"> 
+            <MovieManager></MovieManager>
           </Route>
         </Switch>
       </Router>
