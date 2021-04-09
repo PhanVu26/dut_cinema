@@ -18,6 +18,12 @@ export const toggleModal = () => {
     }
 }
 
+export const toggleMovieForm = () => {
+    return {
+        type: types.TOGGLE_MOVIE_FORM,
+    }
+}
+
 export const getMovieInfo = (movie) => {
     return {
         type: types.GET_MOVIE_INFO,

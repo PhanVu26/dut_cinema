@@ -65,70 +65,73 @@ class MovieModal extends Component {
                             <div className='row'>
                                 <div className='col-md-8 col-lg-8 movie-details'>
                                     <table className='table'>
-                                        <tr>
-                                            <td>
-                                                <span className="title-detail">ID phim:</span>
-                                            </td>
-                                            <td>
-                                                <span>{movie.id}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span className="title-detail">Tên phim:</span>
-                                            </td>
-                                            <td>
-                                                <span>{movie.name}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span className="title-detail">Thể loại:</span>
-                                            </td>
-                                            <td>
-                                                <span>{this.showGenres(movie.genreIds)}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span className="title-detail">Đạo diễn:</span>
-                                            </td>
-                                            <td>
-                                                <span>{movie.author}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span className="title-detail">Nhà sản xuất:</span>
-                                            </td>
-                                            <td>
-                                                <span>{movie.producer}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span className="title-detail">Ngày phát hành:</span>
-                                            </td>
-                                            <td>
-                                                <span>{movie.releaseDate}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span className="title-detail">Diễn viên:</span>
-                                            </td>
-                                            <td>
-                                                <span>{this.showActors(movie.actorIds)}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span className="title-detail">Mô tả phim:</span>
-                                            </td>
-                                            <td>
-                                                <span>{movie.description}</span>
-                                            </td>
-                                        </tr>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span className="title-detail">ID phim:</span>
+                                                </td>
+                                                <td>
+                                                    <span>{movie.id}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span className="title-detail">Tên phim:</span>
+                                                </td>
+                                                <td>
+                                                    <span>{movie.name}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span className="title-detail">Thể loại:</span>
+                                                </td>
+                                                <td>
+                                                    <span>{this.showGenres(movie.genreIds)}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span className="title-detail">Đạo diễn:</span>
+                                                </td>
+                                                <td>
+                                                    <span>{movie.author}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span className="title-detail">Nhà sản xuất:</span>
+                                                </td>
+                                                <td>
+                                                    <span>{movie.producer}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span className="title-detail">Ngày phát hành:</span>
+                                                </td>
+                                                <td>
+                                                    <span>{movie.releaseDate}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span className="title-detail">Diễn viên:</span>
+                                                </td>
+                                                <td>
+                                                    <span>{this.showActors(movie.actorIds)}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span className="title-detail">Mô tả phim:</span>
+                                                </td>
+                                                <td>
+                                                    <span>{movie.description}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        
                                     </table>
                                 </div>
                                 <div className='col-md-4 col-lg-4'>
