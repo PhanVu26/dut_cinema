@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
-import {Modal, Button, ThemeProvider} from 'react-bootstrap';
+// import {Modal, Button, ThemeProvider} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import * as actions from "../../../actions/movieManager/index"
+import MovieForm from '../../Modal/MovieModal/MovieForm';
 
 class MovieControl extends Component {
 
-    // onHandleModal = () => {
-    //     console.log("user editing: ", this.props.userEditing)
-    //     if(this.props.userEditing.id === '' ){
-    //         this.props.onToggleUserForm();
-    //     }else {
-    //         this.props.onClearUser({
-    //             id: '',
-    //             username :'',
-    //             password: '',
-    //             status: false,
-    //             role: ''
+    onHandleModal = () => {
+        console.log("movie info: ", this.props.movieInfo)
+        if(this.props.movieInfo.id === '' ){
+            this.props.onToggleMovieForm();
+        }else {
+            this.props.onClearMovie({
+                id: '',
+                name :'',
+                author: '',
+                producer: '',
+                genreIds: [],
+                actorIds: [],
+                releaseDate: '',
+                description: '',
+                thumbnail: ''
 
-    //         })
-    //         this.props.onToggleUserForm();
-    //     }
-    // }
+            })
+            this.props.onToggleMovieForm();
+        }
+    }
     // onSubmit = (event) => {
     //     event.preventDefault();
     // }
@@ -35,31 +40,29 @@ class MovieControl extends Component {
                 <button onClick={this.onHandleModal} type="button" className="btn btn-primary">
                     <span className="fas fa-plus mr-2"></span>Thêm Movie
                 </button>
-                {/* <Modal show={isDisplayUserForm}>
-                    <MovieForm></MovieForm>
-                </Modal> */}
+                <MovieForm></MovieForm>
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    // return {
-    //     isDisplayUserForm : state.isDisplayUserForm,
-    //     userEditing : state.userEditing
-    // }
+    return {
+        isDisplayMovieForm : state.isDisplayMovieForm,
+        movieInfo : state.movieInfo
+    }
 
 }
 
 const mapDispatchToProps = (dispatch, props) => {
-    // return {
-    //     onToggleUserForm: ()=>{
-    //         dispatch(actions.toggleUserForm())
-    //     },
-    //     onClearUser: (user) => {
-    //         dispatch(actions.getUserEditing(user))
-    //     }
-    // }
+    return {
+        onToggleMovieForm: ()=>{
+            dispatch(actions.toggleMovieForm())
+        },
+        onClearMovie: (movie) => {
+            dispatch(actions.getMovieInfo(movie))
+        }
+    }
 } 
 
 export default connect(mapStateToProps, mapDispatchToProps ) (MovieControl);

@@ -50,10 +50,10 @@ class MovieManager extends Component{
             <Router>
                 <Navbar></Navbar>        
                 <section>
-                    <div class="container-fluid mt-5">
-                        <div class="row">                   
-                            <div class="col-xl-12 col-12 mb-4 mb-xl-0">
-                                <h2 class="text-center mb-5 mt-3">Danh sách phim</h2>
+                    <div className="container-fluid mt-5">
+                        <div className="row">                   
+                            <div className="col-xl-12 col-12 mb-4 mb-xl-0">
+                                <h2 className="text-center mb-5 mt-3">Danh sách phim</h2>
                                 <div className="row">
                                     <div className="col-md-8 col-xl-8">
                                         <MovieControl></MovieControl>

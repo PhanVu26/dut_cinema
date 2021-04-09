@@ -33,14 +33,14 @@ class MovieItem extends Component {
     showGenres(genres){
         var result = null;
         result = genres.map(genre => {
-            return <li>{genre.name}</li>
+            return <li key={genre.id}>{genre.name}</li>
         }) 
         return result;
     }
     showActors(actors){
         var result = null;
         result = actors.map(actor => {
-            return <li>{actor.name}</li>
+            return <li key={actor.id}>{actor.name}</li>
         }) 
         return result;
     }
