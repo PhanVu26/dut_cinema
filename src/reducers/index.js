@@ -5,7 +5,8 @@ import userEditing from './UserReducer/UserEditingReducer';
 import userFilter from './UserReducer/FilterUserReducer';
 import movies from './MovieReducer/MovieReducer';
 import isDisplayMovieModal from './MovieReducer/ShowModalReducer';
-import movieInfo from './MovieReducer/MovieInfoReducer'
+import movieInfo from './MovieReducer/MovieInfoReducer';
+import isDisplayMovieForm from './MovieReducer/ShowMovieFormReducer'
 
 const myReducer = combineReducers({
     users,
@@ -14,7 +15,8 @@ const myReducer = combineReducers({
     userFilter,
     movies,
     isDisplayMovieModal,
-    movieInfo
+    movieInfo,
+    isDisplayMovieForm
 
 })
 

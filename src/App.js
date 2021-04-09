@@ -1,9 +1,9 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 import AdminPage from "./pages/admin/AdminPage"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import routes from "./routes/index.route";
+// import routes from "./routes/index.route";
 import HomePage from "./pages/HomePage/HomePage"
 import UserManagementPage from './pages/admin/UserManagementPage';
 import MovieManager from './pages/manager/movie manager';

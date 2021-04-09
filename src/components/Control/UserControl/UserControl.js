@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import UserSearchControl from './UserSearchControl';
-import UserSortControl from './UserSortControl';
+// import UserSearchControl from './UserSearchControl';
+// import UserSortControl from './UserSortControl';
 import {Modal, Button, ThemeProvider} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import * as actions from "../../../actions/index"
