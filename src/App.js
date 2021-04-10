@@ -14,6 +14,8 @@ import Promotion2 from "./pages/client/HomePage/Promotion/PromotionItems/promoti
 import Promotion3 from "./pages/client/HomePage/Promotion/PromotionItems/promotion003_TriAnThanhVien";
 import Promotion4 from "./pages/client/HomePage/Promotion/PromotionItems/promotion004_TungBungHaiSao";
 import PromotionPage from "./pages/client/HomePage/Promotion/PromotionPage";
+import UserPage from "./pages/client/UserPage/UserPage";
+
 function App() {
   return (
     <Router>
@@ -69,6 +71,9 @@ function App() {
         </Route>
         <Route exact path="/promotion">
           <Header /> <PromotionPage /> <Footer />
+        </Route>
+        <Route exact path="/profile">
+          <Header /> <UserPage /> <Footer />
         </Route>
       </Switch>
     </Router>
