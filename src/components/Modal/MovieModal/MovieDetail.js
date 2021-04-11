@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../../actions/movieManager/index';
 
 import testThumbnail from '../../../assets/images/logo.png';
-import style from '../MovieModal/MovieDetail.css'
+import style from '../MovieModal/MovieModal.css'
 class MovieModal extends Component {
 
     constructor(props) {
