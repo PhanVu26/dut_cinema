@@ -1,0 +1,16 @@
+.movie-details .title-detail{
+    font-weight: bold;
+}
+
+.actors-box, .genres-box{
+    overflow: auto;
+    height: 150px;
+    border: rgb(110, 104, 104) solid 0.5px;
+}
+
+.form-group span {
+    font-weight: bold;
+}
+.form-group p {
+    color: darkgoldenrod;
+}
