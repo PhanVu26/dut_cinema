@@ -5,6 +5,18 @@ export const listAllMovies = () => {
     }
 }
 
+export const listAllGenres = () => {
+    return {
+        type: types.LIST_ALL_GENRES
+    }
+}
+
+export const listAllActors = () => {
+    return {
+        type: types.LIST_ALL_ACTORS
+    }
+}
+
 export const saveMovie = (movie) => {
     return {
         type: types.SAVE_MOVIE,
