@@ -17,3 +17,11 @@ export const DELETE_MOVIE = 'DELETE_MOVIE';
 export const GET_MOVIE_INFO = 'GET_MOVIE_INFO';
 export const UPDATE_MOVIE = 'UPDATE_MOVIE';
 export const FILTER_MOVIE = 'FILTER_MOVIE';
+
+// Genres
+export const LIST_ALL_GENRES = 'LIST_ALL_GENRES';
+
+// Actors
+
+export const LIST_ALL_ACTORS = 'LIST_ALL_ACTORS';
+

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../../actions/movieManager/index'
 
 import testImage from '../../../assets/images/logo.png'
+import MovieForm from '../../Modal/MovieModal/MovieForm'
 import MovieModal from '../../Modal/MovieModal/MovieDetail'
 
 class MovieItem extends Component {
@@ -63,7 +64,7 @@ class MovieItem extends Component {
                 <td className="text-center">{movie.id}</td>
                 <td className="text-center">{movie.name}</td>
                 <td className="text-center">
-                    <img src={testImage} height="80px" width="80px"></img>
+                    <img src={movie.thumbnail} height="80px" width="80px"></img>
                 </td>
                 <td className="text-center">
                     <ul className='list-unstyled'>
@@ -88,7 +89,7 @@ class MovieItem extends Component {
                         className="btn btn-warning">
                         <span className="fa fa-pencil"></span>
                     </button>
-                    <MovieModal movie={movie}></MovieModal>
+                    {/* <MovieForm movie={movie}></MovieForm> */}
                     &nbsp;
                     <button type="button" className="btn btn-danger">
                         <span className="far fa-trash-alt"></span>
@@ -101,6 +102,7 @@ class MovieItem extends Component {
                         <span className="fas fa-eye"></span>
                     </button>
                 </td>
+                <MovieModal ></MovieModal>
             </tr>
         );
     }
