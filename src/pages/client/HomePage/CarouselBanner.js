@@ -12,43 +12,43 @@ const CarouselBanner = () => {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://www.galaxycine.vn/media/2020/11/2/banner-2048x682_1604305881849.jpg"
+            src="https://www.galaxycine.vn/media/2021/4/9/banner-2048x682_1617961579181.jpg"
             alt="First slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://www.galaxycine.vn/media/2020/2/28/n3-ss-2048x682_1582863674634.jpg"
+            src="https://www.galaxycine.vn/media/2021/4/12/banner-2048x682_1618212848326.jpg"
             alt="Second slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://www.galaxycine.vn/media/2020/2/28/2048x682_1582860213657.jpg"
+            src="https://www.galaxycine.vn/media/2021/4/9/2048-x-682_1617958002178.jpg"
             alt="Third slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://www.galaxycine.vn/media/2020/10/23/banner-2048x682_1603448463402.jpg"
+            src="https://www.galaxycine.vn/media/2021/4/9/2048x682_1617958416956.jpg"
             alt="Fourth slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://www.galaxycine.vn/media/2020/10/22/2048x682px1_1603373831290.png"
+            src="https://www.galaxycine.vn/media/2021/4/7/2048x682_1617781870335.jpg"
             alt="Fifth slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://www.galaxycine.vn/media/2020/11/10/2048x682_1605002076002.jpg"
-            alt="Fifth slide"
+            src="https://www.galaxycine.vn/media/2021/4/7/2048x682_1617782109260.jpg"
+            alt="Sixth slide"
           />
         </Carousel.Item>
       </Carousel>

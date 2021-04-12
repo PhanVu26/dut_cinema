@@ -2,20 +2,20 @@ export const data = {
   movie: [
     {
       id: "Movie001",
-      name: "Nắng 3: lời hứa của cha",
-      slug: "nang-3-loi-hua-cua-cha",
+      name: "KIỀU",
+      slug: "kieu",
       intro:
-        "Cuộc sống của một bà mẹ đơn thân cùng đứa con gái nhỏ thêm phần thú vị khi có sự xuất hiện của một người đàn ông lịch lãm, kế hoạch tìm chồng, tìm cha từ đây bắt đầu",
-      type: "Hài, Tình cảm , Gia đình",
-      author: "Đồng Đăng Giao",
-      actor: "Khả Như, Kiều Minh Tuấn",
-      time: "105 minutes",
+        "Được lấy cảm hứng từ tác phẩm Truyện Kiều của đại thi hào Nguyễn Du, phim điện ảnh cổ trang Kiều chắt lọc những tình huống bi thương và hạnh phúc nhất trong chặng đời đầy truân chuyên của Thúy Kiều - một thân phận tài hoa và bạc mệnh.",
+      type: "Tâm lý",
+      author: "Mai Thu Huyền",
+      actor: "Trình Mỹ Duyên, NSND Lê Khanh, Cao Thái Hà",
+      time: "90 phút",
       nation: "Việt Nam",
-      premiereDate: "Wed Mar 10 2020 00:00:00 GMT+0700 (Indochina Time)",
+      premiereDate: "Wed Apr 7 2021 00:00:00 GMT+0700 (Indochina Time)",
       date: [
         {
           id: "movie001_15032020",
-          dateMovie: "05/15/2020",
+          dateMovie: "04/07/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -41,7 +41,7 @@ export const data = {
         },
         {
           id: "movie001_16032020",
-          dateMovie: "05/16/2020",
+          dateMovie: "04/08/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -67,7 +67,7 @@ export const data = {
         },
         {
           id: "movie001_17032020",
-          dateMovie: "05/17/2020",
+          dateMovie: "04/09/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -94,10 +94,10 @@ export const data = {
       ],
       price: "75000",
       image:
-        "https://www.galaxycine.vn/media/2020/2/25/450x300_1582597508575.jpg",
+        "https://www.galaxycine.vn/media/2021/3/25/300x450_1616658468884.jpg",
       imageInfo:
-        "https://www.galaxycine.vn/media/2020/2/26/nang-3---poster-khong-logo_1582692152072.jpg",
-      video: "https://www.youtube.com/embed/DymKqNH_m8w?autoplay=1",
+        "https://www.galaxycine.vn/media/2021/3/25/300x450_1616658468884.jpg",
+      video: "https://www.youtube.com/watch?v=QJH2OinB4a4",
       vote: {
         rate: "6.37",
         numberOfReviews: "83",
@@ -105,20 +105,21 @@ export const data = {
     },
     {
       id: "Movie002",
-      name: "Onward: Truy Tìm Phép Thuật",
-      slug: "onward-truy-tim-phep-thuat",
+      name: "Godzilla vs Kong",
+      slug: "Godzilla-vs-Kong",
       intro:
-        "Lấy bối cảnh vùng ngoại ô một thế giới kỳ ảo, hai anh em yêu tinh tuổi teen bắt đầu hành trình khám phá xem, liệu rằng đâu đó ngoài kia có còn tồn tại ma thuật không?",
-      type: "Hoạt Hình",
-      author: "Dan Scanlon",
-      actor: "Tom Holland, Chris Pratt",
-      time: "105 minute",
+        "Cuộc chiến được chờ đợi nhất giữa hai siêu quái thú Godzilla và King Kong cuối cùng đã đến giờ G. Con người đóng vai trò gì trong trận battle siêu kinh điển này? Kết cục của thế giới sẽ ra sao?",
+      type: "Hành động",
+      author: "Adam Wingard",
+      actor:
+        "Alexander Skarsgård, Millie Bobby Brown, Oguri Shun, Eiza González",
+      time: "113 phút",
       nation: "Mỹ",
-      premiereDate: "Wed Aug 10 2021 00:00:00 GMT+0700 (Indochina Time)",
+      premiereDate: "Thu Mar 25 2021 00:00:00 GMT+0700 (Indochina Time)",
       date: [
         {
           id: "movie002_15032020",
-          dateMovie: "05/15/2020",
+          dateMovie: "03/25/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -144,7 +145,7 @@ export const data = {
         },
         {
           id: "movie002_16032020",
-          dateMovie: "05/16/2020",
+          dateMovie: "03/26/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -170,7 +171,7 @@ export const data = {
         },
         {
           id: "movie002_17032020",
-          dateMovie: "05/17/2020",
+          dateMovie: "04/15/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -196,10 +197,11 @@ export const data = {
         },
       ],
       price: "75000",
-      image: "https://galaxycine.vn/media/2020/2/24/450x300_1582529315801.jpg",
+      image:
+        "https://www.galaxycine.vn/media/2021/2/26/godzilla-vs-kong-poster_1614327851876.jpg",
       imageInfo:
-        "https://www.galaxycine.vn/media/2020/1/16/poster-onward-official_1579158439704.jpg",
-      video: "https://www.youtube.com/embed/UCfgXvSzllA?autoplay=1",
+        "https://www.galaxycine.vn/media/2021/2/26/godzilla-vs-kong-poster_1614327851876.jpg",
+      video: "https://www.youtube.com/watch?v=AcfvncjOGS8",
       vote: {
         rate: "7.51",
         numberOfReviews: "50",
@@ -207,20 +209,20 @@ export const data = {
     },
     {
       id: "Movie003",
-      name: "Ác mộng bên hồ",
-      slug: "ac-mong-ben-ho",
+      name: "Bố Già",
+      slug: "bo-gia",
       intro:
-        "Một nhóm bạn đi nghỉ dưỡng tại ngôi nhà bên hồ, tuy nhiên cuộc vui đã trở nên kinh hoàng khi có người bị sát hại. Thế lực bí ẩn dưới đáy hồ thực sự là gì?",
-      type: "Kinh dị, tâm lý",
-      author: "Quang Huy",
-      actor: "Patrick Walshe McBride, Iben Akerlie",
-      time: "105 minute",
-      nation: "Na Uy",
-      premiereDate: "Wed Mar 10 2020 00:00:00 GMT+0700 (Indochina Time)",
+        "Ra mắt từ đầu năm 2020, đến thời điểm này, trung bình mỗi tập phim của Bố Già đều đạt trên 20 triệu lượt xem (cao nhất là tập 1 với 33 triệu lượt xem).",
+      type: "Hài, Gia đình",
+      author: "Vũ Ngọc Đãng",
+      actor: "Trấn Thành, Tuấn Trần, Ngân Chi",
+      time: "128 phút",
+      nation: "Việt Nam",
+      premiereDate: "Fri Mar 05 2021 00:00:00 GMT+0700 (Indochina Time)",
       date: [
         {
           id: "movie003_15032020",
-          dateMovie: "05/15/2020",
+          dateMovie: "03/05/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -246,7 +248,7 @@ export const data = {
         },
         {
           id: "movie003_16032020",
-          dateMovie: "05/16/2020",
+          dateMovie: "03/16/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -272,7 +274,7 @@ export const data = {
         },
         {
           id: "movie003_17032020",
-          dateMovie: "06/15/2020",
+          dateMovie: "04/15/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -298,10 +300,11 @@ export const data = {
         },
       ],
       price: "75000",
-      image: "https://galaxycine.vn/media/2020/2/27/450x300_1582775198057.jpg",
+      image:
+        "https://www.galaxycine.vn/media/2021/2/26/300x450_1614324959732.jpg",
       imageInfo:
-        "https://www.galaxycine.vn/media/2020/2/27/300x450-1_1582775190404.jpg",
-      video: "https://www.youtube.com/embed/VWjlmdhvCy0?autoplay=1",
+        "https://www.galaxycine.vn/media/2021/2/26/300x450_1614324959732.jpg",
+      video: "https://www.youtube.com/watch?v=g8_DQqqTabk",
       vote: {
         rate: "7.5",
         numberOfReviews: "40",
@@ -309,20 +312,20 @@ export const data = {
     },
     {
       id: "Movie004",
-      name: "Căn Hộ Của Quỷ",
-      slug: "can-ho-cua-quy",
+      name: "Dreambuilders",
+      slug: "dreambuilders",
       intro:
-        "Phim là câu chuyện có thật về gia đình bị ma ám tại vùng Madrid khi họ chuyển đến căn nhà mới, các thế lực đen tối tại đây đã gây nỗi ám ảnh kinh hoàng cho họ.",
-      type: "Kinh dị",
-      author: "Albert Pintó",
-      actor: "Begoña Vargas , Iván Marcos",
-      time: "105 minute",
-      nation: "Italia",
-      premiereDate: "Wed Mar 10 2020 00:00:00 GMT+0700 (Indochina Time)",
+        "Bạn có từng tưởng tượng “giấc mơ” của mình được tạo nên như thế nào chưa? Dreambuilders là chuyến hành trình đầy màu sắc của cô bé Minna vào xứ sở của những giấc mơ, nơi có những “thợ xây mơ” dễ thương và rộn chuyện.",
+      type: "Hoạt hình",
+      author: "Kim Hagen Jensen",
+      actor: "",
+      time: "81 phút",
+      nation: "Đan Mạch",
+      premiereDate: "Fri Apr 09 2021 00:00:00 GMT+0700 (Indochina Time)",
       date: [
         {
           id: "movie004_15032020",
-          dateMovie: "07/15/2020",
+          dateMovie: "04/09/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -348,7 +351,7 @@ export const data = {
         },
         {
           id: "movie004_16032020",
-          dateMovie: "06/16/2020",
+          dateMovie: "04/16/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -374,7 +377,7 @@ export const data = {
         },
         {
           id: "movie004_17032020",
-          dateMovie: "06/17/2020",
+          dateMovie: "04/17/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -401,10 +404,10 @@ export const data = {
       ],
       price: "75000",
       image:
-        "https://galaxycine.vn/media/2020/2/24/450x300-32_1582530414160.jpg",
+        "https://www.galaxycine.vn/media/2021/4/1/300x450_1617248692392.jpg",
       imageInfo:
-        "https://www.galaxycine.vn/media/2020/2/24/300x450-32_1582530404329.jpg",
-      video: "https://www.youtube.com/embed/5b4RLQssyuc?autoplay=1",
+        "https://www.galaxycine.vn/media/2021/4/1/300x450_1617248692392.jpg",
+      video: "https://www.youtube.com/watch?v=4MsZE1YB-R0",
       vote: {
         rate: "7.5",
         numberOfReviews: "40",
@@ -412,20 +415,20 @@ export const data = {
     },
     {
       id: "Movie005",
-      name: "The Invisible Man: Kẻ Vô Hình",
-      slug: "the-invisible-ke-vo-hinh",
+      name: "Josee: Khi Nàng Thơ Yêu",
+      slug: "josee-khi-nang-tho-yeu",
       intro:
-        "Một cô gái đang bị truy sát bởi một tên ác nhân mà cô không thể nhìn thấy. Mục đích của kẻ vô hình này là gì? Hắn có liên hệ ra sao với cô gái kia? Đón xem!",
-      type: "Kinh dị, ly kì, giả tưởng",
-      author: "Quang Huy",
-      actor: "Elisabeth Moss, Oliver Jackson-Cohen",
-      time: "105 minute",
-      nation: "Mỹ",
-      premiereDate: "Wed Mar 10 2020 00:00:00 GMT+0700 (Indochina Time)",
+        "Đừng hứa sẽ bên nhau mãi mãi, hãy hứa sẽ đi cùng thật lâu. Vì bệnh tật, cô nàng mộng mơ Josee phải ngồi trên xe lăn và sống nương tựa vào người bà. Tình cờ, Josee gặp chàng sinh viên năm cuối Tsuneo. Cậu nhận lời bà của Josee chăm sóc cho cô. Tsuneo là người đầu tiên giúp Josee hoà mình vào xã hội, giúp Josee trở nên tự tin vào chính mình hơn. Nhờ Tsuneo, tài năng vẽ tranh của Josee cũng được nhiều người biết đến. Không lâu sau, hàng loạt những biến cố trong cuộc sống bỗng dồn dập kéo đến...",
+      type: "Hoạt hình",
+      author: "",
+      actor: "Nagakawa Taishi, Kiyohara Kaya",
+      time: "98 phút",
+      nation: "Nhật Bản",
+      premiereDate: "Fri Apr 09 2021 00:00:00 GMT+0700 (Indochina Time)",
       date: [
         {
           id: "movie005_15032020",
-          dateMovie: "05/15/2020",
+          dateMovie: "04/09/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -451,7 +454,7 @@ export const data = {
         },
         {
           id: "movie005_16032020",
-          dateMovie: "07/15/2020",
+          dateMovie: "04/15/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -477,7 +480,7 @@ export const data = {
         },
         {
           id: "movie005_17032020",
-          dateMovie: "08/15/2020",
+          dateMovie: "04/30/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -503,10 +506,9 @@ export const data = {
         },
       ],
       price: "75000",
-      image: "https://galaxycine.vn/media/2020/2/19/450x300_1582096375218.jpg",
-      imageInfo:
-        "https://www.galaxycine.vn/media/2020/2/20/300x450-cuoc-xe_1582172116913.jpg",
-      video: "https://www.youtube.com/embed/EAqCXCSraJ4?autoplay=1",
+      image: "https://www.galaxycine.vn/media/2021/4/6/2_1617695064117.jpg",
+      imageInfo: "https://www.galaxycine.vn/media/2021/4/6/2_1617695064117.jpg",
+      video: "https://www.youtube.com/watch?v=QdMH4SF2XYw",
       vote: {
         rate: "7.5",
         numberOfReviews: "40",
@@ -514,20 +516,20 @@ export const data = {
     },
     {
       id: "Movie006",
-      name: "Cuốc Xe Nửa Đêm",
-      slug: "cuoc-xe-nua-dem",
+      name: "Bàn Tay Diệt Quỷ",
+      slug: "ban-tay-diet-quy",
       intro:
-        "Hoàng Yến Chibi trở lại điện ảnh với vai công nàng xe ôm với vai Thư, cô gặp Sỹ (do diễn viên Quách Ngọc Tuyên thủ vai) trong một dịp tình cờ. Sau đấy cả hai yêu nhau, tuy nhiên dường như Thư và Sỹ đều có sự liên quan đến những nhân vật trong thế giới ngầm đầy đen tối. Liệu số phận của họ sẽ đi đến đâu?",
-      type: "Hành động, tâm lý",
-      author: "Nguyễn Nguyên Hoàng",
-      actor: "Hoàng Yến Chibi, Quách Ngọc Tuyên",
-      time: "105 minute",
-      nation: "Việt Nam",
-      premiereDate: "Wed Mar 10 2020 00:00:00 GMT+0700 (Indochina Time)",
+        'Võ sĩ MMA Yong Hoo (Park Seo Joon) đi theo con đường trừ tà trục quỷ sau khi bỗng dưng sở hữu "Bàn tay diệt quỷ". Đối đầu với anh là Giám mục bóng tối - tên quỷ Satan đội lốt người.',
+      type: "Hành động",
+      author: "Kim Joo Hwan",
+      actor: "Park Seo Joon, Woo Do Hwan, Choi Woo Shik",
+      time: "128 phút",
+      nation: "Hàn Quốc",
+      premiereDate: "Fri Apr 09 2021 00:00:00 GMT+0700 (Indochina Time)",
       date: [
         {
           id: "movie006_15032020",
-          dateMovie: "05/15/2020",
+          dateMovie: "04/09/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -553,7 +555,7 @@ export const data = {
         },
         {
           id: "movie006_16032020",
-          dateMovie: "05/16/2020",
+          dateMovie: "04/16/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -579,7 +581,7 @@ export const data = {
         },
         {
           id: "movie006_17032020",
-          dateMovie: "05/17/2020",
+          dateMovie: "04/30/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -606,10 +608,10 @@ export const data = {
       ],
       price: "75000",
       image:
-        "https://galaxycine.vn/media/2020/2/20/450x300-cuoc-xe_1582172123848.jpg",
+        "https://www.galaxycine.vn/media/2021/3/24/main-poster_1616572298243.jpg",
       imageInfo:
-        "https://www.galaxycine.vn/media/2020/2/20/300x450-cuoc-xe_1582172116913.jpg",
-      video: "https://www.youtube.com/embed/UCfgXvSzllA?autoplay=1",
+        "https://www.galaxycine.vn/media/2021/3/24/main-poster_1616572298243.jpg",
+      video: "https://www.youtube.com/watch?v=uqJ9u7GSaYM",
       vote: {
         rate: "7.5",
         numberOfReviews: "40",
@@ -617,20 +619,20 @@ export const data = {
     },
     {
       id: "Movie007",
-      name: "Nắng 4: lời hứa của cha",
-      slug: "nang-4-loi-hua-cua-cha",
+      name: "Lật Mặt: 48H",
+      slug: "lat-mat-48h",
       intro:
-        "Cuộc sống của một bà mẹ đơn thân cùng đứa con gái nhỏ thêm phần thú vị khi có sự xuất hiện của một người đàn ông lịch lãm, kế hoạch tìm chồng, tìm cha từ đây bắt đầu",
-      type: "Hài, Tình cảm , Gia đình",
-      author: "Đồng Đăng Giao",
-      actor: "Khả Như , Kiều Minh Tuấn",
-      time: "105 minutes",
-      nation: "Việt Name",
-      premiereDate: "Wed Mar 10 2020 00:00:00 GMT+0700 (Indochina Time)",
+        "Một gia đình bị truy đuổi giữa vùng sông nước. Cơ hội nào cho người đàn ông cứu lấy vợ con khỏi bọn xã hội đen máu mặt?",
+      type: "Hành động",
+      author: "Lý Hải",
+      actor: "Ốc Thanh Vân, Huỳnh Đông, Mạc Văn Khoa, Võ Thành Tâm",
+      time: "110 phút",
+      nation: "Việt Nam",
+      premiereDate: "Fri Apr 30 2021 00:00:00 GMT+0700 (Indochina Time)",
       date: [
         {
           id: "movie007_15032020",
-          dateMovie: "05/15/2020",
+          dateMovie: "04/30/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -656,7 +658,7 @@ export const data = {
         },
         {
           id: "movie007_16032020",
-          dateMovie: "06/15/2020",
+          dateMovie: "05/05/2021",
           frameTime: [
             {
               Room: "Room 1",
@@ -682,109 +684,6 @@ export const data = {
         },
         {
           id: "movie007_17032020",
-          dateMovie: "05/17/2020",
-          frameTime: [
-            {
-              Room: "Room 1",
-              time: "08:00",
-            },
-            {
-              Room: "Room 2",
-              time: "13:00",
-            },
-            {
-              Room: "Room 3",
-              time: "15:00",
-            },
-            {
-              Room: "Room 1",
-              time: "17:00",
-            },
-            {
-              Room: "Room 2",
-              time: "22:00",
-            },
-          ],
-        },
-      ],
-      price: "75000",
-      image:
-        "https://www.galaxycine.vn/media/2020/2/25/450x300_1582597508575.jpg",
-      imageInfo:
-        "https://www.galaxycine.vn/media/2020/2/20/300x450-cuoc-xe_1582172116913.jpg",
-      video: "https://www.youtube.com/embed/EAqCXCSraJ4?autoplay=1",
-      vote: {
-        rate: "7.5",
-        numberOfReviews: "40",
-      },
-    },
-    {
-      id: "Movie008",
-      name: "Cuốc Xe Nửa Đêm",
-      slug: "cuoc-xe-nua-dem",
-      intro:
-        "Hoàng Yến Chibi trở lại điện ảnh với vai công nàng xe ôm với vai Thư, cô gặp Sỹ (do diễn viên Quách Ngọc Tuyên thủ vai) trong một dịp tình cờ. Sau đấy cả hai yêu nhau, tuy nhiên dường như Thư và Sỹ đều có sự liên quan đến những nhân vật trong thế giới ngầm đầy đen tối. Liệu số phận của họ sẽ đi đến đâu?",
-      type: "Hành động, tâm lý",
-      author: "Nguyễn Nguyên Hoàng",
-      actor: "Hoàng Yến Chibi, Quách Ngọc Tuyên",
-      time: "105 minute",
-      nation: "Việt Nam",
-      premiereDate: "Wed Mar 21 2021 00:00:00 GMT+0700 (Indochina Time)",
-      date: [
-        {
-          id: "movie008_15032020",
-          dateMovie: "05/15/2021",
-          frameTime: [
-            {
-              Room: "Room 1",
-              time: "08:00",
-            },
-            {
-              Room: "Room 2",
-              time: "13:00",
-            },
-            {
-              Room: "Room 3",
-              time: "15:00",
-            },
-            {
-              Room: "Room 1",
-              time: "17:00",
-            },
-            {
-              Room: "Room 2",
-              time: "22:00",
-            },
-          ],
-        },
-        {
-          id: "movie008_16032020",
-          dateMovie: "05/16/2021",
-          frameTime: [
-            {
-              Room: "Room 1",
-              time: "08:00",
-            },
-            {
-              Room: "Room 2",
-              time: "13:00",
-            },
-            {
-              Room: "Room 3",
-              time: "15:00",
-            },
-            {
-              Room: "Room 1",
-              time: "17:00",
-            },
-            {
-              Room: "Room 2",
-              time: "22:00",
-            },
-          ],
-        },
-        {
-          id: "movie008_17032020",
           dateMovie: "05/17/2021",
           frameTime: [
             {
@@ -812,10 +711,113 @@ export const data = {
       ],
       price: "75000",
       image:
-        "https://galaxycine.vn/media/2020/2/20/450x300-cuoc-xe_1582172123848.jpg",
+        "https://www.galaxycine.vn/media/2021/3/4/300-lat-mat_1614842112584.jpg",
       imageInfo:
-        "https://www.galaxycine.vn/media/2020/2/20/300x450-cuoc-xe_1582172116913.jpg",
-      video: "https://www.youtube.com/embed/UCfgXvSzllA?autoplay=1",
+        "https://www.galaxycine.vn/media/2021/3/4/300-lat-mat_1614842112584.jpg",
+      video: "https://www.youtube.com/watch?v=jox0zmGyHLU",
+      vote: {
+        rate: "7.5",
+        numberOfReviews: "40",
+      },
+    },
+    {
+      id: "Movie008",
+      name: "1990",
+      slug: "1990",
+      intro:
+        "1990 kể về hội bạn thân gồm ba cô gái với ba cá tính khác nhau. Khi ngưỡng tuổi “30 chênh vênh” ập đến với cả ba vào cùng một thời điểm, hàng loạt những vấn đề về hôn nhân, tình yêu, sự nghiệp,... lần lượt xuất hiện, buộc họ phải giúp đỡ nhau vượt qua cột mốc đầy sóng gió này.",
+      type: "Tâm lý",
+      author: "Nhất Trung",
+      actor: "Nhã Phương, Ninh Dương Lan Ngọc, Diễm My 9X",
+      time: "105 phút",
+      nation: "Việt Nam",
+      premiereDate: "Wed Apr 21 2021 00:00:00 GMT+0700 (Indochina Time)",
+      date: [
+        {
+          id: "movie008_15032020",
+          dateMovie: "04/21/2021",
+          frameTime: [
+            {
+              Room: "Room 1",
+              time: "08:00",
+            },
+            {
+              Room: "Room 2",
+              time: "13:00",
+            },
+            {
+              Room: "Room 3",
+              time: "15:00",
+            },
+            {
+              Room: "Room 1",
+              time: "17:00",
+            },
+            {
+              Room: "Room 2",
+              time: "22:00",
+            },
+          ],
+        },
+        {
+          id: "movie008_16032020",
+          dateMovie: "04/30/2021",
+          frameTime: [
+            {
+              Room: "Room 1",
+              time: "08:00",
+            },
+            {
+              Room: "Room 2",
+              time: "13:00",
+            },
+            {
+              Room: "Room 3",
+              time: "15:00",
+            },
+            {
+              Room: "Room 1",
+              time: "17:00",
+            },
+            {
+              Room: "Room 2",
+              time: "22:00",
+            },
+          ],
+        },
+        {
+          id: "movie008_17032020",
+          dateMovie: "05/10/2021",
+          frameTime: [
+            {
+              Room: "Room 1",
+              time: "08:00",
+            },
+            {
+              Room: "Room 2",
+              time: "13:00",
+            },
+            {
+              Room: "Room 3",
+              time: "15:00",
+            },
+            {
+              Room: "Room 1",
+              time: "17:00",
+            },
+            {
+              Room: "Room 2",
+              time: "22:00",
+            },
+          ],
+        },
+      ],
+      price: "75000",
+      image:
+        "https://www.galaxycine.vn/media/2021/4/5/1990---teaser-poster--kc-21-04-2021_1617608893524.jpg",
+      imageInfo:
+        "https://www.galaxycine.vn/media/2021/4/5/1990---teaser-poster--kc-21-04-2021_1617608893524.jpg",
+      video: "https://www.youtube.com/watch?v=0509zlM8QA8",
       vote: {
         rate: "7.5",
         numberOfReviews: "40",
