@@ -21,9 +21,9 @@ class BuyTicketPage extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.fetchAllDataMovie();
-  }
+    componentDidMount() {
+      this.props.fetchAllDataMovie();
+    }
 
   handleOnChooseMovie = (mv) => {
     console.log("mv:", mv);

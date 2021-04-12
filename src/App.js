@@ -1,3 +1,4 @@
+
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -8,6 +9,7 @@ import AccountManagementPage from "./pages/admin/AccounManagementPage";
 import Header from "./components/client/Header/Header";
 import Footer from "./components/client/Footer/Footer";
 import HomePage from "./pages/client/HomePage/HomePage";
+import BuyTicketPage from "./pages/client/BuyTicketPage/BuyTicketPage";
 import MoviePage from "./pages/client/MoviePage/MoviePage";
 import Promotion1 from "./pages/client/HomePage/Promotion/PromotionItems/promotion001_SinhNhatTrangThi";
 import Promotion2 from "./pages/client/HomePage/Promotion/PromotionItems/promotion002_miloDay";
@@ -26,6 +28,17 @@ function App() {
         <Route exact path="/admin/account">
           <AccountManagementPage></AccountManagementPage>
         </Route>
+        <Route exact path="/buy-ticket"
+          component={({ history }) => {
+            return (
+              <>
+                <Header />
+                <BuyTicketPage history={history} />
+                <Footer />
+              </>
+            );
+          }}
+        ></Route>
         <Route exact path="/">
           <Header />
           <HomePage />
