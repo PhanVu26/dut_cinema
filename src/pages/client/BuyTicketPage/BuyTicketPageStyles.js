@@ -18,7 +18,7 @@ const styles = (theme) => ({
   },
   active: {
     backgroundColor: "#f1f1f1 !important",
-    color: theme.color.orange,
+    color: "#f26b38",
   },
   session: {
     border: "1px solid #dedede",
@@ -27,8 +27,8 @@ const styles = (theme) => ({
     marginRight: "10px",
     marginTop: "10px",
     "&:hover": {
-      color: theme.color.orange,
-      borderColor: theme.color.orange,
+      color: "#f26b38",
+      borderColor: "#f26b38",
       cursor: "pointer",
     },
   },

@@ -76,9 +76,13 @@ class NavigationBar extends Component {
             >
               <ul className="navbar-c navbar-nav">
                 <li className="nav-item-c nav-item">
-                  <div className="nav-link-c text-uppercase nav-link">
+                  <Link
+                    to="/buy-ticket"
+                    className="nav-link-c text-uppercase nav-link"
+                    href="about.html"
+                  >
                     Mua vé
-                  </div>
+                  </Link>
                 </li>
                 <li
                   className={`nav-item-c nav-item dropdown ${styleFilmMenu}`}

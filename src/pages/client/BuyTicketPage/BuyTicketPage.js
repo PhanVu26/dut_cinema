@@ -2,14 +2,14 @@ import { withStyles } from "@material-ui/styles";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import ColumnBlock from "../../components/ColumnBlock/ColumnBlock";
+import ColumnBlock from "../../../components/client/ColumnBlock/ColumnBlock";
 import styles from "./BuyTicketPageStyles";
-// import {
-//   actFetchDataMovieRequest,
-//   actReceiveMovieChoosing,
-// } from "../../actions/action";
+import {
+  actFetchDataMovieRequest,
+  actReceiveMovieChoosing,
+} from "../../../actions/index";
 import { Box } from "@material-ui/core";
-// import history from "../../commons/history";
+import history from "../../../commons/history";
 
 class BuyTicketPage extends Component {
   constructor() {
@@ -21,12 +21,12 @@ class BuyTicketPage extends Component {
     };
   }
 
-  //   componentDidMount() {
-  //     this.props.fetchAllDataMovie();
-  //   }
+  componentDidMount() {
+    this.props.fetchAllDataMovie();
+  }
 
   handleOnChooseMovie = (mv) => {
-    // console.log("mv:", mv);
+    console.log("mv:", mv);
     this.setState({
       timeOfMovie: mv.date,
       isShow: true,
@@ -126,8 +126,8 @@ class BuyTicketPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    movies: state.reducerMovie.movie,
-    showtimes: state.reducerShowtimes.showtime,
+    movies: state.MovieReducer.movie,
+    showtimes: state.ShowTimesReducer.showtime,
   };
 };
 

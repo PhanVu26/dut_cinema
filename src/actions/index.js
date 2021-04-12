@@ -1,6 +1,6 @@
 import * as Types from "../constants/ActionType";
-// import history from "../commons/history";
-// import callApi from "../utils/ApiCallerServer";
+import history from "../commons/history";
+import callApi from "../utils/ApiCallerServer";
 
 export const listAllUsers = () => {
   return {
@@ -28,13 +28,13 @@ export const deleteUser = (id) => {
   };
 };
 
-// export const actFetchDataMovieRequest = () => {
-//   return (dispatch) => {
-//     return callApi("api/movies", "GET", null).then((res) => {
-//       dispatch(actFetchDataMovie(res.data));
-//     });
-//   };
-// };
+export const actFetchDataMovieRequest = () => {
+  return (dispatch) => {
+    return callApi("api/movies", "GET", null).then((res) => {
+      dispatch(actFetchDataMovie(res.data));
+    });
+  };
+};
 
 export const actFetchDataMovie = (movie) => {
   return {
