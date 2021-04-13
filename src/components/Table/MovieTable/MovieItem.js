@@ -50,6 +50,9 @@ class MovieItem extends Component {
         }) 
         return result;
     }
+    onDeleteMovie = () => {
+        this.props.onDeleteMovie(this.props.movie.id);
+    }
     render() {
         const {index, movie} = this.props;
         const genres = [] ;
@@ -98,7 +101,10 @@ class MovieItem extends Component {
                     {/* <MovieForm></MovieForm> */}
                     
                     &nbsp;
-                    <button type="button" className="btn btn-danger">
+                    <button
+                        onClick={() => {if(window.confirm('Bạn có muốn xóa Phim này?')){this.onDeleteMovie()};}} 
+                        type="button" 
+                        className="btn btn-danger">
                         <span className="far fa-trash-alt"></span>
                     </button>
                     &nbsp;
@@ -130,10 +136,10 @@ const mapDispatchToProps = (dispatch, props) =>{
         },
         getMovieInfo : (movie) => {
             dispatch(actions.getMovieInfo(movie))
-        }
-        // onDeleteUser: (id) => {
-        //     dispatch(actions.deleteUser(id))
-        // },
+        },
+        onDeleteMovie: (id) => {
+            dispatch(actions.deleteMovie(id))
+        },
         // onUpdateUserStatus: (id) => {
         //     dispatch(actions.updateUserStatus(id))
         // },
