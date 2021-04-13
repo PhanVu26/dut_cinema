@@ -7,7 +7,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HomePage from "./pages/HomePage/HomePage"
 import UserManagementPage from './pages/admin/UserManagementPage';
 import MovieManager from './pages/manager/movie manager';
-import ActorManager from './pages/manager/ActorManager/index'
+import ActorManager from './pages/manager/ActorManager/index';
+import ManagerPage from './pages/manager/index';
 function App() {
   return (
     <div className="App">
@@ -22,11 +23,8 @@ function App() {
           <Route exact path="/"> 
             <HomePage></HomePage>
           </Route>
-          <Route exact path="/manager/movies"> 
-            <MovieManager></MovieManager>
-          </Route>
-          <Route exact path="/manager/actors"> 
-            <ActorManager></ActorManager>
+          <Route exact path="/manager"> 
+            <ManagerPage></ManagerPage>
           </Route>
         </Switch>
       </Router>
