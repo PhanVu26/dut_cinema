@@ -7,11 +7,12 @@ class MovieList extends Component {
     constructor(props){
         super(props);
 
-        // this.state = {
-        //     nameFilter: '',
-        //     roleFilter: -1,
-        //     statusFilter: -1
-        // }
+        this.state = {
+            filterByName: '',
+            filterByGenre: -1,
+            filterByAuthor: '',
+            filterByProducer:''
+        }
     }
 
     showMovies = movies => {
@@ -24,26 +25,64 @@ class MovieList extends Component {
         return result;
       };
 
-    // handleChange = (e) => {
-    //     var target = e.target;
-    //     var name = target.name;
-    //     var value = target.value;
-    //     var filter = {
-    //         username: name === 'nameFilter' ? value : this.state.nameFilter,
-    //         role: name === 'roleFilter' ? value : this.state.roleFilter,
-    //         status: name === 'statusFilter' ? value : this.state.statusFilter
-    //     }
-    //     this.setState({
-    //         [name]: value
-    //     })
-    //     this.props.onFilterUser(filter)
+    handleChange = (e) => {
+        var target = e.target;
+        var name = target.name;
+        var value = target.value;
+        var filter = {
+            name: name === 'filterByName' ? value : this.state.filterByName,
+            genre: name === 'filterByGenre' ? value : this.state.filterByGenre,
+            author: name === 'filterByAuthor' ? value : this.state.filterByAuthor,
+            producer: name === 'filterByProducer' ? value : this.state.filterByProducer,
+        }
+        this.setState({
+            [name]: value
+        })
+        this.props.onFilterMovie(filter)
         
-    // }
+    }
+
+    showGenreSelectBox = (genres) => {
+        var result = null;
+        result = genres.map((genre, index) => {
+            return (
+                <option key={index} value={genre.id}>{genre.name}</option>
+            )
+        })
+        return result;
+    }
 
     render() {
 
-        var{rowsPerPage} = this.props;
-        console.log("list users ", rowsPerPage)
+        // var{rowsPerPage} = this.props;
+        // console.log("list movies ", rowsPerPage)
+        var{rowsPerPage, filterMovie} = this.props;
+        if(filterMovie.name){
+            rowsPerPage = rowsPerPage.filter((movie) => {
+                return movie.name.toLowerCase().indexOf(filterMovie.name.toLowerCase()) !== -1
+            })
+        }
+        if(filterMovie.author){
+            rowsPerPage = rowsPerPage.filter((movie) => {
+                return movie.author.toLowerCase().indexOf(filterMovie.author.toLowerCase()) !== -1
+            })
+        }
+
+        if(filterMovie.producer){
+            rowsPerPage = rowsPerPage.filter((movie) => {
+                return movie.producer.toLowerCase().indexOf(filterMovie.producer.toLowerCase()) !== -1
+            })
+        }
+     
+        if(filterMovie.genre !== -1){
+            rowsPerPage = rowsPerPage.filter((movie) => {
+                var found = movie.genreIds.some(genre =>{
+                    return genre.id === filterMovie.genre
+                });
+                console.log('found', found)
+                return found === true ? true: false
+            })
+        }
         return (
             <table className="table table-bordered table-hover">
                 <thead>
@@ -60,6 +99,49 @@ class MovieList extends Component {
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <input 
+                                type="text"
+                                name="filterByName"
+                                placeholder='Nhập tên phim'
+                                onChange={this.handleChange}
+                                value={this.state.filterByName}>
+                            </input>
+                        </td>
+                        <td></td>
+                        <td>
+                            <select 
+                                name="filterByGenre"
+                                onChange={this.handleChange}
+                                value={this.state.filterByGenre} >
+                                    <option value={-1}>Tất cả</option>
+                                    {this.showGenreSelectBox(this.props.genres)}
+                            </select>
+                        </td>
+                        <td>
+                            <input 
+                                type="text"
+                                name="filterByAuthor"
+                                placeholder='Nhập tên đạo diễn'
+                                onChange={this.handleChange}
+                                value={this.state.filterByAuthor}>
+                            </input>
+                        </td>
+                        <td>
+                            <input 
+                                type="text"
+                                name="filterByProducer"
+                                placeholder='Nhập tên nhà sản xuất'
+                                onChange={this.handleChange}
+                                value={this.state.filterByProducer}>
+                            </input>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                     
                     {this.showMovies(rowsPerPage)}
                     
@@ -72,15 +154,16 @@ class MovieList extends Component {
 const mapStateToProps = (state) => {
     return {
         movies: state.movies,
-        // userFilter : state.userFilter,
+        genres: state.genres,
+        filterMovie : state.filterMovie,
         // pageInfo: state.pageInfo
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
-    // return {
-    //     onFilterUser: (filter) => {
-    //         dispatch(actions.filterUser(filter))
-    //     }
-    // }
+    return {
+        onFilterMovie: (filter) => {
+            dispatch(actions.filterMovie(filter))
+        }
+    }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (MovieList);

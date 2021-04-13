@@ -13,8 +13,8 @@ var initialState = [
                 name: "Phim tình cảm"
             },
             {   
-                id: 2,
-                name: "Phim hành động"
+                id: 4,
+                name: "Phim gia đình"
             },
         ],
         actorIds: [
@@ -165,8 +165,8 @@ var initialState = [
                 name: "Phim tình cảm"
             },
             {   
-                id: 2,
-                name: "Phim hành động"
+                id: 8,
+                name: "Phim trinh thám"
             },
         ],
         actorIds: [
@@ -196,8 +196,8 @@ var initialState = [
                 name: "Phim tình cảm"
             },
             {   
-                id: 2,
-                name: "Phim hành động"
+                id: 3,
+                name: "Phim hài"
             },
         ],
         actorIds: [
