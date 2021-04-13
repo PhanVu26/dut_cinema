@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { NavLink } from "react-router-dom";
 
 
 class Navbar  extends Component {
@@ -17,10 +18,10 @@ class Navbar  extends Component {
                             <a className="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
                             <li className="nav-item">
-                            <a className="nav-link" href="#">Movies</a>
+                            < NavLink className="nav-link" to="/manager/movies">Movies</ NavLink>
                             </li>
                             <li className="nav-item">
-                            <a className="nav-link" href="#">Actors</a>
+                            <NavLink className="nav-link" to="/manager/actors">Actors</NavLink>
                             </li>
                         </ul>
                         </div>
