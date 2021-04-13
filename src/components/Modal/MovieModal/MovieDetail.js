@@ -5,7 +5,7 @@ import * as actions from '../../../actions/movieManager/index';
 
 import testThumbnail from '../../../assets/images/logo.png';
 import style from '../MovieModal/MovieModal.css'
-class MovieModal extends Component {
+class MovieDetail extends Component {
 
     constructor(props) {
         super(props);
@@ -176,4 +176,4 @@ const mapDispatchToProps = (dispatch, props) =>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieModal);
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetail);

@@ -5,7 +5,7 @@ import * as actions from '../../../actions/movieManager/index'
 
 import testImage from '../../../assets/images/logo.png'
 import MovieForm from '../../Modal/MovieModal/MovieForm'
-import MovieModal from '../../Modal/MovieModal/MovieDetail'
+import MovieDetail from '../../Modal/MovieModal/MovieDetail'
 
 class MovieItem extends Component {
 
@@ -30,6 +30,11 @@ class MovieItem extends Component {
         this.props.onToggleModal();
         this.props.getMovieInfo(this.props.movie)
         console.log("xem movie:", this.props.movie)
+    }
+    editMovie = () => {
+        this.props.onToggleMovieForm();
+        this.props.getMovieInfo(this.props.movie)
+        console.log("edit moviessss:", this.props.movie) 
     }
     showGenres(genres){
         var result = null;
@@ -85,11 +90,13 @@ class MovieItem extends Component {
                 </td> */}
                 <td className="text-center">
                     <button 
+                        onClick={this.editMovie}
                         type="button" 
                         className="btn btn-warning">
                         <span className="fa fa-pencil"></span>
                     </button>
-                    {/* <MovieForm movie={movie}></MovieForm> */}
+                    {/* <MovieForm></MovieForm> */}
+                    
                     &nbsp;
                     <button type="button" className="btn btn-danger">
                         <span className="far fa-trash-alt"></span>
@@ -102,22 +109,24 @@ class MovieItem extends Component {
                         <span className="fas fa-eye"></span>
                     </button>
                 </td>
-                <MovieModal ></MovieModal>
+                <MovieDetail></MovieDetail>
+                {/* <MovieForm></MovieForm> */}
             </tr>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    return {
-        isDisplayMovieModal : state.isDisplayMovieModal
-    }
+
 }
 
 const mapDispatchToProps = (dispatch, props) =>{
     return {
         onToggleModal: () => {
             dispatch(actions.toggleModal())
+        },
+        onToggleMovieForm: () => {
+            dispatch(actions.toggleMovieForm())
         },
         getMovieInfo : (movie) => {
             dispatch(actions.getMovieInfo(movie))
