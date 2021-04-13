@@ -49,3 +49,10 @@ export const deleteMovie = (id) => {
         id
     }
 }
+
+export const filterMovie = (filter) => {
+    return {
+        type: types.FILTER_MOVIE,
+        filter
+    }
+}

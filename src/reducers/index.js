@@ -3,13 +3,14 @@ import users from "./UserReducer/UserReducer";
 import isDisplayUserForm from './UserReducer/DisplayUserFormReducer';
 import userEditing from './UserReducer/UserEditingReducer';
 import userFilter from './UserReducer/FilterUserReducer';
+
 import movies from './MovieReducer/MovieReducer';
 import isDisplayMovieModal from './MovieReducer/ShowModalReducer';
 import movieInfo from './MovieReducer/MovieInfoReducer';
 import isDisplayMovieForm from './MovieReducer/ShowMovieFormReducer'
 import genres from "./GenreReducer/GenreReducer";
 import actors from "./ActorReducer/ActorReducer";
-
+import filterMovie from './MovieReducer/FilterMovieReducer';
 const myReducer = combineReducers({
     users,
     genres,
@@ -20,7 +21,8 @@ const myReducer = combineReducers({
     movies,
     isDisplayMovieModal,
     movieInfo,
-    isDisplayMovieForm
+    isDisplayMovieForm,
+    filterMovie
 
 })
 
