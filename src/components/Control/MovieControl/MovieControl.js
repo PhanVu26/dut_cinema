@@ -8,19 +8,20 @@ class MovieControl extends Component {
 
     onHandleModal = () => {
         console.log("movie info: ", this.props.movieInfo)
-        if(this.props.movieInfo.id === '' ){
+        if(this.props.movieInfo.id === "" ){
+            console.log("null")
             this.props.onToggleMovieForm();
         }else {
             this.props.onClearMovie({
-                id: '',
-                name :'',
-                author: '',
-                producer: '',
+                id: "",
+                name :"",
+                author: "",
+                producer: "",
                 genreIds: [],
                 actorIds: [],
-                releaseDate: '',
-                description: '',
-                thumbnail: ''
+                releaseDate: "",
+                description: "",
+                thumbnail: ""
 
             })
             this.props.onToggleMovieForm();
