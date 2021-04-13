@@ -11,6 +11,10 @@ import isDisplayMovieForm from './MovieReducer/ShowMovieFormReducer'
 import genres from "./GenreReducer/GenreReducer";
 import actors from "./ActorReducer/ActorReducer";
 import filterMovie from './MovieReducer/FilterMovieReducer';
+
+import isDisplayActorForm from './ActorReducer/DisplayActorFormReducer';
+import actorEditing from './ActorReducer/ActorEditingReducer';
+
 const myReducer = combineReducers({
     users,
     genres,
@@ -22,7 +26,9 @@ const myReducer = combineReducers({
     isDisplayMovieModal,
     movieInfo,
     isDisplayMovieForm,
-    filterMovie
+    filterMovie,
+    isDisplayActorForm,
+    actorEditing
 
 })
 
