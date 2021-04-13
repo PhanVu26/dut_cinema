@@ -24,4 +24,11 @@ export const LIST_ALL_GENRES = 'LIST_ALL_GENRES';
 // Actors
 
 export const LIST_ALL_ACTORS = 'LIST_ALL_ACTORS';
+export const SAVE_ACTOR = 'SAVE_ACTOR';
+export const TOGGLE_ACTOR_MODAL = 'TOGGLE_ACTOR_MODAL';
+export const TOGGLE_ACTOR_FORM = 'TOGGLE_ACTOR_FORM';
+export const DELETE_ACTOR = 'DELETE_ACTOR';
+export const GET_ACTOR_INFO = 'GET_ACTOR_INFO';
+export const UPDATE_ACTOR = 'UPDATE_ACTOR';
+export const FILTER_ACTOR = 'FILTER_ACTOR';
 
