@@ -42,3 +42,10 @@ export const getMovieInfo = (movie) => {
         movie
     }
 }
+
+export const deleteMovie = (id) => {
+    return {
+        type: types.DELETE_MOVIE,
+        id
+    }
+}

@@ -266,11 +266,11 @@ var myReducer = (state = initialState, action) => {
                 state[index] = editMovie;
             }
             return [...state];    
-        // case types.DELETE_USER:
-        //     index = findIndex(state, action.id)
-        //     state.splice(index, 1);
-        //     console.log(action);
-        //     return [...state];       
+        case types.DELETE_MOVIE:
+            index = findIndex(state, action.id)
+            state.splice(index, 1);
+            console.log(action);
+            return [...state];       
         // case types.UPDATE_USER_STATUS:
         //     index = findIndex(state, action.id);
         //     state[index] = {
