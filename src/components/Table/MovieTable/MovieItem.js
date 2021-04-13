@@ -99,15 +99,12 @@ class MovieItem extends Component {
                         <span className="fa fa-pencil"></span>
                     </button>
                     {/* <MovieForm></MovieForm> */}
-                    
-                    &nbsp;
                     <button
                         onClick={() => {if(window.confirm('Bạn có muốn xóa Phim này?')){this.onDeleteMovie()};}} 
                         type="button" 
                         className="btn btn-danger">
                         <span className="far fa-trash-alt"></span>
                     </button>
-                    &nbsp;
                     <button 
                         type="button" 
                         className="btn btn-danger"
