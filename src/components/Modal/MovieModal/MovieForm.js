@@ -23,10 +23,14 @@ class MovieForm extends Component {
             },
             selectedActors: [],
             selectedGenres: [],
-            invalidMessage: ""
+            invalidMessage: "",
+            filterGenre: "",
+            filterActor: ""
         }
     }
     
+    
+
     findIndexActorById = (actorIds,id) => {
         console.log("actors:", actorIds)
         console.log("find id", id)
@@ -51,16 +55,16 @@ class MovieForm extends Component {
     }
 
     onHandleChange = (e) => {
-        console.log("e ,", e)
+        //console.log("e ,", e)
         var target = e.target;
         var name = target.name;
         var value = target.value;
-        console.log("value,", value)
+        //console.log("value,", value)
         var id = e.target.id;
 
-        console.log(id)
-        var thumbnail = e.target.files != null ? URL.createObjectURL(e.target.files[0]) : this.state.thumbnail
-        
+        //console.log(id)
+        var thumbnail = e.target.files != null ? URL.createObjectURL(e.target.files[0]) : this.state.movie.thumbnail
+        console.log("thumbnail", thumbnail)
         if(e.target.checked === true){
             if(e.target.className === "actor-checkbox"){
                 this.setState(prevState => ({
@@ -129,6 +133,7 @@ class MovieForm extends Component {
                 <div className="actor-item ml-3">
                     <label htmlFor={'actor'+actor.id} className="mr-2">{actor.name}</label>
                     <input 
+                        defaultChecked = {this.state.selectedActors.some(actorName => actorName === actor.name)}
                         className="actor-checkbox"
                         type="checkbox" 
                         id={'actor'+actor.id} 
@@ -152,10 +157,12 @@ class MovieForm extends Component {
     showGenreCheckbox = genres =>{
         var results = [];
         results = genres.map(genre => {
+            console.log("checked", this.state.selectedGenres.some(genreName => genreName === genre.name))
             return (
                 <div className="genre-item ml-3">
                     <label htmlFor={'genre'+genre.id} className="mr-2">{genre.name}</label>
                     <input 
+                        defaultChecked = {this.state.selectedGenres.some(genreName => genreName === genre.name)}
                         className="genre-checkbox"
                         type="checkbox" 
                         id={'genre'+genre.id} 
@@ -179,18 +186,19 @@ class MovieForm extends Component {
     validateMovie = () => {
         const movie = this.state.movie;
         if(movie.name === "" || movie.author === "" || movie.description === "" ||
-            movie.description === "" || movie.genreIds === [] || movie.releaseDate === "" ||
-            movie.thumbnail === "" || movie.actorIds === []){
+            movie.description === "" || movie.genreIds.length == 0 || movie.releaseDate === "" ||
+            movie.thumbnail == "" || movie.actorIds.length == 0){
                 return false
             }
         return true;    
     }
     saveMovie = (event) => {
         event.preventDefault();
-        console.log("new Movie", this.state.movie)
         if(this.validateMovie() === true) {
             this.props.onSaveMovie(this.state.movie)
+            console.log("save movie 1", this.state.movie)
             this.props.onToggleMovieForm()
+            
         }else {
             this.setState({
                 invalidMessage : "Vui lòng nhập đầy đủ thông tin"
@@ -198,15 +206,79 @@ class MovieForm extends Component {
         }
     }
 
+    onHandleSearchChange = (e) => {
+        var {name, value} = e.target;
+        this.setState({
+            [name]: value
+        })
+    }
+    shouldComponentUpdate(nextProps, nextState) {        
+        return true;
+    }
+    // componentDidMount(){
+    //     console.log("didmount", this.props.movieInfo)
+    //     if(this.props.movieInfo && this.props.movieInfo.id !== ""){
+    //         console.log("movie info digs", this.props.movieInfo)
+    //         this.setState(prevState => ({
+    //             movie: this.props.movieInfo,
+    //             selectedGenres: [...prevState.selectedGenres, ...this.props.movieInfo.genreIds.map(genre =>{return genre.name})],
+    //             selectedActors: [...prevState.selectedActors, ...this.props.movieInfo.actorIds.map(actor =>{return actor.name})]
+    //         }))
+    //     }
+    // }
+
+    // static getDerivedStateFromProps(nextProps, prevState){
+    //     if(nextProps.movieInfo!==prevState.movie){
+    //       return { movie: nextProps.movieInfo};
+    //    }
+    //     return null;
+    //   }
+    //   componentDidUpdate(prevProps, prevState) {
+    //     if(prevProps.movieInfo!==this.props.movie){
+    //       //Perform some operation here
+    //       this.setState({
+    //                     movie: prevProps.movieInfo,
+    //                     selectedGenres: [...prevState.selectedGenres, ...prevProps.movieInfo.genreIds.map(genre =>{return genre.name})],
+    //                     selectedActors: [...prevState.selectedActors, ...prevProps.movieInfo.actorIds.map(actor =>{return actor.name})]
+    //                 })
+        
+    //     }  
+    // }
+
+    componentWillReceiveProps(nextProps) {
+        console.log("nextprops", nextProps.movieInfo)
+        if(nextProps.movieInfo) {
+            this.setState({
+                movie: nextProps.movieInfo,
+                selectedGenres: nextProps.movieInfo.genreIds.map(genre =>{return genre.name}),
+                selectedActors: nextProps.movieInfo.actorIds.map(actor =>{return actor.name})
+            })
+        }
+      }
+
     render() {
+
         const {isDisplayMovieForm} = this.props;
         const {movie} = this.state
         const movieInfo = this.props.movieInfo;
-        const {genres, actors} = this.props
+        console.log("render")
+        var {genres, actors} = this.props
+
+        console.log("state", this.state.selectedGenres)
+        genres = genres.filter((genre) => {
+            return genre.name.toLowerCase().indexOf(this.state.filterGenre.toLowerCase()) !== -1
+        });
+
+        actors = actors.filter((actor) => {
+            return actor.name.toLowerCase().indexOf(this.state.filterActor.toLowerCase()) !== -1
+        })
 
         return (
            <div>  
-            <Modal show={isDisplayMovieForm} size="lg" style={{maxWidth: '100%', width: '100%'}}>
+            <Modal 
+                show={isDisplayMovieForm} 
+                size="lg"
+                style={{maxWidth: '100%', width: '100%'}}>
                 <Modal.Header>{movieInfo.id === "" ? "Taọ phim mới" : "Chỉnh sửa phim"}</Modal.Header>
                 <Modal.Body>
                     <form onSubmit={this.saveMovie}>
@@ -215,7 +287,6 @@ class MovieForm extends Component {
                                 <div className="form-group">
                                     <label>Tên phim :</label>
                                     <input
-                                        readOnly ={movieInfo.id !== ''}
                                         type="text"
                                         className="form-control"
                                         name="name"
@@ -227,7 +298,6 @@ class MovieForm extends Component {
                                 <div className="form-group">
                                     <label>Đạo diễn :</label>
                                     <input
-                                        readOnly ={movieInfo.id !== ''}
                                         type="text"
                                         className="form-control"
                                         name="author"
@@ -239,7 +309,6 @@ class MovieForm extends Component {
                                 <div className="form-group">
                                     <label>Nhà sản xuất :</label>
                                     <input
-                                        readOnly ={movieInfo.id !== ''}
                                         type="text"
                                         className="form-control"
                                         name="producer"
@@ -251,7 +320,6 @@ class MovieForm extends Component {
                                 <div className="form-group">
                                     <label>Ngày phát hành :</label>
                                     <input
-                                        readOnly ={movieInfo.id !== ''}
                                         type="text"
                                         className="form-control"
                                         name="releaseDate"
@@ -264,6 +332,8 @@ class MovieForm extends Component {
                                 <div className="form-group">
                                     <label>Mô tả phim :</label>
                                     <textarea
+                                        rows='5'
+                                        cols='40'
                                         type="text"
                                         className="form-control"
                                         name="description"
@@ -280,7 +350,13 @@ class MovieForm extends Component {
                                 
                             <div className="form-group">
                                     <label>Thể loại :</label>
-                                    <input className="ml-2" placeholder="Nhập tên thể loại"></input><br></br>
+                                    <input 
+                                        name="filterGenre"
+                                        value = {this.state.filterGenre}
+                                        className="ml-2" 
+                                        placeholder="Tìm theo thể loại"
+                                        onChange = {this.onHandleSearchChange}>
+                                    </input><br></br>
                                     <div className="genres-box">
                                         
                                         {this.showGenreCheckbox(genres)}
@@ -292,7 +368,13 @@ class MovieForm extends Component {
 
                                 <div className="form-group">
                                     <label>Diễn viên :</label>
-                                    <input className="ml-2" placeholder="Nhập tên diễn viên"></input><br></br>
+                                    <input 
+                                        name="filterActor"
+                                        value={this.state.filterActor}
+                                        className="ml-2" 
+                                        placeholder="Tìm theo tên diễn viên"
+                                        onChange = {this.onHandleSearchChange}>                                       
+                                    </input><br></br>
                                     <div className="actors-box">
                                         
                                         {this.showActorCheckbox(actors)}
@@ -359,6 +441,9 @@ const mapDispatchToProps = (dispatch, props) =>{
         },
         onSaveMovie: (movie) => {
             dispatch(actions.saveMovie(movie))
+        },
+        onGetMovieInfo : (movie) => {
+            dispatch(actions.getMovieInfo(movie))
         }
         // // onDeleteUser: (id) => {
         // //     dispatch(actions.deleteUser(id))

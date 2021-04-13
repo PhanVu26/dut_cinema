@@ -247,18 +247,24 @@ var myReducer = (state = initialState, action) => {
                 thumbnail: action.movie.thumbnail,
                 releaseDate: action.movie.releaseDate,
             } 
+            console.log("movie info in save movie", movieInfo)
             if(!movieInfo.id){
                 movieInfo.id = randomId();
                 state.push(movieInfo);
-            }// else {
-            //     index = findIndex(state, newUser.id);
-            //     let editUser = {...state[index]};
-            //     editUser.username = newUser.username;
-            //     editUser.role = newUser.role;
-            //     editUser.status = newUser.status;
-            //     state[index] = editUser;
-            //     //return state;
-            // }
+            } else {
+                console.log("ex")
+                index = findIndex(state, movieInfo.id);
+                let editMovie = {...state[index]};
+                editMovie.name = movieInfo.name;
+                editMovie.genreIds = movieInfo.genreIds;
+                editMovie.author = movieInfo.author;
+                editMovie.producer = movieInfo.producer;
+                editMovie.description = movieInfo.description;
+                editMovie.actorIds = movieInfo.actorIds;
+                editMovie.thumbnail = movieInfo.thumbnail;
+                editMovie.releaseDate = movieInfo.releaseDate;
+                state[index] = editMovie;
+            }
             return [...state];    
         // case types.DELETE_USER:
         //     index = findIndex(state, action.id)

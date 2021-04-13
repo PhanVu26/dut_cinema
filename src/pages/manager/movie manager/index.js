@@ -8,6 +8,7 @@ import {
     BrowserRouter as Router,
   } from "react-router-dom";
 import Pagination from '../../../components/Pagination/Pagination';
+import MovieForm from '../../../components/Modal/MovieModal/MovieForm';
 class MovieManager extends Component{
     constructor(props) {
         super(props);
@@ -53,7 +54,7 @@ class MovieManager extends Component{
                     <div className="container-fluid mt-5">
                         <div className="row">                   
                             <div className="col-xl-12 col-12 mb-4 mb-xl-0">
-                                <h2 className="text-center mb-5 mt-3">Danh sách phim</h2>
+                                <h2 className="text-center mb-3 mt-2">Danh sách phim</h2>
                                 <div className="row">
                                     <div className="col-md-8 col-xl-8">
                                         <MovieControl></MovieControl>
