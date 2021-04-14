@@ -13,9 +13,9 @@ class ActorItem extends Component {
     // onHandleModal = () => {
     //     this.props.onToggleUserForm()
     // }
-    // onDeleteUser = () => {
-    //     this.props.onDeleteUser(this.props.user.id);
-    // }
+    onDeleteActor = () => {
+        this.props.onDeleteActor(this.props.actor.id);
+    }
     // toggleUserStatus = () => {
     //     this.props.onUpdateUserStatus(this.props.user.id)
     // }
@@ -104,7 +104,7 @@ class ActorItem extends Component {
                     </button>
                     {/* <actorForm></actorForm> */}
                     <button
-                         
+                        onClick={() => {if(window.confirm('Bạn có muốn xóa diễn viên này?')){this.onDeleteActor()};}} 
                         type="button" 
                         className="btn btn-danger ml-2 mr-2">
                         <span className="far fa-trash-alt"></span>
@@ -139,9 +139,9 @@ const mapDispatchToProps = (dispatch, props) =>{
         getActorInfo : (actor) => {
             dispatch(actions.getActorInfo(actor))
         },
-        // onDeleteactor: (id) => {
-        //     dispatch(actions.deleteactor(id))
-        // },
+        onDeleteActor: (id) => {
+            dispatch(actions.deleteActor(id))
+        },
         // onUpdateUserStatus: (id) => {
         //     dispatch(actions.updateUserStatus(id))
         // },

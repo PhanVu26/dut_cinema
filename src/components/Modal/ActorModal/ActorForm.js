@@ -23,13 +23,11 @@ class ActorForm extends Component {
     
 
     componentWillReceiveProps(nextProps) {
-        console.log("nextprops", nextProps.actorEditing)
         if(nextProps.actorEditing) {
             this.setState({
                 actor: nextProps.actorEditing,
             })
         }
-        console.log("state props", this.state)
     }
    
     onHandleChange = (e) => {
@@ -87,8 +85,6 @@ class ActorForm extends Component {
         const {isDisplayActorForm} = this.props;
         const {actor} = this.state
         const actorEditing = this.props.actorEditing;
-
-        console.log("actorState", this.state)
 
         return (
            <div>  
