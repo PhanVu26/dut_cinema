@@ -14,6 +14,7 @@ import filterMovie from './MovieReducer/FilterMovieReducer';
 
 import isDisplayActorForm from './ActorReducer/DisplayActorFormReducer';
 import actorEditing from './ActorReducer/ActorEditingReducer';
+import filterActor from './ActorReducer/FilterActorReducer';
 
 const myReducer = combineReducers({
     users,
@@ -28,7 +29,8 @@ const myReducer = combineReducers({
     isDisplayMovieForm,
     filterMovie,
     isDisplayActorForm,
-    actorEditing
+    actorEditing,
+    filterActor
 
 })
 
