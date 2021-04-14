@@ -4,6 +4,7 @@ var initialState = {
     name :'',
     birthday: '',
     image: '',
+    nationality: '',
     description: '',
 };
 
@@ -14,6 +15,7 @@ var myReducer = (state = initialState, action) => {
                 id: action.actor.id,
                 name: action.actor.name,
                 image: action.actor.image,
+                nationality: action.actor.nationality,
                 birthday: action.actor.birthday,
                 description:action.actor.description,
             }        
