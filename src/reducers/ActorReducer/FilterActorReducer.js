@@ -1,17 +1,15 @@
 import * as types from "../../constants/ActionType";
 var initialState = {
-    username: '',
-    role: -1,
-    status: -1
+    name: '',
+    nationality: '',
 };
 
 var myReducer = (state = initialState, action) => {
     switch(action.type){
-        case types.FILTER_USER: 
+        case types.FILTER_ACTOR: 
             var filter = {
-                username : action.filter.username,
-                role: parseInt(action.filter.role),
-                status: parseInt(action.filter.status)
+                name : action.filter.name,
+                nationality: action.filter.nationality,
             }       
             return filter
         default: return state;     
