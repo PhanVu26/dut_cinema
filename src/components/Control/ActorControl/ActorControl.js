@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 import {Modal, Button, ThemeProvider} from 'react-bootstrap';
 import {connect} from 'react-redux';
-import * as actions from "../../../actions/index"
-import UserForm from '../../Form/UserForm/UserForm';
+import * as actions from "../../../actions/actorManager/index"
+import ActorForm from '../../Modal/ActorModal/ActorForm';
 
-class UserControl extends Component {
+class ActorControl extends Component {
 
     onHandleModal = () => {
-        console.log("user editing: ", this.props.userEditing)
-        if(this.props.userEditing.id === '' ){
-            this.props.onToggleUserForm();
+        if(this.props.actorEditing.id === '' ){
+            this.props.onToggleActorForm();
         }else {
-            this.props.onClearUser({
+            this.props.onClearActor({
                 id: '',
-                username :'',
-                password: '',
-                status: false,
-                role: ''
+                name :'',
+                birthday: '',
+                iamge: '',
+                description: ''
 
             })
-            this.props.onToggleUserForm();
+            this.props.onToggleActorForm();
         }
     }
     onSubmit = (event) => {
@@ -30,15 +29,13 @@ class UserControl extends Component {
         this.props.onCloseForm();
     }
     render() {
-        const {isDisplayUserForm} = this.props;
+        const {isDisplayActorForm} = this.props;
         return (
             <div className = "mb-2 float-left">
                 <button onClick={this.onHandleModal} type="button" className="btn btn-primary">
                     <span className="fas fa-plus mr-2"></span>Thêm diễn viên
                 </button>
-                <Modal show={isDisplayUserForm}>
-                    <UserForm></UserForm>
-                </Modal>
+                <ActorForm></ActorForm>
             </div>
         );
     }
@@ -46,21 +43,21 @@ class UserControl extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isDisplayUserForm : state.isDisplayUserForm,
-        userEditing : state.userEditing
+        isDisplayActorForm : state.isDisplayActorForm,
+        actorEditing : state.actorEditing
     }
 
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        onToggleUserForm: ()=>{
-            dispatch(actions.toggleUserForm())
+        onToggleActorForm: ()=>{
+            dispatch(actions.toggleActorForm())
         },
-        onClearUser: (user) => {
-            dispatch(actions.getUserEditing(user))
+        onClearActor: (actor) => {
+            dispatch(actions.getActorInfo(actor))
         }
     }
 } 
 
-export default connect(mapStateToProps, mapDispatchToProps ) (UserControl);
+export default connect(mapStateToProps, mapDispatchToProps ) (ActorControl);

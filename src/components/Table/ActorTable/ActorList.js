@@ -93,6 +93,7 @@ class ActorList extends Component {
                         <th className="text-center">Tên diễn viên</th>
                         <th className="text-center">Hình ảnh</th>
                         <th className="text-center">Ngày sinh</th>
+                        <th className="text-center">Quốc tịch</th>
                         <th className="text-center">Hành Động</th>
                     </tr>
                 </thead>

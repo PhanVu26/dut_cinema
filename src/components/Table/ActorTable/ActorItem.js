@@ -69,8 +69,15 @@ class ActorItem extends Component {
                 <td className="text-center">{index}</td>
                 <td className="text-center">{actor.id}</td>
                 <td className="text-center">{actor.name}</td>
-                <td className="text-center">{actor.image}</td>
+                <td className="text-center">
+                    <img 
+                        height='100px'
+                        width='100px'
+                        src= {actor.image}/>
+                </td>
+                
                 <td className="text-center">{actor.birthday}</td>
+                <td className='text-center'>{actor.nationality}</td>
                 {/* <td className="text-center">
                     <img src={actor.thumbnail} height="80px" width="80px"></img>
                 </td>

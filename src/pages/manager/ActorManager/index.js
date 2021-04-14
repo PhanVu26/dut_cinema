@@ -10,6 +10,7 @@ import {
 import Pagination from '../../../components/Pagination/Pagination';
 import ActorControl from '../../../components/Control/ActorControl/ActorControl';
 import ActorList from '../../../components/Table/ActorTable/ActorList';
+import ActorForm from '../../../components/Modal/ActorModal/ActorForm';
 class ActorManager extends Component{
     constructor(props) {
         super(props);
