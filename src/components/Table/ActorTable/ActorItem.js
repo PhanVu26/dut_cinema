@@ -29,11 +29,11 @@ class ActorItem extends Component {
     //     this.props.getMovieInfo(this.props.movie)
     //     console.log("xem movie:", this.props.movie)
     // }
-    // editMovie = () => {
-    //     this.props.onToggleMovieForm();
-    //     this.props.getMovieInfo(this.props.movie)
-    //     console.log("edit moviessss:", this.props.movie) 
-    // }
+    editActor = () => {
+        this.props.onToggleActorForm();
+        this.props.getActorInfo(this.props.actor)
+        console.log("edit moviessss:", this.props.actor) 
+    }
     // showGenres(genres){
     //     var result = null;
     //     result = genres.map(genre => {
@@ -97,7 +97,7 @@ class ActorItem extends Component {
                 </td> */}
                 <td className="text-center">
                     <button 
-                        onClick={this.editactor}
+                        onClick={this.editActor}
                         type="button" 
                         className="btn btn-warning">
                         <span className="fa fa-pencil"></span>
@@ -133,12 +133,12 @@ const mapDispatchToProps = (dispatch, props) =>{
         // onToggleModal: () => {
         //     dispatch(actions.toggleModal())
         // },
-        // onToggleactorForm: () => {
-        //     dispatch(actions.toggleactorForm())
-        // },
-        // getactorInfo : (actor) => {
-        //     dispatch(actions.getactorInfo(actor))
-        // },
+        onToggleActorForm: () => {
+            dispatch(actions.toggleActorForm())
+        },
+        getActorInfo : (actor) => {
+            dispatch(actions.getActorInfo(actor))
+        },
         // onDeleteactor: (id) => {
         //     dispatch(actions.deleteactor(id))
         // },

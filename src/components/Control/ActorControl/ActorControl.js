@@ -7,6 +7,7 @@ import ActorForm from '../../Modal/ActorModal/ActorForm';
 class ActorControl extends Component {
 
     onHandleModal = () => {
+        console.log("actorInfoooo: ", this.props.actorEditing)
         if(this.props.actorEditing.id === '' ){
             this.props.onToggleActorForm();
         }else {
@@ -15,6 +16,7 @@ class ActorControl extends Component {
                 name :'',
                 birthday: '',
                 iamge: '',
+                nationality:'',
                 description: ''
 
             })
@@ -29,7 +31,6 @@ class ActorControl extends Component {
         this.props.onCloseForm();
     }
     render() {
-        const {isDisplayActorForm} = this.props;
         return (
             <div className = "mb-2 float-left">
                 <button onClick={this.onHandleModal} type="button" className="btn btn-primary">

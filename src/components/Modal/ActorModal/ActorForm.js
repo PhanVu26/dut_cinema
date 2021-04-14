@@ -22,8 +22,16 @@ class ActorForm extends Component {
     
     
 
+    componentWillReceiveProps(nextProps) {
+        console.log("nextprops", nextProps.actorEditing)
+        if(nextProps.actorEditing) {
+            this.setState({
+                actor: nextProps.actorEditing,
+            })
+        }
+        console.log("state props", this.state)
+    }
    
-
     onHandleChange = (e) => {
         //console.log("e ,", e)
         var target = e.target;
@@ -45,7 +53,7 @@ class ActorForm extends Component {
     validateActor = () => {
         const actor = this.state.actor;
         if(actor.name === "" || actor.description === "" ||
-            actor.image === "" || actor.birthday === ""){
+            actor.image === "" || actor.birthday === "" || actor.nationality === ""){
                 return false
             }
         return true;    
@@ -151,7 +159,8 @@ class ActorForm extends Component {
                                     <img 
                                         className='mt-3'
                                         src={actor.image} 
-                                       
+                                        height='300px'
+                                        width='300px'
                                     ></img>
                                 </div>
                             </div>                      
