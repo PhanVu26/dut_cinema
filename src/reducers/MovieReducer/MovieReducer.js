@@ -230,6 +230,7 @@ const randomId = () =>{
     return Math.floor(Math.random() * 100) + 1;
 }
 
+
 var myReducer = (state = initialState, action) => {
     var index = -1;
     switch(action.type){
@@ -271,6 +272,7 @@ var myReducer = (state = initialState, action) => {
             state.splice(index, 1);
             console.log(action);
             return [...state];       
+
         // case types.UPDATE_USER_STATUS:
         //     index = findIndex(state, action.id);
         //     state[index] = {

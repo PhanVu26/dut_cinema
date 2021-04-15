@@ -22,7 +22,6 @@ class MovieControl extends Component {
                 releaseDate: "",
                 description: "",
                 thumbnail: ""
-
             })
             this.props.onToggleMovieForm();
         }

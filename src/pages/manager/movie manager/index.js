@@ -102,6 +102,7 @@ class MovieManager extends Component{
                     </div>
                 </div>
             </section> 
+
                 
         )
     }

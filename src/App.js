@@ -9,6 +9,7 @@ import UserManagementPage from './pages/admin/UserManagementPage';
 import MovieManager from './pages/manager/movie manager';
 import ActorManager from './pages/manager/ActorManager/index';
 import ManagerPage from './pages/manager/index';
+
 function App() {
   return (
     <div className="App">

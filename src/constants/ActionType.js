@@ -32,3 +32,13 @@ export const GET_ACTOR_INFO = 'GET_ACTOR_INFO';
 export const UPDATE_ACTOR = 'UPDATE_ACTOR';
 export const FILTER_ACTOR = 'FILTER_ACTOR';
 
+// Movies manager
+
+export const LIST_ALL_MOVIES = 'LIST_ALL_MOVIES';
+export const SAVE_MOVIE = 'SAVE_MOVIE';
+export const TOGGLE_MOVIE_MODAL = 'TOGGLE_MOVIE_MODAL';
+export const TOGGLE_MOVIE_FORM = 'TOGGLE_MOVIE_FORM';
+export const DELETE_MOVIE = 'DELETE_MOVIE';
+export const GET_MOVIE_INFO = 'GET_MOVIE_INFO';
+export const UPDATE_MOVIE = 'UPDATE_MOVIE';
+export const FILTER_MOVIE = 'FILTER_MOVIE';

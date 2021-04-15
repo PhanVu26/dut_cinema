@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../../actions/movieManager/index';
 
 import testThumbnail from '../../../assets/images/logo.png';
+
 import style from '../MovieModal/MovieModal.css'
 class MovieForm extends Component {
 

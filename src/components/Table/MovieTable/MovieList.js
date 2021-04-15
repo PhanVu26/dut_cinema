@@ -83,6 +83,7 @@ class MovieList extends Component {
                 return found === true ? true: false
             })
         }
+
         return (
             <table className="table table-bordered table-hover">
                 <thead>
@@ -142,7 +143,6 @@ class MovieList extends Component {
                         <td></td>
                         <td></td>
                     </tr>
-                    
                     {this.showMovies(rowsPerPage)}
                     
                 </tbody>

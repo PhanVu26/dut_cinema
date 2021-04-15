@@ -53,6 +53,7 @@ class MovieItem extends Component {
     onDeleteMovie = () => {
         this.props.onDeleteMovie(this.props.movie.id);
     }
+
     render() {
         const {index, movie} = this.props;
         const genres = [] ;
@@ -105,6 +106,7 @@ class MovieItem extends Component {
                         className="btn btn-danger">
                         <span className="far fa-trash-alt"></span>
                     </button>
+
                     <button 
                         type="button" 
                         className="btn btn-danger"
@@ -120,6 +122,7 @@ class MovieItem extends Component {
 }
 
 const mapStateToProps = (state) => {
+
 
 }
 

@@ -22,6 +22,7 @@ class Navbar  extends Component {
                             </li>
                             <li className="nav-item">
                             <NavLink className="nav-link" to="/manager/actors">Actors</NavLink>
+
                             </li>
                         </ul>
                         </div>
