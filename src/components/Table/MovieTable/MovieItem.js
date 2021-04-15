@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import {Modal, Button} from "react-bootstrap";
-import {connect} from 'react-redux';
-import * as actions from '../../../actions/movieManager/index'
+import React, { Component } from "react";
+import { Modal, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import * as actions from "../../../actions/movieManager/index";
 
 import testImage from '../../../assets/images/logo.png'
 import MovieForm from '../../Modal/MovieModal/MovieForm'
