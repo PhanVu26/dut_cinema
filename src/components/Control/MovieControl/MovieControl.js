@@ -15,7 +15,7 @@ class MovieControl extends Component {
             this.props.onClearMovie({
                 id: "",
                 name :"",
-                author: "",
+                director: "",
                 producer: "",
                 genreIds: [],
                 actorIds: [],

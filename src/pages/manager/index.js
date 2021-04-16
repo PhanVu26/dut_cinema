@@ -5,7 +5,7 @@ import {
 
 import Footer from '../../components/admin/Footer/Footer';
 import Navbar from '../../components/manager/Navbar/Navbar';
-import MovieManager from './movie manager/index';
+import MovieManager from './MovieManager/index';
 import ActorManager from './ActorManager/index';
 
 class ManagerPage extends Component{

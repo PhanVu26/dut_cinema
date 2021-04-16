@@ -10,7 +10,7 @@ class MovieList extends Component {
         this.state = {
             filterByName: '',
             filterByGenre: -1,
-            filterByAuthor: '',
+            filterByDirector: '',
             filterByProducer:''
         }
     }
@@ -32,7 +32,7 @@ class MovieList extends Component {
         var filter = {
             name: name === 'filterByName' ? value : this.state.filterByName,
             genre: name === 'filterByGenre' ? value : this.state.filterByGenre,
-            author: name === 'filterByAuthor' ? value : this.state.filterByAuthor,
+            director: name === 'filterByDirector' ? value : this.state.filterByDirector,
             producer: name === 'filterByProducer' ? value : this.state.filterByProducer,
         }
         this.setState({
@@ -62,9 +62,9 @@ class MovieList extends Component {
                 return movie.name.toLowerCase().indexOf(filterMovie.name.toLowerCase()) !== -1
             })
         }
-        if(filterMovie.author){
+        if(filterMovie.director){
             rowsPerPage = rowsPerPage.filter((movie) => {
-                return movie.author.toLowerCase().indexOf(filterMovie.author.toLowerCase()) !== -1
+                return movie.director.toLowerCase().indexOf(filterMovie.director.toLowerCase()) !== -1
             })
         }
 
@@ -87,8 +87,7 @@ class MovieList extends Component {
             <table className="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th className="text-center">STT</th>
-                        <th className="text-center">ID</th>
+                        <th className="text-center">ID phim</th>
                         <th className="text-center">Tên phim</th>
                         <th className="text-center">Hình ảnh phim</th>
                         <th className="text-center">Thể loại</th>
@@ -100,7 +99,6 @@ class MovieList extends Component {
                 </thead>
                 <tbody>
                     <tr>
-                        <td></td>
                         <td></td>
                         <td>
                             <input 
@@ -124,10 +122,10 @@ class MovieList extends Component {
                         <td>
                             <input 
                                 type="text"
-                                name="filterByAuthor"
+                                name="filterByDirector"
                                 placeholder='Nhập tên đạo diễn'
                                 onChange={this.handleChange}
-                                value={this.state.filterByAuthor}>
+                                value={this.state.filterByDirector}>
                             </input>
                         </td>
                         <td>

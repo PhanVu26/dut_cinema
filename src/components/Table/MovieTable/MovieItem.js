@@ -68,7 +68,6 @@ class MovieItem extends Component {
         // var role = user.role === 1 ? 'Quản lý phim' : user.role === 2 ? 'Quản lý lịch chiếu' : 'Người dùng';
         return (
             <tr>
-                <td className="text-center">{index}</td>
                 <td className="text-center">{movie.id}</td>
                 <td className="text-center">{movie.name}</td>
                 <td className="text-center">
@@ -81,7 +80,7 @@ class MovieItem extends Component {
                         }
                     </ul>
                 </td>
-                <td className="text-center">{movie.author}</td>
+                <td className="text-center">{movie.director}</td>
                 <td className="text-center">{movie.producer}</td>
                 <td className="text-center">{movie.releaseDate}</td>
                 {/* <td className="text-center">

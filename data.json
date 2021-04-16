@@ -1,0 +1,245 @@
+{
+  "movies": [
+      {
+          "id": "1",
+          "name": "Bố già",
+          "director": "Phan Vũ",
+          "producer": "Phan Vũ",
+          "description": "không có mô tả",
+          "releaseDate": "26/01/2021",
+          "genreIds": [
+              {   
+                  "id": "1",
+                  "name": "Phim tình cảm"
+              },
+              {   
+                  "id": "4",
+                  "name": "Phim gia đình"
+              }
+          ],
+          "actorIds": [
+              {
+                  "id": "1",
+                  "name": "Phan Văn Vũ"
+              },
+              {
+                  "id": "2",
+                  "name": "Phan Văn Nhân"
+              }
+          ],
+          "thumbnail":  ""
+  
+      },
+      {
+          "id": "2",
+          "name": "Bố già2",
+          "director": "Phan Vũ2",
+          "producer": "Phan Vũ2",
+          "description": "không có mô tả",
+          "releaseDate": "26/01/2021",
+          "genreIds": [
+              {   
+                  "id": "1",
+                  "name": "Phim tình cảm"
+              },
+              {   
+                  "id": "2",
+                  "name": "Phim hành động"
+              }
+          ],
+          "actorIds": [
+              {
+                  "id": "1",
+                  "name": "Phan Văn Vũ2"
+              },
+              {
+                  "id": "2",
+                  "name": "Phan Văn Nhân2"
+              }
+          ],
+          "thumbnail": ""
+  
+      },
+      {
+          "id": "3",
+          "name": "Bố già3",
+          "director": "Phan Vũ33",
+          "producer": "Phan Vũ3",
+          "description": "không có mô tả",
+          "releaseDate": "26/01/2021",
+          "genreIds": [
+              {   
+                  "id": "1",
+                  "name": "Phim tình cảm"
+              },
+              {   
+                  "id": "4",
+                  "name": "Phim gia đình"
+              }
+          ],
+          "actorIds": [
+              {
+                  "id": "1",
+                  "name": "Phan Văn Vũ3"
+              },
+              {
+                  "id": "2",
+                  "name": "Phan Văn Nhân3"
+              }
+          ],
+          "thumbnail":  ""
+  
+      },
+      {
+          "id": "4",
+          "name": "Bố già4",
+          "director": "Phan Vũ4",
+          "producer": "Phan Vũ4",
+          "description": "không có mô tả",
+          "releaseDate": "26/01/2021",
+          "genreIds": [
+              {   
+                  "id": "1",
+                  "name": "Phim tình cảm"
+              },
+              {   
+                  "id": "2",
+                  "name": "Phim hành động"
+              }
+          ],
+          "actorIds": [
+              {
+                  "id": "1",
+                  "name": "Phan Văn Vũ4"
+              },
+              {
+                  "id": "2",
+                  "name": "Phan Văn Nhân4"
+              }
+          ],
+          "thumbnail": ""
+  
+      },
+      {
+          "id": "5",
+          "name": "Bố già5",
+          "director": "Phan Vũ55",
+          "producer": "Phan Vũ5",
+          "description": "không có mô tả",
+          "releaseDate": "26/01/2021",
+          "genreIds": [
+              {   
+                  "id": "1",
+                  "name": "Phim tình cảm"
+              },
+              {   
+                  "id": "4",
+                  "name": "Phim gia đình"
+              }
+          ],
+          "actorIds": [
+              {
+                  "id": "1",
+                  "name": "Phan Văn Vũ5"
+              },
+              {
+                  "id": "2",
+                  "name": "Phan Văn Nhân5"
+              }
+          ],
+          "thumbnail":  ""
+  
+      },
+      {
+          "id": "6",
+          "name": "Bố già6",
+          "director": "Phan Vũ6",
+          "producer": "Phan Vũ6",
+          "description": "không có mô tả",
+          "releaseDate": "26/01/2021",
+          "genreIds": [
+              {   
+                  "id": "1",
+                  "name": "Phim tình cảm"
+              },
+              {   
+                  "id": "2",
+                  "name": "Phim hành động"
+              }
+          ],
+          "actorIds": [
+              {
+                  "id": "1",
+                  "name": "Phan Văn Vũ6"
+              },
+              {
+                  "id": "2",
+                  "name": "Phan Văn Nhân6"
+              }
+          ],
+          "thumbnail": ""
+  
+      },
+      {
+          "id": "7",
+          "name": "Bố già7",
+          "director": "Phan Vũ7",
+          "producer": "Phan Vũ7",
+          "description": "không có mô tả",
+          "releaseDate": "26/01/2021",
+          "genreIds": [
+              {   
+                  "id": "1",
+                  "name": "Phim tình cảm"
+              },
+              {   
+                  "id": "4",
+                  "name": "Phim gia đình"
+              }
+          ],
+          "actorIds": [
+              {
+                  "id": "1",
+                  "name": "Phan Văn Vũ7"
+              },
+              {
+                  "id": "2",
+                  "name": "Phan Văn Nhân7"
+              }
+          ],
+          "thumbnail":  ""
+  
+      },
+      {
+          "id": "8",
+          "name": "Bố già8",
+          "director": "Phan Vũ8",
+          "producer": "Phan Vũ8",
+          "description": "không có mô tả",
+          "releaseDate": "26/01/2021",
+          "genreIds": [
+              {   
+                  "id": "1",
+                  "name": "Phim tình cảm"
+              },
+              {   
+                  "id": "2",
+                  "name": "Phim hành động"
+              }
+          ],
+          "actorIds": [
+              {
+                  "id": "1",
+                  "name": "Phan Văn Vũ8"
+              },
+              {
+                  "id": "2",
+                  "name": "Phan Văn Nhân8"
+              }
+          ],
+          "thumbnail": ""   
+      }
+  ],
+
+  "users" :[]
+}

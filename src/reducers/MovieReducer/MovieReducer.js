@@ -1,220 +1,5 @@
 import * as types from "../../constants/ActionType";
-var initialState = [
-    {
-        id: 1,
-        name: "Bố già",
-        author: "Phan Vũ",
-        producer: "Phan Vũ",
-        description: "không có mô tả",
-        releaseDate: "26/01/2021",
-        genreIds: [
-            {   
-                id: 1,
-                name: "Phim tình cảm"
-            },
-            {   
-                id: 4,
-                name: "Phim gia đình"
-            },
-        ],
-        actorIds: [
-            {
-                id: 1,
-                name: "Phan Văn Vũ"
-            },
-            {
-                id: 2,
-                name: "Phan Văn Nhân"
-            }
-        ],
-        thumbnail:  " "
-
-    },
-    {
-        id: 2,
-        name: "Hai Phượng",
-        author: "Phan Vũ",
-        producer: "Phan Vũ",
-        description: "không có mô tả",
-        releaseDate: "26/01/2021",
-        genreIds: [
-            {   
-                id: 1,
-                name: "Phim tình cảm"
-            },
-            {   
-                id: 2,
-                name: "Phim hành động"
-            },
-        ],
-        actorIds: [
-            {
-                id: 1,
-                name: "Phan Văn Vũ"
-            },
-            {
-                id: 2,
-                name: "Phan Văn Nhân"
-            }
-        ],
-        thumbnail:  " "
-
-    },
-    {
-        id: 3,
-        name: "End Game",
-        author: "Phan Vũ",
-        producer: "Phan Vũ",
-        description: "không có mô tả",
-        releaseDate: "26/01/2021",
-        genreIds: [
-            {   
-                id: 1,
-                name: "Phim tình cảm"
-            },
-            {   
-                id: 2,
-                name: "Phim hành động"
-            },
-        ],
-        actorIds: [
-            {
-                id: 1,
-                name: "Phan Văn Vũ"
-            },
-            {
-                id: 2,
-                name: "Phan Văn Nhân"
-            }
-        ],
-        thumbnail:  " "
-
-    },
-    {
-        id: 4,
-        name: "Spider Man",
-        author: "Phan Vũ",
-        producer: "Phan Vũ",
-        description: "không có mô tả",
-        releaseDate: "26/01/2021",
-        genreIds: [
-            {   
-                id: 1,
-                name: "Phim tình cảm"
-            },
-            {   
-                id: 2,
-                name: "Phim hành động"
-            },
-        ],
-        actorIds: [
-            {
-                id: 1,
-                name: "Phan Văn Vũ"
-            },
-            {
-                id: 2,
-                name: "Phan Văn Nhân"
-            }
-        ],
-        thumbnail:  " "
-
-    },
-
-    {
-        id: 5,
-        name: "VanHensing",
-        author: "Phan Vũ",
-        producer: "Phan Vũ",
-        description: "không có mô tả",
-        releaseDate: "26/01/2021",
-        genreIds: [
-            {   
-                id: 1,
-                name: "Phim tình cảm"
-            },
-            {   
-                id: 2,
-                name: "Phim hành động"
-            },
-        ],
-        actorIds: [
-            {
-                id: 1,
-                name: "Phan Văn Vũ"
-            },
-            {
-                id: 2,
-                name: "Phan Văn Nhân"
-            }
-        ],
-        thumbnail:  " "
-
-    },
-
-    {
-        id: 6,
-        name: "Tom and Jerry",
-        author: "Phan Vũ",
-        producer: "Phan Vũ",
-        description: "không có mô tả",
-        releaseDate: "26/01/2021",
-        genreIds: [
-            {   
-                id: 1,
-                name: "Phim tình cảm"
-            },
-            {   
-                id: 8,
-                name: "Phim trinh thám"
-            },
-        ],
-        actorIds: [
-            {
-                id: 1,
-                name: "Phan Văn Vũ"
-            },
-            {
-                id: 2,
-                name: "Phan Văn Nhân"
-            }
-        ],
-        thumbnail:  " "
-
-    },
-
-    {
-        id: 7,
-        name: "Hai Lúa",
-        author: "Phan Vũ",
-        producer: "Phan Vũ",
-        description: "không có mô tả",
-        releaseDate: "26/01/2021",
-        genreIds: [
-            {   
-                id: 1,
-                name: "Phim tình cảm"
-            },
-            {   
-                id: 3,
-                name: "Phim hài"
-            },
-        ],
-        actorIds: [
-            {
-                id: 1,
-                name: "Phan Văn Vũ"
-            },
-            {
-                id: 2,
-                name: "Phan Văn Nhân"
-            }
-        ],
-        thumbnail:  " "
-
-    },
-    
-];
+var initialState = []
 
 const findIndex = (users, id) => {
     var result = -1;
@@ -234,13 +19,14 @@ var myReducer = (state = initialState, action) => {
     var index = -1;
     switch(action.type){
         case types.LIST_ALL_MOVIES:
+            var state = action.movies;
             return state;
         case types.SAVE_MOVIE:
             var movieInfo = {
                 id: action.movie.id,
                 name: action.movie.name,
                 genreIds: action.movie.genreIds,
-                author: action.movie.author,
+                director: action.movie.director,
                 producer: action.movie.producer,
                 description: action.movie.description,
                 actorIds: action.movie.actorIds,
@@ -257,7 +43,7 @@ var myReducer = (state = initialState, action) => {
                 let editMovie = {...state[index]};
                 editMovie.name = movieInfo.name;
                 editMovie.genreIds = movieInfo.genreIds;
-                editMovie.author = movieInfo.author;
+                editMovie.director = movieInfo.director;
                 editMovie.producer = movieInfo.producer;
                 editMovie.description = movieInfo.description;
                 editMovie.actorIds = movieInfo.actorIds;

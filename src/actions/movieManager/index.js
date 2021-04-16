@@ -1,4 +1,6 @@
 import * as types from "../../constants/ActionType";
+import callApi from "../../utils/ApiCallerServer";
+
 export const listAllMovies = () => {
     return {
         type: types.LIST_ALL_MOVIES
@@ -56,3 +58,19 @@ export const filterMovie = (filter) => {
         filter
     }
 }
+
+export const actFetchDataMoviesRequest = () => {
+    return (dispatch) => {
+      return callApi("movies", "GET", null).then((res) => {
+        console.log("response", res)  
+        dispatch(actFetchDataMovies(res.data));
+      });
+    };
+  };
+  
+  export const actFetchDataMovies = (movies) => {
+    return {
+      type: types.LIST_ALL_MOVIES,
+      movies,
+    };
+  };

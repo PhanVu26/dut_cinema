@@ -9,6 +9,7 @@ import {
   } from "react-router-dom";
 import Pagination from '../../../components/Pagination/Pagination';
 import MovieForm from '../../../components/Modal/MovieModal/MovieForm';
+import * as actions from '../../../actions/movieManager/index';
 class MovieManager extends Component{
     constructor(props) {
         super(props);
@@ -22,7 +23,8 @@ class MovieManager extends Component{
         };
       }
       componentDidMount() {
-        // this.props.fetchAllProducts();
+        this.props.fetchDataMovies();  
+        console.log("fetch movies", this.props.movies)
         this.setState({
           totalRecords: this.props.movies.length
         });
@@ -114,7 +116,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch, props) =>{
-
+    return {
+        fetchDataMovies : () => {
+            dispatch(actions.actFetchDataMoviesRequest())
+        }
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieManager);

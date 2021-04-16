@@ -13,7 +13,7 @@ class MovieDetail extends Component {
             id: "",
             name: "",
             genreIds: [],
-            author:"",
+            director:"",
             producer:"",
             actorIds: [],
             releaseDate: "",
@@ -45,7 +45,7 @@ class MovieDetail extends Component {
     //         id: this.props.movieInfo.id,
     //         name: this.props.movieInfo.name,
     //         genreIds: this.props.movieInfo.genreIds,
-    //         author: this.props.movieInfo.author,
+    //         director: this.props.movieInfo.director,
     //         producer: this.props.movieInfo.producer,
     //         releaseDate: this.props.movieInfo.releaseDate,
     //         actors: this.props.movieInfo.actorIds,
@@ -95,7 +95,7 @@ class MovieDetail extends Component {
                                                     <span className="title-detail">Đạo diễn:</span>
                                                 </td>
                                                 <td>
-                                                    <span>{movie.author}</span>
+                                                    <span>{movie.director}</span>
                                                 </td>
                                             </tr>
                                             <tr>

@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import routes from "./routes/index.route";
 import HomePage from "./pages/HomePage/HomePage"
 import UserManagementPage from './pages/admin/UserManagementPage';
-import MovieManager from './pages/manager/movie manager';
+import MovieManager from './pages/manager/MovieManager';
 import ActorManager from './pages/manager/ActorManager/index';
 import ManagerPage from './pages/manager/index';
 function App() {

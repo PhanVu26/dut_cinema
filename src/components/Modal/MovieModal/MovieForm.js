@@ -14,7 +14,7 @@ class MovieForm extends Component {
                 id: "",
                 name: "",
                 genreIds: [],
-                author:"",
+                director:"",
                 producer:"",
                 actorIds: [],
                 releaseDate: "",
@@ -185,7 +185,7 @@ class MovieForm extends Component {
 
     validateMovie = () => {
         const movie = this.state.movie;
-        if(movie.name === "" || movie.author === "" || movie.description === "" ||
+        if(movie.name === "" || movie.director === "" || movie.description === "" ||
             movie.description === "" || movie.genreIds.length == 0 || movie.releaseDate === "" ||
             movie.thumbnail == "" || movie.actorIds.length == 0){
                 return false
@@ -300,8 +300,8 @@ class MovieForm extends Component {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        name="author"
-                                        value={movie.author}
+                                        name="director"
+                                        value={movie.director}
                                         onChange={ this.onHandleChange }
                                     
                                     />
