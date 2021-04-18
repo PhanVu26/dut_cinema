@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../../actions/movieManager/index';
 
-import testThumbnail from '../../../assets/images/logo.png';
+import testImage from '../../../assets/images/logo.png';
 import style from '../MovieModal/MovieModal.css'
 class MovieForm extends Component {
 
@@ -18,7 +18,7 @@ class MovieForm extends Component {
                 producer:"",
                 actorIds: [],
                 releaseDate: "",
-                thumbnail: "",
+                image: "",
                 description: ""
             },
             selectedActors: [],
@@ -63,8 +63,8 @@ class MovieForm extends Component {
         var id = e.target.id;
 
         //console.log(id)
-        var thumbnail = e.target.files != null ? URL.createObjectURL(e.target.files[0]) : this.state.movie.thumbnail
-        console.log("thumbnail", thumbnail)
+        var image = e.target.files != null ? URL.createObjectURL(e.target.files[0]) : this.state.movie.image
+        console.log("image", image)
         if(e.target.checked === true){
             if(e.target.className === "actor-checkbox"){
                 this.setState(prevState => ({
@@ -120,7 +120,7 @@ class MovieForm extends Component {
             movie: {
                 ...prevState.movie,
                 [name]: value,
-                thumbnail: thumbnail,
+                image: image,
             },
             //genreIds: genreIds
         }))
@@ -187,7 +187,7 @@ class MovieForm extends Component {
         const movie = this.state.movie;
         if(movie.name === "" || movie.director === "" || movie.description === "" ||
             movie.description === "" || movie.genreIds.length == 0 || movie.releaseDate === "" ||
-            movie.thumbnail == "" || movie.actorIds.length == 0){
+            movie.image == "" || movie.actorIds.length == 0){
                 return false
             }
         return true;    
@@ -388,7 +388,7 @@ class MovieForm extends Component {
                         <div className='row'>
                             <div className='col-md-6 col-lg-6'>
                                 <div className="form-group">
-                                    <label>Thumbnail :</label>
+                                    <label>image :</label>
                                     <input
                                         type="file"
                                         className="form-control"
@@ -400,7 +400,7 @@ class MovieForm extends Component {
                             
                             <div className='col-md-6 col-lg-6'>
                                 <img 
-                                    src={movie.thumbnail} 
+                                    src={movie.image} 
                                         width='200px'
                                         height='200px'
                                     ></img>

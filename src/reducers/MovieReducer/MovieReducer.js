@@ -27,10 +27,11 @@ var myReducer = (state = initialState, action) => {
                 name: action.movie.name,
                 genreIds: action.movie.genreIds,
                 director: action.movie.director,
+                country: action.movie.country,
                 producer: action.movie.producer,
                 description: action.movie.description,
                 actorIds: action.movie.actorIds,
-                thumbnail: action.movie.thumbnail,
+                image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
             } 
             console.log("movie info in save movie", movieInfo)
@@ -45,9 +46,10 @@ var myReducer = (state = initialState, action) => {
                 editMovie.genreIds = movieInfo.genreIds;
                 editMovie.director = movieInfo.director;
                 editMovie.producer = movieInfo.producer;
+                editMovie.country = movieInfo.country;
                 editMovie.description = movieInfo.description;
                 editMovie.actorIds = movieInfo.actorIds;
-                editMovie.thumbnail = movieInfo.thumbnail;
+                editMovie.image = movieInfo.image;
                 editMovie.releaseDate = movieInfo.releaseDate;
                 state[index] = editMovie;
             }

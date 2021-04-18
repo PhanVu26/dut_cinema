@@ -5,6 +5,7 @@
           "name": "Bố già",
           "director": "Phan Vũ",
           "producer": "Phan Vũ",
+          "country": "Việt Nam",
           "description": "không có mô tả",
           "releaseDate": "26/01/2021",
           "genreIds": [
@@ -27,13 +28,17 @@
                   "name": "Phan Văn Nhân"
               }
           ],
-          "thumbnail":  ""
+          "image": {
+            "mainUrl": "/images/spider-man.jpg",
+            "thumbnailUrl": "/images/spider-man.jpg"
+          }
   
       },
       {
           "id": "2",
           "name": "Bố già2",
           "director": "Phan Vũ2",
+          "country": "Việt Nam",
           "producer": "Phan Vũ2",
           "description": "không có mô tả",
           "releaseDate": "26/01/2021",
@@ -57,13 +62,17 @@
                   "name": "Phan Văn Nhân2"
               }
           ],
-          "thumbnail": ""
+          "image": {
+            "mainUrl": "/images/spider-man.jpg",
+            "thumbnailUrl": "/images/spider-man.jpg"
+          }
   
       },
       {
           "id": "3",
           "name": "Bố già3",
           "director": "Phan Vũ33",
+          "country": "Việt Nam",
           "producer": "Phan Vũ3",
           "description": "không có mô tả",
           "releaseDate": "26/01/2021",
@@ -87,13 +96,16 @@
                   "name": "Phan Văn Nhân3"
               }
           ],
-          "thumbnail":  ""
-  
+          "image": {
+            "mainUrl": "/images/spider-man.jpg",
+            "thumbnailUrl": "/images/spider-man.jpg"
+          } 
       },
       {
           "id": "4",
           "name": "Bố già4",
           "director": "Phan Vũ4",
+          "country": "Việt Nam",
           "producer": "Phan Vũ4",
           "description": "không có mô tả",
           "releaseDate": "26/01/2021",
@@ -117,13 +129,17 @@
                   "name": "Phan Văn Nhân4"
               }
           ],
-          "thumbnail": ""
+          "image": {
+            "mainUrl": "/images/spider-man.jpg",
+            "thumbnailUrl": "/images/spider-man.jpg"
+          }
   
       },
       {
           "id": "5",
           "name": "Bố già5",
           "director": "Phan Vũ55",
+          "country": "Việt Nam",
           "producer": "Phan Vũ5",
           "description": "không có mô tả",
           "releaseDate": "26/01/2021",
@@ -147,7 +163,10 @@
                   "name": "Phan Văn Nhân5"
               }
           ],
-          "thumbnail":  ""
+          "image": {
+            "mainUrl": "/images/spider-man.jpg",
+            "thumbnailUrl": "/images/spider-man.jpg"
+          }
   
       },
       {
@@ -155,6 +174,7 @@
           "name": "Bố già6",
           "director": "Phan Vũ6",
           "producer": "Phan Vũ6",
+          "country": "Việt Nam",
           "description": "không có mô tả",
           "releaseDate": "26/01/2021",
           "genreIds": [
@@ -177,13 +197,17 @@
                   "name": "Phan Văn Nhân6"
               }
           ],
-          "thumbnail": ""
+          "image": {
+            "mainUrl": "/images/spider-man.jpg",
+            "thumbnailUrl": "/images/spider-man.jpg"
+          }
   
       },
       {
           "id": "7",
           "name": "Bố già7",
           "director": "Phan Vũ7",
+          "country": "Việt Nam",
           "producer": "Phan Vũ7",
           "description": "không có mô tả",
           "releaseDate": "26/01/2021",
@@ -207,7 +231,10 @@
                   "name": "Phan Văn Nhân7"
               }
           ],
-          "thumbnail":  ""
+          "image": {
+            "mainUrl": "/images/spider-man.jpg",
+            "thumbnailUrl": "/images/spider-man.jpg"
+          }
   
       },
       {
@@ -215,6 +242,7 @@
           "name": "Bố già8",
           "director": "Phan Vũ8",
           "producer": "Phan Vũ8",
+          "country": "Việt Nam",
           "description": "không có mô tả",
           "releaseDate": "26/01/2021",
           "genreIds": [
@@ -237,7 +265,10 @@
                   "name": "Phan Văn Nhân8"
               }
           ],
-          "thumbnail": ""   
+          "image": {
+            "mainUrl": "/images/spider-man.jpg",
+            "thumbnailUrl": "/images/spider-man.jpg"
+          } 
       }
   ],
 

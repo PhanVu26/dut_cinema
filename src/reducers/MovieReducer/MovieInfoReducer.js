@@ -7,7 +7,7 @@ var initialState = {
     producer:"",
     actorIds: [],
     releaseDate: "",
-    thumbnail: "",
+    image: "",
     releaseDate: "",
     description: ""
 };
@@ -24,7 +24,7 @@ var myReducer = (state = initialState, action) => {
                 producer: action.movie.producer,
                 description: action.movie.description,
                 actorIds: action.movie.actorIds,
-                thumbnail: action.movie.thumbnail,
+                image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
             }     
             console.log("in action, movieInfo", movieInfo)   

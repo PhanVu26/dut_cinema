@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../../actions/movieManager/index';
 
-import testThumbnail from '../../../assets/images/logo.png';
+import testImage from '../../../assets/images/logo.png';
 import style from '../MovieModal/MovieModal.css'
 class MovieDetail extends Component {
 
@@ -17,7 +17,7 @@ class MovieDetail extends Component {
             producer:"",
             actorIds: [],
             releaseDate: "",
-            thumbnail: "",
+            image: "",
             description: ""
         }
     }
@@ -49,7 +49,7 @@ class MovieDetail extends Component {
     //         producer: this.props.movieInfo.producer,
     //         releaseDate: this.props.movieInfo.releaseDate,
     //         actors: this.props.movieInfo.actorIds,
-    //         thumbnail: this.props.movieInfo.thumbnail
+    //         image: this.props.movieInfo.image
     //     })
         
     // }
@@ -135,7 +135,9 @@ class MovieDetail extends Component {
                                     </table>
                                 </div>
                                 <div className='col-md-4 col-lg-4'>
-                                    <img src={testThumbnail}></img>
+                                    <img 
+                                        width="100%"                                        
+                                        src={movie.image.thumbnailUrl}></img>
                                 </div>
                             </div>
                         </Modal.Body>

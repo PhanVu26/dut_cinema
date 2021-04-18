@@ -10,6 +10,7 @@ import {
 import Pagination from '../../../components/Pagination/Pagination';
 import MovieForm from '../../../components/Modal/MovieModal/MovieForm';
 import * as actions from '../../../actions/movieManager/index';
+import MovieDetail from '../../../components/Modal/MovieModal/MovieDetail';
 class MovieManager extends Component{
     constructor(props) {
         super(props);
@@ -52,6 +53,7 @@ class MovieManager extends Component{
         return (    
             <section>
                 <div className="container-fluid mt-5">
+                    <MovieDetail></MovieDetail>
                     <div className="row">                   
                         <div className="col-xl-12 col-12 mb-4 mb-xl-0">
                             <h2 className="text-center mb-3 mt-2">Danh sách phim</h2>

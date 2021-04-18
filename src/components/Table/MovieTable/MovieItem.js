@@ -71,8 +71,9 @@ class MovieItem extends Component {
                 <td className="text-center">{movie.id}</td>
                 <td className="text-center">{movie.name}</td>
                 <td className="text-center">
-                    <img src={movie.thumbnail} height="80px" width="80px"></img>
+                    <img src={movie.image.thumbnailUrl} height="80px" width="80px"></img>
                 </td>
+                
                 <td className="text-center">
                     <ul className='list-unstyled'>
                         {
@@ -80,6 +81,7 @@ class MovieItem extends Component {
                         }
                     </ul>
                 </td>
+                <td className="text-center">{movie.country}</td>
                 <td className="text-center">{movie.director}</td>
                 <td className="text-center">{movie.producer}</td>
                 <td className="text-center">{movie.releaseDate}</td>
@@ -94,24 +96,22 @@ class MovieItem extends Component {
                     <button 
                         onClick={this.editMovie}
                         type="button" 
-                        className="btn btn-warning">
-                        <span className="fa fa-pencil"></span>
+                        className="btn btn-warning mr-1 px-1">
+                        <i className="fa fa-pencil"></i>
                     </button>
-                    {/* <MovieForm></MovieForm> */}
                     <button
                         onClick={() => {if(window.confirm('Bạn có muốn xóa Phim này?')){this.onDeleteMovie()};}} 
                         type="button" 
-                        className="btn btn-danger">
-                        <span className="far fa-trash-alt"></span>
+                        className="btn btn-danger mr-1 px-1">
+                        <i className="far fa-trash-alt"></i>
                     </button>
                     <button 
                         type="button" 
-                        className="btn btn-danger"
+                        className="btn btn-primary mr-1 px-1"
                         onClick={this.getMovieInfo}>
-                        <span className="fas fa-eye"></span>
+                        <i className="fas fa-eye"></i>
                     </button>
                 </td>
-                <MovieDetail></MovieDetail>
                 {/* <MovieForm></MovieForm> */}
             </tr>
         );

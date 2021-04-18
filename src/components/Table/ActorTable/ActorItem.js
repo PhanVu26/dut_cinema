@@ -79,7 +79,7 @@ class ActorItem extends Component {
                 <td className="text-center">{actor.birthday}</td>
                 <td className='text-center'>{actor.nationality}</td>
                 {/* <td className="text-center">
-                    <img src={actor.thumbnail} height="80px" width="80px"></img>
+                    <img src={actor.image} height="80px" width="80px"></img>
                 </td>
                 <td className="text-center">
                     <ul className='list-unstyled'>

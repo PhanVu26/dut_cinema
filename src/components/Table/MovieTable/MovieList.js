@@ -91,6 +91,7 @@ class MovieList extends Component {
                         <th className="text-center">Tên phim</th>
                         <th className="text-center">Hình ảnh phim</th>
                         <th className="text-center">Thể loại</th>
+                        <th className="text-center">Quốc gia</th>
                         <th className="text-center">Đạo diễn</th>
                         <th className="text-center">Nhà sản xuất</th>
                         <th className="text-center">Ngày phát hành</th>
@@ -104,7 +105,7 @@ class MovieList extends Component {
                             <input 
                                 type="text"
                                 name="filterByName"
-                                placeholder='Nhập tên phim'
+                                placeholder='Tên phim'
                                 onChange={this.handleChange}
                                 value={this.state.filterByName}>
                             </input>
@@ -119,11 +120,12 @@ class MovieList extends Component {
                                     {this.showGenreSelectBox(this.props.genres)}
                             </select>
                         </td>
+                        <td></td>
                         <td>
                             <input 
                                 type="text"
                                 name="filterByDirector"
-                                placeholder='Nhập tên đạo diễn'
+                                placeholder='Đạo diễn'
                                 onChange={this.handleChange}
                                 value={this.state.filterByDirector}>
                             </input>
@@ -132,7 +134,7 @@ class MovieList extends Component {
                             <input 
                                 type="text"
                                 name="filterByProducer"
-                                placeholder='Nhập tên nhà sản xuất'
+                                placeholder='Nhà sản xuất'
                                 onChange={this.handleChange}
                                 value={this.state.filterByProducer}>
                             </input>
