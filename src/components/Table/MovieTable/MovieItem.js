@@ -107,7 +107,7 @@ class MovieItem extends Component {
                     <button 
                         type="button" 
                         className="btn btn-primary mr-1 px-1"
-                        onClick={this.getMovieInfo}>
+                        onClick={this.getMovie}>
                         <i className="fas fa-eye"></i>
                     </button>
                 </td>

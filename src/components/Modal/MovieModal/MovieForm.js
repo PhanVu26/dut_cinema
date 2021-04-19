@@ -264,6 +264,15 @@ class MovieForm extends Component {
                         <div className='row'>
                             <div className='col-md-6 col-lg-6'>
                                 <div className="form-group">
+                                    <label>ID phim :</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        value={movie.id}   
+                                        readOnly="true"                                 
+                                    />
+                                </div>
+                                <div className="form-group">
                                     <label>Tên phim :</label>
                                     <input
                                         type="text"
