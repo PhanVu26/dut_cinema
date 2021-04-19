@@ -14,7 +14,7 @@ var initialState = {
 
 var myReducer = (state = initialState, action) => {
     switch(action.type){
-        case types.GET_MOVIE_INFO:
+        case types.EDIT_MOVIE:
             var movieInfo = {
                 id: action.movie.id,
                 name: action.movie.name,
@@ -27,6 +27,7 @@ var myReducer = (state = initialState, action) => {
                 image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
             }     
+            console.log("movie edit ", movieInfo)
             return movieInfo
         default: return state;     
     }

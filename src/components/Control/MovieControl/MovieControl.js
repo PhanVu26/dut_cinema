@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch, props) => {
             dispatch(actions.toggleMovieForm())
         },
         onClearMovie: (movie) => {
-            dispatch(actions.getMovieInfo(movie))
+            dispatch(actions.getMovie(movie))
         }
     }
 } 

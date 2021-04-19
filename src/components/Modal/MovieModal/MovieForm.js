@@ -209,11 +209,11 @@ class MovieForm extends Component {
     saveMovie = (event) => {
         event.preventDefault();
         if(this.validateMovie() === true) {
-            this.props.onSaveMovie(this.state.movie)
-            this.props.onToggleMovieForm();
-            //this.reload();
-            this.forceUpdate();
-            
+            if(this.props.movieInfo.id == ""){
+                console.log("edit moive id", this.props.movieInfo.id)
+                this.props.onAddMovie(this.state.movie)
+            }else this.props.onUpdateMovie(this.state.movie)
+            this.props.onToggleMovieForm();          
         }else {
             this.setState({
                 invalidMessage : "Vui lòng nhập đầy đủ thông tin"
@@ -227,9 +227,6 @@ class MovieForm extends Component {
             [name]: value
         })
     }
-    shouldComponentUpdate(nextProps, nextState) {        
-        return true;
-    }
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.movieInfo) {
@@ -239,9 +236,7 @@ class MovieForm extends Component {
                 selectedActors: nextProps.movieInfo.actorIds.map(actor =>{return actor.name})
             })
         }
-      }
-
-    reload=()=>window.location.reload();
+    }
     render() {
         const {isDisplayMovieForm} = this.props;
         const {movie} = this.state
@@ -265,7 +260,7 @@ class MovieForm extends Component {
                 style={{maxWidth: '100%', width: '100%'}}>
                 <Modal.Header>{movieInfo.id === "" ? "Taọ phim mới" : "Chỉnh sửa phim"}</Modal.Header>
                 <Modal.Body>
-                    <form onSubmit={this.saveMovie}>
+                    <form onSubmit={this.addMovie}>
                         <div className='row'>
                             <div className='col-md-6 col-lg-6'>
                                 <div className="form-group">
@@ -423,11 +418,14 @@ const mapDispatchToProps = (dispatch, props) =>{
         onToggleMovieForm: () => {
             dispatch(actions.toggleMovieForm())
         },
-        onSaveMovie: (movie) => {
+        onAddMovie: (movie) => {
             dispatch(actions.actAddMovieRequest(movie))
         },
-        onGetMovieInfo : (movie) => {
-            dispatch(actions.getMovieInfo(movie))
+        onGetMovie : (id) => {
+            dispatch(actions.getMovieRequest(id))
+        },
+        onUpdateMovie : (movie) => {
+            dispatch(actions.actUpdateMovieRequest(movie))
         }
         // // onDeleteUser: (id) => {
         // //     dispatch(actions.deleteUser(id))

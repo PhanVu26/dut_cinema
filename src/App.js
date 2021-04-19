@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/"> 
             <HomePage></HomePage>
           </Route>
-          <Route exact path="/manager"> 
+          <Route path="/manager"> 
             <ManagerPage></ManagerPage>
           </Route>
         </Switch>

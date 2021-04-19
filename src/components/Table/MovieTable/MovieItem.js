@@ -26,14 +26,14 @@ class MovieItem extends Component {
     //     this.props.onToggleUserForm();
     //     this.props.getUserEditing(this.props.user)
     // }
-    getMovieInfo = () => {
+    getMovie = () => {
         this.props.onToggleModal();
-        this.props.getMovieInfo(this.props.movie)
+        this.props.onGetMovie(this.props.movie.id)
 
     }
     editMovie = () => {
         this.props.onToggleMovieForm();
-        this.props.getMovieInfo(this.props.movie)
+        this.props.onGetMovie(this.props.movie.id)
     }
     showGenres(genres){
         var result = null;
@@ -129,8 +129,8 @@ const mapDispatchToProps = (dispatch, props) =>{
         onToggleMovieForm: () => {
             dispatch(actions.toggleMovieForm())
         },
-        getMovieInfo : (movie) => {
-            dispatch(actions.getMovieInfo(movie))
+        onGetMovie : (id) => {
+            dispatch(actions.getMovieRequest(id))
         },
         onDeleteMovie: (id) => {
             dispatch(actions.deleteMovie(id))
