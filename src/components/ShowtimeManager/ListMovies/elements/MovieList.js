@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "../../../actions/movieManager/index";
-import MovieItem from "../../Table/MovieTable/MovieItem";
+import * as actions from "../../../../actions/movieManager/index";
+import MovieItem from "./MovieItem";
 
 class MovieList extends Component {
   constructor(props) {

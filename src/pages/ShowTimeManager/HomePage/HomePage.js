@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NavigationBar from "../../../components/ShowtimeManager/NavigationBar/NavigationBar";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import ListMovie from "../../../components/ShowtimeManager/ListMovie/ListMovie";
+import ListMovies from "../../../components/ShowtimeManager/ListMovies/ListMovies";
 
 class HomePage extends Component {
   // render() {
@@ -23,8 +23,8 @@ class HomePage extends Component {
   render() {
     return (
       <>
-        {/* <NavigationBar />; */}
-        <ListMovie />;
+        <NavigationBar />;
+        <ListMovies />;
       </>
     );
   }

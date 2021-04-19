@@ -13,6 +13,10 @@ import HomePage from "./pages/HomePage/HomePage";
 import UserManagementPage from "./pages/admin/UserManagementPage";
 import MovieManager from "./pages/manager/movie manager";
 import ShowTimeManager from "./pages/ShowTimeManager/HomePage/HomePage";
+<<<<<<< HEAD
+=======
+import EditShowTimePage from "./pages/ShowTimeManager/EditShowTimePage/EditShowTimePage";
+>>>>>>> e4e561f (create edit showtime page)
 function App() {
   return (
     <div className="App">
@@ -35,6 +39,9 @@ function App() {
           </Route>
           <Route exact path="/showtime_manager">
             <ShowTimeManager></ShowTimeManager>
+          </Route>
+          <Route exact path="/showtime_manager/edit">
+            <EditShowTimePage></EditShowTimePage>
           </Route>
         </Switch>
       </Router>
