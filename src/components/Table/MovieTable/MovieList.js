@@ -56,7 +56,7 @@ class MovieList extends Component {
     render() {
 
         // var{rowsPerPage} = this.props;
-        // console.log("list movies ", rowsPerPage)
+        console.log("filter", this.state);
         var{rowsPerPage, filterMovie} = this.props;
         if(filterMovie.name){
             rowsPerPage = rowsPerPage.filter((movie) => {
@@ -77,10 +77,9 @@ class MovieList extends Component {
      
         if(filterMovie.genre !== -1){
             rowsPerPage = rowsPerPage.filter((movie) => {
-                var found = movie.genreIds.some(genre =>{
-                    return genre.id === filterMovie.genre
-                });
-                return found === true ? true: false
+                return movie.genreIds.some(genre => {
+                    return genre.id == filterMovie.genre
+                })
             })
         }
         return (
