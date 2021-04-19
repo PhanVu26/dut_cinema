@@ -7,9 +7,7 @@ import MovieForm from '../../Modal/MovieModal/MovieForm';
 class MovieControl extends Component {
 
     onHandleModal = () => {
-        console.log("movie info: ", this.props.movieInfo)
         if(this.props.movieInfo.id === "" ){
-            console.log("null")
             this.props.onToggleMovieForm();
         }else {
             this.props.onClearMovie({
@@ -41,7 +39,6 @@ class MovieControl extends Component {
                 <button onClick={this.onHandleModal} type="button" className="btn btn-primary">
                     <span className="fas fa-plus mr-2"></span>Thêm Movie
                 </button>
-                <MovieForm></MovieForm>
             </div>
         );
     }

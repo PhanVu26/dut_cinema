@@ -55,7 +55,6 @@ class UserManagementPage extends Component{
             endIndex
           } = this.state;
         var rowsPerPage = users.slice(startIndex, endIndex + 1);  
-        console.log("rowPerPage: ", rowsPerPage);
         return (
             <Router>
                 <Navbar></Navbar>        

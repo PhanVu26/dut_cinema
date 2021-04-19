@@ -10,7 +10,6 @@ var initialState = {
 var myReducer = (state = initialState, action) => {
     switch(action.type){
         case types.GET_USER_EDITING:
-            console.log("action.user ", action.user.status)
             var userEditing = {
                 id: action.user.id,
                 username: action.user.username,

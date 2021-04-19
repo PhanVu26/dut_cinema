@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../../actions/movieManager/index'
+import MovieForm from '../../Modal/MovieModal/MovieForm';
 import MovieItem from '../../Table/MovieTable/MovieItem';
 
 class MovieList extends Component {
@@ -79,7 +80,6 @@ class MovieList extends Component {
                 var found = movie.genreIds.some(genre =>{
                     return genre.id === filterMovie.genre
                 });
-                console.log('found', found)
                 return found === true ? true: false
             })
         }

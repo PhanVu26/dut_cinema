@@ -16,9 +16,10 @@ class MovieForm extends Component {
                 genreIds: [],
                 director:"",
                 producer:"",
+                country:"",
                 actorIds: [],
                 releaseDate: "",
-                image: "",
+                image: {},
                 description: ""
             },
             selectedActors: [],
@@ -32,15 +33,12 @@ class MovieForm extends Component {
     
 
     findIndexActorById = (actorIds,id) => {
-        console.log("actors:", actorIds)
-        console.log("find id", id)
         var result = -1;
         actorIds.forEach((actorId, index) => {
             if(actorId.id === id){
                 result = index;
             }
         });
-        console.log("result", result)
         return result;
     }
 
@@ -55,36 +53,56 @@ class MovieForm extends Component {
     }
 
     onHandleChange = (e) => {
-        //console.log("e ,", e)
         var target = e.target;
         var name = target.name;
         var value = target.value;
-        //console.log("value,", value)
         var id = e.target.id;
 
         //console.log(id)
-        var image = e.target.files != null ? URL.createObjectURL(e.target.files[0]) : this.state.movie.image
-        console.log("image", image)
+        var file = null;
+        var image = null;
+        if(e.target.files != null){
+            file = e.target.files
+            var reader = new FileReader();
+            reader.readAsDataURL(file[0])
+            reader.onload = (e) => {
+                image = e.target.result
+                this.setState(prevState => ({
+                    movie: {
+                        ...prevState.movie,
+                        image: {
+                            mainUrl: file!=null ? image : prevState.movie.image.mainUrl,
+                            thumbnailUrl: file!=null ? image : prevState.movie.image.thumbnailUrl   
+                        },
+                    },
+                    //genreIds: genreIds
+                }))
+            }
+        }
+        
+
+        
+
         if(e.target.checked === true){
             if(e.target.className === "actor-checkbox"){
                 this.setState(prevState => ({
-                    selectedActors: [...prevState.selectedActors, e.target.name],
+                    selectedActors: [...prevState.selectedActors, e.target.labels[0].innerHTML],
                     movie: {
                         ...prevState.movie,
                         actorIds: [...prevState.movie.actorIds, {
                             id: value,
-                            name: name
+                            name: e.target.labels[0].innerHTML
                         }]
                     }
                 }))
             }else {
                 this.setState(prevState => ({
-                    selectedGenres: [...prevState.selectedGenres, e.target.name],
+                    selectedGenres: [...prevState.selectedGenres, e.target.labels[0].innerHTML],
                     movie: {
                         ...prevState.movie,
                         genreIds: [...prevState.movie.genreIds, {
                             id: value,
-                            name: name
+                            name: e.target.labels[0].innerHTML
                         }]
                     }
                 }))
@@ -93,7 +111,6 @@ class MovieForm extends Component {
         }else {
             if(e.target.className === "actor-checkbox"){
                 if(value != ""){
-                    console.log("id: ", id)
                     this.setState((prevState) => ({
                         selectedActors: prevState.selectedActors.filter((_, i) => i !== this.findIndexActorById(this.state.movie.actorIds, value)),
                         movie: {
@@ -105,7 +122,6 @@ class MovieForm extends Component {
             }
             else {
                 if(value != ""){
-                    console.log("id: ", id)
                     this.setState((prevState) => ({
                         selectedGenres: prevState.selectedGenres.filter((_, i) => i !== this.findIndexActorById(this.state.movie.genreIds, value)),
                         movie: {
@@ -116,28 +132,28 @@ class MovieForm extends Component {
                 }
             }    
         }
-        this.setState(prevState => ({
-            movie: {
-                ...prevState.movie,
-                [name]: value,
-                image: image,
-            },
-            //genreIds: genreIds
-        }))
+
+        if(name !== ""){
+            this.setState(prevState => ({
+                movie: {
+                    ...prevState.movie,
+                    [name]: value,
+                },
+            }))
+        }
     }
 
     showActorCheckbox = actors =>{
         var results = [];
-        results = actors.map(actor => {
+        results = actors.map((actor, index) => {
             return (
-                <div className="actor-item ml-3">
+                <div className="actor-item ml-3" key={index}>
                     <label htmlFor={'actor'+actor.id} className="mr-2">{actor.name}</label>
                     <input 
                         defaultChecked = {this.state.selectedActors.some(actorName => actorName === actor.name)}
                         className="actor-checkbox"
                         type="checkbox" 
                         id={'actor'+actor.id} 
-                        name={actor.name}
                         onChange = {this.onHandleChange} 
                         value={actor.id}></input><br></br>
                 </div>
@@ -156,17 +172,15 @@ class MovieForm extends Component {
 
     showGenreCheckbox = genres =>{
         var results = [];
-        results = genres.map(genre => {
-            console.log("checked", this.state.selectedGenres.some(genreName => genreName === genre.name))
+        results = genres.map((genre, index) => {
             return (
-                <div className="genre-item ml-3">
+                <div className="genre-item ml-3" key={index}>
                     <label htmlFor={'genre'+genre.id} className="mr-2">{genre.name}</label>
                     <input 
                         defaultChecked = {this.state.selectedGenres.some(genreName => genreName === genre.name)}
                         className="genre-checkbox"
                         type="checkbox" 
                         id={'genre'+genre.id} 
-                        name={genre.name}
                         onChange = {this.onHandleChange} 
                         value={genre.id}></input><br></br>
                 </div>
@@ -187,7 +201,7 @@ class MovieForm extends Component {
         const movie = this.state.movie;
         if(movie.name === "" || movie.director === "" || movie.description === "" ||
             movie.description === "" || movie.genreIds.length == 0 || movie.releaseDate === "" ||
-            movie.image == "" || movie.actorIds.length == 0){
+            movie.image == "" || movie.actorIds.length == 0 || movie.country === ""){
                 return false
             }
         return true;    
@@ -196,8 +210,9 @@ class MovieForm extends Component {
         event.preventDefault();
         if(this.validateMovie() === true) {
             this.props.onSaveMovie(this.state.movie)
-            console.log("save movie 1", this.state.movie)
-            this.props.onToggleMovieForm()
+            this.props.onToggleMovieForm();
+            //this.reload();
+            this.forceUpdate();
             
         }else {
             this.setState({
@@ -215,38 +230,8 @@ class MovieForm extends Component {
     shouldComponentUpdate(nextProps, nextState) {        
         return true;
     }
-    // componentDidMount(){
-    //     console.log("didmount", this.props.movieInfo)
-    //     if(this.props.movieInfo && this.props.movieInfo.id !== ""){
-    //         console.log("movie info digs", this.props.movieInfo)
-    //         this.setState(prevState => ({
-    //             movie: this.props.movieInfo,
-    //             selectedGenres: [...prevState.selectedGenres, ...this.props.movieInfo.genreIds.map(genre =>{return genre.name})],
-    //             selectedActors: [...prevState.selectedActors, ...this.props.movieInfo.actorIds.map(actor =>{return actor.name})]
-    //         }))
-    //     }
-    // }
-
-    // static getDerivedStateFromProps(nextProps, prevState){
-    //     if(nextProps.movieInfo!==prevState.movie){
-    //       return { movie: nextProps.movieInfo};
-    //    }
-    //     return null;
-    //   }
-    //   componentDidUpdate(prevProps, prevState) {
-    //     if(prevProps.movieInfo!==this.props.movie){
-    //       //Perform some operation here
-    //       this.setState({
-    //                     movie: prevProps.movieInfo,
-    //                     selectedGenres: [...prevState.selectedGenres, ...prevProps.movieInfo.genreIds.map(genre =>{return genre.name})],
-    //                     selectedActors: [...prevState.selectedActors, ...prevProps.movieInfo.actorIds.map(actor =>{return actor.name})]
-    //                 })
-        
-    //     }  
-    // }
 
     componentWillReceiveProps(nextProps) {
-        console.log("nextprops", nextProps.movieInfo)
         if(nextProps.movieInfo) {
             this.setState({
                 movie: nextProps.movieInfo,
@@ -256,15 +241,13 @@ class MovieForm extends Component {
         }
       }
 
+    reload=()=>window.location.reload();
     render() {
-
         const {isDisplayMovieForm} = this.props;
         const {movie} = this.state
         const movieInfo = this.props.movieInfo;
-        console.log("render")
         var {genres, actors} = this.props
 
-        console.log("state", this.state.selectedGenres)
         genres = genres.filter((genre) => {
             return genre.name.toLowerCase().indexOf(this.state.filterGenre.toLowerCase()) !== -1
         });
@@ -277,6 +260,7 @@ class MovieForm extends Component {
            <div>  
             <Modal 
                 show={isDisplayMovieForm} 
+                onHide = {this.props.onToggleMovieForm}
                 size="lg"
                 style={{maxWidth: '100%', width: '100%'}}>
                 <Modal.Header>{movieInfo.id === "" ? "Taọ phim mới" : "Chỉnh sửa phim"}</Modal.Header>
@@ -318,9 +302,20 @@ class MovieForm extends Component {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label>Ngày phát hành :</label>
+                                    <label>Quốc gia :</label>
                                     <input
                                         type="text"
+                                        className="form-control"
+                                        name="country"
+                                        value={movie.country}
+                                        onChange={ this.onHandleChange }
+                                    
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label>Ngày phát hành :</label>
+                                    <input
+                                        type="date"
                                         className="form-control"
                                         name="releaseDate"
                                         value={movie.releaseDate}
@@ -328,27 +323,25 @@ class MovieForm extends Component {
                                     
                                     />
                                 </div>
-
                                 <div className="form-group">
-                                    <label>Mô tả phim :</label>
-                                    <textarea
-                                        rows='5'
-                                        cols='40'
-                                        type="text"
+                                    <label>image :</label>
+                                    <input
+                                        name = "image"
+                                        type="file"
                                         className="form-control"
-                                        name="description"
-                                        value={movie.description}
                                         onChange={ this.onHandleChange }
                                     
                                     />
-                                </div>
-                
-                                
+                                    <img 
+                                        src={movie.image.thumbnailUrl} 
+                                        width='200px'
+                                        height='200px'
+                                    ></img>
+                                </div> 
                             </div>
 
-                            <div className='col-md-6 col-lg-6'>
-                                
-                            <div className="form-group">
+                            <div className='col-md-6 col-lg-6'>                              
+                                <div className="form-group">
                                     <label>Thể loại :</label>
                                     <input 
                                         name="filterGenre"
@@ -383,30 +376,21 @@ class MovieForm extends Component {
                                     
                                     <span>Đã chọn:</span><p>{this.state.selectedActors.toString()}</p>
                                 </div>
-                            </div>
-                        </div>
-                        <div className='row'>
-                            <div className='col-md-6 col-lg-6'>
                                 <div className="form-group">
-                                    <label>image :</label>
-                                    <input
-                                        type="file"
+                                    <label>Mô tả phim :</label>
+                                    <textarea
+                                        rows='5'
+                                        cols='40'
+                                        type="text"
                                         className="form-control"
+                                        name="description"
+                                        value={movie.description}
                                         onChange={ this.onHandleChange }
                                     
                                     />
                                 </div>
                             </div>
-                            
-                            <div className='col-md-6 col-lg-6'>
-                                <img 
-                                    src={movie.image} 
-                                        width='200px'
-                                        height='200px'
-                                    ></img>
-                            </div>
-                        </div>
-                        
+                        </div>     
                     </form>    
                     <h5 className="text-danger">{this.state.invalidMessage !== "" ? this.state.invalidMessage: ""}</h5>
                 </Modal.Body>
@@ -440,7 +424,7 @@ const mapDispatchToProps = (dispatch, props) =>{
             dispatch(actions.toggleMovieForm())
         },
         onSaveMovie: (movie) => {
-            dispatch(actions.saveMovie(movie))
+            dispatch(actions.actAddMovieRequest(movie))
         },
         onGetMovieInfo : (movie) => {
             dispatch(actions.getMovieInfo(movie))

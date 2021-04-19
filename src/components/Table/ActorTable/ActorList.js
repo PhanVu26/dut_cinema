@@ -35,7 +35,6 @@ class ActorList extends Component {
         this.setState({
             [name]: value
         })
-        console.log("filter", filter)
         this.props.onFilterActor(filter)
         
     }
@@ -43,7 +42,6 @@ class ActorList extends Component {
 
     render() {
         var{rowsPerPage, filterActor} = this.props;
-        console.log("filterActor", filterActor)
         if(filterActor.name){
             rowsPerPage = rowsPerPage.filter((actor) => {
                 return actor.name.toLowerCase().indexOf(filterActor.name.toLowerCase()) !== -1

@@ -31,7 +31,6 @@ class ActorForm extends Component {
     }
    
     onHandleChange = (e) => {
-        //console.log("e ,", e)
         var target = e.target;
         var name = target.name;
         var value = target.value;

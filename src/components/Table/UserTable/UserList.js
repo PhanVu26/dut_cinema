@@ -65,7 +65,6 @@ class UserList extends Component {
             }
             
         })
-        console.log("list users ", rowsPerPage)
         return (
             <table className="table table-bordered table-hover">
                 <thead>

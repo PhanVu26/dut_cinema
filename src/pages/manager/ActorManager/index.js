@@ -48,7 +48,6 @@ class ActorManager extends Component{
             endIndex
           } = this.state;
         var rowsPerPage = actors.slice(startIndex, endIndex + 1);  
-        console.log("rowPerPage: ", rowsPerPage);
         return (       
             <section>
                 <div className="container-fluid mt-5">

@@ -9,7 +9,6 @@ import UserForm from '../../Form/UserForm/UserForm';
 class UserControl extends Component {
 
     onHandleModal = () => {
-        console.log("user editing: ", this.props.userEditing)
         if(this.props.userEditing.id === '' ){
             this.props.onToggleUserForm();
         }else {

@@ -180,7 +180,6 @@ var userReducer = (state = initialState, action) => {
         case types.DELETE_USER:
             index = findIndex(state, action.id)
             state.splice(index, 1);
-            console.log(action);
             return [...state];       
         case types.UPDATE_USER_STATUS:
             index = findIndex(state, action.id);
@@ -188,7 +187,6 @@ var userReducer = (state = initialState, action) => {
                 ...state[index],
                 status: !state[index].status
             }
-            console.log(action);
             return [...state];            
         default: return state;     
     }

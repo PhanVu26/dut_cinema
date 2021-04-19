@@ -59,7 +59,11 @@ class MovieDetail extends Component {
         return (
             <div>
                 <form>
-                    <Modal show={isDisplayMovieModal} size="lg" style={{maxWidth: '100%', width: '100%'}}>
+                    <Modal 
+                        onHide = {this.props.onToggleModal}
+                        show={isDisplayMovieModal} 
+                        size="lg" 
+                        style={{maxWidth: '100%', width: '100%'}}>
                         <Modal.Header>Chi tiết phim</Modal.Header>
                         <Modal.Body>
                             <div className='row'>

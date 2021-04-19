@@ -19,6 +19,14 @@ export const listAllActors = () => {
     }
 }
 
+export const actAddMovieRequest = (movie) => {
+    return (dispatch) => {
+        return callApi("movies", "POST", movie).then((res) => {
+          dispatch(saveMovie(res.data));
+        });
+      };
+}
+
 export const saveMovie = (movie) => {
     return {
         type: types.SAVE_MOVIE,
@@ -62,7 +70,6 @@ export const filterMovie = (filter) => {
 export const actFetchDataMoviesRequest = () => {
     return (dispatch) => {
       return callApi("movies", "GET", null).then((res) => {
-        console.log("response", res)  
         dispatch(actFetchDataMovies(res.data));
       });
     };

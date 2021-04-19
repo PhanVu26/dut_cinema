@@ -25,7 +25,6 @@ class MovieManager extends Component{
       }
       componentDidMount() {
         this.props.fetchDataMovies();  
-        console.log("fetch movies", this.props.movies)
         this.setState({
           totalRecords: this.props.movies.length
         });
@@ -49,10 +48,11 @@ class MovieManager extends Component{
             endIndex
           } = this.state;
         var rowsPerPage = movies.slice(startIndex, endIndex + 1);  
-        console.log("rowPerPage: ", rowsPerPage);
+        console.log("render in movie manager page")
         return (    
             <section>
                 <div className="container-fluid mt-5">
+                    <MovieForm></MovieForm>
                     <MovieDetail></MovieDetail>
                     <div className="row">                   
                         <div className="col-xl-12 col-12 mb-4 mb-xl-0">

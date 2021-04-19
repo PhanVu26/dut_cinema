@@ -7,7 +7,6 @@ import ActorForm from '../../Modal/ActorModal/ActorForm';
 class ActorControl extends Component {
 
     onHandleModal = () => {
-        console.log("actorInfoooo: ", this.props.actorEditing)
         if(this.props.actorEditing.id === '' ){
             this.props.onToggleActorForm();
         }else {

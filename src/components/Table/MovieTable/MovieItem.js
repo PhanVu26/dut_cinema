@@ -29,12 +29,11 @@ class MovieItem extends Component {
     getMovieInfo = () => {
         this.props.onToggleModal();
         this.props.getMovieInfo(this.props.movie)
-        console.log("xem movie:", this.props.movie)
+
     }
     editMovie = () => {
         this.props.onToggleMovieForm();
         this.props.getMovieInfo(this.props.movie)
-        console.log("edit moviessss:", this.props.movie) 
     }
     showGenres(genres){
         var result = null;
@@ -118,9 +117,9 @@ class MovieItem extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-
-}
+// const mapStateToProps = (state) => {
+//     return null;
+// }
 
 const mapDispatchToProps = (dispatch, props) =>{
     return {
@@ -145,4 +144,4 @@ const mapDispatchToProps = (dispatch, props) =>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieItem);
+export default connect(null, mapDispatchToProps)(MovieItem);

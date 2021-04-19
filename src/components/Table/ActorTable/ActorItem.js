@@ -32,7 +32,6 @@ class ActorItem extends Component {
     editActor = () => {
         this.props.onToggleActorForm();
         this.props.getActorInfo(this.props.actor)
-        console.log("edit moviessss:", this.props.actor) 
     }
     // showGenres(genres){
     //     var result = null;

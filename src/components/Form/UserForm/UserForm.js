@@ -23,13 +23,11 @@ class UserForm extends Component {
     }
     onHandleChange = (event) => {
         var target = event.target;
-        console.log(target)
         var name = target.name;
         var value = target.value;
         this.setState({
             [name] : value
         })
-        console.log("handleCHange:", this.state)
     }
 
     onSubmit = (event) => {
