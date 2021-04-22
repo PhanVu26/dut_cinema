@@ -2,6 +2,8 @@ import { Button, Modal } from "react-bootstrap";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../../actions/movieManager/index";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 
 // import testThumbnail from "../../../assets/images/logo.png";
 // import style from "../MovieModal/MovieModal.css";
@@ -25,6 +27,16 @@ class MovieForm extends Component {
       invalidMessage: "",
       filterGenre: "",
       filterActor: "",
+      showtime: {
+        cinema: {
+          id: "",
+          name: "",
+          numOfRoom: "",
+        },
+        room: "",
+        date: "",
+      },
+      optionRoom: [],
     };
   }
 
@@ -297,6 +309,14 @@ class MovieForm extends Component {
     }
   }
 
+  optionRoom() {
+    let arr = [];
+    for (let i = 0; i < this.state.showtime.cinema.numOfRoom; i++) {
+      arr.push(i + 1);
+    }
+    return arr;
+  }
+
   render() {
     const { isDisplayMovieForm } = this.props;
     const { movie } = this.state;
@@ -329,119 +349,93 @@ class MovieForm extends Component {
           style={{ maxWidth: "100%", width: "100%" }}
         >
           <Modal.Header>
-            Chỉnh sửa lịch chiếu: <b>{movie.name}</b>
+            Chỉnh sửa lịch chiếu: <b>{this.state.movie.name}</b>
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={this.saveMovie}>
               <div className="row">
                 <div className="col-md-6 col-lg-6">
                   <div className="form-group">
-                    <label>Tên phim :</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="name"
-                      value={movie.name}
-                      onChange={this.onHandleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Đạo diễn :</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="author"
-                      value={movie.author}
-                      onChange={this.onHandleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Nhà sản xuất :</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="producer"
-                      value={movie.producer}
-                      onChange={this.onHandleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Ngày phát hành :</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="releaseDate"
-                      value={movie.releaseDate}
-                      onChange={this.onHandleChange}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label>Mô tả phim :</label>
-                    <textarea
-                      rows="5"
-                      cols="40"
-                      type="text"
-                      className="form-control"
-                      name="description"
-                      value={movie.description}
-                      onChange={this.onHandleChange}
-                    />
+                    <label>Chọn rạp chiếu:</label>
+                    <select
+                      className="mr-2 ml-2"
+                      onChange={(e) => {
+                        const temp = this.props.cinemaInfo.cinema[
+                          e.target.value
+                        ];
+                        const temp2 = [];
+                        for (let i = 1; i <= temp.numOfRoom; i++) temp2.push(i);
+                        this.setState((prevState) => ({
+                          showtime: {
+                            ...prevState.showtime,
+                            cinema: {
+                              ...temp,
+                            },
+                            room: "",
+                          },
+                          optionRoom: temp2,
+                        }));
+                      }}
+                    >
+                      {this.props.cinemaInfo.cinema.map((item, index) => {
+                        return (
+                          <option key={index} value={index}>
+                            {item.name}
+                          </option>
+                        );
+                      })}
+                    </select>
                   </div>
                 </div>
-
                 <div className="col-md-6 col-lg-6">
                   <div className="form-group">
-                    <label>Thể loại :</label>
-                    <input
-                      name="filterGenre"
-                      value={this.state.filterGenre}
-                      className="ml-2"
-                      placeholder="Tìm theo thể loại"
-                      onChange={this.onHandleSearchChange}
-                    ></input>
-                    <br></br>
-                    <div className="genres-box">
-                      {this.showGenreCheckbox(genres)}
-                    </div>
-
-                    <span>Đã chọn:</span>
-                    <p>{this.state.selectedGenres.toString()}</p>
-                  </div>
-
-                  <div className="form-group">
-                    <label>Diễn viên :</label>
-                    <input
-                      name="filterActor"
-                      value={this.state.filterActor}
-                      className="ml-2"
-                      placeholder="Tìm theo tên diễn viên"
-                      onChange={this.onHandleSearchChange}
-                    ></input>
-                    <br></br>
-                    <div className="actors-box">
-                      {this.showActorCheckbox(actors)}
-                    </div>
-
-                    <span>Đã chọn:</span>
-                    <p>{this.state.selectedActors.toString()}</p>
+                    <label>Chọn phòng chiếu:</label>
+                    <select
+                      className="mr-2 ml-2"
+                      value={this.state.showtime.room}
+                      onChange={(e) => {
+                        this.setState((prevState) => ({
+                          showtime: {
+                            ...prevState.showtime,
+                            room: e.target.value,
+                          },
+                        }));
+                      }}
+                    >
+                      {this.state.optionRoom.map((item, index) => {
+                        return (
+                          <option key={index} value={item}>
+                            {item}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <p>{this.state.showtime.room}</p>
                   </div>
                 </div>
               </div>
               <div className="row">
                 <div className="col-md-6 col-lg-6">
                   <div className="form-group">
-                    <label>Thumbnail :</label>
-                    <input
-                      type="file"
-                      className="form-control"
-                      onChange={this.onHandleChange}
+                    <label>Chọn ngày:</label>
+                    <DatePicker
+                      selected={this.state.showtime.date}
+                      onChange={(selectedDate) =>
+                        this.setState((prevState) => ({
+                          showtime: {
+                            ...prevState.showtime,
+                            date: selectedDate,
+                          },
+                        }))
+                      }
+                      dateFormat="dd/MM/yyyy"
+                      minDate={new Date()}
                     />
+                    <p>{this.state.showtime.date.toString()}</p>
                   </div>
                 </div>
-
                 <div className="col-md-6 col-lg-6">
-                  <img src={movie.thumbnail} width="200px" height="200px"></img>
+                  <Button onClick={this.saveMovie}>Load</Button>
                 </div>
               </div>
             </form>
@@ -467,6 +461,7 @@ const mapStateToProps = (state) => {
     actors: state.actors,
     isDisplayMovieForm: state.isDisplayMovieForm,
     movieInfo: state.movieInfo,
+    cinemaInfo: state.reducerShowTime,
   };
 };
 
