@@ -36,6 +36,7 @@ class MovieForm extends Component {
         room: "",
         date: "",
       },
+      showRoom: [],
       optionRoom: [],
     };
   }
@@ -242,6 +243,21 @@ class MovieForm extends Component {
     }
     return true;
   };
+
+  validateDataShowtime = () => {
+    const showtime = this.state.showtime;
+    if (
+      showtime.cinema.id === "" ||
+      showtime.cinema.name === "" ||
+      showtime.cinema.numOfRoom === "" ||
+      showtime.room === "" ||
+      showtime.date === ""
+    ) {
+      return false;
+    }
+    return true;
+  };
+
   saveMovie = (event) => {
     event.preventDefault();
     if (this.validateMovie() === true) {
@@ -255,6 +271,36 @@ class MovieForm extends Component {
     }
   };
 
+  loadShowtime = (event) => {
+    if (this.validateDataShowtime() === true) {
+      this.setState({
+        optionRoom: this.props.cinemaInfo.showtime,
+      });
+    } else {
+      this.setState({
+        invalidMessage: "Vui lòng nhập đầy đủ thông tin",
+        optionRoom: [],
+      });
+    }
+  };
+
+  toggleModal = (event) => {
+    this.setState((prevState) => ({
+      showtime: {
+        cinema: {
+          id: "",
+          name: "",
+          numOfRoom: "",
+        },
+        room: "",
+        date: "",
+      },
+      showRoom: [],
+      optionRoom: [],
+    }));
+    this.props.onToggleMovieForm();
+  };
+
   onHandleSearchChange = (e) => {
     var { name, value } = e.target;
     this.setState({
@@ -264,35 +310,6 @@ class MovieForm extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     return true;
   }
-  // componentDidMount(){
-  //     console.log("didmount", this.props.movieInfo)
-  //     if(this.props.movieInfo && this.props.movieInfo.id !== ""){
-  //         console.log("movie info digs", this.props.movieInfo)
-  //         this.setState(prevState => ({
-  //             movie: this.props.movieInfo,
-  //             selectedGenres: [...prevState.selectedGenres, ...this.props.movieInfo.genreIds.map(genre =>{return genre.name})],
-  //             selectedActors: [...prevState.selectedActors, ...this.props.movieInfo.actorIds.map(actor =>{return actor.name})]
-  //         }))
-  //     }
-  // }
-
-  // static getDerivedStateFromProps(nextProps, prevState){
-  //     if(nextProps.movieInfo!==prevState.movie){
-  //       return { movie: nextProps.movieInfo};
-  //    }
-  //     return null;
-  //   }
-  //   componentDidUpdate(prevProps, prevState) {
-  //     if(prevProps.movieInfo!==this.props.movie){
-  //       //Perform some operation here
-  //       this.setState({
-  //                     movie: prevProps.movieInfo,
-  //                     selectedGenres: [...prevState.selectedGenres, ...prevProps.movieInfo.genreIds.map(genre =>{return genre.name})],
-  //                     selectedActors: [...prevState.selectedActors, ...prevProps.movieInfo.actorIds.map(actor =>{return actor.name})]
-  //                 })
-
-  //     }
-  // }
 
   componentWillReceiveProps(nextProps) {
     console.log("nextprops", nextProps.movieInfo);
@@ -309,13 +326,13 @@ class MovieForm extends Component {
     }
   }
 
-  optionRoom() {
-    let arr = [];
-    for (let i = 0; i < this.state.showtime.cinema.numOfRoom; i++) {
-      arr.push(i + 1);
-    }
-    return arr;
-  }
+  // optionRoom() {
+  //   let arr = [];
+  //   for (let i = 0; i < this.state.showtime.cinema.numOfRoom; i++) {
+  //     arr.push(i + 1);
+  //   }
+  //   return arr;
+  // }
 
   render() {
     const { isDisplayMovieForm } = this.props;
@@ -372,14 +389,16 @@ class MovieForm extends Component {
                               ...temp,
                             },
                             room: "",
+                            date: "",
                           },
-                          optionRoom: temp2,
+                          showRoom: temp2,
                         }));
                       }}
                     >
+                      <option key={0}></option>
                       {this.props.cinemaInfo.cinema.map((item, index) => {
                         return (
-                          <option key={index} value={index}>
+                          <option key={index + 1} value={index}>
                             {item.name}
                           </option>
                         );
@@ -402,9 +421,10 @@ class MovieForm extends Component {
                         }));
                       }}
                     >
-                      {this.state.optionRoom.map((item, index) => {
+                      <option key={0}></option>
+                      {this.state.showRoom.map((item, index) => {
                         return (
-                          <option key={index} value={item}>
+                          <option key={index + 1} value={item}>
                             {item}
                           </option>
                         );
@@ -417,7 +437,7 @@ class MovieForm extends Component {
               <div className="row">
                 <div className="col-md-6 col-lg-6">
                   <div className="form-group">
-                    <label>Chọn ngày:</label>
+                    <label>Chọn ngày: </label>
                     <DatePicker
                       selected={this.state.showtime.date}
                       onChange={(selectedDate) =>
@@ -435,7 +455,7 @@ class MovieForm extends Component {
                   </div>
                 </div>
                 <div className="col-md-6 col-lg-6">
-                  <Button onClick={this.saveMovie}>Load</Button>
+                  <Button onClick={this.loadShowtime}>Load</Button>
                 </div>
               </div>
             </form>
@@ -444,10 +464,49 @@ class MovieForm extends Component {
                 ? this.state.invalidMessage
                 : ""}
             </h5>
+
+            <form action="">
+              <hr />
+
+              <div className="row">
+                <div className="col-md-6 col-lg-6">
+                  <div className="form-group" style={{ display: "flex" }}>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="name"
+                      placeholder="Định dạng: hh:mm"
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      style={{ marginLeft: "5px" }}
+                    >
+                      <span className="fa fa-plus"></span>
+                    </button>
+                  </div>
+                </div>
+                <div className="col-md-6 col-lg-6">
+                  <div className="form-group" style={{ display: "flex" }}>
+                    <p style={{ color: "black", margin: "auto 5px auto auto" }}>
+                      Xóa lịch chiếu đã chọn:
+                    </p>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      style={{ marginLeft: "10px" }}
+                    >
+                      <span className="far fa-trash-alt"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <p>Thông tin lịch chiếu:</p>
+            </form>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.saveMovie}>Save</Button>
-            <Button onClick={this.props.onToggleMovieForm}>Close</Button>
+            <Button onClick={this.toggleModal}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>
