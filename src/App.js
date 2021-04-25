@@ -4,7 +4,6 @@ import "./App.css";
 
 import AdminPage from "./pages/admin/AdminPage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import routes from "./routes/index.route";
 import AccountManagementPage from "./pages/admin/AccounManagementPage";
 import Header from "./components/client/Header/Header";
 import Footer from "./components/client/Footer/Footer";

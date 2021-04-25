@@ -51,13 +51,13 @@ export const actSearchMovie = (keyword) => {
 };
 
 //get data users
-// export const actFetchDataUsersRequest = () => {
-//   return (dispatch) => {
-//     return callApi("api/users", "GET", null).then((res) => {
-//       dispatch(actFetchDataUsers(res.data));
-//     });
-//   };
-// };
+export const actFetchDataUsersRequest = () => {
+  return (dispatch) => {
+    return callApi("api/users", "GET", null).then((res) => {
+      dispatch(actFetchDataUsers(res.data));
+    });
+  };
+};
 
 export const actFetchDataUsers = (users) => {
   return {
@@ -68,14 +68,14 @@ export const actFetchDataUsers = (users) => {
 
 //---------------------------------------------------------------------
 
-// export const actUpdateUserRequest = (users) => {
-//   return (dispatch) => {
-//     console.log(users._id);
-//     return callApi(`api/users/${users._id}`, "PUT", users).then((res) => {
-//       dispatch(actUpdateUser(res.data));
-//     });
-//   };
-// };
+export const actUpdateUserRequest = (users) => {
+  return (dispatch) => {
+    console.log(users._id);
+    return callApi(`api/users/${users._id}`, "PUT", users).then((res) => {
+      dispatch(actUpdateUser(res.data));
+    });
+  };
+};
 
 export const actUpdateUser = (user) => {
   return {
@@ -85,13 +85,13 @@ export const actUpdateUser = (user) => {
 };
 //------------------------------------------------------------------
 
-// export const actDeleteUserRequest = (id) => {
-//   return (dispatch) => {
-//     return callApi(`api/users/${id}`, "DELETE", null).then((res) => {
-//       dispatch(actDeleteUser(id));
-//     });
-//   };
-// };
+export const actDeleteUserRequest = (id) => {
+  return (dispatch) => {
+    return callApi(`api/users/${id}`, "DELETE", null).then((res) => {
+      dispatch(actDeleteUser(id));
+    });
+  };
+};
 
 export const actDeleteUser = (id) => {
   return {
@@ -100,9 +100,9 @@ export const actDeleteUser = (id) => {
   };
 };
 
-// export const actLoginAccountRequest = (account) => {
-//   return callApi("api/users/login", "POST", account);
-// };
+export const actLoginAccountRequest = (account) => {
+  return callApi("api/users/login", "POST", account);
+};
 
 // act receive moving choosing
 export const actReceiveMovieChoosing = (movie, date, time, idUser) => {
@@ -122,13 +122,13 @@ export const actFetchDataBooking = (data) => {
   };
 };
 
-// export const actUpdateMovieRequest = (data) => {
-//   return (dispatch) => {
-//     return callApi(`api/movies/${data._id}`, "PUT", data).then((res) => {
-//       dispatch(actUpdateMovie(res.data));
-//     });
-//   };
-// };
+export const actUpdateMovieRequest = (data) => {
+  return (dispatch) => {
+    return callApi(`api/movies/${data._id}`, "PUT", data).then((res) => {
+      dispatch(actUpdateMovie(res.data));
+    });
+  };
+};
 
 export const actUpdateMovie = (data) => {
   return {
@@ -137,19 +137,19 @@ export const actUpdateMovie = (data) => {
   };
 };
 
-// export const actAddMovieRequest = (data) => {
-//   return callApi("api/movies/add", "POST", data);
-// };
+export const actAddMovieRequest = (data) => {
+  return callApi("api/movies/add", "POST", data);
+};
 
-// export const actDeleteMovieRequest = (id) => {
-//   return (dispatch) => {
-//     return callApi(`api/movies/${id}`, "DELETE", null).then((res) => {
-//       if (res.status === 200) {
-//         dispatch(actDeleteMovie(id));
-//       }
-//     });
-//   };
-// };
+export const actDeleteMovieRequest = (id) => {
+  return (dispatch) => {
+    return callApi(`api/movies/${id}`, "DELETE", null).then((res) => {
+      if (res.status === 200) {
+        dispatch(actDeleteMovie(id));
+      }
+    });
+  };
+};
 
 export const actDeleteMovie = (id) => {
   return {
@@ -158,15 +158,15 @@ export const actDeleteMovie = (id) => {
   };
 };
 
-// export const actFetchDataBookingMovieRequest = () => {
-//   return (dispatch) => {
-//     return callApi("api/bookings", "GET", null).then((res) => {
-//       if (res.status === 200) {
-//         dispatch(actFetchDataBookingMovie(res.data));
-//       } else alert("Không thể kết nối đến dữ liệu!");
-//     });
-//   };
-// };
+export const actFetchDataBookingMovieRequest = () => {
+  return (dispatch) => {
+    return callApi("api/bookings", "GET", null).then((res) => {
+      if (res.status === 200) {
+        dispatch(actFetchDataBookingMovie(res.data));
+      } else alert("Không thể kết nối đến dữ liệu!");
+    });
+  };
+};
 
 export const actFetchDataBookingMovie = (bookingMovie) => {
   return {
@@ -175,21 +175,21 @@ export const actFetchDataBookingMovie = (bookingMovie) => {
   };
 };
 
-// export const actCreateBookingRequest = (data) => {
-//   return (dispatch) => {
-//     return callApi("api/bookings/add", "POST", data).then((res) => {
-//       if (res.status === 200 || res.status === 201) {
-//         alert(
-//           "Đặt vé thành công, chúng tôi đã gửi mã QR code qua điện thoại của bạn, vui lòng đem mã số này đến quầy để nhận vé!"
-//         );
-//         dispatch(actCreateBooking(res.data));
-//         setTimeout(() => {
-//           history.push("/");
-//         }, 0);
-//       } else alert("Không thể kết nối dữ liệu!");
-//     });
-//   };
-// };
+export const actCreateBookingRequest = (data) => {
+  return (dispatch) => {
+    return callApi("api/bookings/add", "POST", data).then((res) => {
+      if (res.status === 200 || res.status === 201) {
+        alert(
+          "Đặt vé thành công, chúng tôi đã gửi mã QR code qua điện thoại của bạn, vui lòng đem mã số này đến quầy để nhận vé!"
+        );
+        dispatch(actCreateBooking(res.data));
+        setTimeout(() => {
+          history.push("/");
+        }, 0);
+      } else alert("Không thể kết nối dữ liệu!");
+    });
+  };
+};
 
 export const actCreateBooking = (data) => {
   return {
@@ -207,15 +207,15 @@ export function addMovieInformation(movie) {
 
 //------------------------------------------------------------------------------
 
-// fetch data supports
-// export const actFetchDataSupportRequest = () => {
-//   return (dispatch) => {
-//     return callApi("api/supports", "GET", null).then((res) => {
-//       console.log(res);
-//       dispatch(actFetchDataSupport(res.data));
-//     });
-//   };
-// };
+//fetch data supports
+export const actFetchDataSupportRequest = () => {
+  return (dispatch) => {
+    return callApi("api/supports", "GET", null).then((res) => {
+      console.log(res);
+      dispatch(actFetchDataSupport(res.data));
+    });
+  };
+};
 
 export const actFetchDataSupport = (support) => {
   return {
@@ -226,13 +226,13 @@ export const actFetchDataSupport = (support) => {
 
 //------------------------------------------------------------------------------
 
-// export const actRatingItemMovieRequest = (movie) => {
-//   return (dispatch) => {
-//     return callApi(`api/movies/${movie._id}`, "PUT", movie).then((res) => {
-//       dispatch(actRatingItemMovie(res.data));
-//     });
-//   };
-// };
+export const actRatingItemMovieRequest = (movie) => {
+  return (dispatch) => {
+    return callApi(`api/movies/${movie._id}`, "PUT", movie).then((res) => {
+      dispatch(actRatingItemMovie(res.data));
+    });
+  };
+};
 
 export const actRatingItemMovie = (movie) => {
   return {
@@ -243,15 +243,15 @@ export const actRatingItemMovie = (movie) => {
 
 //------------------------------------------------------------------------------
 
-// export const actFetchDataReviewMovieRequest = () => {
-//   return (dispatch) => {
-//     return callApi("api/reviewMovie", "GET", null).then((res) => {
-//       if (res.status === 200) {
-//         dispatch(actFetchDataReviewMovie(res.data));
-//       } else alert("Không thể kết nối đến dữ liệu!");
-//     });
-//   };
-// };
+export const actFetchDataReviewMovieRequest = () => {
+  return (dispatch) => {
+    return callApi("api/reviewMovie", "GET", null).then((res) => {
+      if (res.status === 200) {
+        dispatch(actFetchDataReviewMovie(res.data));
+      } else alert("Không thể kết nối đến dữ liệu!");
+    });
+  };
+};
 
 export const actFetchDataReviewMovie = (reviewMovie) => {
   return {
@@ -262,17 +262,17 @@ export const actFetchDataReviewMovie = (reviewMovie) => {
 
 //------------------------------------------------------------------------------
 
-// export const actRatingItemReviewMovieRequest = (reviewMovie) => {
-//   return (dispatch) => {
-//     return callApi(
-//       `api/reviewMovie/${reviewMovie._id}`,
-//       "PUT",
-//       reviewMovie
-//     ).then((res) => {
-//       dispatch(actRatingItemReviewMovie(res.data));
-//     });
-//   };
-// };
+export const actRatingItemReviewMovieRequest = (reviewMovie) => {
+  return (dispatch) => {
+    return callApi(
+      `api/reviewMovie/${reviewMovie._id}`,
+      "PUT",
+      reviewMovie
+    ).then((res) => {
+      dispatch(actRatingItemReviewMovie(res.data));
+    });
+  };
+};
 
 export const actRatingItemReviewMovie = (reviewMovie) => {
   return {
@@ -283,15 +283,15 @@ export const actRatingItemReviewMovie = (reviewMovie) => {
 
 //------------------------------------------------------------------------------
 
-// export const actFetchDataFoodRequest = () => {
-//   return (dispatch) => {
-//     return callApi("api/foodCombo").then((res) => {
-//       if (res.status === 200) {
-//         dispatch(actFetchDataData(res.data));
-//       } else alert("Không thể kết nối dữ liệu!");
-//     });
-//   };
-// };
+export const actFetchDataFoodRequest = () => {
+  return (dispatch) => {
+    return callApi("api/foodCombo").then((res) => {
+      if (res.status === 200) {
+        dispatch(actFetchDataData(res.data));
+      } else alert("Không thể kết nối dữ liệu!");
+    });
+  };
+};
 
 export const actFetchDataData = (data) => {
   return {
@@ -302,16 +302,16 @@ export const actFetchDataData = (data) => {
 
 //------------------------------------------------------------------------------
 
-// act receive data ticket
-// export const actFetchDataTicketRequest = () => {
-//   return (dispatch) => {
-//     return callApi("api/tickets", "GET", null).then((res) => {
-//       if (res.status === 200) {
-//         dispatch(actFetchDataTicket(res.data));
-//       } else alert("Không thể kết nối dữ liệu!");
-//     });
-//   };
-// };
+//act receive data ticket
+export const actFetchDataTicketRequest = () => {
+  return (dispatch) => {
+    return callApi("api/tickets", "GET", null).then((res) => {
+      if (res.status === 200) {
+        dispatch(actFetchDataTicket(res.data));
+      } else alert("Không thể kết nối dữ liệu!");
+    });
+  };
+};
 
 export const actFetchDataTicket = (data) => {
   return {
@@ -322,15 +322,15 @@ export const actFetchDataTicket = (data) => {
 
 //------------------------------------------------------------------------------
 
-// export const actFetchDataTheaterRequest = () => {
-//   return (dispatch) => {
-//     return callApi("api/theaters", "GET", null).then((res) => {
-//       if (res.status === 200) {
-//         dispatch(actFetchDataTheater(res.data));
-//       } else alert("Không thể kết nối đến dữ liệu!");
-//     });
-//   };
-// };
+export const actFetchDataTheaterRequest = () => {
+  return (dispatch) => {
+    return callApi("api/theaters", "GET", null).then((res) => {
+      if (res.status === 200) {
+        dispatch(actFetchDataTheater(res.data));
+      } else alert("Không thể kết nối đến dữ liệu!");
+    });
+  };
+};
 
 export const actFetchDataTheater = (theater) => {
   return {
@@ -341,15 +341,15 @@ export const actFetchDataTheater = (theater) => {
 
 //------------------------------------------------------------------------------
 
-// export const actFetchDataPromotionRequest = () => {
-//   return (dispatch) => {
-//     return callApi("api/promotions", "GET", null).then((res) => {
-//       if (res.status === 200) {
-//         dispatch(actFetchDataPromotion(res.data));
-//       } else alert("Không thể kết nối đến dữ liệu!");
-//     });
-//   };
-// };
+export const actFetchDataPromotionRequest = () => {
+  return (dispatch) => {
+    return callApi("api/promotions", "GET", null).then((res) => {
+      if (res.status === 200) {
+        dispatch(actFetchDataPromotion(res.data));
+      } else alert("Không thể kết nối đến dữ liệu!");
+    });
+  };
+};
 
 export const actFetchDataPromotion = (promotion) => {
   return {
@@ -360,8 +360,8 @@ export const actFetchDataPromotion = (promotion) => {
 
 //--------------------------------------------------------
 
-// export const actRegisterUserRequest = (user) => {
-//   return callApi("api/users/register", "POST", user);
-// };
+export const actRegisterUserRequest = (user) => {
+  return callApi("api/users/register", "POST", user);
+};
 
 //-------------------------------------------------------

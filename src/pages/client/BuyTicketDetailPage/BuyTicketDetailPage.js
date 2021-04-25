@@ -2,12 +2,12 @@ import { withStyles } from "@material-ui/styles";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-// import {
-//   actFetchDataFoodRequest,
-//   actFetchDataTicketRequest,
-//   actCreateBookingRequest,
-//   actFetchDataBookingMovieRequest,
-// } from "../../actions/action";
+import {
+  actFetchDataFoodRequest,
+  actFetchDataTicketRequest,
+  actCreateBookingRequest,
+  actFetchDataBookingMovieRequest,
+} from "../../../actions/index";
 import Table from "../../components/client/Table/Table";
 import styles from "./BuyTicketDetailStyle";
 import SeatPickers from "../../components/client/SeatPicker/SeatPickers";
