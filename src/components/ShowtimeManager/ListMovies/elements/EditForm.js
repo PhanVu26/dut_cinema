@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import * as actions from "../../../../actions/movieManager/index";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-
+import "./edit.css";
 // import testThumbnail from "../../../assets/images/logo.png";
 // import style from "../MovieModal/MovieModal.css";
 class MovieForm extends Component {
@@ -25,6 +25,7 @@ class MovieForm extends Component {
       selectedActors: [],
       selectedGenres: [],
       invalidMessage: "",
+      checkMessage: "",
       filterGenre: "",
       filterActor: "",
       showtime: {
@@ -38,6 +39,8 @@ class MovieForm extends Component {
       },
       showRoom: [],
       optionRoom: [],
+      addedShowtime: "",
+      showEdit: "hideMenu",
     };
   }
 
@@ -275,11 +278,13 @@ class MovieForm extends Component {
     if (this.validateDataShowtime() === true) {
       this.setState({
         optionRoom: this.props.cinemaInfo.showtime,
+        showEdit: "showMenu",
       });
     } else {
       this.setState({
         invalidMessage: "Vui lòng nhập đầy đủ thông tin",
         optionRoom: [],
+        showEdit: "hideMenu",
       });
     }
   };
@@ -299,6 +304,20 @@ class MovieForm extends Component {
       optionRoom: [],
     }));
     this.props.onToggleMovieForm();
+  };
+
+  addShowtime = (event) => {
+    const regexp = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    const val = this.state.addedShowtime;
+    const check = regexp.exec(val);
+    if (check != null) {
+      const arr = this.state.optionRoom;
+      arr.push(val);
+      arr.sort();
+      this.setState({ optionRoom: arr, checkMessage: "" });
+    } else {
+      this.setState({ checkMessage: "error" });
+    }
   };
 
   onHandleSearchChange = (e) => {
@@ -465,7 +484,7 @@ class MovieForm extends Component {
                 : ""}
             </h5>
 
-            <form action="">
+            <form action="" className={`${this.state.showEdit}`}>
               <hr />
 
               <div className="row">
@@ -476,11 +495,16 @@ class MovieForm extends Component {
                       className="form-control"
                       name="name"
                       placeholder="Định dạng: hh:mm"
+                      value={this.state.addedShowtime}
+                      onChange={(e) =>
+                        this.setState({ addedShowtime: e.target.value })
+                      }
                     />
                     <button
                       type="button"
                       className="btn btn-primary"
                       style={{ marginLeft: "5px" }}
+                      onClick={this.addShowtime}
                     >
                       <span className="fa fa-plus"></span>
                     </button>
@@ -495,13 +519,37 @@ class MovieForm extends Component {
                       type="button"
                       className="btn btn-danger"
                       style={{ marginLeft: "10px" }}
+                      onClick={this.deleteShowtimes}
                     >
                       <span className="far fa-trash-alt"></span>
                     </button>
                   </div>
                 </div>
               </div>
+              <h5 className="text-danger">
+                {this.state.checkMessage !== "error"
+                  ? this.state.checkMessage
+                  : "Vui lòng nhập đúng định dạng"}
+              </h5>
               <p>Thông tin lịch chiếu:</p>
+              <div className="booklist">
+                {this.state.optionRoom.map((item, index) => {
+                  return (
+                    <div className="form-check" key={index}>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          id={index}
+                        />
+                        <label className="form-check-label" for={index}>
+                          {item}
+                        </label>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </form>
           </Modal.Body>
           <Modal.Footer>
