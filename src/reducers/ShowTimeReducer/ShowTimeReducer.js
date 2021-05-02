@@ -27,10 +27,68 @@ var initialState = {
       numOfRoom: 4,
     },
   ],
-  showtime: ["08:00", "13:00", "15:00", "17:00", "20:00"],
+  showtime: [
+    {
+      movie: {
+        id: 1,
+        name: "Bố già",
+        thumbnail:
+          "https://images-na.ssl-images-amazon.com/images/I/81eB%2B7%2BCkUL._AC_UL200_SR200,200_.jpg",
+      },
+      startTime: "08:00",
+      endTime: "09:00",
+    },
+    {
+      movie: {
+        id: 1,
+        name: "Bố già",
+        thumbnail:
+          "https://images-na.ssl-images-amazon.com/images/I/81eB%2B7%2BCkUL._AC_UL200_SR200,200_.jpg",
+      },
+      id: 2,
+      startTime: "13:00",
+      endTime: "14:00",
+    },
+    {
+      movie: {
+        id: 2,
+        name: "Hai Phượng",
+        thumbnail:
+          "https://images-na.ssl-images-amazon.com/images/I/81eB%2B7%2BCkUL._AC_UL200_SR200,200_.jpg",
+      },
+      id: 3,
+      startTime: "15:00",
+      endTime: "16:00",
+    },
+    {
+      movie: {
+        id: 2,
+        name: "Hai Phượng",
+        thumbnail:
+          "https://images-na.ssl-images-amazon.com/images/I/81eB%2B7%2BCkUL._AC_UL200_SR200,200_.jpg",
+      },
+      id: 4,
+      startTime: "17:00",
+      endTime: "18:00",
+    },
+    {
+      movie: {
+        id: 3,
+        name: "End Game",
+        thumbnail:
+          "https://images-na.ssl-images-amazon.com/images/I/81eB%2B7%2BCkUL._AC_UL200_SR200,200_.jpg",
+      },
+      id: 5,
+      startTime: "20:00",
+      endTime: "21:00",
+    },
+  ],
 };
 
-function reducerShowTime(state = initialState, action) {
+function reducerShowTime(
+  state = JSON.parse(JSON.stringify(initialState)),
+  action
+) {
   switch (action.type) {
     case types.FETCH_DATA_CINEMA: {
       return {
@@ -46,6 +104,13 @@ function reducerShowTime(state = initialState, action) {
       };
     }
 
+    case types.GET_SHOWTIME: {
+      console.log("reducer", initialState);
+
+      return {
+        ...JSON.parse(JSON.stringify(initialState)),
+      };
+    }
     default:
       return state;
   }

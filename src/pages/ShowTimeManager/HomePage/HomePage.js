@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NavigationBar from "../../../components/ShowtimeManager/NavigationBar/NavigationBar";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import ListMovies from "../../../components/ShowtimeManager/ListMovies/ListMovies";
-
+import EditShowTimePage from "../EditShowTimePage/EditShowTimePage";
 class HomePage extends Component {
   // render() {
   //   if (!localStorage.getItem("account")) {
@@ -24,7 +24,7 @@ class HomePage extends Component {
     return (
       <>
         <NavigationBar />;
-        <ListMovies />;
+        <EditShowTimePage />;
       </>
     );
   }
