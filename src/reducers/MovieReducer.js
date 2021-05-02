@@ -29,10 +29,10 @@ function MovieReducer(state = stateDefault, action) {
         ...state,
         movie: action.movie,
         movieShowing: action.movie.filter((item) =>
-          isMovieShowing(item.premiereDate)
+          isMovieShowing(item.releaseDate)
         ),
         movieComingSoon: action.movie.filter(
-          (item) => !isMovieShowing(item.premiereDate)
+          (item) => !isMovieShowing(item.releaseDate)
         ),
       };
     }

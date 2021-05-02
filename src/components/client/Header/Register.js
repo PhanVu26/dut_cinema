@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Button, ButtonToolbar } from "react-bootstrap";
+import { actRegisterUserRequest } from "../../../actions/index";
 
 class Register extends Component {
   constructor(props, context) {
@@ -123,16 +124,16 @@ class Register extends Component {
         targets: 0,
       };
 
-      //   actRegisterUserRequest(user).then((res) => {
-      //     let notification = res.data;
+        actRegisterUserRequest(user).then((res) => {
+          let notification = res.data;
 
-      //     if (!notification.success) {
-      //       alert(notification.message);
-      //     } else {
-      //       this.setState({ show: false });
-      //       alert(notification.message);
-      //     }
-      //   });
+          if (!notification.success) {
+            alert(notification.message);
+          } else {
+            this.setState({ show: false });
+            alert(notification.message);
+          }
+        });
     } else {
       alert("Vui Lòng điền đầy đủ thông tin và đúng định dạng");
     }

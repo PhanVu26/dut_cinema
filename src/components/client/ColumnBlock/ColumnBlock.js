@@ -6,7 +6,7 @@ class ColumnBlock extends Component {
     render() {
         const { classes, title } = this.props;
         return (
-            <div className={`${classes.wrap} col-md-6`}>
+            <div className={`${classes.wrap} col-md-4`}>
                <p className={`${classes.header} text-center text-white text-uppercase m-0`}>{title}</p> 
                {this.props.children}
             </div>

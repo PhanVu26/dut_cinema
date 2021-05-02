@@ -1,2 +1,2 @@
 
-export const API_URL = 'https://server-cinema-reactjs.herokuapp.com';
+export const API_URL = 'https://cinema-nestjs.herokuapp.com';

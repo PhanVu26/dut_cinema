@@ -3,13 +3,16 @@ import "./styles/MoviesStyles.css";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import TabControl from "../../../components/client/TabControl/TabControl";
+import { actFetchDataMovieRequest } from "./../../../actions/index";
 import { data } from "../../../data";
 class Movies extends Component {
   constructor(props) {
     super(props);
     this.href = "/now-showing";
   }
-
+  componentDidMount() {
+    this.props.fetchAllDataMovie();
+  }
   isMovieShowing = (date) => {
     const now = new Date().setHours(0, 0, 0, 0);
     if (Date.parse(date) <= now) return true;
@@ -17,15 +20,15 @@ class Movies extends Component {
   };
 
   render() {
-    // let { movies } = this.props;
-    let movies = data.movie;
+    let { movies } = this.props;
+    //let movies = data.movie;
     console.log(movies);
     let movieShowing = movies.filter((item) =>
-      this.isMovieShowing(item.premiereDate)
+      this.isMovieShowing(item.releaseDate)
     );
 
     let movieComingSoon = movies.filter(
-      (item) => !this.isMovieShowing(item.premiereDate)
+      (item) => !this.isMovieShowing(item.releaseDate)
     );
     return (
       <div className="container mb-5">
@@ -56,18 +59,18 @@ class Movies extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    movieShowing: state.reducerMovie.movieShowing,
-    movieComingSoon: state.reducerMovie.movieComingSoon,
-    movies: state.reducerMovie.movie,
+    movieShowing: state.MovieReducer.movieShowing,
+    movieComingSoon: state.MovieReducer.movieComingSoon,
+    movies: state.MovieReducer.movie,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllDataMovie: () => {
-      // dispatch(actFetchDataMovieRequest());
+      dispatch(actFetchDataMovieRequest());
     },
   };
 };
 
-export default Movies;
-// export default connect(mapStateToProps, mapDispatchToProps)(Movies);
+//export default Movies;
+export default connect(mapStateToProps, mapDispatchToProps)(Movies);

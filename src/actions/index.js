@@ -1,6 +1,7 @@
 import * as Types from "../constants/ActionType";
 import history from "../commons/history";
 import callApi from "../utils/ApiCallerServer";
+import axios from "axios";
 
 export const listAllUsers = () => {
   return {
@@ -30,8 +31,8 @@ export const deleteUser = (id) => {
 
 export const actFetchDataMovieRequest = () => {
   return (dispatch) => {
-    return callApi("api/movies", "GET", null).then((res) => {
-      dispatch(actFetchDataMovie(res.data));
+    return callApi("movies", "GET", null).then((res) => {
+      dispatch(actFetchDataMovie(res.data.results));
     });
   };
 };
@@ -101,7 +102,19 @@ export const actDeleteUser = (id) => {
 };
 
 export const actLoginAccountRequest = (account) => {
-  return callApi("api/users/login", "POST", account);
+  //return callApi("auth/login", "POST", account);
+  axios.interceptors.request.use(function (config) {
+    return config;
+  }, function (error) {
+    return Promise.reject(error);
+  });
+
+  axios.interceptors.response.use(function (response) {
+    return response;
+  }, function (error) {
+    return Promise.reject(error);
+  });
+  return axios.post('https://cinema-nestjs.herokuapp.com/auth/login',account,{headers:{'Content-Type':'application/json'}})
 };
 
 // act receive moving choosing

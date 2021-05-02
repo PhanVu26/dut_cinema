@@ -12,7 +12,7 @@ class ShowMovie extends Component {
 
   render() {
     let { movies } = this.props;
-
+    // console.log(movies);
     return <div className="row">{this.showMovieContent(movies)}</div>;
   }
 }

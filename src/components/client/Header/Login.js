@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Button, ButtonToolbar } from "react-bootstrap";
 import "./styles/LoginStyles.css";
+import { actLoginAccountRequest } from "../../../actions/index";
 
 class Login extends Component {
   constructor(props, context) {
@@ -55,7 +56,7 @@ class Login extends Component {
   onSave = (e) => {
     e.preventDefault();
     let { password, email } = this.state;
-
+    console.log(email.value+" "+email.isValid+" "+password.value+" "+password.isValid);
     if (
       password.value !== "" &&
       password.isValid === true &&
@@ -67,20 +68,18 @@ class Login extends Component {
         email: email.value,
       };
 
-      //   actLoginAccountRequest(account).then((res) => {
-      //     let dataAccount = res.data;
-      //     console.log(dataAccount);
-      //     if (!dataAccount.success) {
-      //       alert(dataAccount.message);
-      //     } else {
-      //       if (Object.keys(dataAccount).length !== 0) {
-      //         localStorage.setItem("account", JSON.stringify(dataAccount));
-      //       }
-      //       alert("Logged in successfully");
-      //       this.setState({ show: false });
-      //       window.location.reload();
-      //     }
-      //   });
+        actLoginAccountRequest(account).then((res) => {
+          let dataAccount = res.data.user;
+          console.log(dataAccount);
+            if (Object.keys(dataAccount).length !== 0) {
+              localStorage.setItem("account", JSON.stringify(dataAccount));
+            }
+            alert("Logged in successfully");
+            this.setState({ show: false });
+            window.location.reload();
+        }).catch(function(error){
+          alert("Khong dung mat khau")
+        });
     } else {
       alert("Vui lòng nhập đúng định dạng.");
     }
@@ -215,7 +214,7 @@ function FormError(props) {
 const validateInput = (type, checkingText) => {
   if (type === "email") {
     if (checkingText !== "") {
-      return { isInputValid: true, errorMessage: "" };
+      return { isValid: true, errorMessage: "" };
     } else {
       return {
         isValid: false,
@@ -224,10 +223,10 @@ const validateInput = (type, checkingText) => {
     }
   }
   if (type === "password") {
-    const regexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    const checkingResult = regexp.exec(checkingText);
-    if (checkingResult !== null) {
-      return { isInputValid: true, errorMessage: "" };
+    // const regexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    // const checkingResult = regexp.exec(checkingText);
+    if (checkingText !== "") {
+      return { isValid: true, errorMessage: "" };
     } else {
       return {
         isValid: false,

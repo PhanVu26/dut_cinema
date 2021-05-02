@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import TabControl from "../../../components/client/TabControl/TabControl";
 import { useDispatch, useSelector } from "react-redux";
-// import { actFetchDataMovieRequest } from "../../../actions/index";
+import { actFetchDataMovieRequest } from "../../../actions/index";
 import { data } from "../../../data";
 
 function MoviePage(props) {
   const dispatch = useDispatch();
-  // const movies = useSelector((state) => state.reducerMovie.movie, []) || [];
-  const movies = data.movie;
-  // useEffect(() => {
-  //   dispatch(actFetchDataMovieRequest());
-  // });
+  const movies = useSelector((state) => state.MovieReducer.movie, []) || [];
+  //const movies = data.movie;
+  useEffect(() => {
+    dispatch(actFetchDataMovieRequest());
+  });
 
   const isMovieShowing = (date) => {
     const now = new Date().setHours(0, 0, 0, 0);
@@ -19,11 +19,11 @@ function MoviePage(props) {
   };
 
   let moviesShowing = movies.filter((item) =>
-    isMovieShowing(item.premiereDate)
+    isMovieShowing(item.releaseDate)
   );
 
   let moviesComingSoon = movies.filter(
-    (item) => !isMovieShowing(item.premiereDate)
+    (item) => !isMovieShowing(item.releaseDate)
   );
 
   const { match } = props;

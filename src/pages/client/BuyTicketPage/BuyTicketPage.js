@@ -21,9 +21,9 @@ class BuyTicketPage extends Component {
     };
   }
 
-    componentDidMount() {
-      this.props.fetchAllDataMovie();
-    }
+  componentDidMount() {
+    this.props.fetchAllDataMovie();
+  }
 
   handleOnChooseMovie = (mv) => {
     console.log("mv:", mv);
@@ -47,7 +47,7 @@ class BuyTicketPage extends Component {
         >
           <div className={`${classes.link} ${active} row no-gutters p-3`}>
             <span className="col-3">
-              <img alt="" className={classes.img} src={item.image} />
+              <img alt="" className={classes.img} src="https://www.galaxycine.vn/media/2020/10/29/450-anime_1603948617423.jpg" />
             </span>
             <p className={`${classes.title} col-9 pl-4`}>{item.name}</p>
           </div>
@@ -106,7 +106,7 @@ class BuyTicketPage extends Component {
     let account = JSON.parse(localStorage.getItem("account"));
     const { timeOfMovie, isShow } = this.state;
     let movieShowing = movies.filter((item) =>
-      this.isMovieShowing(item.premiereDate)
+      this.isMovieShowing(item.releaseDate)
     );
     return (
       <div className="container my-4">
@@ -114,7 +114,9 @@ class BuyTicketPage extends Component {
           <ColumnBlock title="Chọn phim">
             {this.showMovieToChoose(movieShowing, classes)}
           </ColumnBlock>
-
+          <ColumnBlock title="Chọn rạp">
+            {this.showMovieToChoose(movieShowing, classes)}
+          </ColumnBlock>
           <ColumnBlock title="Chọn suất">
             {isShow && this.showTimeOfMovie(timeOfMovie, classes, account)}
           </ColumnBlock>
