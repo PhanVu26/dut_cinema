@@ -40,20 +40,21 @@ class MovieForm extends Component {
       showRoom: [],
       optionRoom: [],
       addedShowtime: "",
+      addHour: "",
+      addMinute: "",
+      hourPicker: [],
+      minutePicker: [],
       showEdit: "hideMenu",
     };
   }
 
   findIndexActorById = (actorIds, id) => {
-    console.log("actors:", actorIds);
-    console.log("find id", id);
     var result = -1;
     actorIds.forEach((actorId, index) => {
       if (actorId.id === id) {
         result = index;
       }
     });
-    console.log("result", result);
     return result;
   };
 
@@ -80,7 +81,6 @@ class MovieForm extends Component {
       e.target.files != null
         ? URL.createObjectURL(e.target.files[0])
         : this.state.movie.thumbnail;
-    console.log("thumbnail", thumbnail);
     if (e.target.checked === true) {
       if (e.target.className === "actor-checkbox") {
         this.setState((prevState) => ({
@@ -114,7 +114,6 @@ class MovieForm extends Component {
     } else {
       if (e.target.className === "actor-checkbox") {
         if (value != "") {
-          console.log("id: ", id);
           this.setState((prevState) => ({
             selectedActors: prevState.selectedActors.filter(
               (_, i) =>
@@ -131,7 +130,6 @@ class MovieForm extends Component {
         }
       } else {
         if (value != "") {
-          console.log("id: ", id);
           this.setState((prevState) => ({
             selectedGenres: prevState.selectedGenres.filter(
               (_, i) =>
@@ -277,6 +275,18 @@ class MovieForm extends Component {
   loadShowtime = (event) => {
     if (this.validateDataShowtime() === true) {
       this.setState({
+        optionRoom: [],
+        showEdit: "hideMenu",
+      });
+      const temp = {
+        movieId: this.state.movie.id,
+        cinemaId: this.state.showtime.cinema.id,
+        roomId: this.state.showtime.room,
+        date: this.state.showtime.date,
+      };
+      console.log(temp);
+      this.props.onLoadShowtime(temp);
+      this.setState({
         optionRoom: this.props.cinemaInfo.showtime,
         showEdit: "showMenu",
       });
@@ -302,18 +312,40 @@ class MovieForm extends Component {
       },
       showRoom: [],
       optionRoom: [],
+      showEdit: "hideMenu",
     }));
     this.props.onToggleMovieForm();
   };
 
   addShowtime = (event) => {
-    const regexp = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    const regexp = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
     const val = this.state.addedShowtime;
     const check = regexp.exec(val);
     if (check != null) {
       const arr = this.state.optionRoom;
-      arr.push(val);
-      arr.sort();
+      const temp = val.split(":");
+      let hours = parseInt(temp[0]);
+      let minutes = parseInt(temp[1]);
+      hours += 1;
+      if (hours == 24) hours = 0;
+      let end =
+        (hours < 10 ? "0" + hours.toString() : hours.toString()) +
+        ":" +
+        (minutes < 10 ? "0" + minutes.toString() : minutes.toString());
+      const obj = {
+        id: this.state.optionRoom.length + 1,
+        startTime: val,
+        endTime: end,
+      };
+      arr.push(obj);
+      arr.sort(function (a, b) {
+        var keyA = a.startTime,
+          keyB = b.startTime;
+        // Compare the 2 dates
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+        return 0;
+      });
       this.setState({ optionRoom: arr, checkMessage: "" });
     } else {
       this.setState({ checkMessage: "error" });
@@ -331,7 +363,6 @@ class MovieForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("nextprops", nextProps.movieInfo);
     if (nextProps.movieInfo) {
       this.setState({
         movie: nextProps.movieInfo,
@@ -357,10 +388,7 @@ class MovieForm extends Component {
     const { isDisplayMovieForm } = this.props;
     const { movie } = this.state;
     const movieInfo = this.props.movieInfo;
-    console.log("render");
     var { genres, actors } = this.props;
-
-    console.log("state", this.state.selectedGenres);
     genres = genres.filter((genre) => {
       return (
         genre.name
@@ -401,6 +429,10 @@ class MovieForm extends Component {
                         ];
                         const temp2 = [];
                         for (let i = 1; i <= temp.numOfRoom; i++) temp2.push(i);
+                        const temp3 = [];
+                        const temp4 = [];
+                        for (let i = 0; i < 24; i++) temp3.push(i);
+                        for (let i = 0; i < 60; i++) temp4.push(i);
                         this.setState((prevState) => ({
                           showtime: {
                             ...prevState.showtime,
@@ -411,6 +443,8 @@ class MovieForm extends Component {
                             date: "",
                           },
                           showRoom: temp2,
+                          hourPicker: temp3,
+                          minutePicker: temp4,
                         }));
                       }}
                     >
@@ -489,8 +523,13 @@ class MovieForm extends Component {
 
               <div className="row">
                 <div className="col-md-6 col-lg-6">
+                  <p style={{ color: "black", margin: "12px 5px auto auto" }}>
+                    Thêm lịch chiếu mới:
+                  </p>
+                </div>
+                <div className="col-md-6 col-lg-6">
                   <div className="form-group" style={{ display: "flex" }}>
-                    <input
+                    {/* <input
                       type="text"
                       className="form-control"
                       name="name"
@@ -500,6 +539,48 @@ class MovieForm extends Component {
                         this.setState({ addedShowtime: e.target.value })
                       }
                     />
+                 
+                     */}
+                    <select
+                      className="mr-2 ml-2"
+                      value={this.state.addHour}
+                      onChange={(e) => {
+                        this.setState((prevState) => ({
+                          addHour: e.target.value,
+                        }));
+                      }}
+                    >
+                      <option key={-1}></option>
+
+                      {this.state.hourPicker.map((item, index) => {
+                        return (
+                          <option key={index} value={item}>
+                            {item}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <p>{this.state.addHour}</p>
+                    <select
+                      className="mr-2 ml-2"
+                      value={this.state.addMinute}
+                      onChange={(e) => {
+                        this.setState((prevState) => ({
+                          addMinute: e.target.value,
+                        }));
+                      }}
+                    >
+                      <option key={-1}></option>
+
+                      {this.state.minutePicker.map((item, index) => {
+                        return (
+                          <option key={index} value={item}>
+                            {item}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <p>{this.state.addMinute}</p>
                     <button
                       type="button"
                       className="btn btn-primary"
@@ -510,7 +591,7 @@ class MovieForm extends Component {
                     </button>
                   </div>
                 </div>
-                <div className="col-md-6 col-lg-6">
+                {/* <div className="col-md-6 col-lg-6">
                   <div className="form-group" style={{ display: "flex" }}>
                     <p style={{ color: "black", margin: "auto 5px auto auto" }}>
                       Xóa lịch chiếu đã chọn:
@@ -524,28 +605,29 @@ class MovieForm extends Component {
                       <span className="far fa-trash-alt"></span>
                     </button>
                   </div>
-                </div>
+                </div> */}
               </div>
               <h5 className="text-danger">
                 {this.state.checkMessage !== "error"
                   ? this.state.checkMessage
                   : "Vui lòng nhập đúng định dạng"}
               </h5>
-              <p>Thông tin lịch chiếu:</p>
+              <p>Thông tin lịch chiếu {this.state.movie.name}:</p>
               <div className="booklist">
-                {this.state.optionRoom.map((item, index) => {
+                {this.state.optionRoom.map((item) => {
                   return (
-                    <div className="form-check" key={index}>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          id={index}
-                        />
-                        <label className="form-check-label" for={index}>
-                          {item}
-                        </label>
-                      </div>
+                    <div className="form-check" key={item.id}>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        style={{ marginRight: "10px" }}
+                        onClick={this.deleteShowtimes}
+                      >
+                        <span className="far fa-trash-alt"></span>
+                      </button>
+                      <label>
+                        {item.startTime} - {item.endTime}
+                      </label>
                     </div>
                   );
                 })}
@@ -563,6 +645,7 @@ class MovieForm extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log("abc", state.reducerShowTime);
   return {
     genres: state.genres,
     actors: state.actors,
@@ -582,6 +665,10 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     onGetMovieInfo: (movie) => {
       dispatch(actions.getMovieInfo(movie));
+    },
+    onLoadShowtime: (showtime) => {
+      console.log("dispatch");
+      dispatch(actions.getShowtime(showtime));
     },
     // // onDeleteUser: (id) => {
     // //     dispatch(actions.deleteUser(id))
