@@ -6,6 +6,7 @@ import * as actions from '../../../actions/movieManager/index'
 import testImage from '../../../assets/images/logo.png'
 import MovieForm from '../../Modal/MovieModal/MovieForm'
 import MovieDetail from '../../Modal/MovieModal/MovieDetail'
+import { NavLink } from 'react-router-dom';
 
 class MovieItem extends Component {
 
@@ -37,14 +38,14 @@ class MovieItem extends Component {
     }
     showGenres(genres){
         var result = null;
-        result = genres.map(genre => {
+        result = genres?.map(genre => {
             return <li key={genre.id}>{genre.name}</li>
         }) 
         return result;
     }
     showActors(actors){
         var result = null;
-        result = actors.map(actor => {
+        result = actors?.map(actor => {
             return <li key={actor.id}>{actor.name}</li>
         }) 
         return result;
@@ -55,11 +56,11 @@ class MovieItem extends Component {
     render() {
         const {index, movie} = this.props;
         const genres = [] ;
-        movie.genreIds.forEach(genre => {
+        movie.genreIds?.forEach(genre => {
             genres.push(genre.name)
         });
         const actors = [] ;
-        movie.actorIds.forEach(actor => {
+        movie.actorIds?.forEach(actor => {
             actors.push(actor.name)
         });
         // const {isDisplayUserForm} = this.props;
@@ -92,24 +93,28 @@ class MovieItem extends Component {
                     </i>
                 </td> */}
                 <td className="text-center">
-                    <button 
-                        onClick={this.editMovie}
-                        type="button" 
-                        className="btn btn-warning mr-1 px-1">
-                        <i className="fa fa-pencil"></i>
-                    </button>
+                    <NavLink to = {"movies?id=" + movie.id}>
+                        <button 
+                            onClick={this.editMovie}
+                            type="button" 
+                            className="btn btn-warning mr-1 px-1">
+                            <i className="fa fa-pencil"></i>
+                        </button>
+                    </NavLink>    
                     <button
                         onClick={() => {if(window.confirm('Bạn có muốn xóa Phim này?')){this.onDeleteMovie()};}} 
                         type="button" 
                         className="btn btn-danger mr-1 px-1">
                         <i className="far fa-trash-alt"></i>
                     </button>
-                    <button 
-                        type="button" 
-                        className="btn btn-primary mr-1 px-1"
-                        onClick={this.getMovie}>
-                        <i className="fas fa-eye"></i>
-                    </button>
+                    <NavLink to = {"movies?id=" + movie.id}>
+                        <button 
+                            type="button" 
+                            className="btn btn-primary mr-1 px-1"
+                            onClick={this.getMovie}>
+                            <i className="fas fa-eye"></i>
+                        </button>
+                    </NavLink>    
                 </td>
                 {/* <MovieForm></MovieForm> */}
             </tr>

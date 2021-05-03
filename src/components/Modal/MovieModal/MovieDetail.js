@@ -27,14 +27,14 @@ class MovieDetail extends Component {
 
     showGenres(genres){
         var results = [];
-        genres.forEach(genre => {
+        genres?.forEach(genre => {
             results.push(genre.name)
         }) 
         return results.toString();
     }
     showActors(actors){
         var results = [];
-        actors.forEach(actor => {
+        actors?.forEach(actor => {
             results.push(actor.name)
         }) 
         return results.toString();

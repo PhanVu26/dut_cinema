@@ -5,13 +5,14 @@ import * as actions from '../../../actions/movieManager/index';
 
 import testImage from '../../../assets/images/logo.png';
 import style from '../MovieModal/MovieModal.css'
+import { NavLink } from 'react-router-dom';
 class MovieForm extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            previewImage: "",
             movie: {
-                id: "",
                 name: "",
                 genreIds: [],
                 director:"",
@@ -19,7 +20,8 @@ class MovieForm extends Component {
                 country:"",
                 actorIds: [],
                 releaseDate: "",
-                image: {},
+                mainImage: "",
+                thumbnailImage:"",
                 description: ""
             },
             selectedActors: [],
@@ -62,22 +64,31 @@ class MovieForm extends Component {
         var file = null;
         var image = null;
         if(e.target.files != null){
-            file = e.target.files
-            var reader = new FileReader();
-            reader.readAsDataURL(file[0])
-            reader.onload = (e) => {
-                image = e.target.result
-                this.setState(prevState => ({
-                    movie: {
-                        ...prevState.movie,
-                        image: {
-                            mainUrl: file!=null ? image : prevState.movie.image.mainUrl,
-                            thumbnailUrl: file!=null ? image : prevState.movie.image.thumbnailUrl   
-                        },
-                    },
-                    //genreIds: genreIds
-                }))
-            }
+            file = e.target.files[0]
+            this.setState(prevState => ({
+                previewImage: URL.createObjectURL(file),
+                movie: {
+                    ...prevState.movie,
+                    mainImage: file!=null ? file : prevState.movie.mainImage,
+                    thumbnailImage: file!=null ? file : prevState.movie.thumbnailImage   
+                },
+                //genreIds: genreIds
+            }))
+            // var reader = new FileReader();
+            // reader.readAsDataURL(file[0])
+            // reader.onload = (e) => {
+            //     image = e.target.result
+            //     this.setState(prevState => ({
+            //         movie: {
+            //             ...prevState.movie,
+            //             image: {
+            //                 mainImage: file!=null ? image : prevState.movie.image.mainImage,
+            //                 thumbnailImage: file!=null ? image : prevState.movie.image.thumbnailImage   
+            //             },
+            //         },
+            //         //genreIds: genreIds
+            //     }))
+            // }
         }
         
 
@@ -89,10 +100,11 @@ class MovieForm extends Component {
                     selectedActors: [...prevState.selectedActors, e.target.labels[0].innerHTML],
                     movie: {
                         ...prevState.movie,
-                        actorIds: [...prevState.movie.actorIds, {
-                            id: value,
-                            name: e.target.labels[0].innerHTML
-                        }]
+                        actorIds: [...prevState.movie.actorIds,
+                            //id: value,
+                            // name: e.target.labels[0].innerHTML
+                            parseInt(value)
+                        ]
                     }
                 }))
             }else {
@@ -100,10 +112,11 @@ class MovieForm extends Component {
                     selectedGenres: [...prevState.selectedGenres, e.target.labels[0].innerHTML],
                     movie: {
                         ...prevState.movie,
-                        genreIds: [...prevState.movie.genreIds, {
-                            id: value,
-                            name: e.target.labels[0].innerHTML
-                        }]
+                        genreIds: [...prevState.movie.genreIds,
+                            parseInt(value)
+                            // id: value,
+                            // name: e.target.labels[0].innerHTML
+                        ]
                     }
                 }))
             }
@@ -150,7 +163,7 @@ class MovieForm extends Component {
                 <div className="actor-item ml-3" key={index}>
                     <label htmlFor={'actor'+actor.id} className="mr-2">{actor.name}</label>
                     <input 
-                        defaultChecked = {this.state.selectedActors.some(actorName => actorName === actor.name)}
+                        defaultChecked = {this.state.selectedActors?.some(actorName => actorName === actor.name)}
                         className="actor-checkbox"
                         type="checkbox" 
                         id={'actor'+actor.id} 
@@ -177,7 +190,7 @@ class MovieForm extends Component {
                 <div className="genre-item ml-3" key={index}>
                     <label htmlFor={'genre'+genre.id} className="mr-2">{genre.name}</label>
                     <input 
-                        defaultChecked = {this.state.selectedGenres.some(genreName => genreName === genre.name)}
+                        defaultChecked = {this.state.selectedGenres?.some(genreName => genreName === genre.name)}
                         className="genre-checkbox"
                         type="checkbox" 
                         id={'genre'+genre.id} 
@@ -211,7 +224,40 @@ class MovieForm extends Component {
         if(this.validateMovie() === true) {
             if(this.props.movieInfo.id == ""){
                 console.log("edit moive id", this.props.movieInfo.id)
-                this.props.onAddMovie(this.state.movie)
+                console.log("save movie", this.state.movie)
+
+                var data = new FormData();
+                var newMovie = this.state.movie;
+                console.log("newMovie", newMovie)
+                data.append("name", newMovie.name)
+                data.append("genreIds", newMovie.genreIds)
+                data.append("director", newMovie.director)
+                data.append("producer", newMovie.producer)
+                data.append("country", newMovie.country)
+                data.append("actorIds", newMovie.actorIds)
+                data.append("releaseDate", newMovie.releaseDate)
+                data.append("mainImage", newMovie.mainImage)
+                data.append("thumbnailImage", newMovie.thumbnailImage)
+                data.append("description", newMovie.description)
+                
+                // data = {
+                //     name: newMovie.name,
+                //     genreIds: newMovie.genreIds,
+                //     director: newMovie.director,
+                //     producer:newMovie.producer,
+                //     country:newMovie.country,
+                //     actorIds: newMovie.actorIds,
+                //     releaseDate: newMovie.releaseDate,
+                //     description: newMovie.description
+                // };
+                // data.append("mainImage", newMovie.mainImage)
+                // data.append("thumbnailImage", newMovie.thumbnailImage)
+                console.log("form-data", data)
+                console.log("image", data.mainImage);
+
+
+
+                this.props.onAddMovie(data)
             }else this.props.onUpdateMovie(this.state.movie)
             this.props.onToggleMovieForm();          
         }else {
@@ -232,8 +278,8 @@ class MovieForm extends Component {
         if(nextProps.movieInfo) {
             this.setState({
                 movie: nextProps.movieInfo,
-                selectedGenres: nextProps.movieInfo.genreIds.map(genre =>{return genre.name}),
-                selectedActors: nextProps.movieInfo.actorIds.map(actor =>{return actor.name})
+                selectedGenres: nextProps.movieInfo.genreIds?.map(genre =>{return genre.name}),
+                selectedActors: nextProps.movieInfo.actorIds?.map(actor =>{return actor.name})
             })
         }
     }
@@ -242,7 +288,7 @@ class MovieForm extends Component {
         const {movie} = this.state
         const movieInfo = this.props.movieInfo;
         var {genres, actors} = this.props
-
+        console.log("state.movie", this.state);
         genres = genres.filter((genre) => {
             return genre.name.toLowerCase().indexOf(this.state.filterGenre.toLowerCase()) !== -1
         });
@@ -260,7 +306,7 @@ class MovieForm extends Component {
                 style={{maxWidth: '100%', width: '100%'}}>
                 <Modal.Header>{movieInfo.id === "" ? "Taọ phim mới" : "Chỉnh sửa phim"}</Modal.Header>
                 <Modal.Body>
-                    <form onSubmit={this.addMovie}>
+                    <form onSubmit={this.addMovie} encType="multipart/form-data">
                         <div className='row'>
                             <div className='col-md-6 col-lg-6'>
                                 <div className="form-group">
@@ -268,7 +314,7 @@ class MovieForm extends Component {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        value={movie.id}   
+                                        // value={movie.id}   
                                         readOnly="true"                                 
                                     />
                                 </div>
@@ -337,7 +383,7 @@ class MovieForm extends Component {
                                     
                                     />
                                     <img 
-                                        src={movie.image.thumbnailUrl} 
+                                        src={movieInfo.id?movieInfo.image.thumbnailImage:this.state.previewImage} 
                                         width='200px'
                                         height='200px'
                                     ></img>
@@ -360,7 +406,7 @@ class MovieForm extends Component {
                                         
                                     </div>
                                     
-                                    <span>Đã chọn:</span><p>{this.state.selectedGenres.toString()}</p>
+                                    <span>Đã chọn:</span><p>{this.state.selectedGenres?.toString()}</p>
                                 </div>
 
                                 <div className="form-group">
@@ -378,7 +424,7 @@ class MovieForm extends Component {
                                         
                                     </div>
                                     
-                                    <span>Đã chọn:</span><p>{this.state.selectedActors.toString()}</p>
+                                    <span>Đã chọn:</span><p>{this.state.selectedActors?.toString()}</p>
                                 </div>
                                 <div className="form-group">
                                     <label>Mô tả phim :</label>

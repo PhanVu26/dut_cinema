@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 
 class Pagination extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class Pagination extends Component {
 
   setPage(page) {
     var { totalRecords, pageLimit, totalPages } = this.state;
-
+    
     if (page < 1) {
       page = 1;
     } else if (page > totalPages) {
@@ -110,48 +111,58 @@ class Pagination extends Component {
 
     return (
       <ul className="pagination">
-        <li className={pager.currentPage === 1 ? 'page-item disabled' : 'page-item'}>
-          <button 
-            className='page-link'
-            onClick={() => this.setPage(1)}
-          >
-            Đầu
-          </button>
-        </li>
-        <li className={pager.currentPage === 1 ? 'page-item disabled' : 'page-item'}>
-          <button 
-            className='page-link'
-            onClick={() => this.setPage(pager.currentPage - 1)}
-          >
-            Sau
-          </button>
-        </li>
-        {pager.pages.map((page, index) => (
-          <li key={index} className={pager.currentPage === page ? "active page-item" : "page-item"}>
-            <button
+        <NavLink to={"movies?page=1&perPage=" + this.state.pageLimit}>
+          <li className={pager.currentPage === 1 ? 'page-item disabled' : 'page-item'}>
+            <button 
               className='page-link'
-              onClick={() => this.setPage(page)}
+              onClick={() => this.setPage(1)}
             >
-              {page}
+              Đầu
             </button>
           </li>
+        </NavLink>
+        <NavLink to={"movies?page=" + pager.currentPage + "&perPage=" + this.state.pageLimit}>
+          <li className={pager.currentPage === 1 ? 'page-item disabled' : 'page-item'}>
+            <button 
+              className='page-link'
+              onClick={() => this.setPage(pager.currentPage - 1)}
+            >
+              Sau
+            </button>
+          </li>
+        </NavLink>  
+        {pager.pages.map((page, index) => (
+          <NavLink to={"movies?page=" + page + "&perPage=" + this.state.pageLimit}>
+            <li key={index} className={pager.currentPage === page ? "active page-item" : "page-item"}>
+              <button
+                className='page-link'
+                onClick={() => this.setPage(page)}
+              >
+                {page}
+              </button>
+            </li>
+          </NavLink>
         ))}
-        <li className={pager.currentPage === pager.totalPages ? 'page-item disabled' : 'page-item'}>
-          <button
-            className='page-link'
-            onClick={() => this.setPage(pager.currentPage + 1)}
-          >
-            Tiếp
-          </button>
-        </li>
-        <li className={pager.currentPage === pager.totalPages ? 'page-item disabled' : 'page-item'}>
-          <button
-            className='page-link'
-            onClick={() => this.setPage(pager.totalPages)}
-          >
-            Cuối
-          </button>
-        </li>
+        <NavLink to={"movies?page=" + pager.currentPage + "&perPage=" + this.state.pageLimit}>
+          <li className={pager.currentPage === pager.totalPages ? 'page-item disabled' : 'page-item'}>
+            <button
+              className='page-link'
+              onClick={() => this.setPage(pager.currentPage + 1)}
+            >
+              Tiếp
+            </button>
+          </li>
+        </NavLink>  
+        <NavLink to={"movies?page=" + this.state.totalPages + "&perPage=" + this.state.pageLimit}>
+          <li className={pager.currentPage === pager.totalPages ? 'page-item disabled' : 'page-item'}>
+            <button
+              className='page-link'
+              onClick={() => this.setPage(pager.totalPages)}
+            >
+              Cuối
+            </button>
+          </li>
+        </NavLink>
       </ul>
     );
   }
