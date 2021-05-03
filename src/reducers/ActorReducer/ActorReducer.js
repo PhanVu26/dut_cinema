@@ -88,6 +88,7 @@ var myReducer = (state = initialState, action) => {
     var index = -1;
     switch(action.type){
         case types.LIST_ALL_ACTORS:
+            var state = action.actors;
             return state;
         case types.SAVE_ACTOR:
             var newActor = {

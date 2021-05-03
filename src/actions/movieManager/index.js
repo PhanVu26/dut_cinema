@@ -7,9 +7,18 @@ export const listAllMovies = () => {
     }
 }
 
-export const listAllGenres = () => {
+export const actFetchDataGenresRequest = () => {
+    return (dispatch) => {
+      return callApi("genres", "GET", null).then((res) => {
+        console.log("data", res.data.results)
+        dispatch(actFetchDataGenres(res.data.results));
+      });
+    };
+};
+export const actFetchDataGenres = (genres) => {
     return {
-        type: types.LIST_ALL_GENRES
+        type: types.LIST_ALL_GENRES,
+        genres
     }
 }
 
@@ -25,7 +34,7 @@ export const actAddMovieRequest = (movie) => {
           console.log("post movie", res.data)  
           dispatch(addMovie(res.data));
         });
-      };
+    };
 }
 
 export const addMovie = (movie) => {
@@ -95,8 +104,8 @@ export const filterMovie = (filter) => {
 export const actFetchDataMoviesRequest = () => {
     return (dispatch) => {
       return callApi("movies", "GET", null).then((res) => {
-        console.log("data", res.data)
-        dispatch(actFetchDataMovies(res.data));
+        console.log("data", res.data.results)
+        dispatch(actFetchDataMovies(res.data.results));
       });
     };
   };

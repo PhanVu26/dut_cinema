@@ -56,6 +56,7 @@ var myReducer = (state = initialState, action) => {
     var index = -1;
     switch(action.type){
         case types.LIST_ALL_GENRES:
+            var state = action.genres;
             return state;
         // case types.SAVE_USER:
         //     var today = new Date();

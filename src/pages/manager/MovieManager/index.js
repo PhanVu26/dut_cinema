@@ -10,6 +10,7 @@ import {
 import Pagination from '../../../components/Pagination/Pagination';
 import MovieForm from '../../../components/Modal/MovieModal/MovieForm';
 import * as actions from '../../../actions/movieManager/index';
+import * as actorActions from '../../../actions/actorManager/index';
 import MovieDetail from '../../../components/Modal/MovieModal/MovieDetail';
 class MovieManager extends Component{
     constructor(props) {
@@ -25,6 +26,8 @@ class MovieManager extends Component{
       }
       componentDidMount() {
         this.props.fetchDataMovies();  
+        this.props.fetchDataActors();  
+        this.props.fetchDataGenres(); 
         this.setState({
           totalRecords: this.props.movies.length
         });
@@ -121,7 +124,13 @@ const mapDispatchToProps = (dispatch, props) =>{
     return {
         fetchDataMovies : () => {
             dispatch(actions.actFetchDataMoviesRequest())
-        }
+        },
+        fetchDataActors : () => {
+            dispatch(actorActions.actFetchDataActorsRequest())
+        },
+        fetchDataGenres : () => {
+            dispatch(actions.actFetchDataGenresRequest())
+        },
     }
 }
 

@@ -1,4 +1,22 @@
 import * as types from "../../constants/ActionType";
+import callApi from "../../utils/ApiCallerServer";
+
+export const actFetchDataActorsRequest = () => {
+    return (dispatch) => {
+      return callApi("actors", "GET", null).then((res) => {
+        console.log("data", res.data.results)
+        dispatch(actFetchDataActors(res.data.results));
+      });
+    };
+};
+
+export const actFetchDataActors = (actors) => {
+    return {
+        type: types.LIST_ALL_ACTORS,
+        actors
+    }
+}
+
 export const listAllActors = () => {
     return {
         type: types.LIST_ALL_ACTORS
