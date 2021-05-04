@@ -12,10 +12,10 @@ class MovieDetail extends Component {
         this.state = {
             id: "",
             name: "",
-            genreIds: [],
+            genres: [],
             director:"",
             producer:"",
-            actorIds: [],
+            actors: [],
             releaseDate: "",
             image: "",
             description: ""
@@ -44,11 +44,11 @@ class MovieDetail extends Component {
     //     this.setState({
     //         id: this.props.movieInfo.id,
     //         name: this.props.movieInfo.name,
-    //         genreIds: this.props.movieInfo.genreIds,
+    //         genres: this.props.movieInfo.genres,
     //         director: this.props.movieInfo.director,
     //         producer: this.props.movieInfo.producer,
     //         releaseDate: this.props.movieInfo.releaseDate,
-    //         actors: this.props.movieInfo.actorIds,
+    //         actors: this.props.movieInfo.actors,
     //         image: this.props.movieInfo.image
     //     })
         
@@ -82,8 +82,18 @@ class MovieDetail extends Component {
                                                 <td>
                                                     <span className="title-detail">Tên phim:</span>
                                                 </td>
+                                                
                                                 <td>
                                                     <span>{movie.name}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span className="title-detail">Thời lượng:</span>
+                                                </td>
+                                                
+                                                <td>
+                                                    <span>{movie.duration + ' phút'}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -91,7 +101,7 @@ class MovieDetail extends Component {
                                                     <span className="title-detail">Thể loại:</span>
                                                 </td>
                                                 <td>
-                                                    <span>{this.showGenres(movie.genreIds)}</span>
+                                                    <span>{this.showGenres(movie.genres)}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -123,7 +133,7 @@ class MovieDetail extends Component {
                                                     <span className="title-detail">Diễn viên:</span>
                                                 </td>
                                                 <td>
-                                                    <span>{this.showActors(movie.actorIds)}</span>
+                                                    <span>{this.showActors(movie.actors)}</span>
                                                 </td>
                                             </tr>
                                             <tr>

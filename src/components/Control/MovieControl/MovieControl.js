@@ -15,8 +15,8 @@ class MovieControl extends Component {
                 name :"",
                 director: "",
                 producer: "",
-                genreIds: [],
-                actorIds: [],
+                genres: [],
+                actors: [],
                 releaseDate: "",
                 description: "",
                 image: ""

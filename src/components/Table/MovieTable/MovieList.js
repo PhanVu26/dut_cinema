@@ -77,7 +77,7 @@ class MovieList extends Component {
      
         if(filterMovie.genre !== -1){
             rowsPerPage = rowsPerPage.filter((movie) => {
-                return movie.genreIds.some(genre => {
+                return movie.genres.some(genre => {
                     return genre.id == filterMovie.genre
                 })
             })

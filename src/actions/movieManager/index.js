@@ -31,8 +31,8 @@ export const listAllActors = () => {
 export const actAddMovieRequest = (movie) => {
     return (dispatch) => {
         return callApi("movies", "POST", movie).then((res) => {
-          console.log("post movie", res.data)  
-          dispatch(addMovie(res.data));
+          console.log("post movie", res)  
+          //dispatch(addMovie(res.data));
         });
     };
 }

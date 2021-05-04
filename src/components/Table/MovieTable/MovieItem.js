@@ -56,11 +56,11 @@ class MovieItem extends Component {
     render() {
         const {index, movie} = this.props;
         const genres = [] ;
-        movie.genreIds?.forEach(genre => {
+        movie.genres?.forEach(genre => {
             genres.push(genre.name)
         });
         const actors = [] ;
-        movie.actorIds?.forEach(actor => {
+        movie.actors?.forEach(actor => {
             actors.push(actor.name)
         });
         // const {isDisplayUserForm} = this.props;
@@ -77,7 +77,7 @@ class MovieItem extends Component {
                 <td className="text-center">
                     <ul className='list-unstyled'>
                         {
-                            this.showGenres(movie.genreIds)
+                            this.showGenres(movie.genres)
                         }
                     </ul>
                 </td>

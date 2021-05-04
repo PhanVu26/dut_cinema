@@ -25,12 +25,13 @@ var myReducer = (state = initialState, action) => {
             var movieInfo = {
                 id: action.movie.id,
                 name: action.movie.name,
-                genreIds: action.movie.genreIds,
+                genres: action.movie.genres,
+                duration: action.movie.duration,
                 director: action.movie.director,
                 country: action.movie.country,
                 producer: action.movie.producer,
                 description: action.movie.description,
-                actorIds: action.movie.actorIds,
+                actors: action.movie.actors,
                 image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
             } 
@@ -40,12 +41,13 @@ var myReducer = (state = initialState, action) => {
             var movieEditting = {
                 id: action.movie.id,
                 name: action.movie.name,
-                genreIds: action.movie.genreIds,
+                genres: action.movie.genres,
+                duration: action.movie.duration,
                 director: action.movie.director,
                 country: action.movie.country,
                 producer: action.movie.producer,
                 description: action.movie.description,
-                actorIds: action.movie.actorIds,
+                actors: action.movie.actors,
                 image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
             } 

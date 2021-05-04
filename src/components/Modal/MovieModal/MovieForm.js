@@ -14,11 +14,12 @@ class MovieForm extends Component {
             previewImage: "",
             movie: {
                 name: "",
-                genreIds: [],
+                genres: [],
                 director:"",
                 producer:"",
                 country:"",
-                actorIds: [],
+                duration: 0,
+                actors: [],
                 releaseDate: "",
                 mainImage: "",
                 thumbnailImage:"",
@@ -34,9 +35,9 @@ class MovieForm extends Component {
     
     
 
-    findIndexActorById = (actorIds,id) => {
+    findIndexActorById = (actors,id) => {
         var result = -1;
-        actorIds.forEach((actorId, index) => {
+        actors.forEach((actorId, index) => {
             if(actorId === id){
                 result = index;
             }
@@ -44,9 +45,9 @@ class MovieForm extends Component {
         return result;
     }
 
-    findIndexGenreById = (genreIds,id) => {
+    findIndexGenreById = (genres,id) => {
         var result = -1;
-        genreIds.forEach((genreId, index) => {
+        genres.forEach((genreId, index) => {
             if(genreId.id === id){
                 result = index;
             }
@@ -73,7 +74,7 @@ class MovieForm extends Component {
                     mainImage: file!=null ? file : prevState.movie.mainImage,
                     thumbnailImage: file!=null ? file : prevState.movie.thumbnailImage   
                 },
-                //genreIds: genreIds
+                //genres: genres
             }))
             // var reader = new FileReader();
             // reader.readAsDataURL(file[0])
@@ -87,7 +88,7 @@ class MovieForm extends Component {
             //                 thumbnailImage: file!=null ? image : prevState.movie.image.thumbnailImage   
             //             },
             //         },
-            //         //genreIds: genreIds
+            //         //genres: genres
             //     }))
             // }
         }
@@ -101,7 +102,7 @@ class MovieForm extends Component {
                     }],
                     movie: {
                         ...prevState.movie,
-                        actorIds: [...prevState.movie.actorIds,
+                        actors: [...prevState.movie.actors,
                             //id: value,
                             // name: e.target.labels[0].innerHTML
                             parseInt(value)
@@ -111,13 +112,13 @@ class MovieForm extends Component {
             }else {
                 console.log("falise")
                 let label = e.target.labels[0].innerHTML;
-                let a = this.state.movie.actorIds.filter(actor => actor != value)
+                let a = this.state.movie.actors.filter(actor => actor != value)
                 console.log("filter", a)
                 this.setState((prevState) => ({
                     selectedActors: prevState.selectedActors.filter(actor => actor.name !== label),
                     movie: {
                         ...prevState.movie,
-                        actorIds: a
+                        actors: a
                     }
                 }));
             }
@@ -130,7 +131,7 @@ class MovieForm extends Component {
                     }],
                     movie: {
                         ...prevState.movie,
-                        genreIds: [...prevState.movie.genreIds,
+                        genres: [...prevState.movie.genres,
                             //id: value,
                             // name: e.target.labels[0].innerHTML
                             parseInt(value)
@@ -139,12 +140,12 @@ class MovieForm extends Component {
                 }))
             }else {
                 let label = e.target.labels[0].innerHTML;
-                let genres = this.state.movie.genreIds.filter(genre => genre != value)
+                let genres = this.state.movie.genres.filter(genre => genre != value)
                 this.setState((prevState) => ({
                     selectedGenres: prevState.selectedGenres.filter(genre => genre.name !== label),
                     movie: {
                         ...prevState.movie,
-                        genreIds: genres
+                        genres: genres
                     }
                 }));
             }
@@ -157,7 +158,7 @@ class MovieForm extends Component {
         //             selectedActors: [...prevState.selectedActors, e.target.labels[0].innerHTML],
         //             movie: {
         //                 ...prevState.movie,
-        //                 actorIds: [...prevState.movie.actorIds,
+        //                 actors: [...prevState.movie.actors,
         //                     //id: value,
         //                     // name: e.target.labels[0].innerHTML
         //                     parseInt(value)
@@ -169,7 +170,7 @@ class MovieForm extends Component {
         //             selectedGenres: [...prevState.selectedGenres, e.target.labels[0].innerHTML],
         //             movie: {
         //                 ...prevState.movie,
-        //                 genreIds: [...prevState.movie.genreIds,
+        //                 genres: [...prevState.movie.genres,
         //                     parseInt(value)
         //                     // id: value,
         //                     // name: e.target.labels[0].innerHTML
@@ -182,10 +183,10 @@ class MovieForm extends Component {
         //     if(e.target.className === "actor-checkbox"){
         //         if(value != ""){
         //             this.setState((prevState) => ({
-        //                 selectedActors: prevState.selectedActors.filter((_, i) => i !== this.findIndexActorById(this.state.movie.actorIds, value)),
+        //                 selectedActors: prevState.selectedActors.filter((_, i) => i !== this.findIndexActorById(this.state.movie.actors, value)),
         //                 movie: {
         //                     ...prevState.movie,
-        //                     actorIds: prevState.movie.actorIds.filter((_, i) => i !== this.findIndexActorById(prevState.movie.actorIds, value))
+        //                     actors: prevState.movie.actors.filter((_, i) => i !== this.findIndexActorById(prevState.movie.actors, value))
         //                 }
         //             }));
         //         }
@@ -193,10 +194,10 @@ class MovieForm extends Component {
         //     else {
         //         if(value != ""){
         //             this.setState((prevState) => ({
-        //                 selectedGenres: prevState.selectedGenres.filter((_, i) => i !== this.findIndexActorById(this.state.movie.genreIds, value)),
+        //                 selectedGenres: prevState.selectedGenres.filter((_, i) => i !== this.findIndexActorById(this.state.movie.genres, value)),
         //                 movie: {
         //                     ...prevState.movie,
-        //                     genreIds: prevState.movie.genreIds.filter((_, i) => i !== this.findIndexGenreById(prevState.movie.genreIds, value))
+        //                     genres: prevState.movie.genres.filter((_, i) => i !== this.findIndexGenreById(prevState.movie.genres, value))
         //                 }
         //             }));
         //         }
@@ -243,7 +244,7 @@ class MovieForm extends Component {
             selectedActors: prevState.selectedActors.filter(actor => actor.id !== id),
             movie: {
                 ...prevState.movie,
-                actorIds: this.state.movie.actorIds.filter(actor => actor != id)
+                actors: this.state.movie.actors.filter(actor => actor != id)
             }
         }));
     }
@@ -253,7 +254,7 @@ class MovieForm extends Component {
             selectedGenres: prevState.selectedGenres.filter(genre => genre.id !== id),
             movie: {
                 ...prevState.movie,
-                genreIds: this.state.movie.genreIds.filter(genre => genre != id)
+                genres: this.state.movie.genres.filter(genre => genre != id)
             }
         }));
     }
@@ -308,8 +309,8 @@ class MovieForm extends Component {
     validateMovie = () => {
         const movie = this.state.movie;
         if(movie.name === "" || movie.director === "" || movie.description === "" ||
-            movie.description === "" || movie.genreIds.length == 0 || movie.releaseDate === "" ||
-            movie.image == "" || movie.actorIds.length == 0 || movie.country === ""){
+            movie.description === "" || movie.genres.length == 0 || movie.releaseDate === "" ||
+            movie.image == "" || movie.actors.length == 0 || movie.country === ""){
                 return false
             }
         return true;    
@@ -325,11 +326,12 @@ class MovieForm extends Component {
                 var newMovie = this.state.movie;
                 console.log("newMovie", newMovie)
                 data.append("name", newMovie.name)
-                data.append("genreIds", newMovie.genreIds)
+                data.append("genres", newMovie.genres)
                 data.append("director", newMovie.director)
+                data.append("duration", newMovie.duration)
                 data.append("producer", newMovie.producer)
                 data.append("country", newMovie.country)
-                data.append("actorIds", newMovie.actorIds)
+                data.append("actors", newMovie.actors)
                 data.append("releaseDate", newMovie.releaseDate)
                 data.append("mainImage", newMovie.mainImage)
                 data.append("thumbnailImage", newMovie.thumbnailImage)
@@ -337,11 +339,11 @@ class MovieForm extends Component {
                 
                 // data = {
                 //     name: newMovie.name,
-                //     genreIds: newMovie.genreIds,
+                //     genres: newMovie.genres,
                 //     director: newMovie.director,
                 //     producer:newMovie.producer,
                 //     country:newMovie.country,
-                //     actorIds: newMovie.actorIds,
+                //     actors: newMovie.actors,
                 //     releaseDate: newMovie.releaseDate,
                 //     description: newMovie.description
                 // };
@@ -373,8 +375,8 @@ class MovieForm extends Component {
         if(nextProps.movieInfo) {
             this.setState({
                 movie: nextProps.movieInfo,
-                selectedGenres: nextProps.movieInfo.genreIds?.map(genre =>{return genre.name}),
-                selectedActors: nextProps.movieInfo.actorIds?.map(actor =>{return actor.name})
+                selectedGenres: nextProps.movieInfo.genres?.map(genre =>{return genre.name}),
+                selectedActors: nextProps.movieInfo.actors?.map(actor =>{return actor.name})
             })
         }
     }
@@ -410,7 +412,7 @@ class MovieForm extends Component {
                                         type="text"
                                         className="form-control"
                                         // value={movie.id}   
-                                        readOnly="true"                                 
+                                        readOnly={true}                                 
                                     />
                                 </div>
                                 <div className="form-group">
@@ -420,6 +422,17 @@ class MovieForm extends Component {
                                         className="form-control"
                                         name="name"
                                         value={movie.name}
+                                        onChange={ this.onHandleChange }
+                                    
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label>Thời lượng :</label>
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        name="duration"
+                                        value={movie.duration}
                                         onChange={ this.onHandleChange }
                                     
                                     />
