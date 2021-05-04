@@ -121,6 +121,33 @@ class MovieForm extends Component {
                     }
                 }));
             }
+        }else if(e.target.className === "genre-checkbox"){
+            if(e.target.checked === true){
+                this.setState(prevState => ({
+                    selectedGenres: [...prevState.selectedGenres, {
+                        name : e.target.labels[0].innerHTML,
+                        id: value
+                    }],
+                    movie: {
+                        ...prevState.movie,
+                        genreIds: [...prevState.movie.genreIds,
+                            //id: value,
+                            // name: e.target.labels[0].innerHTML
+                            parseInt(value)
+                        ]
+                    }
+                }))
+            }else {
+                let label = e.target.labels[0].innerHTML;
+                let genres = this.state.movie.genreIds.filter(genre => genre != value)
+                this.setState((prevState) => ({
+                    selectedGenres: prevState.selectedGenres.filter(genre => genre.name !== label),
+                    movie: {
+                        ...prevState.movie,
+                        genreIds: genres
+                    }
+                }));
+            }
         }
         
 
@@ -189,7 +216,7 @@ class MovieForm extends Component {
     showActorCheckbox = actors =>{
         
         var results = [];
-        results = actors.map((actor, index) => {
+        results = actors?.map((actor, index) => {
             console.log("showActorBox", this.state.selectedActors?.some(act => act.id == actor.id))
             return (
                 <div className="actor-item ml-3" key={index}>
@@ -221,10 +248,20 @@ class MovieForm extends Component {
         }));
     }
 
+    removeSelectedGenre = (id) =>{
+        this.setState((prevState) => ({
+            selectedGenres: prevState.selectedGenres.filter(genre => genre.id !== id),
+            movie: {
+                ...prevState.movie,
+                genreIds: this.state.movie.genreIds.filter(genre => genre != id)
+            }
+        }));
+    }
+
     showChoosedActor = (actors) => {
         let rs = []
         console.log("actors",actors);
-        rs = actors.map(actor => {
+        rs = actors?.map(actor => {
             return (
                 <div className="selected-actor ml-2  mt-2">
                     <span>{actor.name}</span>
@@ -237,17 +274,18 @@ class MovieForm extends Component {
 
     showGenreCheckbox = genres =>{
         var results = [];
-        results = genres.map((genre, index) => {
+        results = genres?.map((genre, index) => {
             return (
                 <div className="genre-item ml-3" key={index}>
                     <label htmlFor={'genre'+genre.id} className="mr-2">{genre.name}</label>
                     <input 
-                        defaultChecked = {this.state.selectedGenres?.some(genreName => genreName === genre.name)}
+                        checked = {this.state.selectedGenres?.some(g => g.id == genre.id)}
                         className="genre-checkbox"
                         type="checkbox" 
                         id={'genre'+genre.id} 
                         onChange = {this.onHandleChange} 
                         value={genre.id}></input><br></br>
+                       
                 </div>
             ) 
         })
@@ -255,11 +293,16 @@ class MovieForm extends Component {
     }
 
     showChoosedGenres = (genres) => {
-        var choosedGenres = [];
-        choosedGenres = genres.map(genre => {
-            return genre.name;
+        let rs = []
+        rs = genres?.map(genre => {
+            return (
+                <div className="selected-genre ml-2  mt-2">
+                    <span>{genre.name}</span>
+                    <a><i onClick={() => this.removeSelectedGenre(genre.id)} className="fas fa-times ml-1"></i></a>
+                </div>
+            )
         })
-        return choosedGenres;
+        return rs
     }
 
     validateMovie = () => {
@@ -458,7 +501,10 @@ class MovieForm extends Component {
                                         
                                     </div>
                                     
-                                    <span>Đã chọn:</span><p>{this.state.selectedGenres?.toString()}</p>
+                                    <div>
+                                        <span>Đã chọn:</span>
+                                        {this.showChoosedGenres(this.state.selectedGenres)}
+                                    </div>
                                 </div>
 
                                 <div className="form-group">

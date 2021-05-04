@@ -14,17 +14,17 @@
 .form-group p {
     color: darkgoldenrod;
 }
-.selected-actor{
+.selected-actor, .selected-genre{
     border-radius: 4px;
     display: inline-block;
     background-color: rgb(221, 211, 153);
 }
-.selected-actor > a{
+.selected-actor > a, .selected-genre > a{
     padding: 3px 7px;
     cursor: pointer;
 }
 
-.selected-actor > a > i{
+.selected-actor > a > i, .selected-genre > a > i{
     color: rgb(182, 10, 10);
 }
 
