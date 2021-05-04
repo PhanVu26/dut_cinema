@@ -14,3 +14,20 @@
 .form-group p {
     color: darkgoldenrod;
 }
+.selected-actor{
+    border-radius: 4px;
+    display: inline-block;
+    background-color: rgb(221, 211, 153);
+}
+.selected-actor > a{
+    padding: 3px 7px;
+    cursor: pointer;
+}
+
+.selected-actor > a > i{
+    color: rgb(182, 10, 10);
+}
+
+.selected-actor > span{
+    padding: 3px 7px;
+}

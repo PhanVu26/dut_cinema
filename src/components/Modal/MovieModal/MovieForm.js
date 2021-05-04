@@ -37,7 +37,7 @@ class MovieForm extends Component {
     findIndexActorById = (actorIds,id) => {
         var result = -1;
         actorIds.forEach((actorId, index) => {
-            if(actorId.id === id){
+            if(actorId === id){
                 result = index;
             }
         });
@@ -60,7 +60,8 @@ class MovieForm extends Component {
         var value = target.value;
         var id = e.target.id;
 
-        //console.log(id)
+        console.log("value", e)
+        console.log("checked", e.target.checked)
         var file = null;
         var image = null;
         if(e.target.files != null){
@@ -91,13 +92,13 @@ class MovieForm extends Component {
             // }
         }
         
-
-        
-
-        if(e.target.checked === true){
-            if(e.target.className === "actor-checkbox"){
+        if(e.target.className === "actor-checkbox"){
+            if(e.target.checked === true){
                 this.setState(prevState => ({
-                    selectedActors: [...prevState.selectedActors, e.target.labels[0].innerHTML],
+                    selectedActors: [...prevState.selectedActors, {
+                        name : e.target.labels[0].innerHTML,
+                        id: value
+                    }],
                     movie: {
                         ...prevState.movie,
                         actorIds: [...prevState.movie.actorIds,
@@ -108,43 +109,72 @@ class MovieForm extends Component {
                     }
                 }))
             }else {
-                this.setState(prevState => ({
-                    selectedGenres: [...prevState.selectedGenres, e.target.labels[0].innerHTML],
+                console.log("falise")
+                let label = e.target.labels[0].innerHTML;
+                let a = this.state.movie.actorIds.filter(actor => actor != value)
+                console.log("filter", a)
+                this.setState((prevState) => ({
+                    selectedActors: prevState.selectedActors.filter(actor => actor.name !== label),
                     movie: {
                         ...prevState.movie,
-                        genreIds: [...prevState.movie.genreIds,
-                            parseInt(value)
-                            // id: value,
-                            // name: e.target.labels[0].innerHTML
-                        ]
+                        actorIds: a
                     }
-                }))
+                }));
             }
-            
-        }else {
-            if(e.target.className === "actor-checkbox"){
-                if(value != ""){
-                    this.setState((prevState) => ({
-                        selectedActors: prevState.selectedActors.filter((_, i) => i !== this.findIndexActorById(this.state.movie.actorIds, value)),
-                        movie: {
-                            ...prevState.movie,
-                            actorIds: prevState.movie.actorIds.filter((_, i) => i !== this.findIndexActorById(prevState.movie.actorIds, value))
-                        }
-                    }));
-                }
-            }
-            else {
-                if(value != ""){
-                    this.setState((prevState) => ({
-                        selectedGenres: prevState.selectedGenres.filter((_, i) => i !== this.findIndexActorById(this.state.movie.genreIds, value)),
-                        movie: {
-                            ...prevState.movie,
-                            genreIds: prevState.movie.genreIds.filter((_, i) => i !== this.findIndexGenreById(prevState.movie.genreIds, value))
-                        }
-                    }));
-                }
-            }    
         }
+        
+
+        // if(e.target.checked === true){
+        //     if(e.target.className === "actor-checkbox"){
+        //         this.setState(prevState => ({
+        //             selectedActors: [...prevState.selectedActors, e.target.labels[0].innerHTML],
+        //             movie: {
+        //                 ...prevState.movie,
+        //                 actorIds: [...prevState.movie.actorIds,
+        //                     //id: value,
+        //                     // name: e.target.labels[0].innerHTML
+        //                     parseInt(value)
+        //                 ]
+        //             }
+        //         }))
+        //     }else {
+        //         this.setState(prevState => ({
+        //             selectedGenres: [...prevState.selectedGenres, e.target.labels[0].innerHTML],
+        //             movie: {
+        //                 ...prevState.movie,
+        //                 genreIds: [...prevState.movie.genreIds,
+        //                     parseInt(value)
+        //                     // id: value,
+        //                     // name: e.target.labels[0].innerHTML
+        //                 ]
+        //             }
+        //         }))
+        //     }
+            
+        // }else {
+        //     if(e.target.className === "actor-checkbox"){
+        //         if(value != ""){
+        //             this.setState((prevState) => ({
+        //                 selectedActors: prevState.selectedActors.filter((_, i) => i !== this.findIndexActorById(this.state.movie.actorIds, value)),
+        //                 movie: {
+        //                     ...prevState.movie,
+        //                     actorIds: prevState.movie.actorIds.filter((_, i) => i !== this.findIndexActorById(prevState.movie.actorIds, value))
+        //                 }
+        //             }));
+        //         }
+        //     }
+        //     else {
+        //         if(value != ""){
+        //             this.setState((prevState) => ({
+        //                 selectedGenres: prevState.selectedGenres.filter((_, i) => i !== this.findIndexActorById(this.state.movie.genreIds, value)),
+        //                 movie: {
+        //                     ...prevState.movie,
+        //                     genreIds: prevState.movie.genreIds.filter((_, i) => i !== this.findIndexGenreById(prevState.movie.genreIds, value))
+        //                 }
+        //             }));
+        //         }
+        //     }    
+        // }
 
         if(name !== ""){
             this.setState(prevState => ({
@@ -157,30 +187,52 @@ class MovieForm extends Component {
     }
 
     showActorCheckbox = actors =>{
+        
         var results = [];
         results = actors.map((actor, index) => {
+            console.log("showActorBox", this.state.selectedActors?.some(act => act.id == actor.id))
             return (
                 <div className="actor-item ml-3" key={index}>
+                    <img src={testImage} width="30px" height="30px">
+                    </img>
                     <label htmlFor={'actor'+actor.id} className="mr-2">{actor.name}</label>
                     <input 
-                        defaultChecked = {this.state.selectedActors?.some(actorName => actorName === actor.name)}
+                        checked = {this.state.selectedActors?.some(act => act.id == actor.id)}
                         className="actor-checkbox"
                         type="checkbox" 
                         id={'actor'+actor.id} 
                         onChange = {this.onHandleChange} 
                         value={actor.id}></input><br></br>
+                       
                 </div>
             ) 
         })
         return results;
     }
 
+    removeSelectedActor = (id) =>{
+        console.log("remove ", id)
+        this.setState((prevState) => ({
+            selectedActors: prevState.selectedActors.filter(actor => actor.id !== id),
+            movie: {
+                ...prevState.movie,
+                actorIds: this.state.movie.actorIds.filter(actor => actor != id)
+            }
+        }));
+    }
+
     showChoosedActor = (actors) => {
-        var choosedActors = [];
-        choosedActors = actors.map(actor => {
-            return actor.name;
+        let rs = []
+        console.log("actors",actors);
+        rs = actors.map(actor => {
+            return (
+                <div className="selected-actor ml-2  mt-2">
+                    <span>{actor.name}</span>
+                    <a><i onClick={() => this.removeSelectedActor(actor.id)} className="fas fa-times ml-1"></i></a>
+                </div>
+            )
         })
-        return choosedActors;
+        return rs
     }
 
     showGenreCheckbox = genres =>{
@@ -288,7 +340,7 @@ class MovieForm extends Component {
         const {movie} = this.state
         const movieInfo = this.props.movieInfo;
         var {genres, actors} = this.props
-        console.log("state.movie", this.state);
+        console.log("state", this.state);
         genres = genres.filter((genre) => {
             return genre.name.toLowerCase().indexOf(this.state.filterGenre.toLowerCase()) !== -1
         });
@@ -410,6 +462,7 @@ class MovieForm extends Component {
                                 </div>
 
                                 <div className="form-group">
+                                    
                                     <label>Diễn viên :</label>
                                     <input 
                                         name="filterActor"
@@ -424,7 +477,10 @@ class MovieForm extends Component {
                                         
                                     </div>
                                     
-                                    <span>Đã chọn:</span><p>{this.state.selectedActors?.toString()}</p>
+                                    <div>
+                                        <span>Đã chọn:</span>
+                                        {this.showChoosedActor(this.state.selectedActors)}
+                                    </div>    
                                 </div>
                                 <div className="form-group">
                                     <label>Mô tả phim :</label>
