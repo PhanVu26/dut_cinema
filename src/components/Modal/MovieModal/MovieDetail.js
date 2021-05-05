@@ -33,6 +33,7 @@ class MovieDetail extends Component {
         return results.toString();
     }
     showActors(actors){
+        console.log("actors", actors)
         var results = [];
         actors?.forEach(actor => {
             results.push(actor.name)

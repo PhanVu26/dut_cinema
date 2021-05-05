@@ -4,7 +4,6 @@ import callApi from "../../utils/ApiCallerServer";
 export const actFetchDataActorsRequest = () => {
     return (dispatch) => {
       return callApi("actors", "GET", null).then((res) => {
-        console.log("data", res.data.results)
         dispatch(actFetchDataActors(res.data.results));
       });
     };

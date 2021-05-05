@@ -35,6 +35,7 @@ var myReducer = (state = initialState, action) => {
                 image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
             } 
+            console.log("movie infor in reducer", movieInfo)
             state.push(movieInfo);
             return [...state]; 
         case types.UPDATE_MOVIE:

@@ -10,7 +10,7 @@ export const listAllMovies = () => {
 export const actFetchDataGenresRequest = () => {
     return (dispatch) => {
       return callApi("genres", "GET", null).then((res) => {
-        console.log("data", res.data.results)
+        //console.log("data", res.data.results)
         dispatch(actFetchDataGenres(res.data.results));
       });
     };
@@ -29,10 +29,11 @@ export const listAllActors = () => {
 }
 
 export const actAddMovieRequest = (movie) => {
+    console.log("p movie", movie)
     return (dispatch) => {
         return callApi("movies", "POST", movie).then((res) => {
-          console.log("post movie", res)  
-          //dispatch(addMovie(res.data));
+          console.log("post movie", movie)  
+          dispatch(addMovie(res.data));
         });
     };
 }
@@ -59,7 +60,7 @@ export const toggleMovieForm = () => {
 export const getMovieRequest = (id) => {
     return (dispatch) => {
         return callApi(`movies/${id}`, 'GET', null).then((res) => {
-            console.log("res", res.data)
+            //console.log("res", res.data)
             dispatch(getMovie(res.data));
         });
     };
@@ -82,7 +83,7 @@ export const actUpdateMovieRequest = (movie) => {
     return (dispatch) => {
         return callApi(`movies/${movie.id}`, 'PUT', movie).then((res) => {
           dispatch(updateMovie(res.data));
-          console.log("res update", res.data)
+          //console.log("res update", res.data)
         });
       };
 }
@@ -104,7 +105,7 @@ export const filterMovie = (filter) => {
 export const actFetchDataMoviesRequest = () => {
     return (dispatch) => {
       return callApi("movies", "GET", null).then((res) => {
-        console.log("data", res.data.results)
+        //console.log("data", res.data.results)
         dispatch(actFetchDataMovies(res.data.results));
       });
     };
