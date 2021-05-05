@@ -3,10 +3,10 @@ import {
     BrowserRouter as Router, Route, Switch,
   } from "react-router-dom";
 
-import Footer from '../../components/admin/Footer/Footer';
-import Navbar from '../../components/manager/Navbar/Navbar';
 import MovieManager from './MovieManager/index';
 import ActorManager from './ActorManager/index';
+import Navbar from '../../components/manager/Navbar/Navbar';
+import Footer from '../../components/manager/Footer/Footer';
 
 class ManagerPage extends Component{
     constructor(props) {
@@ -15,14 +15,22 @@ class ManagerPage extends Component{
       
     render(){
         return (
-            <Router>
-                <Navbar></Navbar>        
-                <Switch>
+            // <Router>
+            //     <Navbar></Navbar>        
+            //     <Switch>
+            //         <Route path="/manager/movies" exact component={MovieManager}></Route>  
+            //         <Route path="/manager/actors" exact component={ActorManager}></Route>  
+            //     </Switch>    
+            //     <Footer></Footer>
+            // </Router>
+        <Router>
+            <Navbar></Navbar>        
+            <Switch>
                     <Route path="/manager/movies" exact component={MovieManager}></Route>  
                     <Route path="/manager/actors" exact component={ActorManager}></Route>  
-                </Switch>    
-                <Footer></Footer>
-            </Router>
+            </Switch>
+            <Footer></Footer>
+        </Router>
                 
         )
     }
