@@ -49,8 +49,7 @@ class ActorForm extends Component {
 
     validateActor = () => {
         const actor = this.state.actor;
-        if(actor.name === "" || actor.description === "" ||
-            actor.image === "" || actor.birthday === "" || actor.nationality === ""){
+        if(actor.name === "" || actor.description === ""){
                 return false
             }
         return true;    
@@ -58,12 +57,18 @@ class ActorForm extends Component {
     saveActor = (event) => {
         event.preventDefault();
         if(this.validateActor() === true) {
-            const saveActor = {
-                name: this.state.actor.name,
-                description: this.state.actor.description
-            } 
-            this.props.onSaveActor(saveActor)
-            this.props.onToggleActorForm()
+            if(this.props.actorEditing.id){
+                console.log("update actorId", this.props.actorEditing.id, this.state.actor)
+                this.props.onUpdateActor(this.state.actor)
+                this.props.onToggleActorForm()
+            }else {
+                const saveActor = {
+                    name: this.state.actor.name,
+                    description: this.state.actor.description
+                } 
+                this.props.onSaveActor(saveActor)
+                this.props.onToggleActorForm()
+            }
             
         }else {
             this.setState({
@@ -200,7 +205,10 @@ const mapDispatchToProps = (dispatch, props) =>{
         },
         onGetActorEditing : (actor) => {
             dispatch(actions.getActorInfo(actor))
-        }
+        },
+        onUpdateActor: (actor) => {
+            dispatch(actions.actUpdateActorsRequest(actor))
+        },
         // // onDeleteUser: (id) => {
         // //     dispatch(actions.deleteUser(id))
         // // },

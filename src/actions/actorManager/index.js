@@ -73,7 +73,7 @@ export const filterActor = (filter) => {
 
 export const actUpdateActorsRequest = (actor) => {
     return (dispatch) => {
-        return callApi("actors"/`${actor.id}`, "PATCH", actor).then((res) => {
+        return callApi(`actors/${actor.id}`, "PATCH", actor).then((res) => {
             console.log("post actor", res.data)
             dispatch(actUpdateActor(res.data));
       });

@@ -112,7 +112,12 @@ var myReducer = (state = initialState, action) => {
         case types.DELETE_ACTOR:
             index = findIndex(state, action.id)
             state.splice(index, 1);
-            return [...state];       
+            return [...state];     
+            case types.UPDATE_ACTOR:               
+                index = findIndex(state, action.actor.id);
+                console.log("index", index, action.actor, state)
+                state[index] = action.actor;
+                return [...state];        
         // case types.UPDATE_USER_STATUS:
         //     index = findIndex(state, action.id);
         //     state[index] = {
