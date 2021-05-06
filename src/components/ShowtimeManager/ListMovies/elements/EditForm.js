@@ -2,6 +2,7 @@ import { Button, Modal } from "react-bootstrap";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../../actions/movieManager/index";
+import * as actions2 from "../../../../actions/showtimeManager/index";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import "./edit.css";
@@ -668,7 +669,7 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     onLoadShowtime: (showtime) => {
       console.log("dispatch");
-      dispatch(actions.getShowtime(showtime));
+      dispatch(actions2.getShowtime(showtime));
     },
     // // onDeleteUser: (id) => {
     // //     dispatch(actions.deleteUser(id))

@@ -6,28 +6,29 @@ var initialState = {
       id: 1,
       name: "cinema Da Nang 1",
       address: "Hung Vuong 1",
-      numOfRoom: 4,
+      // numOfRoom: 4,
     },
     {
       id: 2,
       name: "cinema Da Nang 2",
       address: "Hung Vuong 2",
-      numOfRoom: 4,
+      // numOfRoom: 4,
     },
     {
       id: 3,
       name: "cinema Da Nang 3",
       address: "Hung Vuong 3",
-      numOfRoom: 4,
+      // numOfRoom: 4,
     },
     {
       id: 4,
       name: "cinema Da Nang 4",
       address: "Hung Vuong 4",
-      numOfRoom: 4,
+      // numOfRoom: 4,
     },
   ],
-  showtime: [
+  rooms: [],
+  showtimes: [
     {
       movie: {
         id: 1,
@@ -83,6 +84,7 @@ var initialState = {
       endTime: "21:00",
     },
   ],
+  movie: [],
 };
 
 function reducerShowTime(
@@ -93,7 +95,7 @@ function reducerShowTime(
     case types.FETCH_DATA_CINEMA: {
       return {
         ...state,
-        cinema: action.cinema,
+        cinema: JSON.parse(JSON.stringify(action.cinema)),
       };
     }
 
@@ -104,11 +106,22 @@ function reducerShowTime(
       };
     }
 
-    case types.GET_SHOWTIME: {
-      console.log("reducer", initialState);
-
+    case types.GET_CINEMA_ROOMS: {
       return {
-        ...JSON.parse(JSON.stringify(initialState)),
+        ...state,
+        rooms: action.rooms,
+      };
+    }
+    case types.GET_SHOWTIME: {
+      return {
+        ...state,
+        showtimes: action.showtimes,
+      };
+    }
+    case types.GET_ALL_MOVIES_SHOWTIMES: {
+      return {
+        ...state,
+        movie: action.movie,
       };
     }
     default:
