@@ -56,7 +56,14 @@ export const getActorInfo = (actor) => {
         actor
     }
 }
-
+export const actDeleteActorsRequest = (id) => {
+    return (dispatch) => {
+        return callApi(`actors/${id}`, "DELETE", null).then((res) => {
+            console.log("delete actor", res)
+            dispatch(deleteActor(id));
+      });
+    };
+};
 export const deleteActor = (id) => {
     return {
         type: types.DELETE_ACTOR,

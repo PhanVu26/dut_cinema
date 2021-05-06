@@ -139,7 +139,7 @@ const mapDispatchToProps = (dispatch, props) =>{
             dispatch(actions.getActorInfo(actor))
         },
         onDeleteActor: (id) => {
-            dispatch(actions.deleteActor(id))
+            dispatch(actions.actDeleteActorsRequest(id))
         },
         // onUpdateUserStatus: (id) => {
         //     dispatch(actions.updateUserStatus(id))
