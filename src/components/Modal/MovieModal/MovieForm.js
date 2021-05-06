@@ -263,6 +263,19 @@ class MovieForm extends Component {
     saveMovie = (event) => {
         
         event.preventDefault();
+        const newMovie = this.state.movie;
+        const saveMovie = {
+            name: newMovie.name,
+            genreIds: newMovie.genres,
+            director:newMovie.director,
+            producer:newMovie.producer,
+            country:newMovie.country,
+            duration: parseInt(newMovie.duration),
+            actorIds: newMovie.actors,
+            releaseDate: newMovie.releaseDate,
+            description: newMovie.description
+
+        }
         if(this.validateMovie() === true) {
             if(this.props.movieInfo.id == ""){
                 //console.log("edit moive id", this.props.movieInfo.id)
@@ -271,23 +284,12 @@ class MovieForm extends Component {
                 const data = new FormData();
                 const newMovie = this.state.movie;
 
-                const saveMovie = {
-                    name: newMovie.name,
-                    genreIds: newMovie.genres,
-                    director:newMovie.director,
-                    producer:newMovie.producer,
-                    country:newMovie.country,
-                    duration: parseInt(newMovie.duration),
-                    actorIds: newMovie.actors,
-                    releaseDate: newMovie.releaseDate,
-                    description: newMovie.description
-
-                }
+                
                 console.log("newMovie", newMovie)
                 data.append("name", newMovie.name)
                 data.append("genreIds", newMovie.genres)
                 // data.append("director", newMovie.director)
-                data.append("duration", 100)
+                data.append("duration", parseInt(newMovie.duration))
                 data.append("producer", newMovie.producer)
                 data.append("country", newMovie.country)
                 data.append("actorIds", newMovie.actors)
@@ -301,8 +303,8 @@ class MovieForm extends Component {
 
 
 
-                this.props.onAddMovie(saveMovie)
-            }else this.props.onUpdateMovie(this.state.movie)
+                this.props.onAddMovie(data)
+            }else this.props.onUpdateMovie(saveMovie)
             this.props.onToggleMovieForm();          
         }else {
             this.setState({

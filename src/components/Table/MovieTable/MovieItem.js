@@ -82,7 +82,7 @@ class MovieItem extends Component {
                     </ul>
                 </td>
                 <td className="text-center">{movie.country}</td>
-                <td className="text-center">{movie.director}</td>
+                {/* <td className="text-center">{movie.director}</td> */}
                 <td className="text-center">{movie.producer}</td>
                 <td className="text-center">{movie.releaseDate}</td>
                 {/* <td className="text-center">
@@ -138,7 +138,7 @@ const mapDispatchToProps = (dispatch, props) =>{
             dispatch(actions.getMovieRequest(id))
         },
         onDeleteMovie: (id) => {
-            dispatch(actions.deleteMovie(id))
+            dispatch(actions.actDeleteMovieRequest(id))
         },
         // onUpdateUserStatus: (id) => {
         //     dispatch(actions.updateUserStatus(id))

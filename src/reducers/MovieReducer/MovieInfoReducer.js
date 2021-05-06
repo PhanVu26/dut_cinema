@@ -16,16 +16,24 @@ var initialState = {
 var myReducer = (state = initialState, action) => {
     switch(action.type){
         case types.EDIT_MOVIE:
+            var genres = []
+            var actors = []
+            if (action.movie.genres != undefined){
+                genres = action.movie.genres
+            }
+            if (action.movie.actors != undefined){
+                actors = action.movie.actors
+            }
             var movieInfo = {
                 id: action.movie.id,
                 name: action.movie.name,
-                genres: action.movie.genres? action.movie.genres:[],
+                genres: genres,
                 duration: action.movie.duration,
                 country: action.movie.country,
                 director: action.movie.director,
                 producer: action.movie.producer,
                 description: action.movie.description,
-                actors: action.movie.actors?action.movie.actors:[],
+                actors: actors,
                 image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
             }     

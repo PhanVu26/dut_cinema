@@ -91,7 +91,7 @@ class MovieList extends Component {
                         <th className="text-center">Hình ảnh phim</th>
                         <th className="text-center">Thể loại</th>
                         <th className="text-center">Quốc gia</th>
-                        <th className="text-center">Đạo diễn</th>
+                        {/* <th className="text-center">Đạo diễn</th> */}
                         <th className="text-center">Nhà sản xuất</th>
                         <th className="text-center">Ngày phát hành</th>
                         <th className="text-center">Hành Động</th>
@@ -120,7 +120,7 @@ class MovieList extends Component {
                             </select>
                         </td>
                         <td></td>
-                        <td>
+                        {/* <td>
                             <input 
                                 type="text"
                                 name="filterByDirector"
@@ -128,7 +128,7 @@ class MovieList extends Component {
                                 onChange={this.handleChange}
                                 value={this.state.filterByDirector}>
                             </input>
-                        </td>
+                        </td> */}
                         <td>
                             <input 
                                 type="text"

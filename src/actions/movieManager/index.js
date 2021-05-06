@@ -71,7 +71,16 @@ export const getMovie = (movie) => {
         movie
     }
 }
-
+export const actDeleteMovieRequest = (id) => {
+    return (dispatch) => {
+        return callApi(`movies/${id}`, 'DELETE', null).then((res) => {
+            //console.log("movie delete", movie)
+            console.log("res update", res)
+            dispatch(deleteMovie(id));
+          
+        });
+      };
+}
 export const deleteMovie = (id) => {
     return {
         type: types.DELETE_MOVIE,
@@ -81,9 +90,11 @@ export const deleteMovie = (id) => {
 
 export const actUpdateMovieRequest = (movie) => {
     return (dispatch) => {
-        return callApi(`movies/${movie.id}`, 'PUT', movie).then((res) => {
-          dispatch(updateMovie(res.data));
-          //console.log("res update", res.data)
+        return callApi(`movies/${movie.id}`, 'PATCH', movie).then((res) => {
+            console.log("movie update", movie)
+            console.log("res update", res.data)
+            dispatch(updateMovie(res.data));
+          
         });
       };
 }
