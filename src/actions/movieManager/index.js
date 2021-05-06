@@ -1,4 +1,5 @@
 import * as types from "../../constants/ActionType";
+
 export const listAllMovies = () => {
   return {
     type: types.LIST_ALL_MOVIES,
@@ -54,16 +55,5 @@ export const filterMovie = (filter) => {
   return {
     type: types.FILTER_MOVIE,
     filter,
-  };
-};
-
-export const getShowtime = (showtime) => {
-  return {
-    type: types.GET_SHOWTIME,
-    payload: {
-      movieId: showtime.movieId,
-      roomId: showtime.roomId,
-      date: showtime.date,
-    },
   };
 };

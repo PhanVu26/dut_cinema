@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../actions/movieManager/index";
+import * as actions2 from "../../../actions/showtimeManager/index";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { Button, Modal } from "react-bootstrap";
@@ -20,7 +21,7 @@ class EditShowTimePage extends Component {
         cinema: {
           id: "",
           name: "",
-          numOfRoom: "",
+          address: "",
         },
         room: "",
         date: "",
@@ -41,7 +42,7 @@ class EditShowTimePage extends Component {
     if (
       showtime.cinema.id === "" ||
       showtime.cinema.name === "" ||
-      showtime.cinema.numOfRoom === "" ||
+      showtime.cinema.address === "" ||
       showtime.room === "" ||
       showtime.date === ""
     ) {
@@ -69,14 +70,29 @@ class EditShowTimePage extends Component {
         optionRoom: [],
         showEdit: "hideMenu",
       });
-      const temp = {
-        movieId: this.state.movie.id,
-        cinemaId: this.state.showtime.cinema.id,
-        roomId: this.state.showtime.room,
-        date: this.state.showtime.date,
-      };
-      console.log(temp);
-      this.props.onLoadShowtime(temp);
+      let month = this.state.showtime.date.getMonth() + 1;
+      let day = this.state.showtime.date.getDay() + 1;
+      if (month < 10) {
+        month = "0" + month.toString();
+      } else {
+        month = month.toString();
+      }
+      if (day < 10) {
+        day = "0" + day.toString();
+      } else {
+        day = day.toString();
+      }
+      // let d = new Date();
+      // d.toISOString
+      let dateString =
+        this.state.showtime.date.getFullYear().toString() +
+        "-" +
+        month +
+        "-" +
+        day;
+      console.log(this.state.showtime.room, dateString);
+      this.props.onLoadShowtime(this.state.showtime.room, dateString);
+      this.props.onLoadMovies();
       this.setState({
         optionRoom: this.props.cinemaInfo.showtime,
         showEdit: "showMenu",
@@ -91,41 +107,49 @@ class EditShowTimePage extends Component {
   };
 
   addShowtime = (event) => {
-    const regexp = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
-    const val = this.state.addedShowtime;
-    const check = regexp.exec(val);
-    if (check != null) {
-      const arr = this.state.optionRoom;
-      const temp = val.split(":");
-      let hours = parseInt(temp[0]);
-      let minutes = parseInt(temp[1]);
-      hours += 1;
-      if (hours == 24) hours = 0;
-      let end =
-        (hours < 10 ? "0" + hours.toString() : hours.toString()) +
-        ":" +
-        (minutes < 10 ? "0" + minutes.toString() : minutes.toString());
-      const obj = {
-        id: this.state.optionRoom.length + 1,
-        startTime: val,
-        endTime: end,
-      };
-      arr.push(obj);
-      arr.sort(function (a, b) {
-        var keyA = a.startTime,
-          keyB = b.startTime;
-        // Compare the 2 dates
-        if (keyA < keyB) return -1;
-        if (keyA > keyB) return 1;
-        return 0;
-      });
-      this.setState({ optionRoom: arr, checkMessage: "" });
-    } else {
+    if (
+      this.state.addHour === -1 ||
+      this.state.addMinute === -1 ||
+      this.state.movie.id === ""
+    ) {
       this.setState({ checkMessage: "error" });
+    } else {
+      let month = this.state.showtime.date.getMonth() + 1;
+      let day = this.state.showtime.date.getDay() + 1;
+      if (month < 10) {
+        month = "0" + month.toString();
+      } else {
+        month = month.toString();
+      }
+      if (day < 10) {
+        day = "0" + day.toString();
+      } else {
+        day = day.toString();
+      }
+      // let d = new Date();
+      // d.toISOString
+      let dateString =
+        this.state.showtime.date.getFullYear().toString() +
+        "-" +
+        month +
+        "-" +
+        day;
+      const temp = {
+        date: dateString,
+        hour: this.state.addHour,
+        minute: this.state.addMinute,
+        advertiseTime: 10,
+        roomId: this.state.showtime.room,
+        movieId: this.state.movie.id,
+      };
+      console.log("addshowtime: ", temp);
+      actions2.actAddShowtimeRequest(temp).then((res) => console.log(res));
+      this.setState({ checkMessage: "" });
     }
   };
 
   render() {
+    console.log("abc: ", this.props.cinemaInfo.cinema);
     const movies = this.props.movies;
     return (
       <div>
@@ -140,32 +164,54 @@ class EditShowTimePage extends Component {
                 <select
                   className="mr-2 ml-2"
                   onChange={(e) => {
-                    const temp = this.props.cinemaInfo.cinema[e.target.value];
-                    const temp2 = [];
-                    for (let i = 1; i <= temp.numOfRoom; i++) temp2.push(i);
                     const temp3 = [];
                     const temp4 = [];
                     for (let i = 0; i < 24; i++) temp3.push(i);
                     for (let i = 0; i < 60; i++) temp4.push(i);
-                    this.setState((prevState) => ({
-                      showtime: {
-                        ...prevState.showtime,
-                        cinema: {
-                          ...temp,
+                    let temp = { id: "", name: "", address: "" };
+                    if (e.target.value == 0) {
+                      this.setState((prevState) => ({
+                        showtime: {
+                          ...prevState.showtime,
+                          cinema: {
+                            ...temp,
+                          },
+                          room: "",
+                          date: "",
                         },
-                        room: "",
-                        date: "",
-                      },
-                      showRoom: temp2,
-                      hourPicker: temp3,
-                      minutePicker: temp4,
-                    }));
+                        showRoom: [],
+                        hourPicker: temp3,
+                        minutePicker: temp4,
+                      }));
+                    } else {
+                      temp = this.props.cinemaInfo.cinema.filter(
+                        (item) => item.id === parseInt(e.target.value)
+                      );
+                      temp = temp[0];
+                      this.props.onLoadCinemaRooms(parseInt(e.target.value));
+                      console.log(this.props.cinemaInfo.rooms);
+                      this.setState((prevState) => ({
+                        showtime: {
+                          ...prevState.showtime,
+                          cinema: {
+                            ...temp,
+                          },
+                          room: "",
+                          date: "",
+                        },
+                        showRoom: this.props.cinemaInfo.rooms,
+                        hourPicker: temp3,
+                        minutePicker: temp4,
+                      }));
+                    }
+                    // const temp2 = [];
+                    // for (let i = 1; i <= temp.numOfRoom; i++) temp2.push(i);
                   }}
                 >
-                  <option key={0}></option>
+                  <option key={0} value={0}></option>
                   {this.props.cinemaInfo.cinema.map((item, index) => {
                     return (
-                      <option key={index + 1} value={index}>
+                      <option key={index + 1} value={item.id}>
                         {item.name}
                       </option>
                     );
@@ -183,16 +229,16 @@ class EditShowTimePage extends Component {
                     this.setState((prevState) => ({
                       showtime: {
                         ...prevState.showtime,
-                        room: e.target.value,
+                        room: parseInt(e.target.value),
                       },
                     }));
                   }}
                 >
                   <option key={0}></option>
-                  {this.state.showRoom.map((item, index) => {
+                  {this.props.cinemaInfo.rooms.map((item, index) => {
                     return (
-                      <option key={index + 1} value={item}>
-                        {item}
+                      <option key={index + 1} value={item.id}>
+                        {item.roomNumber}
                       </option>
                     );
                   })}
@@ -216,7 +262,7 @@ class EditShowTimePage extends Component {
                     }))
                   }
                   dateFormat="dd/MM/yyyy"
-                  minDate={new Date()}
+                  // minDate={new Date()}
                 />
                 <p>{this.state.showtime.date.toString()}</p>
               </div>
@@ -282,14 +328,13 @@ class EditShowTimePage extends Component {
                      */}
                 <select
                   className="mr-2 ml-2"
-                  value={this.state.addHour}
                   onChange={(e) => {
                     this.setState((prevState) => ({
-                      addHour: e.target.value,
+                      addHour: parseInt(e.target.value),
                     }));
                   }}
                 >
-                  <option key={-1}></option>
+                  <option key={-1} value={-1}></option>
 
                   {this.state.hourPicker.map((item, index) => {
                     return (
@@ -302,14 +347,13 @@ class EditShowTimePage extends Component {
                 <p>{this.state.addHour}</p>
                 <select
                   className="mr-2 ml-2"
-                  value={this.state.addMinute}
                   onChange={(e) => {
                     this.setState((prevState) => ({
-                      addMinute: e.target.value,
+                      addMinute: parseInt(e.target.value),
                     }));
                   }}
                 >
-                  <option key={-1}></option>
+                  <option key={-1} value={-1}></option>
 
                   {this.state.minutePicker.map((item, index) => {
                     return (
@@ -326,21 +370,31 @@ class EditShowTimePage extends Component {
               <label>Chọn phim: </label>
               <select
                 className="mr-2 ml-2"
-                value={this.state.movie.name}
                 onChange={(e) => {
-                  const movie_temp = movies.filter(
-                    (item) => item.id === e.target.value
-                  );
-                  this.setState((prevState) => ({
-                    movie: {
-                      id: movie_temp.id,
-                      name: movie_temp.name,
-                    },
-                  }));
+                  let val = parseInt(e.target.value);
+                  if (val === 0) {
+                    this.setState((prevState) => ({
+                      movie: {
+                        id: "",
+                        name: "",
+                      },
+                    }));
+                  } else {
+                    let movie_temp = this.props.cinemaInfo.movie.filter(
+                      (item) => item.id === val
+                    );
+                    movie_temp = movie_temp[0];
+                    this.setState((prevState) => ({
+                      movie: {
+                        id: movie_temp.id,
+                        name: movie_temp.name,
+                      },
+                    }));
+                  }
                 }}
               >
-                <option key={0}></option>
-                {movies.map((item, index) => {
+                <option key={0} value={0}></option>
+                {this.props.cinemaInfo.movie.map((item, index) => {
                   return (
                     <option key={index + 1} value={item.id}>
                       {item.name}
@@ -366,10 +420,10 @@ class EditShowTimePage extends Component {
               : "Vui lòng nhập đúng định dạng"}
           </h5>
           <div className="booklist">
-            {this.state.optionRoom.map((item) => {
+            {this.props.cinemaInfo.showtimes.map((item) => {
               return (
                 <article className="book">
-                  <img src={item.movie.thumbnail} alt="" />
+                  <img src={item.movie.image} alt="" />
                   <h4>{item.movie.name}</h4>
                   <button
                     type="button"
@@ -380,7 +434,8 @@ class EditShowTimePage extends Component {
                     <span className="far fa-trash-alt"></span>
                   </button>
                   <label>
-                    {item.startTime} - {item.endTime}
+                    {item.startTime.slice(11, 16)} -{" "}
+                    {item.endTime.slice(11, 16)}
                   </label>
                 </article>
               );
@@ -413,9 +468,14 @@ const mapDispatchToProps = (dispatch, props) => {
     onGetMovieInfo: (movie) => {
       dispatch(actions.getMovieInfo(movie));
     },
-    onLoadShowtime: (showtime) => {
-      console.log("dispatch");
-      dispatch(actions.getShowtime(showtime));
+    onLoadShowtime: (roomId, dateString) => {
+      dispatch(actions2.actFetchShowtimesRequest(roomId, dateString));
+    },
+    onLoadCinemaRooms: (cinemaId) => {
+      dispatch(actions2.actFetchRoomDataRequest(cinemaId));
+    },
+    onLoadMovies: () => {
+      dispatch(actions2.actFetchMoviesRequest());
     },
     // // onDeleteUser: (id) => {
     // //     dispatch(actions.deleteUser(id))
