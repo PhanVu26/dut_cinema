@@ -22,6 +22,14 @@ export const listAllActors = () => {
     }
 }
 
+export const actSaveActorsRequest = (actor) => {
+    return (dispatch) => {
+        return callApi("actors", "POST", actor).then((res) => {
+            console.log("post actor", res.data)
+            dispatch(actFetchDataActors(res.data));
+      });
+    };
+};
 
 export const saveActor = (actor) => {
     return {

@@ -11,6 +11,7 @@ import Pagination from '../../../components/Pagination/Pagination';
 import ActorControl from '../../../components/Control/ActorControl/ActorControl';
 import ActorList from '../../../components/Table/ActorTable/ActorList';
 import ActorForm from '../../../components/Modal/ActorModal/ActorForm';
+import * as actorActions from '../../../actions/actorManager/index'
 class ActorManager extends Component{
     constructor(props) {
         super(props);
@@ -24,7 +25,7 @@ class ActorManager extends Component{
         };
       }
       componentDidMount() {
-        // this.props.fetchAllProducts();
+        this.props.fetchDataActors();
         this.setState({
           totalRecords: this.props.actors.length
         });
@@ -121,7 +122,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch, props) =>{
-
+    return {
+        fetchDataActors : () => {
+            dispatch(actorActions.actFetchDataActorsRequest())
+        }
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActorManager);

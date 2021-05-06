@@ -2,72 +2,70 @@ import * as types from "../../constants/ActionType";
 var initialState = [
     
         
-    {   
-        id: 1,
-        name: "Phan Văn Vũ",
-        birthday: "10/10/1999",
-        nationality: "Việt Nam",
-        image: "",
-        description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
-    },
-    {   
-        id: 2,
-        name: "Phan Văn Anh",
-        image: "",
-        nationality: "Việt Nam",
-        birthday: "10/10/1999",
-        description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
-    },
-    {   
-        id: 3,
-        name: "Phan Văn Nam",
-        image: "",
-        nationality: "Việt Nam",
-        birthday: "10/10/1999",
-        description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
-    },
-    {   
-        id: 4,
-        name: "Phan Văn Tài",
-        image: "",
-        nationality: "Việt Nam",
-        birthday: "10/10/1999",
-        description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
-    },
-    {   
-        id: 5,
-        name: "Phan Văn Thành",
-        image: "",
-        nationality: "Việt Nam",
-        birthday: "10/10/1999",
-        description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
-    },
-    {   
-        id: 6,
-        name: "Phan Văn Tạo",
-        image: "",
-        nationality: "Việt Nam",
-        birthday: "10/10/1999",
-        description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
-    },
-    {   
-        id: 7,
-        name: "Phan Văn Vũ",
-        image: "",
-        nationality: "Việt Nam",
-        birthday: "10/10/1999",
-        description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
-    },
-    {   
-        id: 8,
-        name: "Phan Văn Anh Nam",
-        image: "",
-        nationality: "Việt Nam",
-        birthday: "10/10/1999",
-        description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
-    },
-        
-    
+//     {   
+//         id: 1,
+//         name: "Phan Văn Vũ",
+//         birthday: "10/10/1999",
+//         nationality: "Việt Nam",
+//         image: "",
+//         description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
+//     },
+//     {   
+//         id: 2,
+//         name: "Phan Văn Anh",
+//         image: "",
+//         nationality: "Việt Nam",
+//         birthday: "10/10/1999",
+//         description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
+//     },
+//     {   
+//         id: 3,
+//         name: "Phan Văn Nam",
+//         image: "",
+//         nationality: "Việt Nam",
+//         birthday: "10/10/1999",
+//         description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
+//     },
+//     {   
+//         id: 4,
+//         name: "Phan Văn Tài",
+//         image: "",
+//         nationality: "Việt Nam",
+//         birthday: "10/10/1999",
+//         description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
+//     },
+//     {   
+//         id: 5,
+//         name: "Phan Văn Thành",
+//         image: "",
+//         nationality: "Việt Nam",
+//         birthday: "10/10/1999",
+//         description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
+//     },
+//     {   
+//         id: 6,
+//         name: "Phan Văn Tạo",
+//         image: "",
+//         nationality: "Việt Nam",
+//         birthday: "10/10/1999",
+//         description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
+//     },
+//     {   
+//         id: 7,
+//         name: "Phan Văn Vũ",
+//         image: "",
+//         nationality: "Việt Nam",
+//         birthday: "10/10/1999",
+//         description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
+//     },
+//     {   
+//         id: 8,
+//         name: "Phan Văn Anh Nam",
+//         image: "",
+//         nationality: "Việt Nam",
+//         birthday: "10/10/1999",
+//         description: "Trấn Thành tên khai sinh Huỳnh Trấn Thành (sinh ngày 5 tháng 2 năm 1987) là một diễn viên hài, người dẫn chương trình, diễn viên lồng tiếng và diễn viên điện ảnh người Việt Nam. Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh Xem thêm tại: https://www.galaxycine.vn/dien-vien/tran-thanh"
+//     },
 ];
 
 const findIndex = (actors, id) => {

@@ -58,7 +58,11 @@ class ActorForm extends Component {
     saveActor = (event) => {
         event.preventDefault();
         if(this.validateActor() === true) {
-            this.props.onSaveActor(this.state.actor)
+            const saveActor = {
+                name: this.state.actor.name,
+                description: this.state.actor.description
+            } 
+            this.props.onSaveActor(saveActor)
             this.props.onToggleActorForm()
             
         }else {
@@ -89,6 +93,7 @@ class ActorForm extends Component {
            <div>  
             <Modal 
                 show={isDisplayActorForm} 
+                onHide = {this.props.onToggleActorForm}
                 size="lg"
                 style={{maxWidth: '100%', width: '100%'}}>
                 <Modal.Header>{actorEditing.id === "" ? "Taọ diễn viên mới" : "Chỉnh sửa thông tin diễn viên"}</Modal.Header>
@@ -191,7 +196,7 @@ const mapDispatchToProps = (dispatch, props) =>{
             dispatch(actions.toggleActorForm())
         },
         onSaveActor: (actor) => {
-            dispatch(actions.saveActor(actor))
+            dispatch(actions.actSaveActorsRequest(actor))
         },
         onGetActorEditing : (actor) => {
             dispatch(actions.getActorInfo(actor))
