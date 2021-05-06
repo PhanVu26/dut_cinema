@@ -111,7 +111,7 @@ class Pagination extends Component {
 
     return (
       <ul className="pagination">
-        <NavLink to={"movies?page=1&perPage=" + this.state.pageLimit}>
+        <a>
           <li className={pager.currentPage === 1 ? 'page-item disabled' : 'page-item'}>
             <button 
               className='page-link'
@@ -120,8 +120,8 @@ class Pagination extends Component {
               Đầu
             </button>
           </li>
-        </NavLink>
-        <NavLink to={"movies?page=" + pager.currentPage + "&perPage=" + this.state.pageLimit}>
+        </a>
+        <a>
           <li className={pager.currentPage === 1 ? 'page-item disabled' : 'page-item'}>
             <button 
               className='page-link'
@@ -130,9 +130,9 @@ class Pagination extends Component {
               Sau
             </button>
           </li>
-        </NavLink>  
+        </a>  
         {pager.pages.map((page, index) => (
-          <NavLink to={"movies?page=" + page + "&perPage=" + this.state.pageLimit}>
+          <a>
             <li key={index} className={pager.currentPage === page ? "active page-item" : "page-item"}>
               <button
                 className='page-link'
@@ -141,9 +141,9 @@ class Pagination extends Component {
                 {page}
               </button>
             </li>
-          </NavLink>
+          </a>
         ))}
-        <NavLink to={"movies?page=" + pager.currentPage + "&perPage=" + this.state.pageLimit}>
+        <a>
           <li className={pager.currentPage === pager.totalPages ? 'page-item disabled' : 'page-item'}>
             <button
               className='page-link'
@@ -152,8 +152,8 @@ class Pagination extends Component {
               Tiếp
             </button>
           </li>
-        </NavLink>  
-        <NavLink to={"movies?page=" + this.state.totalPages + "&perPage=" + this.state.pageLimit}>
+        </a>  
+        <a>
           <li className={pager.currentPage === pager.totalPages ? 'page-item disabled' : 'page-item'}>
             <button
               className='page-link'
@@ -162,7 +162,7 @@ class Pagination extends Component {
               Cuối
             </button>
           </li>
-        </NavLink>
+        </a>
       </ul>
     );
   }
