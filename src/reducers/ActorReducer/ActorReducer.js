@@ -92,24 +92,22 @@ var myReducer = (state = initialState, action) => {
             var newActor = {
                 id: action.actor.id,
                 name: action.actor.name,
-                birthday: action.actor.birthday,
-                nationality: action.actor.nationality,
-                image: action.actor.image,
+                // birthday: action.actor.birthday,
+                // nationality: action.actor.nationality,
+                // image: action.actor.image,
                 description : action.actor.description,
             }
-            if(!newActor.id){
-                newActor.id = randomId();
-                state.push(newActor);
-            } else {
-                index = findIndex(state, newActor.id);
-                let editActor = {...state[index]};
-                editActor.name = newActor.name;
-                editActor.image = newActor.image;
-                editActor.birthday = newActor.birthday;
-                editActor.description = newActor.description;
-                editActor.nationality = newActor.nationality;
-                state[index] = editActor;
-            }
+            state.push(newActor);
+            // } else {
+            //     index = findIndex(state, newActor.id);
+            //     let editActor = {...state[index]};
+            //     editActor.name = newActor.name;
+            //     editActor.image = newActor.image;
+            //     editActor.birthday = newActor.birthday;
+            //     editActor.description = newActor.description;
+            //     editActor.nationality = newActor.nationality;
+            //     state[index] = editActor;
+            // }
             return [...state];    
         case types.DELETE_ACTOR:
             index = findIndex(state, action.id)

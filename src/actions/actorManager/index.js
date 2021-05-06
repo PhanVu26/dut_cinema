@@ -26,7 +26,7 @@ export const actSaveActorsRequest = (actor) => {
     return (dispatch) => {
         return callApi("actors", "POST", actor).then((res) => {
             console.log("post actor", res.data)
-            dispatch(actFetchDataActors(res.data));
+            dispatch(saveActor(res.data));
       });
     };
 };
@@ -68,5 +68,21 @@ export const filterActor = (filter) => {
     return {
         type: types.FILTER_ACTOR,
         filter
+    }
+}
+
+export const actUpdateActorsRequest = (actor) => {
+    return (dispatch) => {
+        return callApi("actors"/`${actor.id}`, "PATCH", actor).then((res) => {
+            console.log("post actor", res.data)
+            dispatch(actUpdateActor(res.data));
+      });
+    };
+};
+
+export const actUpdateActor = (actor) => {
+    return {
+        type: types.UPDATE_ACTOR,
+        actor
     }
 }
