@@ -88,9 +88,9 @@ export const deleteMovie = (id) => {
     }
 }
 
-export const actUpdateMovieRequest = (movie) => {
+export const actUpdateMovieRequest = (movie, id) => {
     return (dispatch) => {
-        return callApi(`movies/${movie.id}`, 'PATCH', movie).then((res) => {
+        return callApi(`movies/${id}`, 'PATCH', movie).then((res) => {
             console.log("movie update", movie)
             console.log("res update", res.data)
             dispatch(updateMovie(res.data));

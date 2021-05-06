@@ -277,11 +277,7 @@ class MovieForm extends Component {
 
         }
         if(this.validateMovie() === true) {
-            if(this.props.movieInfo.id == ""){
-                //console.log("edit moive id", this.props.movieInfo.id)
-                console.log("save movie", this.state.movie.duration)
-
-                const data = new FormData();
+            const data = new FormData();
                 const newMovie = this.state.movie;
 
                 
@@ -294,17 +290,21 @@ class MovieForm extends Component {
                 data.append("country", newMovie.country)
                 data.append("actorIds", newMovie.actors)
                 data.append("releaseDate", newMovie.releaseDate)
-                // data.append("mainImage", newMovie.mainImage)
-                // data.append("thumbnailImage", newMovie.thumbnailImage)
+                data.append("mainImage", newMovie.mainImage)
+                data.append("thumbnailImage", newMovie.thumbnailImage)
                 data.append("description", newMovie.description)
 
                 console.log("form-data: ---", data)
                 console.log("image", data.mainImage);
-
-
-
+            if(this.props.movieInfo.id == ""){
+                //console.log("edit moive id", this.props.movieInfo.id)
+                console.log("save movie", this.state.movie.duration)
                 this.props.onAddMovie(data)
-            }else this.props.onUpdateMovie(saveMovie)
+            }else {
+                //data.append("id", newMovie.id)
+                console.log("data update", data)
+                this.props.onUpdateMovie(data, newMovie.id)
+            }
             this.props.onToggleMovieForm();          
         }else {
             this.setState({
@@ -342,6 +342,11 @@ class MovieForm extends Component {
         actors = actors.filter((actor) => {
             return actor.name.toLowerCase().indexOf(this.state.filterActor.toLowerCase()) !== -1
         })
+        let showImage = null;
+        if(movie.id){
+            showImage = movie.image.thumbnailUrl
+        }else showImage = this.state.previewImage;
+        console.log("show image", showImage, this.state.previewImage, movie.id)
 
         return (
            <div>  
@@ -440,7 +445,7 @@ class MovieForm extends Component {
                                     
                                     />
                                     <img 
-                                        src={movieInfo.id?movieInfo.image.thumbnailImage:this.state.previewImage} 
+                                        src={movie.id?movie.image.thumbnailUrl:this.state.previewImage} 
                                         width='200px'
                                         height='200px'
                                     ></img>
@@ -543,8 +548,8 @@ const mapDispatchToProps = (dispatch, props) =>{
         onGetMovie : (id) => {
             dispatch(actions.getMovieRequest(id))
         },
-        onUpdateMovie : (movie) => {
-            dispatch(actions.actUpdateMovieRequest(movie))
+        onUpdateMovie : (movie, id) => {
+            dispatch(actions.actUpdateMovieRequest(movie, id))
         }
         // // onDeleteUser: (id) => {
         // //     dispatch(actions.deleteUser(id))
