@@ -166,16 +166,18 @@ class MovieForm extends Component {
             //console.log("showActorBox", this.state.selectedActors?.some(act => act.id == actor.id))
             return (
                 <div className="actor-item ml-3" key={index}>
-                    <img src={testImage} width="30px" height="30px">
-                    </img>
-                    <label htmlFor={'actor'+actor.id} className="mr-2">{actor.name}</label>
                     <input 
                         checked = {this.state.selectedActors?.some(act => act.id == actor.id)}
                         className="actor-checkbox"
                         type="checkbox" 
                         id={'actor'+actor.id} 
                         onChange = {this.onHandleChange} 
-                        value={actor.id}></input><br></br>
+                        value={actor.id}></input>
+                    <img className="ml-2" src={testImage} width="30px" height="30px">
+                    </img>
+
+                    <label htmlFor={'actor'+actor.id} className="ml-2">{actor.name}</label>
+                    
                        
                 </div>
             ) 
@@ -223,14 +225,15 @@ class MovieForm extends Component {
         results = genres?.map((genre, index) => {
             return (
                 <div className="genre-item ml-3" key={index}>
-                    <label htmlFor={'genre'+genre.id} className="mr-2">{genre.name}</label>
                     <input 
                         checked = {this.state.selectedGenres?.some(g => g.id == genre.id)}
                         className="genre-checkbox"
                         type="checkbox" 
                         id={'genre'+genre.id} 
                         onChange = {this.onHandleChange} 
-                        value={genre.id}></input><br></br>
+                        value={genre.id}></input>
+                    <label htmlFor={'genre'+genre.id} className="ml-2">{genre.name}</label>
+                    
                        
                 </div>
             ) 
