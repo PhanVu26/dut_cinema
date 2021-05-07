@@ -232,9 +232,7 @@ class MovieForm extends Component {
                         id={'genre'+genre.id} 
                         onChange = {this.onHandleChange} 
                         value={genre.id}></input>
-                    <label htmlFor={'genre'+genre.id} className="ml-2">{genre.name}</label>
-                    
-                       
+                    <label htmlFor={'genre'+genre.id} className="ml-2">{genre.name}</label>           
                 </div>
             ) 
         })

@@ -7,6 +7,7 @@ import MovieManager from './MovieManager/index';
 import ActorManager from './ActorManager/index';
 import Navbar from '../../components/manager/Navbar/Navbar';
 import Footer from '../../components/manager/Footer/Footer';
+import UserProfile from '../UserProfile/UserProfile';
 
 class ManagerPage extends Component{
     constructor(props) {
@@ -28,6 +29,7 @@ class ManagerPage extends Component{
             <Switch>
                     <Route path="/manager/movies" exact component={MovieManager}></Route>  
                     <Route path="/manager/actors" exact component={ActorManager}></Route>  
+                    <Route path="/manager/profile" exact component={UserProfile}></Route>  
             </Switch>
             <Footer></Footer>
         </Router>

@@ -16,8 +16,8 @@ const SlideBar = (props) => {
                         className="fas fa-home fa-lg mr-3 text-white"></i>DashBoard</a>
                 </li>
                 <li className="nav-item">
-                    <a href="#" className="nav-link text-white p-2 mb-2 sidebar-link"><i
-                        className="fas fa-user fa-lg mr-4 text-white"></i>Profile</a>
+                    <NavLink to="/manager/profile" className="nav-link text-white p-2 mb-2 sidebar-link"><i
+                        className="fas fa-user fa-lg mr-4 text-white"></i>Profile</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink to="/manager/movies" className="nav-link text-white p-2 mb-2 sidebar-link"><i
