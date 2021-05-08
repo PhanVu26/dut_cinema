@@ -70,3 +70,7 @@ export const actFetchMoviesRequest = () => {
 export const actAddShowtimeRequest = (showtime) => {
   return callApi("showtimes", "POST", showtime);
 };
+
+export const actDeleteShowtimeRequest = (showtimeID) => {
+  return callApi(`showtimes/${showtimeID}`, "DELETE", null);
+};
