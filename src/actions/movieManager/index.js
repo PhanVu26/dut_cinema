@@ -2,10 +2,22 @@ import * as types from "../../constants/ActionType";
 import callApi from "../../utils/ApiCallerServer";
 
 export const listAllMovies = () => {
-    return {
-        type: types.LIST_ALL_MOVIES
-    }
-}
+  return {
+    type: types.LIST_ALL_MOVIES,
+  };
+};
+
+export const listAllGenres = () => {
+  return {
+    type: types.LIST_ALL_GENRES,
+  };
+};
+
+export const listAllActors = () => {
+  return {
+    type: types.LIST_ALL_ACTORS,
+  };
+};
 
 export const actFetchDataGenresRequest = () => {
     return (dispatch) => {
@@ -22,11 +34,7 @@ export const actFetchDataGenres = (genres) => {
     }
 }
 
-export const listAllActors = () => {
-    return {
-        type: types.LIST_ALL_ACTORS
-    }
-}
+
 
 export const actAddMovieRequest = (movie) => {
     console.log("p movie", movie)
@@ -44,18 +52,24 @@ export const addMovie = (movie) => {
         movie
     }
 }
+export const saveMovie = (movie) => {
+  return {
+    type: types.SAVE_MOVIE,
+    movie,
+  };
+};
 
 export const toggleModal = () => {
-    return {
-        type: types.TOGGLE_MOVIE_MODAL,
-    }
-}
+  return {
+    type: types.TOGGLE_MOVIE_MODAL,
+  };
+};
 
 export const toggleMovieForm = () => {
-    return {
-        type: types.TOGGLE_MOVIE_FORM,
-    }
-}
+  return {
+    type: types.TOGGLE_MOVIE_FORM,
+  };
+};
 
 export const getMovieRequest = (id) => {
     return (dispatch) => {
@@ -81,12 +95,7 @@ export const actDeleteMovieRequest = (id) => {
         });
       };
 }
-export const deleteMovie = (id) => {
-    return {
-        type: types.DELETE_MOVIE,
-        id
-    }
-}
+
 
 export const actUpdateMovieRequest = (movie, id) => {
     return (dispatch) => {
@@ -128,3 +137,17 @@ export const actFetchDataMoviesRequest = () => {
       movies,
     };
   };
+export const getMovieInfo = (movie) => {
+  return {
+    type: types.GET_MOVIE_INFO,
+    movie,
+  };
+};
+
+export const deleteMovie = (id) => {
+  return {
+    type: types.DELETE_MOVIE,
+    id,
+  };
+};
+

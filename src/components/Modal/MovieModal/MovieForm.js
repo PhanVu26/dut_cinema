@@ -56,6 +56,7 @@ class MovieForm extends Component {
     }
 
     onHandleChange = (e) => {
+        //console.log("e ,", e)
         var target = e.target;
         var name = target.name;
         var value = target.value;
@@ -331,6 +332,7 @@ class MovieForm extends Component {
         }
     }
     render() {
+
         const {isDisplayMovieForm} = this.props;
         const {movie} = this.state
         const movieInfo = this.props.movieInfo;
