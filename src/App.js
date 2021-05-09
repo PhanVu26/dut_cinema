@@ -9,6 +9,7 @@ import UserManagementPage from './pages/admin/UserManagementPage';
 import MovieManager from './pages/manager/MovieManager';
 import ActorManager from './pages/manager/ActorManager/index';
 import ManagerPage from './pages/manager/index';
+import Login from './pages/Login/Login';
 function App() {
   return (
     <div className="App">
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path="/manager"> 
             <ManagerPage></ManagerPage>
+          </Route>
+          <Route path="/login"> 
+            <Login></Login>
           </Route>
         </Switch>
       </Router>

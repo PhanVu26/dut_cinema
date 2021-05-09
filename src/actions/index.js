@@ -1,4 +1,6 @@
+import axios from "axios";
 import * as types from "../constants/ActionType";
+
 export const listAllUsers = () => {
     return {
         type: types.LIST_ALL_USERS
@@ -44,4 +46,15 @@ export const filterUser = (filter) => {
         type: types.FILTER_USER,
         filter
     }
+}
+
+
+// Test Login
+export const actLoginAccountRequest = (account) => {
+    //return callApi("auth/login", "POST", account);
+    axios.interceptors.request.use(function (config) {
+      return config;
+    }, function (error) {
+      return Promise.reject(error);
+    });
 }

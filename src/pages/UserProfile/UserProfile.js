@@ -21,6 +21,7 @@ class UserProfile extends Component {
         super(props);
     }
     render(){
+        const userName = sessionStorage.getItem("name")
         return (
             <section>
                 <div className="container-fluid">
@@ -49,7 +50,7 @@ class UserProfile extends Component {
                                             </Col>
                                             <Col className="px-1" md="3">
                                             <Form.Group>
-                                                <label>Username</label>
+                                                <label>{userName}</label>
                                                 <Form.Control
                                                 defaultValue="michael23"
                                                 placeholder="Username"
@@ -176,7 +177,7 @@ class UserProfile extends Component {
                                             height="100px"
                                             src={testAvatar}
                                             ></img>
-                                            <h5 className="title">Mike Andrew</h5>
+                                            <h5 className="title">{userName}</h5>
                                         </a>
                                         <p className="description">michael24</p>
                                         </div>

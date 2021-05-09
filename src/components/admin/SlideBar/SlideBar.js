@@ -1,13 +1,15 @@
 import React from "react"
 
 const SlideBar = (props) => {
+    const userName = sessionStorage.getItem("name");
+    const role = sessionStorage.getItem("role");
     return (          
         <div className="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top sidebar-side">
-            <a href="#" className="navbar-brand text-white mx-auto text-center bottom-border py-3 mb-4 d-block">Admin</a>
+            <a href="#" className="navbar-brand text-white mx-auto text-center bottom-border py-3 mb-4 d-block">{role}</a>
             <div className="bottom-border text-center">
                 <img src="https://images.pexels.com/photos/532220/pexels-photo-532220.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=640"
                     width="50" className="rounded-circle" alt="" />
-                <a href="" className="text-white">Phan Vũ</a>
+                <a href="" className="text-white">{userName}</a>
             </div>
             <ul className="navbar-nav mt-4 flex-column ">
                 <li className="nav-item ">
