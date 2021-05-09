@@ -46,6 +46,7 @@ class MovieForm extends Component {
       hourPicker: [],
       minutePicker: [],
       showEdit: "hideMenu",
+      optionRoom: [],
     };
   }
 
@@ -384,7 +385,6 @@ class MovieForm extends Component {
   //   }
   //   return arr;
   // }
-
   render() {
     const { isDisplayMovieForm } = this.props;
     const { movie } = this.state;
@@ -441,6 +441,7 @@ class MovieForm extends Component {
                               ...temp,
                             },
                             room: "",
+
                             date: "",
                           },
                           showRoom: temp2,
@@ -449,6 +450,7 @@ class MovieForm extends Component {
                         }));
                       }}
                     >
+                     
                       <option key={0}></option>
                       {this.props.cinemaInfo.cinema.map((item, index) => {
                         return (
@@ -509,7 +511,10 @@ class MovieForm extends Component {
                   </div>
                 </div>
                 <div className="col-md-6 col-lg-6">
+
                   <Button onClick={this.loadShowtime}>Load</Button>
+                  <Button onClick={this.saveMovie}>Load</Button>
+
                 </div>
               </div>
             </form>
