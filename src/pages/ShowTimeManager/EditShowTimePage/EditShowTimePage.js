@@ -90,7 +90,6 @@ class EditShowTimePage extends Component {
         month +
         "-" +
         day;
-      console.log(this.state.showtime.room, dateString);
       this.props.onLoadShowtime(this.state.showtime.room, dateString);
       this.props.onLoadMovies();
       this.setState({
@@ -114,38 +113,51 @@ class EditShowTimePage extends Component {
     ) {
       this.setState({ checkMessage: "error" });
     } else {
-      let month = this.state.showtime.date.getMonth() + 1;
-      let day = this.state.showtime.date.getDay() + 1;
-      if (month < 10) {
-        month = "0" + month.toString();
-      } else {
-        month = month.toString();
+      var result = window.confirm("Want to create new showtime?");
+      if (result) {
+        let month = this.state.showtime.date.getMonth() + 1;
+        let day = this.state.showtime.date.getDay() + 1;
+        if (month < 10) {
+          month = "0" + month.toString();
+        } else {
+          month = month.toString();
+        }
+        if (day < 10) {
+          day = "0" + day.toString();
+        } else {
+          day = day.toString();
+        }
+        // let d = new Date();
+        // d.toISOString
+        let dateString =
+          this.state.showtime.date.getFullYear().toString() +
+          "-" +
+          month +
+          "-" +
+          day;
+        const temp = {
+          date: dateString,
+          hour: this.state.addHour,
+          minute: this.state.addMinute,
+          advertiseTime: 10,
+          roomId: this.state.showtime.room,
+          movieId: this.state.movie.id,
+        };
+        actions2.actAddShowtimeRequest(temp).then((res) => console.log(res));
+        this.setState({ checkMessage: "" });
       }
-      if (day < 10) {
-        day = "0" + day.toString();
-      } else {
-        day = day.toString();
-      }
-      // let d = new Date();
-      // d.toISOString
-      let dateString =
-        this.state.showtime.date.getFullYear().toString() +
-        "-" +
-        month +
-        "-" +
-        day;
-      const temp = {
-        date: dateString,
-        hour: this.state.addHour,
-        minute: this.state.addMinute,
-        advertiseTime: 10,
-        roomId: this.state.showtime.room,
-        movieId: this.state.movie.id,
-      };
-      console.log("addshowtime: ", temp);
-      actions2.actAddShowtimeRequest(temp).then((res) => console.log(res));
-      this.setState({ checkMessage: "" });
     }
+
+    // this.loadShowtime();
+  };
+
+  deleteShowtime = (e) => {
+    const showtimeId = parseInt(e.currentTarget.value);
+    var result = window.confirm("Want to delete this showtime?");
+    if (result) {
+      actions2.actDeleteShowtimeRequest(showtimeId);
+    }
+    // this.loadShowtime();
   };
 
   render() {
@@ -153,7 +165,7 @@ class EditShowTimePage extends Component {
     const movies = this.props.movies;
     return (
       <div>
-        <h3>Chỉnh sửa lịch chiếu:</h3>
+        <h3>Quản lý lịch chiếu:</h3>
         <br />
         <br />
         <form onSubmit={this.saveMovie}>
@@ -243,7 +255,7 @@ class EditShowTimePage extends Component {
                     );
                   })}
                 </select>
-                <p>{this.state.showtime.room}</p>
+                {/* <p>{this.state.showtime.room}</p> */}
               </div>
             </div>
           </div>
@@ -264,7 +276,7 @@ class EditShowTimePage extends Component {
                   dateFormat="dd/MM/yyyy"
                   // minDate={new Date()}
                 />
-                <p>{this.state.showtime.date.toString()}</p>
+                {/* <p>{this.state.showtime.date.toString()}</p> */}
               </div>
             </div>
             <div className="col-3">
@@ -344,7 +356,7 @@ class EditShowTimePage extends Component {
                     );
                   })}
                 </select>
-                <p>{this.state.addHour}</p>
+                {/* <p>{this.state.addHour}</p> */}
                 <select
                   className="mr-2 ml-2"
                   onChange={(e) => {
@@ -363,7 +375,7 @@ class EditShowTimePage extends Component {
                     );
                   })}
                 </select>
-                <p>{this.state.addMinute}</p>
+                {/* <p>{this.state.addMinute}</p> */}
               </div>
             </div>
             <div className="col-3" style={{ marginTop: "7px" }}>
@@ -420,16 +432,18 @@ class EditShowTimePage extends Component {
               : "Vui lòng nhập đúng định dạng"}
           </h5>
           <div className="booklist">
-            {this.props.cinemaInfo.showtimes.map((item) => {
+            {this.props.cinemaInfo.showtimes.map((item, index) => {
               return (
-                <article className="book">
+                <article className="book" key={item.id}>
                   <img src={item.movie.image} alt="" />
                   <h4>{item.movie.name}</h4>
                   <button
+                    key={item.id}
                     type="button"
                     className="btn btn-danger"
                     style={{ marginRight: "10px" }}
-                    onClick={this.deleteShowtimes}
+                    value={item.id}
+                    onClick={this.deleteShowtime}
                   >
                     <span className="far fa-trash-alt"></span>
                   </button>
@@ -477,6 +491,12 @@ const mapDispatchToProps = (dispatch, props) => {
     onLoadMovies: () => {
       dispatch(actions2.actFetchMoviesRequest());
     },
+    // onAddShowtime: (showtime, roomId, dateString) => {
+    //   dispatch(actions2.actAddShowtimeRequest(showtime, roomId, dateString));
+    // },
+    // onDeleteShowtime: (showtimeId, roomId, dateString) => {
+    //   dispatch(actions2.actDeleteShowtimeRequest(showtimeId, roomId, dateString));
+    // }
     // // onDeleteUser: (id) => {
     // //     dispatch(actions.deleteUser(id))
     // // },
