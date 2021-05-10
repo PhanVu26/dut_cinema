@@ -8,7 +8,7 @@ class AccountSortControl extends Component {
 
     render() {
         return (
-            <div classNameName="dropdown">
+            <div className="dropdown">
                 {/* <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Sắp xếp
                 </button>

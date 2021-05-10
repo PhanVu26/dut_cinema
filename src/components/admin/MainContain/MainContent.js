@@ -3,7 +3,7 @@ import React from "react";
 
 const MainContent  = (props) => {
     return (
-        <div classNameName="container-fluid">
+        <div className="container-fluid">
             <section>
                 <div className="container-fluid">
                     <div className="row">
