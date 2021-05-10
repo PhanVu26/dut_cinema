@@ -14,10 +14,11 @@ class UserControl extends Component {
         }else {
             this.props.onClearUser({
                 id: '',
-                username :'',
+                name :'',
                 password: '',
-                status: false,
-                role: ''
+                isActive: false,
+                age: '',
+                email:''
 
             })
             this.props.onToggleUserForm();
@@ -37,7 +38,9 @@ class UserControl extends Component {
                 <button onClick={this.onHandleModal} type="button" className="btn btn-primary">
                     <span className="fas fa-plus mr-2"></span>Thêm User
                 </button>
-                <Modal show={isDisplayUserForm}>
+                <Modal 
+                    show={isDisplayUserForm}
+                    onHide = {this.props.onToggleUserForm}>
                     <UserForm></UserForm>
                 </Modal>
             </div>

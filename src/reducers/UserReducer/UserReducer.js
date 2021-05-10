@@ -1,138 +1,5 @@
 import * as types from "../../constants/ActionType";
-var initialState = [
-    {
-        id: 1,
-        username: "Anh",
-        role: 1,
-        status: true,
-        createdAt: "26/01/2018"
-    },
-
-    {
-        id: 2,
-        username: "Nam",
-        role: 1,
-        status: true,
-        createdAt: "26/01/2018"
-    },
-    {
-        id: 3,
-        username: "PhanVu",
-        role: 1,
-        status: true,
-        createdAt: "26/01/2018"
-    },
-    {
-        id: 4,
-        username: "PhanVu",
-        role: 2,
-        status: true,
-        createdAt: "26/01/2018"
-    },
-
-    {
-        id: 5,
-        username: "PhanVu",
-        role: 3,
-        status: false,
-        createdAt: "26/01/2018"
-    },
-    {
-        id: 6,
-        username: "PhanVu",
-        role: 2,
-        status: false,
-        createdAt: "26/01/2018"
-    },
-    {
-        id: 8,
-        username: "PhanVu",
-        role: 2,
-        status: false,
-        createdAt: "26/01/2018"
-    },
-
-    {
-        id: 9,
-        username: "PhanVu",
-        role: 3,
-        status: false,
-        createdAt: "26/01/2018"
-    },
-    {
-        id: 10,
-        username: "PhanVu",
-        role: 1,
-        status: false,
-        createdAt: "26/01/2018"
-    },
-    {
-        id: 1,
-        username: "Anh",
-        role: 1,
-        status: true,
-        createdAt: "26/01/2018"
-    },
-
-    {
-        id: 2,
-        username: "Nam",
-        role: 1,
-        status: true,
-        createdAt: "26/01/2018"
-    },
-    {
-        id: 3,
-        username: "PhanVu",
-        role: 1,
-        status: true,
-        createdAt: "26/01/2018"
-    },
-    {
-        id: 4,
-        username: "PhanVu",
-        role: 2,
-        status: true,
-        createdAt: "26/01/2018"
-    },
-
-    {
-        id: 5,
-        username: "PhanVu",
-        role: 3,
-        status: false,
-        createdAt: "26/01/2018"
-    },
-    {
-        id: 6,
-        username: "PhanVu",
-        role: 2,
-        status: false,
-        createdAt: "26/01/2018"
-    },
-    {
-        id: 8,
-        username: "PhanVu",
-        role: 2,
-        status: false,
-        createdAt: "26/01/2018"
-    },
-
-    {
-        id: 9,
-        username: "PhanVu",
-        role: 3,
-        status: false,
-        createdAt: "26/01/2018"
-    },
-    {
-        id: 10,
-        username: "PhanVu",
-        role: 1,
-        status: false,
-        createdAt: "26/01/2018"
-    }
-];
+var initialState = [];
 
 const findIndex = (users, id) => {
     var result = -1;
@@ -188,7 +55,11 @@ var userReducer = (state = initialState, action) => {
                 ...state[index],
                 isActive: !state[index].isActive
             }
-            return [...state];            
+            return [...state]; 
+        case types.UPDATE_USER:               
+            index = findIndex(state, action.user.id);
+            state[index] = action.user;
+            return [...state];                
         default: return state;     
     }
     return state;

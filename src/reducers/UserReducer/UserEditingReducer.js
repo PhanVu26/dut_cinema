@@ -1,10 +1,11 @@
 import * as types from "../../constants/ActionType";
 var initialState = {
     id: '',
-    username :'',
+    name :'',
     password: '',
-    status: false,
-    role: ''
+    email: '',
+    age: '',
+    isActive: false
 };
 
 var myReducer = (state = initialState, action) => {
@@ -12,11 +13,11 @@ var myReducer = (state = initialState, action) => {
         case types.GET_USER_EDITING:
             var userEditing = {
                 id: action.user.id,
-                username: action.user.username,
+                name: action.user.name,
                 password: action.user.password,
-                role:action.user.role,
-                createdAt: action.user.createdAt,
-                status: action.user.status
+                email:action.user.email,
+                age: action.user.age,
+                isActive: action.user.isActive
             }        
             return userEditing
         default: return state;     

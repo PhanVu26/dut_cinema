@@ -1,7 +1,7 @@
 import { Button, Modal } from 'react-bootstrap';
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../../actions/index'
+import * as actions from '../../../actions/userManager/userAction'
 
 class UserForm extends Component {
 
@@ -9,10 +9,11 @@ class UserForm extends Component {
         super(props);
         this.state = {
             id: '',
-            username : '',
-            password: '',
-            role: 1,
-            status: true,
+            name : '',
+            email: '',
+            age:'',
+            isActive: false,
+            password:''
         }
     }
 
@@ -30,19 +31,35 @@ class UserForm extends Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        const user = this.state;
+        const isActive = this.state.isActive === "true" ? true: false
+        const user = {...this.state, isActive: isActive};
+        console.log("save user", user)
         this.props.onSaveUser(user);
         this.props.onToggleUserForm();
     }
 
-    componentDidMount(){
-        if(this.props.userEditing && this.props.userEditing.id !== ''){
+    // componentDidMount(){
+    //     console.log("get user", this.props.userEditing)
+    //     if(this.props.userEditing && this.props.userEditing.id !== ''){
+    //         this.setState({
+    //             id: this.props.userEditing.id,
+    //             name: this.props.userEditing.name,
+    //             email: this.props.userEditing.email,
+    //             password: this.props.userEditing.password,
+    //             age: this.props.userEditing.age,
+    //             isActive: this.props.userEditing.isActive,
+    //         })
+    //     }
+    // }
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.userEditing && nextProps.userEditing.id !== ''){
             this.setState({
-                id: this.props.userEditing.id,
-                password: this.props.userEditing.password,
-                username: this.props.userEditing.username,
-                role: this.props.userEditing.role,
-                status: this.props.userEditing.status,
+                id: nextProps.userEditing.id,
+                name: nextProps.userEditing.name,
+                email: nextProps.userEditing.email,
+                password: nextProps.userEditing.password,
+                age: nextProps.userEditing.age,
+                isActive: nextProps.userEditing.isActive,
             })
         }
     }
@@ -53,14 +70,37 @@ class UserForm extends Component {
                     <Modal.Header>{this.props.userEditing.id === '' ? 'Thêm người dùng' : 'Chỉnh sửa thông tin'}</Modal.Header>
                     <Modal.Body>
                         <div className="panel-body">
-                            <div className="form-group">
-                                <label>Username :</label>
+                        <div className="form-group">
+                                <label>ID :</label>
                                 <input
                                     readOnly ={this.props.userEditing.id !== ''}
                                     type="text"
                                     className="form-control"
-                                    name="username"
-                                    value={this.state.username}
+                                    name="id"
+                                    value={this.state.id}
+                                   
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label>Email :</label>
+                                <input
+                                    readOnly ={this.props.userEditing.id !== ''}
+                                    type="text"
+                                    className="form-control"
+                                    name="email"
+                                    value={this.state.email}
+                                    onChange={ this.onHandleChange }
+                                   
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label>Name :</label>
+                                <input
+                                    readOnly ={this.props.userEditing.id !== ''}
+                                    type="text"
+                                    className="form-control"
+                                    name="name"
+                                    value={this.state.name}
                                     onChange={ this.onHandleChange }
                                    
                                 />
@@ -80,23 +120,23 @@ class UserForm extends Component {
                             <label>Vai trò :</label>
                             <select
                                 className="form-control"
-                                value={this.state.role}
-                                onChange={ this.onHandleChange }
+                                // value={this.state.role}
+                                // onChange={ this.onHandleChange }
                                 name="role"
                             >
-                                <option selected value={1}>Quản lý phim</option>
+                                <option defaultValue={1}>Quản lý phim</option>
                                 <option value={2}>Quản lý lịch chiếu</option>
                                 <option value={3}>Người dùng</option>
                             </select><br/>
                             <label>Trạng thái :</label>
                             <select
                                 className="form-control"
-                                value={this.state.status}
+                                value={this.state.isActive}
                                 onChange={ this.onHandleChange }
-                                name="status"
+                                name="isActive"
                             >
-                                <option selected value={true}>Đang hoạt động</option>
-                                <option value={false}>Ẩn</option>
+                                <option value={true}>Actived</option>
+                                <option value={false}>InActived</option>
                             </select><br/>
                         </div>
                     </Modal.Body>
@@ -126,7 +166,7 @@ const mapDispatchToProps = (dispatch, props) => {
             dispatch(actions.toggleUserForm())
         },
         onSaveUser: (user) => {
-            dispatch(actions.saveUser(user))
+            dispatch(actions.actUpdateUserRequest(user))
         }
     }
 }

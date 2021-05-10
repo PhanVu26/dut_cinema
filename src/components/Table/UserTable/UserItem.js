@@ -24,7 +24,8 @@ class UserItem extends Component {
     }
     getUserEditing = () => {
         this.props.onToggleUserForm();
-        this.props.getUserEditing(this.props.user)
+        console.log("id", this.props.user.id)
+        this.props.onGetUserEditing(this.props.user.id)
     }
     render() {
         const {index, user} = this.props;
@@ -80,10 +81,10 @@ const mapDispatchToProps = (dispatch, props) =>{
             dispatch(actions.deleteUser(id))
         },
         onUpdateUserStatus: (user) => {
-            dispatch(actions.actUpdateUserRequest(user))
+            dispatch(actions.actUpdateUserStatusRequest(user))
         },
-        getUserEditing : (user) => {
-            dispatch(actions.getUserEditing(user))
+        onGetUserEditing : (id) => {
+            dispatch(actions.actGetUserRequest(id))
         }
     }
 }

@@ -17,6 +17,21 @@ export const listAllUsers = (users) => {
     users
   };
 };
+export const actUpdateUserRequest = (user) => {
+  return (dispatch) => {
+    return callApi(`users/${user.id}`, "PATCH", user).then((res) => {
+      console.log("res", res)
+      dispatch(updateUser(res.data));
+    });
+  };
+};
+
+export const updateUser = (user) => {
+  return {
+    type: types.UPDATE_USER,
+    user,
+  };
+};
 
 export const saveUser = (user) => {
   return {
@@ -38,7 +53,7 @@ export const deleteUser = (id) => {
   };
 };
 
-export const actUpdateUserRequest = (user) => {
+export const actUpdateUserStatusRequest = (user) => {
   return (dispatch) => {
     return callApi(`users/${user.id}`, "PATCH", user).then((res) => {
       console.log("res", res)
@@ -53,6 +68,14 @@ export const updateUserStatus = (id) => {
   };
 };
 
+export const actGetUserRequest = (id) => {
+  return (dispatch) => {
+    return callApi(`users/${id}`, "GET", null).then((res) => {
+      console.log("res", res)
+      dispatch(getUserEditing(res.data));
+    });
+  };
+};
 export const getUserEditing = (user) => {
   return {
     type: types.GET_USER_EDITING,
