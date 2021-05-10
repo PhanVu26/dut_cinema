@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Modal, Button} from "react-bootstrap";
 import {connect} from 'react-redux';
-import * as actions from '../../../actions/index'
+import * as actions from '../../../actions/userManager/userAction'
 import UserForm from '../../Form/UserForm/UserForm';
 
 class UserItem extends Component {
@@ -16,7 +16,11 @@ class UserItem extends Component {
         this.props.onDeleteUser(this.props.user.id);
     }
     toggleUserStatus = () => {
-        this.props.onUpdateUserStatus(this.props.user.id)
+        const userUpdate = {
+            id: this.props.user.id,
+            isActive: !this.props.user.isActive
+        }
+        this.props.onUpdateUserStatus(userUpdate)
     }
     getUserEditing = () => {
         this.props.onToggleUserForm();
@@ -25,7 +29,7 @@ class UserItem extends Component {
     render() {
         const {index, user} = this.props;
         const {isDisplayUserForm} = this.props;
-        const status = user.isActive ? ' Actived ' : ' InActived ';  
+        const status = user.isActive ? ' InActived ' : ' Actived ';  
         var role = user.role === 1 ? 'Quản lý phim' : user.role === 2 ? 'Quản lý lịch chiếu' : 'Người dùng';
         return (
             <tr>
@@ -75,8 +79,8 @@ const mapDispatchToProps = (dispatch, props) =>{
         onDeleteUser: (id) => {
             dispatch(actions.deleteUser(id))
         },
-        onUpdateUserStatus: (id) => {
-            dispatch(actions.updateUserStatus(id))
+        onUpdateUserStatus: (user) => {
+            dispatch(actions.actUpdateUserRequest(user))
         },
         getUserEditing : (user) => {
             dispatch(actions.getUserEditing(user))

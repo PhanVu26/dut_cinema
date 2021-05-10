@@ -186,7 +186,7 @@ var userReducer = (state = initialState, action) => {
             index = findIndex(state, action.id);
             state[index] = {
                 ...state[index],
-                status: !state[index].status
+                isActive: !state[index].isActive
             }
             return [...state];            
         default: return state;     

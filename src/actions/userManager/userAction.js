@@ -38,6 +38,14 @@ export const deleteUser = (id) => {
   };
 };
 
+export const actUpdateUserRequest = (user) => {
+  return (dispatch) => {
+    return callApi(`users/${user.id}`, "PATCH", user).then((res) => {
+      console.log("res", res)
+      dispatch(updateUserStatus(res.data.id));
+    });
+  };
+};
 export const updateUserStatus = (id) => {
   return {
     type: types.UPDATE_USER_STATUS,
