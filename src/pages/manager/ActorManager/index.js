@@ -1,16 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Navbar from '../../../components/manager/Navbar/Navbar'
-import MovieControl from '../../../components/Control/MovieControl/MovieControl';
-import MovieList from '../../../components/Table/MovieTable/MovieList';
-import Footer from '../../../components/admin/Footer/Footer';
-import {
-    BrowserRouter as Router,
-  } from "react-router-dom";
 import Pagination from '../../../components/Pagination/Pagination';
 import ActorControl from '../../../components/Control/ActorControl/ActorControl';
 import ActorList from '../../../components/Table/ActorTable/ActorList';
-import ActorForm from '../../../components/Modal/ActorModal/ActorForm';
 import * as actorActions from '../../../actions/actorManager/index'
 class ActorManager extends Component{
     constructor(props) {

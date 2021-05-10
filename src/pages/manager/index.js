@@ -5,9 +5,9 @@ import {
 
 import MovieManager from './MovieManager/index';
 import ActorManager from './ActorManager/index';
-import Navbar from '../../components/manager/Navbar/Navbar';
-import Footer from '../../components/manager/Footer/Footer';
 import UserProfile from '../UserProfile/UserProfile';
+import Navbar from '../../components/admin/Navbar/Navbar';
+import Footer from '../../components/admin/Footer/Footer';
 
 class ManagerPage extends Component{
     constructor(props) {

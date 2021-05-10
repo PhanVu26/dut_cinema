@@ -11,8 +11,8 @@ import { compose } from "redux";
 import { actFetchCinemaRequest } from "../../../actions/showtimeManager/index";
 import { useDispatch, useSelector } from "react-redux";
 import UserProfile from "../../UserProfile/UserProfile";
-import Footer from "../../../components/ShowtimeManager/Footer/Footer";
-import Navbar from "../../../components/ShowtimeManager/Navbar/Navbar";
+import Navbar from "../../../components/admin/Navbar/Navbar";
+import Footer from "../../../components/admin/Footer/Footer";
 
 function HomePage(props) {
   const dispatch = useDispatch();

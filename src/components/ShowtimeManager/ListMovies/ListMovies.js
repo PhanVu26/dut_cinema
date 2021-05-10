@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Navbar from "../../../components/manager/Navbar/Navbar";
 import MovieControl from "../../../components/Control/MovieControl/MovieControl";
 import MovieList from "./elements/MovieList";
 import Footer from "../../../components/admin/Footer/Footer";

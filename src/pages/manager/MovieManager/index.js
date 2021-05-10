@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Navbar from '../../../components/manager/Navbar/Navbar'
 import MovieControl from '../../../components/Control/MovieControl/MovieControl';
 import MovieList from '../../../components/Table/MovieTable/MovieList';
-import Footer from '../../../components/admin/Footer/Footer';
-import {
-    BrowserRouter as Router,
-  } from "react-router-dom";
 import Pagination from '../../../components/Pagination/Pagination';
 import MovieForm from '../../../components/Modal/MovieModal/MovieForm';
 import * as actions from '../../../actions/movieManager/index';

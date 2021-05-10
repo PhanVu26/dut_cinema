@@ -2,6 +2,18 @@ import React from "react"
 import { NavLink } from "react-router-dom";
 
 const SlideBar = (props) => {
+    const menus = props.menus;
+    const showMenu = (menus) => {       
+        const results = menus.map((item, index) => {
+            return (
+                <li className="nav-item " key = {index}>
+                    <NavLink to= {item.url} className="nav-link text-white p-2 mb-2">
+                        <i className={"fas " + item.icon + " fas fa-lg mr-3 text-white"}></i>{item.label}</NavLink>
+                </li>
+            )
+        })
+        return results;
+    }
     const account = JSON.parse(localStorage.getItem("account"));
     console.log("account", account)
     return (          
@@ -17,22 +29,7 @@ const SlideBar = (props) => {
                     <NavLink to= "/admin" className="nav-link text-white p-2 mb-2 current"><i
                         className="fas fa-home fa-lg mr-3 text-white"></i>DashBoard</NavLink>
                 </li>
-                <li className="nav-item">
-                    <NavLink to="/admin/profile" href="#" className="nav-link text-white p-2 mb-2 sidebar-link"><i
-                        className="fas fa-user fa-lg mr-4 text-white"></i>Profile</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink to="/admin/users" className="nav-link text-white p-2 mb-2 sidebar-link"><i
-                        className="fas fa-envelope fa-lg mr-4 text-white"></i>Users</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink to="/admin/sales" className="nav-link p-2 mb-2 sidebar-link text-white"><i
-                        className="fas fa-shopping-cart fa-lg text-white mr-4"></i>Sales</NavLink>
-                </li>
-                <li className="nav-item">
-                    <a href="#" className="nav-link p-2 mb-2 sidebar-link text-white"><i
-                        className="fas fa-wrench fa-lg text-white mr-4"></i>Settings</a>
-                </li>
+                {showMenu(menus)}
             </ul>
         </div>
                         
