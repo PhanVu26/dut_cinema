@@ -152,6 +152,7 @@ var userReducer = (state = initialState, action) => {
     var index = -1;
     switch(action.type){
         case types.LIST_ALL_USERS:
+            state = action.users;
             return state;
         case types.SAVE_USER:
             var today = new Date();

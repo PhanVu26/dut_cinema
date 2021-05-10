@@ -18,6 +18,7 @@ export default function callApi(endpoint, method = "GET", body) {
     localStorage.setItem("account", JSON.stringify(""));
   }
   let account = JSON.parse(localStorage.getItem("account"));
+  console.log("account", account.accessToken)
   if (Object.keys(account).length === 0) {
     return axios({
       method: method,
@@ -30,7 +31,7 @@ export default function callApi(endpoint, method = "GET", body) {
     const authAxios = axios.create({
       baseURL: API_URL,
       headers: {
-        Authorization: account.accessToken,
+        Authorization: "Bearer " + account.accessToken,
       },
     });
     return authAxios({

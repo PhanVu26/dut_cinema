@@ -1,22 +1,14 @@
 import React, { Component } from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
 import 'font-awesome/css/font-awesome.min.css';  
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "../../components/admin/style.css";
-import Footer from "../../components/admin/Footer/Footer";
-import Modal from "../../components/admin/Modal/Modal";
-import Navbar from "../../components/admin/Navbar/Navbar";
 import {connect} from 'react-redux';
-import * as actions from '../../actions/index';
+
 import UserControl from "../../components/Control/UserControl/UserControl";
 import UserList from "../../components/Table/UserTable/UserList";
 import Pagination from "../../components/Pagination/Pagination";
+import * as actions from '../../actions/userManager/userAction';
 
 class UserManagementPage extends Component{
     constructor(props) {
@@ -31,7 +23,7 @@ class UserManagementPage extends Component{
         };
       }
       componentDidMount() {
-        // this.props.fetchAllProducts();
+        this.props.onFetchAllUsers();
         this.setState({
           totalRecords: this.props.users.length
         });
@@ -126,7 +118,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch, props) =>{
-
+    return {
+        onFetchAllUsers : () => {
+            dispatch(actions.actFetchDataUsersRequest());
+        }
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserManagementPage);

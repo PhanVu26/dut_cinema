@@ -25,18 +25,20 @@ class UserItem extends Component {
     render() {
         const {index, user} = this.props;
         const {isDisplayUserForm} = this.props;
-        const status = user.status ? ' ẩn ' : ' kích hoạt ';  
+        const status = user.isActive ? ' Actived ' : ' InActived ';  
         var role = user.role === 1 ? 'Quản lý phim' : user.role === 2 ? 'Quản lý lịch chiếu' : 'Người dùng';
         return (
             <tr>
-                <td className="text-center">{index}</td>
+                {/* <td className="text-center">{index}</td> */}
                 <td className="text-center">{user.id}</td>
-                <td className="text-center">{user.username}</td>
-                <td className="text-center">{role}</td>
-                <td className="text-center">{user.createdAt}</td>
+                <td className="text-center">{user.name}</td>
+                <td className="text-center">{user.email}</td>
+                <td className="text-center">{user.age}</td>
+                {/* <td className="text-center">{role}</td>
+                <td className="text-center">{user.createdAt}</td> */}
                 <td className="text-center">
                     <i 
-                        className= {user.status ? 'fas fa-toggle-on': 'fas fa-toggle-off' }
+                        className= {user.isActive ? 'fas fa-toggle-on': 'fas fa-toggle-off' }
                         onClick={() => {if(window.confirm('Bạn có muốn'+ status +'user này?')){this.toggleUserStatus()};}}>
                             
                     </i>
