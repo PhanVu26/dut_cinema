@@ -5,8 +5,8 @@ import "./styles/LoginStyles.css";
 import { actLoginAccountRequest } from "../../../actions/index";
 
 class Login extends Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
 
     this.handleShow = this.handleShow.bind(this);
     this.handleHide = this.handleHide.bind(this);

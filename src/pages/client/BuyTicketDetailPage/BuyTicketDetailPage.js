@@ -8,10 +8,10 @@ import {
   actCreateBookingRequest,
   actFetchDataBookingMovieRequest,
 } from "../../../actions/index";
-import Table from "../../components/client/Table/Table";
+import Table from "../../../components/client/Table/Table";
 import styles from "./BuyTicketDetailStyle";
-import SeatPickers from "../../components/client/SeatPicker/SeatPickers";
-import history from "../../commons/history";
+import SeatPickers from "../../../components/client/SeatPicker/SeatPickers";
+import history from "../../../commons/history";
 class BuyTicketDetailPage extends Component {
   constructor(props) {
     super(props);
@@ -385,10 +385,10 @@ class BuyTicketDetailPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    choosing: state.reducerMovie.choosing,
-    tickets: state.reducerTickets.tickets,
-    foodCombo: state.reducerFoods.foodCombo,
-    bookings: state.reducerMovie.bookingMovie,
+    choosing: state.MovieReducer.choosing,
+    tickets: state.TicketReducer.tickets,
+    foodCombo: state.FoodReducer.foodCombo,
+    bookings: state.MovieReducer.bookingMovie,
   };
 };
 

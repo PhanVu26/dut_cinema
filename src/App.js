@@ -9,6 +9,7 @@ import Header from "./components/client/Header/Header";
 import Footer from "./components/client/Footer/Footer";
 import HomePage from "./pages/client/HomePage/HomePage";
 import BuyTicketPage from "./pages/client/BuyTicketPage/BuyTicketPage";
+import BuyTicketDetailPage from "./pages/client/BuyTicketDetailPage/BuyTicketDetailPage";
 import MoviePage from "./pages/client/MoviePage/MoviePage";
 import Promotion1 from "./pages/client/HomePage/Promotion/PromotionItems/promotion001_SinhNhatTrangThi";
 import Promotion2 from "./pages/client/HomePage/Promotion/PromotionItems/promotion002_miloDay";
@@ -69,6 +70,9 @@ function App() {
             );
           }}
         ></Route>
+        <Route exact path="/buy-ticket-detail/:movie">
+          <Header /> <BuyTicketDetailPage /> <Footer />
+        </Route>
         <Route exact path="/promotion/sinh-nhat-trang-thi-nhan-qua-met-nghi">
           <Header /> <Promotion1 /> <Footer />
         </Route>

@@ -337,14 +337,31 @@ export const actFetchDataTicket = (data) => {
 
 export const actFetchDataTheaterRequest = () => {
   return (dispatch) => {
-    return callApi("api/theaters", "GET", null).then((res) => {
-      if (res.status === 200) {
-        dispatch(actFetchDataTheater(res.data));
-      } else alert("Không thể kết nối đến dữ liệu!");
+    return callApi("cinemas", "GET", null).then((res) => {
+      console.log(res.data.results);
+        dispatch(actFetchMovieByTheater(res.data.results));
     });
   };
 };
 
+export const actFetchMovieByTheater = (tt) => {
+  return (dispatch) => {
+    let theater =[];
+    tt.map((item,index,tt) => {
+      callApi(`cinemas/${item.id}/showtimes`,"GET",null).then((res) => {
+        console.log(res.data);
+        theater.push(res.data);
+      }); 
+    });
+    dispatch(actFetchDataTheater(theater));
+  }
+}
+export const actFetchDataMoviesByTheater = (movie) => {
+  return {
+    type: Types.FETCH_DATA_MOVIE,
+    movie,
+  };
+};
 export const actFetchDataTheater = (theater) => {
   return {
     type: Types.FETCH_DATA_THEATER,

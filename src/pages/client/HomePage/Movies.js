@@ -3,7 +3,7 @@ import "./styles/MoviesStyles.css";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import TabControl from "../../../components/client/TabControl/TabControl";
-import { actFetchDataMovieRequest } from "./../../../actions/index";
+import { actFetchDataMovieRequest,actFetchDataTheaterRequest } from "./../../../actions/index";
 import { data } from "../../../data";
 class Movies extends Component {
   constructor(props) {
@@ -12,6 +12,7 @@ class Movies extends Component {
   }
   componentDidMount() {
     this.props.fetchAllDataMovie();
+    this.props.fetchAllDataTheater();
   }
   isMovieShowing = (date) => {
     const now = new Date().setHours(0, 0, 0, 0);
@@ -68,6 +69,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllDataMovie: () => {
       dispatch(actFetchDataMovieRequest());
+    },
+    fetchAllDataTheater:()=>{
+      dispatch(actFetchDataTheaterRequest());
     },
   };
 };

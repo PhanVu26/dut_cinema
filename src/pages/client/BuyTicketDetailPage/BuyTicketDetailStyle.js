@@ -1,10 +1,10 @@
 const styles = (theme) => ({
   chooseMovie: {
-    backgroundColor: theme.color.orange,
+    backgroundColor: "#f26b38",
     minWidth: "365px",
   },
   movie: {
-    backgroundColor: theme.color.lightGray,
+    backgroundColor: "#f1f1f1",
     padding: "10px 30px",
   },
   header: {
@@ -19,7 +19,7 @@ const styles = (theme) => ({
     //adding: '10px 30px'
   },
   button: {
-    backgroundColor: theme.color.orange,
+    backgroundColor: "#f26b38",
     border: "none",
     padding: "7px 25px",
     color: "white",

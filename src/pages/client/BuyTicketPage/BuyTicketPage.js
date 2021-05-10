@@ -5,6 +5,7 @@ import { compose } from "redux";
 import ColumnBlock from "../../../components/client/ColumnBlock/ColumnBlock";
 import styles from "./BuyTicketPageStyles";
 import {
+  actFetchDataTheaterRequest,
   actFetchDataMovieRequest,
   actReceiveMovieChoosing,
 } from "../../../actions/index";
@@ -16,27 +17,53 @@ class BuyTicketPage extends Component {
     super();
     this.state = {
       timeOfMovie: [],
+      mv: [],
       isShow: false,
+      isMovieShow: false,
       active: "",
     };
   }
 
   componentDidMount() {
-    this.props.fetchAllDataMovie();
+    //this.props.fetchAllDataTheater();
+    //this.props.fetchAllDataMovie();
   }
 
-  handleOnChooseMovie = (mv) => {
-    console.log("mv:", mv);
+  showTheaterToChoose = (arr, classes) => {
+    console.log(arr);
+    return arr.map((item, index) => {
+      console.log(this.state.active.id+", "+item.cinema.id+", "+classes.active);
+      let active = this.state.active.id === item.cinema.id ? classes.active : "";
+      return (
+        <div
+          key={index}
+          className={`${classes.block}`}
+          onClick={() => {
+            this.handleOnChooseTheater(item);
+          }}
+        >
+          <div className={`${classes.link} ${active} row no-gutters p-3`}>
+            <p className={`${classes.title} col-9 pl-4`}>{item.cinema.name}</p>
+          </div>
+        </div>
+      );
+    });
+  };
+
+  handleOnChooseTheater = (tt) => {
     this.setState({
-      timeOfMovie: mv.date,
-      isShow: true,
-      active: mv,
+      timeOfMovie: [],
+      isShow: false,
+      mv: tt.movies,
+      isMovieShow:true,
+      active: "",
     });
   };
 
   showMovieToChoose = (arr, classes) => {
     return arr.map((item, index) => {
-      let active = this.state.active._id === item._id ? classes.active : "";
+      console.log(item);
+      let active = this.state.active.id === item.id ? classes.active : "";
       return (
         <div
           key={index}
@@ -56,23 +83,41 @@ class BuyTicketPage extends Component {
     });
   };
 
-  handleOnChooseSession = (item, session, account) => {
-    if (account && Object.keys(account).length > 0) {
-      const movie = this.state.active;
-      this.props.receiveMovieChoosing(movie, item, session, account._id);
-      const slug = movie.slug;
-      history.push(`/buy-ticket-detail/${slug}`);
-    } else {
-      alert("Vui lòng đăng nhập!");
-    }
+  handleOnChooseMovie = (mv) => {
+    var TOS = [];
+    mv.showtimes.map((item,index) => {
+      TOS.push(item.startTime.split("T")[0]);
+    });
+    var TiOfS =[];
+    TOS.map((item,index)=>{
+      var ShowTimes =[];
+      mv.showtimes.map((i,index) => {
+        if(i.startTime.split("T")[0]==item){
+          var O={
+            time: i.startTime.split("T")[1].split(".")[0],
+          }
+          ShowTimes.push(O);
+        }
+      });
+      var obj = {
+        date: item,
+        showtimes: ShowTimes,
+      }
+      TiOfS.push(obj);
+    });
+    this.setState({
+      timeOfMovie: TiOfS,
+      isShow: true,
+      active: mv,
+    });
   };
-
+  
   showTimeOfMovie = (arr, classes, account) => {
     return arr.map((item, index) => {
-      const listSession = item.frameTime.map((obj) => obj.time);
+      const listSession = item.showtimes.map((obj) => obj.time);
       return (
         <div key={index} className={`${classes.block} p-4`}>
-          <div>{item.dateMovie}</div>
+          <div>{item.date}</div>
           <div className="d-flex flex-wrap">
             {listSession.map((session, index) => {
               return (
@@ -95,6 +140,19 @@ class BuyTicketPage extends Component {
     });
   };
 
+  handleOnChooseSession = (item, session, account) => {
+    if (account && Object.keys(account).length > 0) {
+      const movie = this.state.active;
+      //this.props.receiveMovieChoosing(movie, item, session, account.id);
+      const slug = movie.id;
+      console.log(slug);
+      history.push(`/buy-ticket-detail/${slug}`);
+      history.go();
+    } else {
+      alert("Vui lòng đăng nhập!");
+    }
+  };
+
   isMovieShowing = (date) => {
     const now = new Date().setHours(0, 0, 0, 0);
     if (Date.parse(date) <= now) return true;
@@ -102,20 +160,22 @@ class BuyTicketPage extends Component {
   };
 
   render() {
-    const { classes, movies } = this.props;
+    const { classes, theater } = this.props;
+    console.log(theater);
     let account = JSON.parse(localStorage.getItem("account"));
-    const { timeOfMovie, isShow } = this.state;
-    let movieShowing = movies.filter((item) =>
-      this.isMovieShowing(item.releaseDate)
-    );
+    const { timeOfMovie,mv, isShow,isMovieShow } = this.state;
+    console.log(mv);
+    // let movieShowing = movies.filter((item) =>
+    //   this.isMovieShowing(item.releaseDate)
+    // );
     return (
       <div className="container my-4">
         <div className="row">
-          <ColumnBlock title="Chọn phim">
-            {this.showMovieToChoose(movieShowing, classes)}
-          </ColumnBlock>
           <ColumnBlock title="Chọn rạp">
-            {this.showMovieToChoose(movieShowing, classes)}
+            {this.showTheaterToChoose(theater, classes)}
+          </ColumnBlock>
+          <ColumnBlock title="Chọn phim">
+            {isMovieShow && this.showMovieToChoose(mv, classes)}
           </ColumnBlock>
           <ColumnBlock title="Chọn suất">
             {isShow && this.showTimeOfMovie(timeOfMovie, classes, account)}
@@ -128,6 +188,7 @@ class BuyTicketPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    theater: state.MovieReducer.theater,
     movies: state.MovieReducer.movie,
     showtimes: state.ShowTimesReducer.showtime,
   };
@@ -135,6 +196,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchAllDataTheater:()=>{
+      dispatch(actFetchDataTheaterRequest());
+    },
     fetchAllDataMovie: () => {
       dispatch(actFetchDataMovieRequest());
     },
