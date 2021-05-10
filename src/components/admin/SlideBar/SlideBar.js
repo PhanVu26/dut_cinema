@@ -1,4 +1,5 @@
 import React from "react"
+import { NavLink } from "react-router-dom";
 
 const SlideBar = (props) => {
     const account = JSON.parse(localStorage.getItem("account"));
@@ -13,28 +14,20 @@ const SlideBar = (props) => {
             </div>
             <ul className="navbar-nav mt-4 flex-column ">
                 <li className="nav-item ">
-                    <a href="#" className="nav-link text-white p-2 mb-2 current"><i
-                        className="fas fa-home fa-lg mr-3 text-white"></i>DashBoard</a>
+                    <NavLink to= "/admin" className="nav-link text-white p-2 mb-2 current"><i
+                        className="fas fa-home fa-lg mr-3 text-white"></i>DashBoard</NavLink>
                 </li>
                 <li className="nav-item">
-                    <a href="#" className="nav-link text-white p-2 mb-2 sidebar-link"><i
-                        className="fas fa-user fa-lg mr-4 text-white"></i>Profile</a>
+                    <NavLink to="/admin/profile" href="#" className="nav-link text-white p-2 mb-2 sidebar-link"><i
+                        className="fas fa-user fa-lg mr-4 text-white"></i>Profile</NavLink>
                 </li>
                 <li className="nav-item">
-                    <a href="" className="nav-link text-white p-2 mb-2 sidebar-link"><i
-                        className="fas fa-envelope fa-lg mr-4 text-white"></i>Users</a>
+                    <NavLink to="/admin/users" className="nav-link text-white p-2 mb-2 sidebar-link"><i
+                        className="fas fa-envelope fa-lg mr-4 text-white"></i>Users</NavLink>
                 </li>
                 <li className="nav-item">
-                    <a href="#" className="nav-link p-2 mb-2 sidebar-link text-white"><i
-                        className="fas fa-shopping-cart fa-lg text-white mr-4"></i>Sales</a>
-                </li>
-                <li className="nav-item">
-                    <a href="#" className="nav-link text-white p-2 mb-2 sidebar-link"><i
-                        className="fas fa-chart-line fa-lg mr-3 text-white"></i>Analystics</a>
-                </li>
-                <li className="nav-item">
-                    <a href="#" className="nav-link text-white p-2 mb-2 sidebar-link"><i
-                        className="fas fa-chart-bar fa-lg mr-4 text-white"></i>Charts</a>
+                    <NavLink to="/admin/sales" className="nav-link p-2 mb-2 sidebar-link text-white"><i
+                        className="fas fa-shopping-cart fa-lg text-white mr-4"></i>Sales</NavLink>
                 </li>
                 <li className="nav-item">
                     <a href="#" className="nav-link p-2 mb-2 sidebar-link text-white"><i

@@ -56,9 +56,6 @@ class UserManagementPage extends Component{
           } = this.state;
         var rowsPerPage = users.slice(startIndex, endIndex + 1);  
         return (
-            <Router>
-                <Navbar></Navbar>        
-                <Modal></Modal>
                 <section>
                     <div class="container-fluid mt-5">
                         <div class="row">                   
@@ -117,8 +114,6 @@ class UserManagementPage extends Component{
                         </div>
                     </div>
                 </section> 
-                <Footer></Footer>
-            </Router>
                 
         )
     }

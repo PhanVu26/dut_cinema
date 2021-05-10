@@ -17,11 +17,8 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/admin">
+          <Route path="/admin">
             <AdminPage></AdminPage>
-          </Route>
-          <Route exact path="/admin/users">
-            <UserManagementPage></UserManagementPage>
           </Route>
           <Route exact path="/">
             <HomePage></HomePage>
