@@ -29,10 +29,10 @@ function App() {
           <Route path="/login"> 
             <Login></Login>
           </Route>
-          <Route exact path="/showtime_manager">
+          <Route path="/showtime-manager">
             <ShowTimeManager></ShowTimeManager>
           </Route>
-          <Route exact path="/showtime_manager/edit">
+          <Route path="/showtime-manager/edit">
             <EditShowTimePage></EditShowTimePage>
           </Route>
         </Switch>

@@ -5,11 +5,14 @@ import ListMovies from "../../../components/ShowtimeManager/ListMovies/ListMovie
 import EditShowTimePage from "../EditShowTimePage/EditShowTimePage";
 import { connect } from "react-redux";
 //import { actSearchMovie } from "../../actions/action";
-import { Link } from "react-router-dom";
+import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { actFetchCinemaRequest } from "../../../actions/showtimeManager/index";
 import { useDispatch, useSelector } from "react-redux";
+import UserProfile from "../../UserProfile/UserProfile";
+import Footer from "../../../components/ShowtimeManager/Footer/Footer";
+import Navbar from "../../../components/ShowtimeManager/Navbar/Navbar";
 
 function HomePage(props) {
   const dispatch = useDispatch();
@@ -19,10 +22,18 @@ function HomePage(props) {
   });
 
   return (
-    <>
-      <NavigationBar />;
-      <EditShowTimePage />;
-    </>
+    // <>
+    //   <NavigationBar />;
+    //   <EditShowTimePage />;
+    // </>
+    <Router>
+    <Navbar></Navbar>        
+    <Switch>
+        <Route path="/showtime-manager/movie-showtimes" component={EditShowTimePage}></Route>  
+        <Route path="/showtime-manager/profile" component={UserProfile}></Route>  
+    </Switch>
+    <Footer></Footer>
+    </Router>
   );
 
 }
