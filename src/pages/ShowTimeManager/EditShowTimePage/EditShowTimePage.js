@@ -71,7 +71,7 @@ class EditShowTimePage extends Component {
         showEdit: "hideMenu",
       });
       let month = this.state.showtime.date.getMonth() + 1;
-      let day = this.state.showtime.date.getDay() + 1;
+      let day = this.state.showtime.date.getDate();
       if (month < 10) {
         month = "0" + month.toString();
       } else {
@@ -90,6 +90,9 @@ class EditShowTimePage extends Component {
         month +
         "-" +
         day;
+      // console.log("dateString: ", dateString);
+      // console.log(this.state.showtime.date.toString());
+      // console.log(this.state.showtime.date.getDay());
       this.props.onLoadShowtime(this.state.showtime.room, dateString);
       this.props.onLoadMovies();
       this.setState({
@@ -116,7 +119,7 @@ class EditShowTimePage extends Component {
       var result = window.confirm("Want to create new showtime?");
       if (result) {
         let month = this.state.showtime.date.getMonth() + 1;
-        let day = this.state.showtime.date.getDay() + 1;
+        let day = this.state.showtime.date.getDate();
         if (month < 10) {
           month = "0" + month.toString();
         } else {
@@ -135,6 +138,7 @@ class EditShowTimePage extends Component {
           month +
           "-" +
           day;
+        console.log("dateString: ", dateString);
         const temp = {
           date: dateString,
           hour: this.state.addHour,
@@ -147,8 +151,7 @@ class EditShowTimePage extends Component {
         this.setState({ checkMessage: "" });
       }
     }
-
-    // this.loadShowtime();
+    this.setState({ showEdit: "hideMenu" });
   };
 
   deleteShowtime = (e) => {
@@ -157,135 +160,139 @@ class EditShowTimePage extends Component {
     if (result) {
       actions2.actDeleteShowtimeRequest(showtimeId);
     }
-    // this.loadShowtime();
+    this.setState({ showEdit: "hideMenu" });
   };
 
   render() {
-    console.log("abc: ", this.props.cinemaInfo.cinema);
     const movies = this.props.movies;
     return (
       <section>
         <div className="container-fluid">
-            <div className="row">
-                <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
-                  <div>
-                    <h3>Quản lý lịch chiếu:</h3>
-                    <br />
-                    <br />
-                    <form onSubmit={this.saveMovie}>
-                      <div className="row justify-content-md-center">
-                        <div className="col-3">
-                          <div className="form-group">
-                            <label>Chọn rạp chiếu:</label>
-                            <select
-                              className="mr-2 ml-2"
-                              onChange={(e) => {
-                                const temp3 = [];
-                                const temp4 = [];
-                                for (let i = 0; i < 24; i++) temp3.push(i);
-                                for (let i = 0; i < 60; i++) temp4.push(i);
-                                let temp = { id: "", name: "", address: "" };
-                                if (e.target.value == 0) {
-                                  this.setState((prevState) => ({
-                                    showtime: {
-                                      ...prevState.showtime,
-                                      cinema: {
-                                        ...temp,
-                                      },
-                                      room: "",
-                                      date: "",
-                                    },
-                                    showRoom: [],
-                                    hourPicker: temp3,
-                                    minutePicker: temp4,
-                                  }));
-                                } else {
-                                  temp = this.props.cinemaInfo.cinema.filter(
-                                    (item) => item.id === parseInt(e.target.value)
-                                  );
-                                  temp = temp[0];
-                                  this.props.onLoadCinemaRooms(parseInt(e.target.value));
-                                  console.log(this.props.cinemaInfo.rooms);
-                                  this.setState((prevState) => ({
-                                    showtime: {
-                                      ...prevState.showtime,
-                                      cinema: {
-                                        ...temp,
-                                      },
-                                      room: "",
-                                      date: "",
-                                    },
-                                    showRoom: this.props.cinemaInfo.rooms,
-                                    hourPicker: temp3,
-                                    minutePicker: temp4,
-                                  }));
-                                }
-                                // const temp2 = [];
-                                // for (let i = 1; i <= temp.numOfRoom; i++) temp2.push(i);
-                              }}
-                            >
-                              <option key={0} value={0}></option>
-                              {this.props.cinemaInfo.cinema.map((item, index) => {
-                                return (
-                                  <option key={index + 1} value={item.id}>
-                                    {item.name}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                          </div>
-                        </div>
-                        <div className="col-3">
-                          <div className="form-group">
-                            <label>Chọn phòng chiếu:</label>
-                            <select
-                              className="mr-2 ml-2"
-                              value={this.state.showtime.room}
-                              onChange={(e) => {
-                                this.setState((prevState) => ({
-                                  showtime: {
-                                    ...prevState.showtime,
-                                    room: parseInt(e.target.value),
+          <div className="row">
+            <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
+              <div>
+                <br />
+                <h3>Quản lý lịch chiếu:</h3>
+                <br />
+                <br />
+                <form onSubmit={this.saveMovie}>
+                  <div className="row justify-content-md-center">
+                    <div className="col-3">
+                      <div className="form-group">
+                        <label>Chọn rạp chiếu:</label>
+                        <select
+                          className="mr-2 ml-2"
+                          onChange={(e) => {
+                            const temp3 = [];
+                            const temp4 = [];
+                            for (let i = 0; i < 24; i++) temp3.push(i);
+                            for (let i = 0; i < 60; i++) temp4.push(i);
+                            let temp = { id: "", name: "", address: "" };
+                            if (e.target.value == 0) {
+                              this.setState((prevState) => ({
+                                showtime: {
+                                  ...prevState.showtime,
+                                  cinema: {
+                                    ...temp,
                                   },
-                                }));
-                              }}
-                            >
-                              <option key={0}></option>
-                              {this.props.cinemaInfo.rooms.map((item, index) => {
-                                return (
-                                  <option key={index + 1} value={item.id}>
-                                    {item.roomNumber}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            {/* <p>{this.state.showtime.room}</p> */}
-                          </div>
-                        </div>
+                                  room: "",
+                                  date: "",
+                                },
+                                showRoom: [],
+                                hourPicker: temp3,
+                                minutePicker: temp4,
+                              }));
+                            } else {
+                              temp = this.props.cinemaInfo.cinema.filter(
+                                (item) => item.id === parseInt(e.target.value)
+                              );
+                              temp = temp[0];
+                              this.props.onLoadCinemaRooms(
+                                parseInt(e.target.value)
+                              );
+                              console.log(this.props.cinemaInfo.rooms);
+                              this.setState((prevState) => ({
+                                showtime: {
+                                  ...prevState.showtime,
+                                  cinema: {
+                                    ...temp,
+                                  },
+                                  room: "",
+                                  date: "",
+                                },
+                                showRoom: this.props.cinemaInfo.rooms,
+                                hourPicker: temp3,
+                                minutePicker: temp4,
+                              }));
+                            }
+                            // const temp2 = [];
+                            // for (let i = 1; i <= temp.numOfRoom; i++) temp2.push(i);
+                          }}
+                        >
+                          <option key={0} value={0}></option>
+                          {this.props.cinemaInfo.cinema.map((item, index) => {
+                            return (
+                              <option key={index + 1} value={item.id}>
+                                {item.name}
+                              </option>
+                            );
+                          })}
+                        </select>
                       </div>
-                      <div className="row justify-content-md-center">
-                        <div className="col-3">
-                          <div className="form-group">
-                            <label style={{ marginRight: "5px" }}>Chọn ngày: </label>
-                            <DatePicker
-                              selected={this.state.showtime.date}
-                              onChange={(selectedDate) =>
-                                this.setState((prevState) => ({
-                                  showtime: {
-                                    ...prevState.showtime,
-                                    date: selectedDate,
-                                  },
-                                }))
-                              }
-                              dateFormat="dd/MM/yyyy"
-                              // minDate={new Date()}
-                            />
-                            {/* <p>{this.state.showtime.date.toString()}</p> */}
-                          </div>
-                        </div>
-                        <div className="col-3">
-                          <Button onClick={this.loadShowtime}>Load</Button>
-                          {/* <label>Chọn phim: </label>
+                    </div>
+                    <div className="col-3">
+                      <div className="form-group">
+                        <label>Chọn phòng chiếu:</label>
+                        <select
+                          className="mr-2 ml-2"
+                          value={this.state.showtime.room}
+                          onChange={(e) => {
+                            this.setState((prevState) => ({
+                              showtime: {
+                                ...prevState.showtime,
+                                room: parseInt(e.target.value),
+                              },
+                            }));
+                          }}
+                        >
+                          <option key={0}></option>
+                          {this.props.cinemaInfo.rooms.map((item, index) => {
+                            return (
+                              <option key={index + 1} value={item.id}>
+                                {item.roomNumber}
+                              </option>
+                            );
+                          })}
+                        </select>
+                        {/* <p>{this.state.showtime.room}</p> */}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row justify-content-md-center">
+                    <div className="col-3">
+                      <div className="form-group">
+                        <label style={{ marginRight: "5px" }}>
+                          Chọn ngày:{" "}
+                        </label>
+                        <DatePicker
+                          selected={this.state.showtime.date}
+                          onChange={(selectedDate) =>
+                            this.setState((prevState) => ({
+                              showtime: {
+                                ...prevState.showtime,
+                                date: selectedDate,
+                              },
+                            }))
+                          }
+                          dateFormat="dd/MM/yyyy"
+                          // minDate={new Date()}
+                        />
+                        {/* <p>{this.state.showtime.date.toString()}</p> */}
+                      </div>
+                    </div>
+                    <div className="col-3">
+                      <Button onClick={this.loadShowtime}>Load</Button>
+                      {/* <label>Chọn phim: </label>
                           <select
                             className="mr-2 ml-2"
                             value={this.state.movie}
@@ -310,27 +317,31 @@ class EditShowTimePage extends Component {
                               );
                             })}
                           </select> */}
-                        </div>
-                      </div>
-                    </form>
-                    <h5 className="text-danger">
-                      {this.state.invalidMessage !== "" ? this.state.invalidMessage : ""}
-                    </h5>
+                    </div>
+                  </div>
+                </form>
+                <h5 className="text-danger">
+                  {this.state.invalidMessage !== ""
+                    ? this.state.invalidMessage
+                    : ""}
+                </h5>
 
-                    <form action="" className={`${this.state.showEdit}`}>
-                      <hr />
-                      <div className="row">
-                        <div className="col-6">
-                          <p style={{ color: "black", margin: "12px 5px auto auto" }}>
-                            Thêm lịch chiếu mới:
-                          </p>
-                          <br />
-                        </div>
-                      </div>
-                      <div className="row justify-content-md-center">
-                        <div className="col-1">
-                          <div className="form-group" style={{ display: "flex" }}>
-                            {/* <input
+                <form action="" className={`${this.state.showEdit}`}>
+                  <hr />
+                  <div className="row">
+                    <div className="col-6">
+                      <p
+                        style={{ color: "black", margin: "12px 5px auto auto" }}
+                      >
+                        Thêm lịch chiếu mới:
+                      </p>
+                      <br />
+                    </div>
+                  </div>
+                  <div className="row justify-content-md-center">
+                    <div className="col-3" style={{ marginTop: "8px" }}>
+                      <div className="form-group" style={{ display: "flex" }}>
+                        {/* <input
                                   type="text"
                                   className="form-control"
                                   name="name"
@@ -342,134 +353,136 @@ class EditShowTimePage extends Component {
                                 />
                             
                                 */}
-                            <select
-                              className="mr-2 ml-2"
-                              onChange={(e) => {
-                                this.setState((prevState) => ({
-                                  addHour: parseInt(e.target.value),
-                                }));
-                              }}
-                            >
-                              <option key={-1} value={-1}></option>
+                        <label>Chọn giờ: </label>
+                        <select
+                          className="mr-2 ml-2"
+                          onChange={(e) => {
+                            this.setState((prevState) => ({
+                              addHour: parseInt(e.target.value),
+                            }));
+                          }}
+                        >
+                          <option key={-1} value={-1}></option>
 
-                              {this.state.hourPicker.map((item, index) => {
-                                return (
-                                  <option key={index} value={item}>
-                                    {item}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            {/* <p>{this.state.addHour}</p> */}
-                            <select
-                              className="mr-2 ml-2"
-                              onChange={(e) => {
-                                this.setState((prevState) => ({
-                                  addMinute: parseInt(e.target.value),
-                                }));
-                              }}
-                            >
-                              <option key={-1} value={-1}></option>
+                          {this.state.hourPicker.map((item, index) => {
+                            return (
+                              <option key={index} value={item}>
+                                {item}
+                              </option>
+                            );
+                          })}
+                        </select>
+                        {/* <p>{this.state.addHour}</p> */}
+                        <select
+                          className="mr-2 ml-2"
+                          onChange={(e) => {
+                            this.setState((prevState) => ({
+                              addMinute: parseInt(e.target.value),
+                            }));
+                          }}
+                        >
+                          <option key={-1} value={-1}></option>
 
-                              {this.state.minutePicker.map((item, index) => {
-                                return (
-                                  <option key={index} value={item}>
-                                    {item}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            {/* <p>{this.state.addMinute}</p> */}
-                          </div>
-                        </div>
-                        <div className="col-3" style={{ marginTop: "7px" }}>
-                          <label>Chọn phim: </label>
-                          <select
-                            className="mr-2 ml-2"
-                            onChange={(e) => {
-                              let val = parseInt(e.target.value);
-                              if (val === 0) {
-                                this.setState((prevState) => ({
-                                  movie: {
-                                    id: "",
-                                    name: "",
-                                  },
-                                }));
-                              } else {
-                                let movie_temp = this.props.cinemaInfo.movie.filter(
-                                  (item) => item.id === val
-                                );
-                                movie_temp = movie_temp[0];
-                                this.setState((prevState) => ({
-                                  movie: {
-                                    id: movie_temp.id,
-                                    name: movie_temp.name,
-                                  },
-                                }));
-                              }
-                            }}
-                          >
-                            <option key={0} value={0}></option>
-                            {this.props.cinemaInfo.movie.map((item, index) => {
-                              return (
-                                <option key={index + 1} value={item.id}>
-                                  {item.name}
-                                </option>
-                              );
-                            })}
-                          </select>
-                        </div>
-                        <div className="col-1">
-                          <button
-                            type="button"
-                            className="btn btn-primary"
-                            style={{ marginLeft: "5px" }}
-                            onClick={this.addShowtime}
-                          >
-                            <span className="fa fa-plus"></span>
-                          </button>
-                        </div>
+                          {this.state.minutePicker.map((item, index) => {
+                            return (
+                              <option key={index} value={item}>
+                                {item}
+                              </option>
+                            );
+                          })}
+                        </select>
+                        {/* <p>{this.state.addMinute}</p> */}
                       </div>
-                      <h5 className="text-danger">
-                        {this.state.checkMessage !== "error"
-                          ? this.state.checkMessage
-                          : "Vui lòng nhập đúng định dạng"}
-                      </h5>
-                      <div className="booklist">
-                        {this.props.cinemaInfo.showtimes.map((item, index) => {
+                    </div>
+                    <div className="col-3" style={{ marginTop: "8px" }}>
+                      <label>Chọn phim: </label>
+                      <select
+                        className="mr-2 ml-2"
+                        onChange={(e) => {
+                          let val = parseInt(e.target.value);
+                          if (val === 0) {
+                            this.setState((prevState) => ({
+                              movie: {
+                                id: "",
+                                name: "",
+                              },
+                            }));
+                          } else {
+                            let movie_temp = this.props.cinemaInfo.movie.filter(
+                              (item) => item.id === val
+                            );
+                            movie_temp = movie_temp[0];
+                            this.setState((prevState) => ({
+                              movie: {
+                                id: movie_temp.id,
+                                name: movie_temp.name,
+                              },
+                            }));
+                          }
+                        }}
+                      >
+                        <option key={0} value={0}></option>
+                        {this.props.cinemaInfo.movie.map((item, index) => {
                           return (
-                            <article className="book" key={item.id}>
-                              <img src={item.movie.image} alt="" />
-                              <h4>{item.movie.name}</h4>
-                              <button
-                                key={item.id}
-                                type="button"
-                                className="btn btn-danger"
-                                style={{ marginRight: "10px" }}
-                                value={item.id}
-                                onClick={this.deleteShowtime}
-                              >
-                                <span className="far fa-trash-alt"></span>
-                              </button>
-                              <label>
-                                {item.startTime.slice(11, 16)} -{" "}
-                                {item.endTime.slice(11, 16)}
-                              </label>
-                            </article>
+                            <option key={index + 1} value={item.id}>
+                              {item.name}
+                            </option>
                           );
                         })}
-                      </div>
-                      {/* <Button onClick={this.saveMovie}>Save</Button>
-                      <Button onClick={this.toggleModal}>Close</Button> */}
-                    </form>
+                      </select>
+                    </div>
+                    <div className="col-1">
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        style={{ marginLeft: "5px" }}
+                        onClick={this.addShowtime}
+                      >
+                        <span className="fa fa-plus"></span>
+                      </button>
+                    </div>
                   </div>
-                </div>
+                  <h5 className="text-danger">
+                    {this.state.checkMessage !== "error"
+                      ? this.state.checkMessage
+                      : "Vui lòng nhập đúng định dạng"}
+                  </h5>
+                  <div className="booklist">
+                    {this.props.cinemaInfo.showtimes.map((item, index) => {
+                      return (
+                        <article className="book" key={item.id}>
+                          <img src={item.movie.image} alt="" />
+                          <h4>{item.movie.name}</h4>
+                          <button
+                            key={item.id}
+                            type="button"
+                            className="btn btn-danger"
+                            style={{ marginRight: "10px" }}
+                            value={item.id}
+                            onClick={this.deleteShowtime}
+                          >
+                            <span className="far fa-trash-alt"></span>
+                          </button>
+                          <label>
+                            {item.startTime.slice(11, 16)} -{" "}
+                            {item.endTime.slice(11, 16)}
+                          </label>
+                        </article>
+                      );
+                    })}
+                  </div>
+                  {/* <Button onClick={this.saveMovie}>Save</Button>
+                      <Button onClick={this.toggleModal}>Close</Button> */}
+                </form>
               </div>
             </div>
-          </section>
-        );
-      } _    
-    }
+          </div>
+        </div>
+      </section>
+    );
+  }
+  _;
+}
 
 const mapStateToProps = (state) => {
   return {
