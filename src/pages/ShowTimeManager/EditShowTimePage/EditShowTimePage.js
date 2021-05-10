@@ -71,7 +71,7 @@ class EditShowTimePage extends Component {
         showEdit: "hideMenu",
       });
       let month = this.state.showtime.date.getMonth() + 1;
-      let day = this.state.showtime.date.getDay() + 1;
+      let day = this.state.showtime.date.getDate();
       if (month < 10) {
         month = "0" + month.toString();
       } else {
@@ -90,6 +90,9 @@ class EditShowTimePage extends Component {
         month +
         "-" +
         day;
+      // console.log("dateString: ", dateString);
+      // console.log(this.state.showtime.date.toString());
+      // console.log(this.state.showtime.date.getDay());
       this.props.onLoadShowtime(this.state.showtime.room, dateString);
       this.props.onLoadMovies();
       this.setState({
@@ -116,7 +119,7 @@ class EditShowTimePage extends Component {
       var result = window.confirm("Want to create new showtime?");
       if (result) {
         let month = this.state.showtime.date.getMonth() + 1;
-        let day = this.state.showtime.date.getDay() + 1;
+        let day = this.state.showtime.date.getDate();
         if (month < 10) {
           month = "0" + month.toString();
         } else {
@@ -135,6 +138,7 @@ class EditShowTimePage extends Component {
           month +
           "-" +
           day;
+        console.log("dateString: ", dateString);
         const temp = {
           date: dateString,
           hour: this.state.addHour,
