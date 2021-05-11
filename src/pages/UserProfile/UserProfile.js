@@ -1,5 +1,12 @@
 import { render } from "@testing-library/react";
 import React, {Component} from "react";
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 // react-bootstrap components
 import {
@@ -16,12 +23,53 @@ import {
 
 import testAvatar from '../../assets/images/avatar.jpg';
 
-class UserProfile extends Component {
-    constructor(props){
-        super(props);
-    }
-    render(){
-        const userName = sessionStorage.getItem("name")
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box p={3}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+  
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+  };
+  
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
+  
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+      backgroundColor: theme.palette.background.paper,
+    },
+  }));
+  
+  export default function SimpleTabs() {
+    const classes = useStyles();
+    const [value, setValue] = React.useState(0);
+  
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
         return (
             <section>
                 <div className="container-fluid">
@@ -29,143 +77,10 @@ class UserProfile extends Component {
                         <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
                             <Container fluid className="mt-5">
                                 <Row>
-                                <Col md="8">
-                                    <Card>
-                                    <Card.Header>
-                                        <Card.Title as="h4">Edit Profile</Card.Title>
-                                    </Card.Header>
-                                    <Card.Body>
-                                        <Form>
-                                        <Row>
-                                            <Col className="pr-1" md="5">
-                                            <Form.Group>
-                                                <label>Company (disabled)</label>
-                                                <Form.Control
-                                                defaultValue="Creative Code Inc."
-                                                disabled
-                                                placeholder="Company"
-                                                type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                            </Col>
-                                            <Col className="px-1" md="3">
-                                            <Form.Group>
-                                                <label>{userName}</label>
-                                                <Form.Control
-                                                defaultValue="michael23"
-                                                placeholder="Username"
-                                                type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                            </Col>
-                                            <Col className="pl-1" md="4">
-                                            <Form.Group>
-                                                <label htmlFor="exampleInputEmail1">
-                                                Email address
-                                                </label>
-                                                <Form.Control
-                                                placeholder="Email"
-                                                type="email"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>First Name</label>
-                                                <Form.Control
-                                                defaultValue="Mike"
-                                                placeholder="Company"
-                                                type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                            </Col>
-                                            <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Last Name</label>
-                                                <Form.Control
-                                                defaultValue="Andrew"
-                                                placeholder="Last Name"
-                                                type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md="12">
-                                            <Form.Group>
-                                                <label>Address</label>
-                                                <Form.Control
-                                                defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                                                placeholder="Home Address"
-                                                type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col className="pr-1" md="4">
-                                            <Form.Group>
-                                                <label>City</label>
-                                                <Form.Control
-                                                defaultValue="Mike"
-                                                placeholder="City"
-                                                type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                            </Col>
-                                            <Col className="px-1" md="4">
-                                            <Form.Group>
-                                                <label>Country</label>
-                                                <Form.Control
-                                                defaultValue="Andrew"
-                                                placeholder="Country"
-                                                type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                            </Col>
-                                            <Col className="pl-1" md="4">
-                                            <Form.Group>
-                                                <label>Postal Code</label>
-                                                <Form.Control
-                                                placeholder="ZIP Code"
-                                                type="number"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md="12">
-                                            <Form.Group>
-                                                <label>About Me</label>
-                                                <Form.Control
-                                                cols="80"
-                                                defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                                                that two seat Lambo."
-                                                placeholder="Here can be your description"
-                                                rows="4"
-                                                as="textarea"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                            </Col>
-                                        </Row>
-                                        <Button
-                                            className="btn-fill pull-right"
-                                            type="submit"
-                                            variant="info"
-                                        >
-                                            Update Profile
-                                        </Button>
-                                        <div className="clearfix"></div>
-                                        </Form>
-                                    </Card.Body>
-                                    </Card>
-                                </Col>
                                 <Col md="4">
                                     <Card className="card-user">
-                                    <div className="card-image">
-                                        <span>My Profile</span>
+                                    <div className="card-image mt-2">
+                                        <h4>My Profile</h4>
                                     </div>
                                     <Card.Body>
                                         <div className="author">
@@ -177,15 +92,13 @@ class UserProfile extends Component {
                                             height="100px"
                                             src={testAvatar}
                                             ></img>
-                                            <h5 className="title">{userName}</h5>
+                                            <h5 className="title mt-2">Phan Vũ</h5>
                                         </a>
-                                        <p className="description">michael24</p>
+                                        <p className="email">vu@gmail.com</p>
+                                        <p className="phone">0967139958</p>
+                                        <p className="address">Gia Lai-Việt Nam</p>
                                         </div>
-                                        <p className="description text-center">
-                                        "Lamborghini Mercy <br></br>
-                                        Your chick she so thirsty <br></br>
-                                        I'm in that two seat Lambo"
-                                        </p>
+                                        
                                     </Card.Body>
                                     <hr></hr>
                                     <div className="button-container mr-auto ml-auto">
@@ -215,7 +128,65 @@ class UserProfile extends Component {
                                         </Button>
                                     </div>
                                     </Card>
+                                </Col>    
+                                <Col md="8">
+                                    <Card>
+                                    
+                                    <Card.Body>
+                                    <AppBar position="static">
+                                        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                                        <Tab label="My profile" {...a11yProps(0)} />
+                                        <Tab label="Change password" {...a11yProps(1)} />
+                                        </Tabs>
+                                    </AppBar>
+                                    <TabPanel value={value} index={0}>
+                                    <form>
+                                        <div className="form-group row">
+                                            <label for="email">Email address</label>
+                                            <input type="email" className="form-control" id="email" placeholder="Enter email"></input>
+                                        </div>
+                                        <div className="form-group row">
+                                            <label for="name">Name</label>
+                                            <input type="text" className="form-control" id="name" placeholder="Enter Name"></input>
+                                        </div>
+                                        <div className="form-group row">
+                                            <label for="age">Age</label>
+                                            <input type="number" className="form-control" id="age" placeholder="Enter age"></input>
+                                        </div>
+                                        <div className="form-group row">
+                                            <label for="address">Address</label>
+                                            <input type="text" className="form-control" id="address" placeholder="Enter address"></input>
+                                        </div>
+                                        <div className="form-group row">
+                                            <label for="phone">Phone number</label>
+                                            <input type="number" className="form-control" id="phone" placeholder="Enter phone number"></input>
+                                        </div>
+                                        <button type="submit" className="btn btn-primary">Update</button>
+                                        </form>
+                                    </TabPanel>
+                                    <TabPanel value={value} index={1}>
+                                        <form>
+                                            <div className="form-group row">
+                                                <label for="oldPassword">Old password</label>
+                                                <input type="password" className="form-control" id="oldPassword" placeholder="Enter old password"></input>
+                                            </div>
+                                            <div className="form-group row">
+                                                <label for="newPassword">New password</label>
+                                                <input type="password" className="form-control" id="newPassword" placeholder="Enter new password"></input>
+                                            </div>
+                                            <div className="form-group row">
+                                                <label for="repeatedPassword">Repeate Password</label>
+                                                <input type="password" className="form-control" id="repeatedPassword" placeholder="Repeate your password"></input>
+                                            </div>
+                                            
+                                            <button type="submit" className="btn btn-primary">Change</button>
+                                        </form>
+                                    </TabPanel>
+                                    
+                                    </Card.Body>
+                                    </Card>
                                 </Col>
+                                
                                 </Row>
                             </Container>
                         </div>    
@@ -224,6 +195,3 @@ class UserProfile extends Component {
             </section>            
         )      
     }
-}
-
-export default UserProfile;
