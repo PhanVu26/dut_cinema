@@ -18,6 +18,8 @@ import filterActor from "./ActorReducer/FilterActorReducer";
 
 import reducerShowTime from "./ShowTimeReducer/ShowTimeReducer";
 
+import roles from "./UserRoleReducer/UserRoleReducer"
+
 const myReducer = combineReducers({
   users,
   genres,
@@ -34,6 +36,7 @@ const myReducer = combineReducers({
   actorEditing,
   filterActor,
   reducerShowTime,
+  roles
 });
 
 export default myReducer;

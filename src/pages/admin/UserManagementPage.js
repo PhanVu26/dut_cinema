@@ -23,6 +23,7 @@ class UserManagementPage extends Component{
         };
       }
       componentDidMount() {
+        this.props.onFetchAllUserRoles();
         this.props.onFetchAllUsers();
         this.setState({
           totalRecords: this.props.users.length
@@ -121,6 +122,9 @@ const mapDispatchToProps = (dispatch, props) =>{
     return {
         onFetchAllUsers : () => {
             dispatch(actions.actFetchDataUsersRequest());
+        },
+        onFetchAllUserRoles : () => {
+            dispatch(actions.actFetchDataRolesRequest());
         }
     }
 }

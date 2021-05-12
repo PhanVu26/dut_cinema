@@ -17,6 +17,22 @@ export const listAllUsers = (users) => {
     users
   };
 };
+
+export const actFetchDataRolesRequest = () => {
+  return (dispatch) => {
+    return callApi("roles", "GET", null).then((res) => {
+      console.log("res", res)
+      dispatch(listAllRoles(res.data));
+    });
+  };
+};
+export const listAllRoles = (roles) => {
+  return {
+    type: types.FETCH_ALL_ROLES,
+    roles
+  };
+};
+
 export const actUpdateUserRequest = (user) => {
   return (dispatch) => {
     return callApi(`users/${user.id}`, "PATCH", user).then((res) => {

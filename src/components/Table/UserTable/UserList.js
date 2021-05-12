@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UserItem from './UserItem';
 import {connect} from 'react-redux';
 import * as actions from '../../../actions/index'
+import { getRoles } from '@testing-library/dom';
 
 class UserList extends Component {
     constructor(props){
@@ -14,6 +15,16 @@ class UserList extends Component {
         }
     }
 
+    showUserRoles = roles => {
+        console.log("roles",this.props.roles)
+        var result = null;
+        if (roles.length > 0) {
+          result = roles.map((role, index) => {
+            return <option key={role.id} value={role.id} >{role.name}</option>;
+          });
+        }
+        return result;
+    }
     showUsers = users => {
         var result = null;
         if (users.length > 0) {
@@ -56,15 +67,29 @@ class UserList extends Component {
             }
         })
 
-        rowsPerPage = rowsPerPage.filter((user) => {
-            switch(userFilter.role){
-                case 0: return user.role === 1; break;
-                case 1: return user.role === 2; break;
-                case 2: return user.role === 3; break;
-                default: return rowsPerPage;
-            }
+        // rowsPerPage = rowsPerPage.filter((user) => {
+        //     // switch(userFilter.role){
+        //     //     case 0: return user.role === 1; break;
+        //     //     case 1: return user.role === 2; break;
+        //     //     case 2: return user.role === 3; break;
+        //     //     default: return rowsPerPage;
+        //     // }
+        //         return user.userRoles.some(role => {
+        //             return role.id === userFilter.role;
+        //         })
+        //     }else return rowsPerPage;    
             
-        })
+        // })
+
+        if(userFilter.role !== -1){
+            rowsPerPage = rowsPerPage.filter((user) => {
+                return user.userRoles.some(role => {
+                    return role.role.id == userFilter.role
+                })
+            })
+        }
+
+        
         return (
             <table className="table table-bordered table-hover">
                 <thead>
@@ -99,9 +124,7 @@ class UserList extends Component {
                                 onChange={this.handleChange}
                                 value={this.state.roleFilter} >
                                     <option value={-1}>Tất cả</option>
-                                    <option value={0}>Quản lý phim</option>
-                                    <option value={1}>Quản lý lịch chiếu</option>
-                                    <option value={2}>Người dùng</option>
+                                    {this.showUserRoles(this.props.roles)}
                             </select>
                         </td>
                         <td></td>
@@ -129,7 +152,8 @@ const mapStateToProps = (state) => {
     return {
         users: state.users,
         userFilter : state.userFilter,
-        pageInfo: state.pageInfo
+        pageInfo: state.pageInfo,
+        roles: state.roles
     }
 }
 const mapDispatchToProps = (dispatch, props) => {

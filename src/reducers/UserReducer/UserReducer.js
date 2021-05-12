@@ -59,7 +59,8 @@ var userReducer = (state = initialState, action) => {
         case types.UPDATE_USER:               
             index = findIndex(state, action.user.id);
             state[index] = action.user;
-            return [...state];                
+            return [...state];  
+                          
         default: return state;     
     }
     return state;
