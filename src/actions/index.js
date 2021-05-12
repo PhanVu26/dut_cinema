@@ -31,7 +31,7 @@ export const deleteUser = (id) => {
 
 export const actFetchDataMovieRequest = () => {
   return (dispatch) => {
-    return callApi("movies", "GET", null).then((res) => {
+    return callApi("movies?relations=actors,genres", "GET", null).then((res) => {
       dispatch(actFetchDataMovie(res.data.results));
     });
   };
@@ -395,3 +395,20 @@ export const actRegisterUserRequest = (user) => {
 };
 
 //-------------------------------------------------------
+
+
+// get movie
+export const getMovieRequest = (id) => {
+  return (dispatch) => {
+      return callApi(`movies/${id}?relations=actors,genres`, 'GET', null).then((res) => {
+          console.log("res", res.data)
+          dispatch(getMovie(res.data));
+      });
+  };
+}
+export const getMovie = (movie) => {
+  return {
+      type: Types.FETCH_MOVIE,
+      movie
+  }
+}

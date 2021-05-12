@@ -17,6 +17,7 @@ import Promotion3 from "./pages/client/HomePage/Promotion/PromotionItems/promoti
 import Promotion4 from "./pages/client/HomePage/Promotion/PromotionItems/promotion004_TungBungHaiSao";
 import PromotionPage from "./pages/client/HomePage/Promotion/PromotionPage";
 import UserPage from "./pages/client/UserPage/UserPage";
+import MovieDetail from "./pages/client/TicketBooking/MovieInfo/MovieDetail";
 
 function App() {
   return (
@@ -90,6 +91,12 @@ function App() {
         </Route>
         <Route exact path="/profile">
           <Header /> <UserPage /> <Footer />
+        </Route>
+        <Route path="/booking/" >
+          
+                <Header />
+                <MovieDetail/>
+                <Footer />
         </Route>
       </Switch>
     </Router>

@@ -5,6 +5,7 @@ import MovieReducer from "./MovieReducer";
 import ShowTimesReducer from "./ShowTimesReducer";
 import FoodReducer from "./FoodReducer";
 import TicketReducer from "./TicketReducer";
+import MovieInfo from "./MovieInfoReducer"
 
 const reducer = combineReducers({
   UsersReducer,
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   ShowTimesReducer,
   FoodReducer,
   TicketReducer,
+  MovieInfo,
 });
 
 export default reducer;
