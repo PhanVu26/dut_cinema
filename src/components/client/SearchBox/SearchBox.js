@@ -28,11 +28,13 @@ class SearchBox extends Component {
             aria-describedby="search-addon"
             value={this.state.word}
             onChange={(e) => this.setState({ word: e.target.value })}
-            onKeyUp={(e) => this.props.handleOnEnter(e, this.state.keyword)}
+            onKeyUp={(e) => this.props.handleOnEnter(e, this.state.word)}
           />
-          <span class="input-group-text border-0" id="search-addon">
-            <i class="fas fa-search"></i>
-          </span>
+          <button onClick={() => this.props.handleOnClick(this.state.word)}>
+            <span class="input-group-text border-0" id="search-addon">
+              <i class="fas fa-search"></i>
+            </span>
+          </button>
         </div>
       </div>
     );

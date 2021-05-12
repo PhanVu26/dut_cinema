@@ -1,4 +1,3 @@
-
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -17,6 +16,7 @@ import Promotion3 from "./pages/client/HomePage/Promotion/PromotionItems/promoti
 import Promotion4 from "./pages/client/HomePage/Promotion/PromotionItems/promotion004_TungBungHaiSao";
 import PromotionPage from "./pages/client/HomePage/Promotion/PromotionPage";
 import UserPage from "./pages/client/UserPage/UserPage";
+import SearchPage from "./pages/client/SearchPage/SearchPage";
 
 function App() {
   return (
@@ -28,7 +28,9 @@ function App() {
         <Route exact path="/admin/account">
           <AccountManagementPage></AccountManagementPage>
         </Route>
-        <Route exact path="/buy-ticket"
+        <Route
+          exact
+          path="/buy-ticket"
           component={({ history }) => {
             return (
               <>
@@ -69,6 +71,17 @@ function App() {
               </>
             );
           }}
+        ></Route>
+        <Route
+          exact
+          path="/search"
+          component={() => (
+            <>
+              <Header />
+              <SearchPage />
+              <Footer />
+            </>
+          )}
         ></Route>
         <Route exact path="/buy-ticket-detail/:movie">
           <Header /> <BuyTicketDetailPage /> <Footer />

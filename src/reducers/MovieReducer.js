@@ -137,17 +137,18 @@ function MovieReducer(state = stateDefault, action) {
       newState.movie.filter((data) => {
         if (keyword === "") {
           newState.searchMovie = [];
-          console.log(newState.searchMovie);
         } else if (
-          data.name.toLowerCase().includes(keyword.toLowerCase()) ||
-          data.type.toLowerCase().includes(keyword.toLowerCase()) ||
-          data.author.toLowerCase().includes(keyword.toLowerCase()) ||
-          data.actor.toLowerCase().includes(keyword.toLowerCase()) ||
-          data.nation.toLowerCase().includes(keyword.toLowerCase())
+          // data.name.toLowerCase().includes(keyword.toLowerCase()) ||
+          // data.type.toLowerCase().includes(keyword.toLowerCase()) ||
+          // data.author.toLowerCase().includes(keyword.toLowerCase()) ||
+          // data.actor.toLowerCase().includes(keyword.toLowerCase()) ||
+          // data.nation.toLowerCase().includes(keyword.toLowerCase())
+          data.name.toLowerCase().includes(keyword.toLowerCase())
         ) {
           newState.searchMovie.push(data);
         }
       });
+      console.log("result: ", newState.searchMovie);
       return newState;
     }
     case Types.FETCH_DATA_BOOKING_MOVIE: {
