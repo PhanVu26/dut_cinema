@@ -27,6 +27,12 @@ class UserItem extends Component {
         console.log("id", this.props.user.id)
         this.props.onGetUserEditing(this.props.user.id)
     }
+    showUserRole = (userRoles) => {
+        const rs = userRoles.map((role, index) => {
+            return role.role.name
+        })
+        return rs.toString();
+    }
     render() {
         const {index, user} = this.props;
         const {isDisplayUserForm} = this.props;
@@ -39,8 +45,8 @@ class UserItem extends Component {
                 <td className="text-center">{user.name}</td>
                 <td className="text-center">{user.email}</td>
                 <td className="text-center">{user.age}</td>
-                {/* <td className="text-center">{role}</td>
-                <td className="text-center">{user.createdAt}</td> */}
+                <td className="text-center">{this.showUserRole(user.userRoles)}</td>
+                {/* <td className="text-center">{user.createdAt}</td> */}
                 <td className="text-center">
                     <i 
                         className= {user.isActive ? 'fas fa-toggle-on': 'fas fa-toggle-off' }

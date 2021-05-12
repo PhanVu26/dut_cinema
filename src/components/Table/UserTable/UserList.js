@@ -74,7 +74,7 @@ class UserList extends Component {
                         <th className="text-center">Tên</th>
                         <th className="text-center">Email</th>
                         <th className="text-center">Tuổi</th>
-                        {/* <th className="text-center">Vai trò</th> */}
+                        <th className="text-center">Vai trò</th>
                         {/* <th className="text-center">Ngày tạo</th> */}
                         <th className="text-center">Trạng Thái</th>
                         <th className="text-center">Hành Động</th>
@@ -82,7 +82,6 @@ class UserList extends Component {
                 </thead>
                 <tbody>
                     <tr>
-                        <td></td>
                         <td></td>
                         <td>
                             <input 
@@ -93,6 +92,7 @@ class UserList extends Component {
                                 value={this.state.nameFilter}>
                             </input>
                         </td>
+                        <td></td>
                         <td>
                             <select 
                                 name="roleFilter"
