@@ -15,13 +15,6 @@ class Register extends Component {
         isValid: true,
         errorMessage: "",
       },
-      phone: {
-        value: "",
-        isValid: true,
-        errorMessage: "",
-      },
-      gender: "Nam",
-      birth: "",
       email: {
         value: "",
         isValid: true,
@@ -33,11 +26,6 @@ class Register extends Component {
         errorMessage: "",
       },
       rePassword: {
-        value: "",
-        isValid: true,
-        errorMessage: "",
-      },
-      address: {
         value: "",
         isValid: true,
         errorMessage: "",
@@ -72,68 +60,42 @@ class Register extends Component {
     newState.errorMessage = errorMessage;
     this.setState({ [name]: newState });
   };
-
-  handleChangeGender = (event) => {
-    this.setState({
-      gender: event.target.value,
-    });
-  };
-
-  handleChangeBirth = (event) => {
-    this.setState({
-      birth: event.target.value,
-    });
-  };
-
   onSave = (e) => {
     e.preventDefault();
     let {
       name,
-      phone,
-      gender,
       password,
       rePassword,
       email,
-      address,
-      birth,
     } = this.state;
 
     if (
       name.value !== "" &&
       name.isValid === true &&
-      phone.value !== "" &&
-      phone.isValid === true &&
       password.value !== "" &&
       password.isValid === true &&
       rePassword.value !== "" &&
       rePassword.isValid === true &&
       email.value !== "" &&
-      email.isValid === true &&
-      address.value !== "" &&
-      address.isValid === true
+      email.isValid === true
     ) {
       let user = {
-        userName: name.value,
+        name: name.value,
         email: email.value,
-        phone: phone.value,
-        gender: gender,
-        birth: birth,
         password: password.value,
-        address: address.value,
-        currentStar: 0,
-        targets: 0,
       };
 
-        actRegisterUserRequest(user).then((res) => {
-          let notification = res.data;
+      actRegisterUserRequest(user).then((res) => {
+        console.log(res)
+        let notification = res.data.message;
 
-          if (!notification.success) {
-            alert(notification.message);
-          } else {
-            this.setState({ show: false });
-            alert(notification.message);
-          }
-        });
+        if (res.status !== 201) {
+          alert("Register fail.");
+        } else {
+          this.setState({ isShow: false });
+          alert(notification + ". Vui lòng đăng nhập để tiếp tục.");
+        }
+      });
     } else {
       alert("Vui Lòng điền đầy đủ thông tin và đúng định dạng");
     }
@@ -167,13 +129,9 @@ class Register extends Component {
 
     let {
       name,
-      phone,
-      gender,
       password,
       rePassword,
-      email,
-      address,
-      birth,
+      email
     } = this.state;
     return (
       <ButtonToolbar style={toolbar}>
@@ -216,41 +174,7 @@ class Register extends Component {
                   />
                 </div>
               </div>
-              <div className="row mt-3">
-                <div className="col-md-6">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="phone"
-                    placeholder="Số điện thoại"
-                    name="phone"
-                    value={phone.value}
-                    onChange={this.handleInput}
-                    onBlur={this.handleInputValidation}
-                  />
-                  <FormError
-                    type="phone"
-                    isHidden={this.state.phone.isValid}
-                    errorMessage={this.state.phone.errorMessage}
-                  />
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <select
-                      className="form-control"
-                      name="gender"
-                      value={gender.value}
-                      onChange={this.handleChangeGender}
-                    >
-                      <option value="" disabled>
-                        Select Gender
-                      </option>
-                      <option value="Nam">Nam </option>
-                      <option value="Nữ">Nữ </option>
-                    </select>
-                  </div>
-                </div>
-              </div>
+              
               <div className="row mt-3">
                 <div className="col-md-12">
                   <input
@@ -306,41 +230,8 @@ class Register extends Component {
                   />
                 </div>
               </div>
-              <div className="row mt-3">
-                <div className="col-md-12">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="address"
-                    placeholder="Địa chỉ"
-                    name="address"
-                    value={address.value}
-                    onChange={this.handleInput}
-                    onBlur={this.handleInputValidation}
-                  />
-                  <FormError
-                    type="address"
-                    isHidden={this.state.address.isValid}
-                    errorMessage={this.state.address.errorMessage}
-                  />
-                </div>
-              </div>
-              <div className="row mt-3">
-                <div className="col-md-12">
-                  <input
-                    name="birth"
-                    value={birth}
-                    onChange={this.handleChangeBirth}
-                    type="date"
-                    id="birth"
-                    max="3000-12-31"
-                    min="1000-01-01"
-                    className="form-control"
-                    placeholder="Ngày sinh"
-                    required
-                  />
-                </div>
-              </div>
+             
+              
               <div className="row text-center mt-3">
                 <div className="col-md-12">
                   <p>

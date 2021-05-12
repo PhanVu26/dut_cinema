@@ -391,7 +391,7 @@ export const actFetchDataPromotion = (promotion) => {
 //--------------------------------------------------------
 
 export const actRegisterUserRequest = (user) => {
-  return callApi("api/users/register", "POST", user);
+  return callApi("auth/register", "POST", user);
 };
 
 //-------------------------------------------------------

@@ -75,7 +75,7 @@ class Login extends Component {
               localStorage.setItem("account", JSON.stringify(dataAccount));
             }
             alert("Logged in successfully");
-            this.setState({ show: false });
+            this.setState({ isShow: false });
             window.location.reload();
         }).catch(function(error){
           alert("Khong dung mat khau")
