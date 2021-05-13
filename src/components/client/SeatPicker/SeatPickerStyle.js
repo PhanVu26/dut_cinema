@@ -18,7 +18,7 @@ const styles = (theme) => ({
         backgroundColor: 'lightgray',
         "&:hover": {
             cursor: 'pointer',
-            backgroundColor: theme.color.orange,
+            backgroundColor: "#f26b38",
             transition: '0.5s'
         }
     },
@@ -26,7 +26,7 @@ const styles = (theme) => ({
         backgroundColor: 'lightseagreen',
         "&:hover": {
             cursor: 'pointer',
-            backgroundColor: theme.color.orange,
+            backgroundColor: "#f26b38",
             transition: '0.5s'
         }
     },
