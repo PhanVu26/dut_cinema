@@ -8,25 +8,29 @@ class InforUser extends Component {
     let account = JSON.parse(localStorage.getItem("account"));
     this.state = {
       txtName: {
-        value: account.userName,
+        value: account.name,
         isInputValid: true,
         errorMessage: "",
       },
-      txtPhone: {
-        value: account.phone,
+      age: {
+        value: account.age || "",
         isInputValid: true,
         errorMessage: "",
       },
-      txtGender: account.gender,
-      txtBirth: props.account.birth,
+      // txtPhone: {
+      //   value: account.phone,
+      //   isInputValid: true,
+      //   errorMessage: "",
+      // },
+      // txtGender: account.gender,
+      // txtBirth: props.account.birth,
       txtEmail: {
         value: account.email,
       },
-      getPassword: {
-        value: account.password,
-      },
       txtPassword: {
         value: "",
+        isInputValid: true,
+        errorMessage: "",
       },
       txtNewPassword: {
         value: "",
@@ -38,15 +42,15 @@ class InforUser extends Component {
         isInputValid: true,
         errorMessage: "",
       },
-      txtAddress: {
-        value: account.address,
-        isInputValid: true,
-        errorMessage: "",
-      },
+      // txtAddress: {
+      //   value: account.address,
+      //   isInputValid: true,
+      //   errorMessage: "",
+      // },
       isChecked: false,
-      _id: account._id,
-      currentStar: account.currentStar,
-      targets: account.targets,
+      _id: account.id,
+      // currentStar: account.currentStar,
+      // targets: account.targets,
     };
   }
 
@@ -70,33 +74,34 @@ class InforUser extends Component {
     this.setState({ [name]: newState });
   };
 
-  handleChangeGender = (event) => {
-    this.setState({
-      txtGender: event.target.value,
-    });
-  };
+  // handleChangeGender = (event) => {
+  //   this.setState({
+  //     txtGender: event.target.value,
+  //   });
+  // };
 
   toggleChange = (e) => {
     this.setState({
       isChecked: e.target.checked,
     });
   };
-  handleChangeBirth = (event) => {
-    this.setState({
-      txtBirth: event.target.value,
-    });
-  };
+  // handleChangeBirth = (event) => {
+  //   this.setState({
+  //     txtBirth: event.target.value,
+  //   });
+  // };
 
   updateAccount = (account) => {
     let accountStorage = JSON.parse(localStorage.getItem("account"));
 
-    accountStorage.userName = account.userName;
-    accountStorage.phone = account.phone;
-    accountStorage.userName = account.userName;
-    accountStorage.gender = account.gender;
-    accountStorage.birth = account.birth;
-    accountStorage.password = account.password;
-    accountStorage.address = account.address;
+    accountStorage.name = account.name;
+    accountStorage.age = account.age;
+    // accountStorage.phone = account.phone;
+    // accountStorage.userName = account.userName;
+    // accountStorage.gender = account.gender;
+    // accountStorage.birth = account.birth;
+    // accountStorage.password = account.password;
+    // accountStorage.address = account.address;
 
     localStorage.setItem("account", JSON.stringify(accountStorage));
   };
@@ -105,42 +110,48 @@ class InforUser extends Component {
     e.preventDefault();
     let {
       txtName,
-      txtPhone,
-      txtGender,
+      // txtPhone,
+      // txtGender,
       txtPassword,
-      getPassword,
+      age,
       txtNewPassword,
+      txtRePassword,
       txtEmail,
-      txtAddress,
-      txtBirth,
+      // txtAddress,
+      // txtBirth,
       _id,
-      targets,
-      currentStar,
+      // targets,
+      // currentStar,
       isChecked,
     } = this.state;
     if (isChecked === true) {
-      if (txtPassword.value !== getPassword.value) {
-        alert("Mật khẩu Trước đó không đúng");
-        return null;
-      } else if (
+      if (
         txtName.value !== "" &&
         txtName.isInputValid === true &&
-        txtPhone.value !== "" &&
-        txtPhone.isInputValid === true &&
-        txtAddress.value !== "" &&
-        txtAddress.isInputValid === true
+        age.value !== "" &&
+        age.isInputValid === true &&
+        txtPassword.value != "" &&
+        txtPassword.isInputValid === true &&
+        txtNewPassword.value != "" &&
+        txtNewPassword.isInputValid === true &&
+        txtRePassword.value != "" &&
+        txtRePassword.isInputValid === true
+        // txtPhone.value !== "" &&
+        // txtPhone.isInputValid === true &&
+        // txtAddress.value !== "" &&
+        // txtAddress.isInputValid === true
       ) {
         let accountUser = {
-          _id: _id,
-          userName: txtName.value,
-          email: txtEmail.value,
-          phone: txtPhone.value,
-          gender: txtGender,
-          birth: txtBirth,
+          name: txtName.value,
+          age: age.value,
+          // phone: txtPhone.value,
+          // gender: txtGender,
+          // birth: txtBirth,
+          oldPassword: txtPassword.value,
           password: txtNewPassword.value,
-          address: txtAddress.value,
-          currentStar: currentStar,
-          targets: targets,
+          // address: txtAddress.value,
+          // currentStar: currentStar,
+          // targets: targets,
         };
         let result = window.confirm("bạn có muốn cập nhật ?");
         if (result === true) {
@@ -148,26 +159,18 @@ class InforUser extends Component {
           this.updateAccount(accountUser);
           alert("Lưu thông tin thành công");
         }
+      } else {
+        alert("Vui Lòng điền đầy đủ thông tin và đúng định dạng");
       }
     } else if (
       txtName.value !== "" &&
       txtName.isInputValid === true &&
-      txtPhone.value !== "" &&
-      txtPhone.isInputValid === true &&
-      txtAddress.value !== "" &&
-      txtAddress.isInputValid === true
+      age.value !== "" &&
+      age.isInputValid === true
     ) {
       let accountUser = {
-        _id: _id,
-        userName: txtName.value,
-        email: txtEmail.value,
-        phone: txtPhone.value,
-        gender: txtGender,
-        birth: txtBirth,
-        password: getPassword.value,
-        address: txtAddress.value,
-        currentStar: currentStar,
-        targets: targets,
+        name: txtName.value,
+        age: age.value,
       };
       let result = window.confirm("bạn có muốn cập nhật ?");
       if (result === true) {
@@ -189,14 +192,15 @@ class InforUser extends Component {
     };
     let {
       txtName,
-      txtPhone,
-      txtGender,
+      // txtPhone,
+      // txtGender,
       txtPassword,
       txtNewPassword,
       txtRePassword,
       txtEmail,
-      txtAddress,
-      txtBirth,
+      age,
+      // txtAddress,
+      // txtBirth,
     } = this.state;
     return (
       <form onSubmit={this.onSave} id="nameform">
@@ -220,7 +224,20 @@ class InforUser extends Component {
               />
             </div>
           </div>
-          <div className="col-md-4 col-lg-2">
+          <div className="col-md-6 col-lg-6">
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="text"
+                name="email"
+                id="email"
+                className="form-control"
+                value={txtEmail.value}
+                disabled
+              />
+            </div>
+          </div>
+          {/* <div className="col-md-4 col-lg-2">
             <div className="form-group">
               <label htmlFor="usr">Sao hiện tại</label>
               <input
@@ -231,8 +248,8 @@ class InforUser extends Component {
                 disabled
               />
             </div>
-          </div>
-          <div className="col-md-4 col-lg-2">
+          </div> */}
+          {/* <div className="col-md-4 col-lg-2">
             <div className="form-group">
               <label htmlFor="usr">Chỉ tiêu 2020</label>
               <input
@@ -243,9 +260,9 @@ class InforUser extends Component {
                 disabled
               />
             </div>
-          </div>
+          </div> */}
         </div>
-        <div className="row mt-3">
+        {/* <div className="row mt-3">
           <div className="col-md-6 col-lg-4">
             <div className="form-group">
               <label>Ngày sinh</label>
@@ -295,29 +312,23 @@ class InforUser extends Component {
               />
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="row mt-3">
           <div className="col-md-6 col-lg-6">
             <div className="form-group">
-              <label>Địa chỉ</label>
+              <label>Tuổi</label>
               <input
-                type="text"
-                name="txtAddress"
-                id="txtAddress"
+                type="number"
+                name="age"
+                id="age"
                 className="form-control"
-                value={txtAddress.value}
+                value={age.value}
                 onChange={this.handleInput}
-                onBlur={this.handleInputValidation}
-              />
-              <FormError
-                type="txtAddress"
-                isHidden={this.state.txtAddress.isInputValid}
-                errorMessage={this.state.txtAddress.errorMessage}
               />
             </div>
           </div>
-          <div className="col-md-6 col-lg-6">
+          {/* <div className="col-md-6 col-lg-6">
             <div className="form-group">
               <label>Email</label>
               <input
@@ -329,7 +340,7 @@ class InforUser extends Component {
                 disabled
               />
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="row mt-3">
           <div className="col-md-6 col-lg-12">
@@ -358,6 +369,12 @@ class InforUser extends Component {
               placeholder="Mật khẩu hiện tại"
               value={txtPassword.value}
               onChange={this.handleInput}
+              onBlur={this.handleInputValidation}
+            />
+            <FormError
+              type="txtPassword"
+              isHidden={this.state.txtPassword.isInputValid}
+              errorMessage={this.state.txtPassword.errorMessage}
             />
             <input
               type="password"
@@ -409,7 +426,8 @@ class InforUser extends Component {
 
 const validateInput = (type, checkingText, pass) => {
   if (type === "txtName") {
-    const regexp = /^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/;
+    const regexp =
+      /^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/;
     const checkingResult = regexp.exec(checkingText);
     if (checkingResult !== null) {
       return { isInputValid: true, errorMessage: "" };
@@ -433,15 +451,23 @@ const validateInput = (type, checkingText, pass) => {
     }
   }
 
-  if (type === "txtNewPassword") {
-    const regexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    const checkingResult = regexp.exec(checkingText);
-    if (checkingResult !== null) {
+  if (type === "txtNewPassword" || type === "txtPassword") {
+    // const regexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    // const checkingResult = regexp.exec(checkingText);
+    // if (checkingResult !== null) {
+    //   return { isInputValid: true, errorMessage: "" };
+    // } else {
+    //   return {
+    //     isInputValid: false,
+    //     errorMessage: "Mật khẩu từ 8 kí tự bao gồm chữ và số",
+    //   };
+    // }
+    if (checkingText.length >= 8) {
       return { isInputValid: true, errorMessage: "" };
     } else {
       return {
         isInputValid: false,
-        errorMessage: "Mật khẩu từ 8 kí tự bao gồm chữ và số",
+        errorMessage: "Mật khẩu có ít nhất 8 ký tự",
       };
     }
   }
