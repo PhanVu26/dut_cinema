@@ -8,11 +8,12 @@ import {
   actFetchDataTheaterRequest,
   actFetchDataMovieRequest,
   actReceiveMovieChoosing,
+  actFetchDataBookingMovieRequest,
 } from "../../../actions/index";
 import { Box } from "@material-ui/core";
 import history from "../../../commons/history";
 
-class BuyTicketPage extends Component {
+class BuyTicketPage extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -25,8 +26,8 @@ class BuyTicketPage extends Component {
   }
 
   componentDidMount() {
-    //this.props.fetchAllDataTheater();
-    //this.props.fetchAllDataMovie();
+    // this.props.fetchAllDataTheater();
+    // this.props.fetchAllDataMovie();
   }
 
   showTheaterToChoose = (arr, classes) => {
@@ -51,10 +52,13 @@ class BuyTicketPage extends Component {
   };
 
   handleOnChooseTheater = (tt) => {
+    let movieShowing = tt.movies.filter((item) =>
+      this.isMovieShowing(item.releaseDate)
+    );
     this.setState({
       timeOfMovie: [],
       isShow: false,
-      mv: tt.movies,
+      mv: movieShowing,
       isMovieShow:true,
       active: "",
     });
@@ -100,7 +104,7 @@ class BuyTicketPage extends Component {
         }
       });
       var obj = {
-        date: item,
+        dateMovie: item,
         showtimes: ShowTimes,
       }
       TiOfS.push(obj);
@@ -110,6 +114,7 @@ class BuyTicketPage extends Component {
       isShow: true,
       active: mv,
     });
+    console.log(TiOfS);
   };
   
   showTimeOfMovie = (arr, classes, account) => {
@@ -117,7 +122,7 @@ class BuyTicketPage extends Component {
       const listSession = item.showtimes.map((obj) => obj.time);
       return (
         <div key={index} className={`${classes.block} p-4`}>
-          <div>{item.date}</div>
+          <div>{item.dateMovie}</div>
           <div className="d-flex flex-wrap">
             {listSession.map((session, index) => {
               return (
@@ -143,11 +148,18 @@ class BuyTicketPage extends Component {
   handleOnChooseSession = (item, session, account) => {
     if (account && Object.keys(account).length > 0) {
       const movie = this.state.active;
-      //this.props.receiveMovieChoosing(movie, item, session, account.id);
-      const slug = movie.id;
-      console.log(slug);
-      history.push(`/buy-ticket-detail/${slug}`);
-      history.go();
+      this.props.receiveMovieChoosing(movie, item, session, account.id);
+      const slug = movie.name;
+      console.log(movie);
+      var startTime = item.dateMovie+"T"+session+".000Z";
+      var showtimeId = movie.showtimes.map((itm)=>{
+        if(itm.startTime===startTime) return itm.id
+      });
+      console.log(showtimeId[0]);
+      actFetchDataBookingMovieRequest(showtimeId[0]);
+      console.log(showtimeId[0]);
+      this.props.history.push(`/buy-ticket-detail/${slug}`);
+      // history.go();
     } else {
       alert("Vui lòng đăng nhập!");
     }
@@ -155,19 +167,17 @@ class BuyTicketPage extends Component {
 
   isMovieShowing = (date) => {
     const now = new Date().setHours(0, 0, 0, 0);
+    console.log(Date.parse(date)+" "+ now);
     if (Date.parse(date) <= now) return true;
     else return false;
   };
 
   render() {
+    console.log(this.props);
     const { classes, theater } = this.props;
     console.log(theater);
     let account = JSON.parse(localStorage.getItem("account"));
     const { timeOfMovie,mv, isShow,isMovieShow } = this.state;
-    console.log(mv);
-    // let movieShowing = movies.filter((item) =>
-    //   this.isMovieShowing(item.releaseDate)
-    // );
     return (
       <div className="container my-4">
         <div className="row">
@@ -204,6 +214,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     receiveMovieChoosing: (movie, date, time, idUser) => {
       dispatch(actReceiveMovieChoosing(movie, date, time, idUser));
+    },
+    fetchDataBooking: (showtimeId) => {
+      dispatch(actFetchDataBookingMovieRequest(showtimeId));
     },
   };
 };

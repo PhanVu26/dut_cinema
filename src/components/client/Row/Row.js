@@ -61,7 +61,7 @@ class Row extends Component {
       <tr>
         <td>
           <div className='font-weight-bold'>{object.name}</div>
-          <small className='text-muted'>{object.des}</small>
+          <small className='text-muted'>{object.name}</small>
         </td>
         <td align='center'>
         <div>
