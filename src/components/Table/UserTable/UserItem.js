@@ -84,7 +84,7 @@ const mapDispatchToProps = (dispatch, props) =>{
             dispatch(actions.toggleUserForm())
         },
         onDeleteUser: (id) => {
-            dispatch(actions.deleteUser(id))
+            dispatch(actions.actDeleteUserRequest(id))
         },
         onUpdateUserStatus: (user) => {
             dispatch(actions.actUpdateUserStatusRequest(user))

@@ -61,7 +61,16 @@ export const toggleUserForm = () => {
     type: types.TOGGLE_USER_FORM,
   };
 };
-
+export const actDeleteUserRequest = (id) => {
+  return (dispatch) => {
+    return callApi(`users/${id}`, "DELETE", null).then((res) => {
+      console.log("delete: res", res)
+      if(res.status === 200){
+        dispatch(deleteUser(id));
+      }
+    });
+  };
+};
 export const deleteUser = (id) => {
   return {
     type: types.DELETE_USER,
