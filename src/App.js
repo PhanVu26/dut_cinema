@@ -10,6 +10,7 @@ import HomePage from "./pages/client/HomePage/HomePage";
 import BuyTicketPage from "./pages/client/BuyTicketPage/BuyTicketPage";
 import BuyTicketDetailPage from "./pages/client/BuyTicketDetailPage/BuyTicketDetailPage";
 import MoviePage from "./pages/client/MoviePage/MoviePage";
+import PayMovie from "./pages/client/PayMovie/PayMovie";
 import Promotion1 from "./pages/client/HomePage/Promotion/PromotionItems/promotion001_SinhNhatTrangThi";
 import Promotion2 from "./pages/client/HomePage/Promotion/PromotionItems/promotion002_miloDay";
 import Promotion3 from "./pages/client/HomePage/Promotion/PromotionItems/promotion003_TriAnThanhVien";
@@ -54,6 +55,19 @@ function App() {
               <>
                 <Header />
                 <MoviePage match={match} />
+                <Footer />
+              </>
+            );
+          }}
+        ></Route>
+        <Route
+          exact
+          path="/pay-movie"
+          component={({ match }) => {
+            return (
+              <>
+                <Header />
+                <PayMovie match={match} />
                 <Footer />
               </>
             );
