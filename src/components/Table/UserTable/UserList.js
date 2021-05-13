@@ -56,14 +56,14 @@ class UserList extends Component {
         var{rowsPerPage, userFilter} = this.props;
         if(userFilter.username){
             rowsPerPage = rowsPerPage.filter((user) => {
-                return user.username.toLowerCase().indexOf(userFilter.username.toLowerCase()) !== -1
+                return user.name.toLowerCase().indexOf(userFilter.username.toLowerCase()) !== -1
             })
         }
         rowsPerPage = rowsPerPage.filter((user) => {
             if(userFilter.status === -1){
                 return rowsPerPage;
             }else {
-                return user.status === (userFilter.status === 0 ? true : false)
+                return user.isActive === (userFilter.status === 0 ? true : false)
             }
         })
 
@@ -118,6 +118,7 @@ class UserList extends Component {
                             </input>
                         </td>
                         <td></td>
+                        <td></td>
                         <td>
                             <select 
                                 name="roleFilter"
@@ -127,7 +128,6 @@ class UserList extends Component {
                                     {this.showUserRoles(this.props.roles)}
                             </select>
                         </td>
-                        <td></td>
                         <td>
                             <select 
                                 name="statusFilter"
