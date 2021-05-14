@@ -171,12 +171,11 @@ export const actDeleteMovie = (id) => {
   };
 };
 
-export const actFetchDataBookingMovieRequest = () => {
+export const actFetchDataBookingMovieRequest = (showtimeId) => {
   return (dispatch) => {
-    return callApi("api/bookings", "GET", null).then((res) => {
-      if (res.status === 200) {
+    return callApi(`showtimes/${showtimeId}/tickets`, "GET", null).then((res) => {
+      console.log(res.data)
         dispatch(actFetchDataBookingMovie(res.data));
-      } else alert("Không thể kết nối đến dữ liệu!");
     });
   };
 };
@@ -318,10 +317,9 @@ export const actFetchDataData = (data) => {
 //act receive data ticket
 export const actFetchDataTicketRequest = () => {
   return (dispatch) => {
-    return callApi("api/tickets", "GET", null).then((res) => {
-      if (res.status === 200) {
-        dispatch(actFetchDataTicket(res.data));
-      } else alert("Không thể kết nối dữ liệu!");
+    return callApi("ticket-types", "GET", null).then((res) => {
+      console.log(res.data.results);
+        dispatch(actFetchDataTicket(res.data.results));
     });
   };
 };

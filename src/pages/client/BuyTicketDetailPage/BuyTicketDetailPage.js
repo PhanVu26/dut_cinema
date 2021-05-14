@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import {
-  actFetchDataFoodRequest,
   actFetchDataTicketRequest,
   actCreateBookingRequest,
   actFetchDataBookingMovieRequest,
@@ -12,23 +11,31 @@ import Table from "../../../components/client/Table/Table";
 import styles from "./BuyTicketDetailStyle";
 import SeatPickers from "../../../components/client/SeatPicker/SeatPickers";
 import history from "../../../commons/history";
+import { isEmpty } from "lodash";
+
 class BuyTicketDetailPage extends Component {
   constructor(props) {
     super(props);
+    let {choosing,bookings} = this.props;
+    const { movie, date, time } = choosing;
+    var startTime = date.dateMovie+"T"+time+".000Z";
+    var showtimeId = movie.showtimes.map((item)=>{
+      if(item.startTime===startTime) return item.id
+    });
+    console.log(showtimeId[0]);
+    console.log(this.props);
     this.state = {
+      showtime_id: showtimeId[0],
       ticketArr: [],
-      foodArr: [],
       onNextPage: false,
       arrSeatChoosing: [],
       totalAllTicket: 0,
-      totalAllFood: 0,
     };
   }
 
   componentDidMount() {
     this.props.fetchDataTicket();
-    this.props.fetchDataFood();
-    this.props.fetchDataBooking();
+    this.props.fetchDataBooking(this.state.showtime_id);
   }
 
   countAllTotalTicket = (obj, indexTicket) => {
@@ -36,14 +43,6 @@ class BuyTicketDetailPage extends Component {
     newTicket[indexTicket] = obj;
     this.setState({
       ticketArr: newTicket,
-    });
-  };
-
-  countAllTotalFood = (obj, indexFood) => {
-    let newFood = this.state.foodArr;
-    newFood[indexFood] = obj;
-    this.setState({
-      foodArr: newFood,
     });
   };
 
@@ -66,7 +65,6 @@ class BuyTicketDetailPage extends Component {
     this.setState((prevState) => ({
       onNextPage: !prevState.onNextPage,
       ticketArr: [],
-      foodArr: [],
     }));
   };
 
@@ -91,74 +89,39 @@ class BuyTicketDetailPage extends Component {
     return result;
   };
 
-  seatsDisabled = (bookings, movie, time, dateMovie) => {
+  seatsDisabled = (bookings) => {
+    var num_seat = 30;
     let dataSeats = [];
-    for (let i = 0; i < bookings.length; i++) {
-      if (
-        bookings[i].date === dateMovie &&
-        bookings[i].time === time &&
-        bookings[i].idMovie === movie._id
-      ) {
-        for (let j = 0; j < bookings[i].seats.length; j++) {
-          dataSeats.push(bookings[i].seats[j]);
+    if(bookings.tickets!==undefined){
+      for (let i = 0; i < num_seat; i++) {
+        if ( bookings.tickets[i].status === "Booked") {
+          dataSeats.push(bookings.tickets[i].seat);
         }
       }
     }
     let seats = [];
     if (dataSeats.length > 0) {
       for (let z = 0; z < dataSeats.length; z++) {
-        let checkFirst = dataSeats[z].substring(0, 1);
-        let checkSecond = dataSeats[z].substring(1, 2);
+        let checkRow = dataSeats[z].row;
+        let checkColumn = dataSeats[z].column;
 
-        let checkSecondNumber = Number(checkSecond);
-        if (checkFirst === "A") {
-          if (checkSecondNumber === 0) {
-            seats.push(10);
-          } else {
-            seats.push(checkSecondNumber);
-          }
-        } else if (checkFirst === "B") {
-          if (checkSecondNumber === 0) {
-            seats.push(20);
-          } else {
-            seats.push(10 + checkSecondNumber);
-          }
-        } else if (checkFirst === "C") {
-          if (checkSecondNumber === 0) {
-            seats.push(30);
-          } else {
-            seats.push(20 + checkSecondNumber);
-          }
-        } else if (checkFirst === "D") {
-          if (checkSecondNumber === 0) {
-            seats.push(40);
-          } else {
-            seats.push(30 + checkSecondNumber);
-          }
-        } else if (checkFirst === "E") {
-          if (checkSecondNumber === 0) {
-            seats.push(50);
-          } else {
-            seats.push(40 + checkSecondNumber);
-          }
-        } else if (checkFirst === "F") {
-          if (checkSecondNumber === 0) {
-            seats.push(60);
-          } else {
-            seats.push(50 + checkSecondNumber);
-          }
-        } else if (checkFirst === "G") {
-          if (checkSecondNumber === 0) {
-            seats.push(70);
-          } else {
-            seats.push(60 + checkSecondNumber);
-          }
-        } else if (checkFirst === "H") {
-          if (checkSecondNumber === 0) {
-            seats.push(80);
-          } else {
-            seats.push(70 + checkSecondNumber);
-          }
+        let checkColumnNumber = Number(checkColumn);
+        if (checkRow === "A") {
+          seats.push(checkColumnNumber);
+        } else if (checkRow === "B") {
+          seats.push(10 + checkColumnNumber);
+        } else if (checkRow === "C") {
+          seats.push(20 + checkColumnNumber);
+        } else if (checkRow === "D") {
+          seats.push(30 + checkColumnNumber);
+        } else if (checkRow === "E") {
+          seats.push(40 + checkColumnNumber);
+        } else if (checkRow === "F") {
+          seats.push(50 + checkColumnNumber);
+        } else if (checkRow === "G") {
+          seats.push(60 + checkColumnNumber);
+        } else if (checkRow === "H") {
+          seats.push(70 + checkColumnNumber);
         }
       }
 	}
@@ -169,11 +132,9 @@ class BuyTicketDetailPage extends Component {
     choosing,
     roomName,
     amountTicket,
-    totalAllFood,
     totalAllTicket
   ) => {
     console.log("totalAllTicket", totalAllTicket);
-    console.log("totalAllFood", totalAllFood);
     if (this.state.arrSeatChoosing.length === amountTicket) {
       let tickCode = this.makeid(8);
       console.log(this.state.arrSeatChoosing);
@@ -186,12 +147,12 @@ class BuyTicketDetailPage extends Component {
         time: choosing.time,
         seats: this.state.arrSeatChoosing,
         ticketPrice: totalAllTicket,
-        foodPrice: totalAllFood,
         tickCode,
       };
       console.log("data:", data);
       localStorage.setItem("booking", JSON.stringify(data));
       history.push(`/pay-movie`);
+      history.go();
     } else if (this.state.arrSeatChoosing.length === 0) {
       alert("Vui lòng chọn ghế!");
     } else {
@@ -199,12 +160,14 @@ class BuyTicketDetailPage extends Component {
     }
   };
   render() {
-    let { bookings, choosing, classes, tickets, foodCombo } = this.props;
+    console.log(this.props);
+    let { bookings, choosing, classes, tickets} = this.props;
     const { movie, date, time } = choosing;
-    console.log(bookings);	
+    console.log(bookings);
+    console.log(tickets);
     let room = {
-      numberSeat: 80,
-      seatReserved: this.seatsDisabled(bookings, movie, time, date.dateMovie),
+      numberSeat: 30,
+      seatReserved: this.seatsDisabled(bookings),
     };
     console.log("choosing:", choosing);
 
@@ -217,23 +180,23 @@ class BuyTicketDetailPage extends Component {
     //----------------------------------------------------
     //find room, date, time in movie bookings
     let dataDate;
-    for (let i = 0; i < date.frameTime.length; i++) {
-      if (date.frameTime[i].time === time) {
-        dataDate = date.frameTime[i];
+    for (let i = 0; i < date.showtimes.length; i++) {
+      if (date.showtimes[i].time === time) {
+        dataDate = date.showtimes[i];
       }
     }
     
     //-----------------------------------------------------
 
-    const { ticketArr, foodArr, onNextPage } = this.state;
+    const { ticketArr, onNextPage } = this.state;
     let totalAllTicket = this.countTotal(ticketArr);
-    let totalAllFood = this.countTotal(foodArr);
-    let totalBoth = totalAllFood + totalAllTicket;
-    let title = onNextPage ? "Chọn ghế" : "Chọn vé/ thức ăn";
-    let amountTicket = ticketArr
-      .map((item) => item.total)
-      .reduce((a, b) => a + b, 0);
-
+    let totalBoth = totalAllTicket;
+    let title = onNextPage ? "Chọn ghế" : "Chọn vé";
+    let amountTicket = ticketArr.map((item) => item.total).reduce((a, b) => a + b, 0);
+    let roomid ="";
+    if(bookings.room!==undefined){
+      roomid=bookings.room.id;
+    }
     return (
       <div className="container-fluid my-4">
         <div className="row no-gutters">
@@ -249,16 +212,6 @@ class BuyTicketDetailPage extends Component {
                       this.countAllTotalTicket(obj, index)
                     }
                     totalAll={totalAllTicket}
-                  />
-                }
-                {
-                  <Table
-                    type="Combo"
-                    arrData={foodCombo}
-                    countAllTotal={(obj, index) =>
-                      this.countAllTotalFood(obj, index)
-                    }
-                    totalAll={totalAllFood}
                   />
                 }
               </div>
@@ -304,14 +257,14 @@ class BuyTicketDetailPage extends Component {
               <img
                 alt=""
                 className={classes.imageMovie}
-                src={movie.image}
+                src="https://www.galaxycine.vn/media/2020/10/29/450-anime_1603948617423.jpg"
               ></img>
               <div className="text-uppercase text-center font-weight-bold pt-1">
                 {movie.name}
               </div>
               <div className="p-2">
                 <strong>Room: </strong>
-                {dataDate.room}
+                {roomid}
               </div>{" "}
               <hr className="m-0" />
               <div className="p-2">
@@ -330,13 +283,6 @@ class BuyTicketDetailPage extends Component {
                 <div className="p-2">
                   <strong>Tổng giá vé: </strong>
                   <span>{totalAllTicket.toLocaleString()}</span>
-                </div>
-              </span>
-              <span>
-                <hr className="m-0" />
-                <div className="p-2">
-                  <strong>Tổng giá combo: </strong>
-                  <span>{totalAllFood.toLocaleString()}</span>
                 </div>
               </span>
               <hr className="m-0" />
@@ -361,13 +307,7 @@ class BuyTicketDetailPage extends Component {
                   </button>
                   <button
                     onClick={() =>
-                      this.handleSubmit(
-                        choosing,
-                        dataDate.room,
-                        amountTicket,
-                        totalAllFood,
-                        totalAllTicket
-                      )
+                      this.handleSubmit(choosing, roomid, amountTicket,totalAllTicket)
                     }
                     className={`${classes.button} ${classes.buttonNomargin} ml-2`}
                   >
@@ -387,16 +327,14 @@ const mapStateToProps = (state) => {
   return {
     choosing: state.MovieReducer.choosing,
     tickets: state.TicketReducer.tickets,
-    foodCombo: state.FoodReducer.foodCombo,
     bookings: state.MovieReducer.bookingMovie,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchDataBooking: () => dispatch(actFetchDataBookingMovieRequest()),
+    fetchDataBooking: (showtimeId) => dispatch(actFetchDataBookingMovieRequest(showtimeId)),
     fetchDataTicket: () => dispatch(actFetchDataTicketRequest()),
-    fetchDataFood: () => dispatch(actFetchDataFoodRequest()),
     createBooking: (data) => dispatch(actCreateBookingRequest(data)),
   };
 };

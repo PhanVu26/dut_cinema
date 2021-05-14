@@ -62,12 +62,7 @@ class Register extends Component {
   };
   onSave = (e) => {
     e.preventDefault();
-    let {
-      name,
-      password,
-      rePassword,
-      email,
-    } = this.state;
+    let { name, password, rePassword, email } = this.state;
 
     if (
       name.value !== "" &&
@@ -86,7 +81,7 @@ class Register extends Component {
       };
 
       actRegisterUserRequest(user).then((res) => {
-        console.log(res)
+        console.log(res);
         let notification = res.data.message;
 
         if (res.status !== 201) {
@@ -127,12 +122,7 @@ class Register extends Component {
       cursor: "pointer",
     };
 
-    let {
-      name,
-      password,
-      rePassword,
-      email
-    } = this.state;
+    let { name, password, rePassword, email } = this.state;
     return (
       <ButtonToolbar style={toolbar}>
         <div
@@ -174,7 +164,7 @@ class Register extends Component {
                   />
                 </div>
               </div>
-              
+
               <div className="row mt-3">
                 <div className="col-md-12">
                   <input
@@ -230,8 +220,7 @@ class Register extends Component {
                   />
                 </div>
               </div>
-             
-              
+
               <div className="row text-center mt-3">
                 <div className="col-md-12">
                   <p>
@@ -255,7 +244,8 @@ class Register extends Component {
 
 const validateInput = (type, checkingText, pass) => {
   if (type === "name") {
-    const regexp = /^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/;
+    const regexp =
+      /^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/;
     const checkingResult = regexp.exec(checkingText);
     if (checkingResult !== null) {
       return { isValid: true, errorMessage: "" };
@@ -291,14 +281,22 @@ const validateInput = (type, checkingText, pass) => {
     }
   }
   if (type === "password") {
-    const regexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    const checkingResult = regexp.exec(checkingText);
-    if (checkingResult !== null) {
+    // const regexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    // const checkingResult = regexp.exec(checkingText);
+    // if (checkingResult !== null) {
+    //   return { isValid: true, errorMessage: "" };
+    // } else {
+    //   return {
+    //     isValid: false,
+    //     errorMessage: "Mật khẩu từ 8 kí tự bao gồm chữ và số",
+    //   };
+    // }
+    if (checkingText.length >= 8) {
       return { isValid: true, errorMessage: "" };
     } else {
       return {
         isValid: false,
-        errorMessage: "Mật khẩu từ 8 kí tự bao gồm chữ và số",
+        errorMessage: "Mật khẩu tối thiểu 8 ký tự",
       };
     }
   }

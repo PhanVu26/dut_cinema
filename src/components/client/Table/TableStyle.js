@@ -3,7 +3,7 @@ const styles = (theme) => ({
         minWidth: '350px'
     },
     tableHead: {
-        backgroundColor: theme.color.brown,
+        backgroundColor: "#47251c",
         color: 'white',
         border: 'none',
         fontWeight: 'normal'
@@ -12,7 +12,7 @@ const styles = (theme) => ({
         backgroundColor: 'white'
     },
     total: {
-        color: theme.color.orange
+        color: "#f26b38"
     },
     w40: {
         width: '40%'

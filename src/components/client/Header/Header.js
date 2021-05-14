@@ -9,6 +9,7 @@ import { Link, withRouter } from "react-router-dom";
 import history from "../../../commons/history";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import { actSearchMovie } from "../../../actions/index";
 // this is a header component to show the header and navigation to viewer
 class Header extends Component {
   constructor(props) {
@@ -54,11 +55,16 @@ class Header extends Component {
   }
 
   // keyCode equals 13 represented for Enter button
-  handlerOnEnter = (e, keyword) => {
+  handleOnEnter = (e, keyword) => {
     if (e.keyCode === 13) {
       this.props.searchMovie(keyword);
-      history.push("/search");
+      this.props.history.push("/search");
     }
+  };
+
+  handleOnClick = (keyword) => {
+    this.props.searchMovie(keyword);
+    this.props.history.push("/search");
   };
 
   render() {
@@ -112,7 +118,11 @@ class Header extends Component {
           </span>
         </div>
         <NavigationBar status={showMenu} />
-        <SearchBox status={showSearch} handleOnEnter={this.handleOnEnter} />
+        <SearchBox
+          status={showSearch}
+          handleOnEnter={this.handleOnEnter}
+          handleOnClick={this.handleOnClick}
+        />
       </div>
     );
   }
@@ -132,34 +142,33 @@ function Decentralization(props) {
     );
   } else if (Object.keys(account).length !== 0) {
     let role = account.role;
-      return (
-        <div>
-          <span>
-            {" "}
-            User:
-            <Link to="/user-page" className="mx-1">
-              {account.name}
-            </Link>{" "}
-            |{" "}
-          </span>
+    return (
+      <div>
+        <span>
+          {" "}
+          User:
+          <Link to="/user-page" className="mx-1">
+            {account.name}
+          </Link>{" "}
+          |{" "}
+        </span>
 
-          <Link to="/" onClick={() => onDelete()}>
-            Thoát
-          </Link>
-        </div>
-      );
-    }
+        <Link to="/" onClick={() => onDelete()}>
+          Thoát
+        </Link>
+      </div>
+    );
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     searchMovie: (keyword) => {
-      // dispatch(actSearchMovie(keyword));
+      dispatch(actSearchMovie(keyword));
     },
   };
 };
 
-// const withConnect = connect(null, mapDispatchToProps);
+const withConnect = connect(null, mapDispatchToProps);
 
-// export default compose(withRouter, withConnect)(Header);
-export default Header;
+export default compose(withRouter, withConnect)(Header);
