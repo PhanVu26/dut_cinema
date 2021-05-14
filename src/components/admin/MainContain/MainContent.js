@@ -1,4 +1,6 @@
 import React from "react";
+import UserManagementPage from "../../../pages/admin/UserManagementPage";
+import SalesChart from '../Chart/SalesChart'
 
 
 const MainContent  = (props) => {
@@ -88,108 +90,12 @@ const MainContent  = (props) => {
                     <div className="row">
                         <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
                             <div className="row ">
-                                <div className="col-xl-6 col-12 mb-4 mb-xl-0">
-                                    <h2 className="text-muted text-center mb-5">Users</h2>
-                                    <table style={{color: "black"}} className="table table-striped bg-light text-center">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Username</th>
-                                                <th>Password</th>
-                                                <th>Role</th>
-                                                <th>Contact</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            
-                                        </tbody>
-                                    </table>
-                                    <ul className="pagination justify-content-center">
-                                        <li className="page-item"><a href="#" className="page-link px-3 py-2">
-                                            <span>&laquo;</span>
-                                        </a></li>
-                                        {
-                                            
-                                        }
-                                        <li className="page-item active"><a href="#" className="page-link py-2 px-3">1</a></li>
-                                        <li className="page-item"><a href="#" className="page-link py-2 px-3">2</a></li>
-                                        <li className="page-item"><a href="#" className="page-link py-2 px-3">3</a></li>
-                                        <li className="page-item"><a href="#" className="page-link py-2 px-3">4</a></li>
-                                        <li className="page-link"><a href="#" className="page-item py-2 px-3">
-                                            <span>&raquo;</span>
-                                        </a></li>
-                                    </ul>
+                                <div className="col-md-6 col-6 mb-4 mb-xl-0">
+                                    <h2 className="text-muted text-center mb-5">Doanh thu</h2>
+                                    <SalesChart></SalesChart>
+                                    
                                 </div>
-                                <div className="col-xl-6 col-12">
-                                    <h2 className="text-muted text-center mb-5">Pricing</h2>
-                                    <table className="table table-dark table-hover text-center">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Price</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Amir</td>
-                                                <td>$1000</td>
-                                                <td>25/09/2011</td>
-                                                <td><span className="badge badge-success w-75 py-2">Approved</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Amir</td>
-                                                <td>$1000</td>
-                                                <td>25/09/2011</td>
-                                                <td><span className="badge badge-success py-2 w-75">Approved</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Amir</td>
-                                                <td>$1000</td>
-                                                <td>25/09/2011</td>
-                                                <td><span className="badge badge-danger w-75 py-2">Waiting</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Amir</td>
-                                                <td>$1000</td>
-                                                <td>25/09/2011</td>
-                                                <td><span className="badge badge-success w-75 py-2">Approved</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Amir</td>
-                                                <td>$1000</td>
-                                                <td>25/09/2011</td>
-                                                <td><span className="badge badge-danger w-75 py-2">Waiting</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Amir</td>
-                                                <td>$1000</td>
-                                                <td>25/09/2011</td>
-                                                <td><span className="badge badge-success w-75 py-2">Approved</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <ul className="pagination justify-content-center">
-                                        <li className="page-item"><a href="#" className="page-link px-3 py-2">
-                                            <span>&laquo;</span>
-                                        </a></li>
-                                        <li className="page-item active"><a href="#" className="page-link py-2 px-3">1</a></li>
-                                        <li className="page-item"><a href="#" className="page-link py-2 px-3">2</a></li>
-                                        <li className="page-item"><a href="#" className="page-link py-2 px-3">3</a></li>
-                                        <li className="page-item"><a href="#" className="page-link py-2 px-3">4</a></li>
-                                        <li className="page-link"><a href="#" className="page-item py-2 px-3">
-                                            <span>&raquo;</span>
-                                        </a></li>
-                                    </ul>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
