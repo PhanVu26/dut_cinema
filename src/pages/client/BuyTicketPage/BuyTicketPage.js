@@ -109,8 +109,9 @@ class BuyTicketPage extends React.Component {
       }
       TiOfS.push(obj);
     });
+    let TimeOfShowtime = Array.from(new Set(TiOfS));
     this.setState({
-      timeOfMovie: TiOfS,
+      timeOfMovie: TimeOfShowtime,
       isShow: true,
       active: mv,
     });

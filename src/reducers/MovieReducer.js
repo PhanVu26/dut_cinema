@@ -51,11 +51,35 @@ function MovieReducer(state = stateDefault, action) {
     }
     case Types.SHOW_INFORMATION_MOVIE: {
       let newState = { ...state };
+      var TOS = [];
+      let mv = action.movie;
+      mv.showtimes.map((item,index) => {
+        TOS.push(item.startTime.split("T")[0]);
+      });
+      var TiOfS =[];
+      TOS.map((item,index)=>{
+        var ShowTimes =[];
+        mv.showtimes.map((i,index) => {
+          if(i.startTime.split("T")[0]==item){
+            var O={
+              time: i.startTime.split("T")[1].split(".")[0],
+            }
+            ShowTimes.push(O);
+          }
+        });
+        var obj = {
+          dateMovie: item,
+          showtimes: ShowTimes,
+        }
+        TiOfS.push(obj);
+      });
+      let TimeOfShowtime = Array.from(new Set(TiOfS));
+      mv.showtimes = TimeOfShowtime;
       if (newState.showInfoMovie.length === 1) {
         newState.showInfoMovie.splice(0, 1);
-        newState.showInfoMovie.push(action.movie);
+        newState.showInfoMovie.push(mv);
       } else {
-        newState.showInfoMovie.push(action.movie);
+        newState.showInfoMovie.push(mv);
       }
       return newState;
     }
