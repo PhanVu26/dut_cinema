@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { actUpdateUserRequest } from "../../actions/action";
+import { actUpdateUserRequest } from "../../../actions/index";
+import callApi from "../../../utils/ApiCallerServer";
 
 class InforUser extends Component {
   constructor(props, context) {
@@ -143,11 +144,10 @@ class InforUser extends Component {
       ) {
         let accountUser = {
           name: txtName.value,
-          age: age.value,
+          age: parseInt(age.value),
           // phone: txtPhone.value,
           // gender: txtGender,
           // birth: txtBirth,
-          oldPassword: txtPassword.value,
           password: txtNewPassword.value,
           // address: txtAddress.value,
           // currentStar: currentStar,
@@ -155,9 +155,21 @@ class InforUser extends Component {
         };
         let result = window.confirm("bạn có muốn cập nhật ?");
         if (result === true) {
-          this.props.onUpdateUser(accountUser);
-          this.updateAccount(accountUser);
-          alert("Lưu thông tin thành công");
+          const temp_account = {
+            email: txtEmail.value,
+            password: txtPassword.value,
+          };
+          callApi("auth/login", "POST", temp_account)
+            .then((res) => {
+              console.log("user: ", res.status);
+              this.props.onUpdateUser(accountUser);
+              this.updateAccount(accountUser);
+              alert("Lưu thông tin thành công");
+            })
+            .catch((error) => {
+              console.log("error: ", error);
+              alert("Vui lòng kiểm tra lại thông tin");
+            });
         }
       } else {
         alert("Vui Lòng điền đầy đủ thông tin và đúng định dạng");
@@ -170,7 +182,7 @@ class InforUser extends Component {
     ) {
       let accountUser = {
         name: txtName.value,
-        age: age.value,
+        age: parseInt(age.value),
       };
       let result = window.confirm("bạn có muốn cập nhật ?");
       if (result === true) {
@@ -513,7 +525,7 @@ function FormError(props) {
 const mapDispatchToProps = (dispatch) => {
   return {
     onUpdateUser: (user) => {
-      //   dispatch(actUpdateUserRequest(user));
+      dispatch(actUpdateUserRequest(user));
     },
   };
 };

@@ -69,10 +69,10 @@ export const actFetchDataUsers = (users) => {
 
 //---------------------------------------------------------------------
 
-export const actUpdateUserRequest = (users) => {
+export const actUpdateUserRequest = (user) => {
+  // console.log("request: ", user);
   return (dispatch) => {
-    console.log(users._id);
-    return callApi(`api/users/${users._id}`, "PUT", users).then((res) => {
+    return callApi("users/me", "PATCH", user).then((res) => {
       dispatch(actUpdateUser(res.data));
     });
   };
@@ -103,18 +103,26 @@ export const actDeleteUser = (id) => {
 
 export const actLoginAccountRequest = (account) => {
   //return callApi("auth/login", "POST", account);
-  axios.interceptors.request.use(function (config) {
-    return config;
-  }, function (error) {
-    return Promise.reject(error);
-  });
+  axios.interceptors.request.use(
+    function (config) {
+      return config;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
 
-  axios.interceptors.response.use(function (response) {
-    return response;
-  }, function (error) {
-    return Promise.reject(error);
+  axios.interceptors.response.use(
+    function (response) {
+      return response;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
+  return axios.post("https://cinema-nestjs.herokuapp.com/auth/login", account, {
+    headers: { "Content-Type": "application/json" },
   });
-  return axios.post('https://cinema-nestjs.herokuapp.com/auth/login',account,{headers:{'Content-Type':'application/json'}})
 };
 
 // act receive moving choosing
@@ -173,10 +181,12 @@ export const actDeleteMovie = (id) => {
 
 export const actFetchDataBookingMovieRequest = (showtimeId) => {
   return (dispatch) => {
-    return callApi(`showtimes/${showtimeId}/tickets`, "GET", null).then((res) => {
-      console.log(res.data)
+    return callApi(`showtimes/${showtimeId}/tickets`, "GET", null).then(
+      (res) => {
+        console.log(res.data);
         dispatch(actFetchDataBookingMovie(res.data));
-    });
+      }
+    );
   };
 };
 
@@ -319,7 +329,7 @@ export const actFetchDataTicketRequest = () => {
   return (dispatch) => {
     return callApi("ticket-types", "GET", null).then((res) => {
       console.log(res.data.results);
-        dispatch(actFetchDataTicket(res.data.results));
+      dispatch(actFetchDataTicket(res.data.results));
     });
   };
 };
@@ -337,23 +347,23 @@ export const actFetchDataTheaterRequest = () => {
   return (dispatch) => {
     return callApi("cinemas", "GET", null).then((res) => {
       console.log(res.data.results);
-        dispatch(actFetchMovieByTheater(res.data.results));
+      dispatch(actFetchMovieByTheater(res.data.results));
     });
   };
 };
 
 export const actFetchMovieByTheater = (tt) => {
   return (dispatch) => {
-    let theater =[];
-    tt.map((item,index,tt) => {
-      callApi(`cinemas/${item.id}/showtimes`,"GET",null).then((res) => {
+    let theater = [];
+    tt.map((item, index, tt) => {
+      callApi(`cinemas/${item.id}/showtimes`, "GET", null).then((res) => {
         console.log(res.data);
         theater.push(res.data);
-      }); 
+      });
     });
     dispatch(actFetchDataTheater(theater));
-  }
-}
+  };
+};
 export const actFetchDataMoviesByTheater = (movie) => {
   return {
     type: Types.FETCH_DATA_MOVIE,

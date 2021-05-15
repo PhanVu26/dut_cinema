@@ -56,7 +56,15 @@ class Login extends Component {
   onSave = (e) => {
     e.preventDefault();
     let { password, email } = this.state;
-    console.log(email.value+" "+email.isValid+" "+password.value+" "+password.isValid);
+    console.log(
+      email.value +
+        " " +
+        email.isValid +
+        " " +
+        password.value +
+        " " +
+        password.isValid
+    );
     if (
       password.value !== "" &&
       password.isValid === true &&
@@ -68,17 +76,21 @@ class Login extends Component {
         email: email.value,
       };
 
-        actLoginAccountRequest(account).then((res) => {
+      actLoginAccountRequest(account)
+        .then((res) => {
           let dataAccount = res.data.user;
+          let token = res.data.accessToken;
+          dataAccount.accessToken = token;
           console.log(dataAccount);
-            if (Object.keys(dataAccount).length !== 0) {
-              localStorage.setItem("account", JSON.stringify(dataAccount));
-            }
-            alert("Logged in successfully");
-            this.setState({ isShow: false });
-            window.location.reload();
-        }).catch(function(error){
-          alert("Khong dung mat khau")
+          if (Object.keys(dataAccount).length !== 0) {
+            localStorage.setItem("account", JSON.stringify(dataAccount));
+          }
+          alert("Logged in successfully");
+          this.setState({ isShow: false });
+          window.location.reload();
+        })
+        .catch(function (error) {
+          alert("Khong dung mat khau");
         });
     } else {
       alert("Vui lòng nhập đúng định dạng.");

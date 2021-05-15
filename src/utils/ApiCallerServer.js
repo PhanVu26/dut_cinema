@@ -15,6 +15,23 @@ export default function callApi(endpoint, method = "GET", body) {
       console.log(err);
     });
   } else {
+    // axios.interceptors.request.use(
+    //   (config) => {
+    //     config.headers.authorization = `Bearer ${account.accessToken}`;
+    //     return config;
+    //   },
+    //   (error) => {
+    //     return Promise.reject(error);
+    //   }
+    // );
+    // return axios({
+    //   method: method,
+    //   url: `${Config.API_URL}/${endpoint}`,
+    //   data: body,
+    // }).catch((err) => {
+    //   console.log(err);
+    // });
+
     const authAxios = axios.create({
       baseURL: Config.API_URL,
       headers: {
