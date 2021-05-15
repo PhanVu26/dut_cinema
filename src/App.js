@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 
 import AdminPage from "./pages/admin/AdminPage";
@@ -9,6 +8,7 @@ import Footer from "./components/client/Footer/Footer";
 import HomePage from "./pages/client/HomePage/HomePage";
 import BuyTicketPage from "./pages/client/BuyTicketPage/BuyTicketPage";
 import BuyTicketDetailPage from "./pages/client/BuyTicketDetailPage/BuyTicketDetailPage";
+import TicketBooking from "./pages/client/TicketBooking/TicketBooking";
 import MoviePage from "./pages/client/MoviePage/MoviePage";
 import PayMovie from "./pages/client/PayMovie/PayMovie";
 import Promotion1 from "./pages/client/HomePage/Promotion/PromotionItems/promotion001_SinhNhatTrangThi";
@@ -17,7 +17,7 @@ import Promotion3 from "./pages/client/HomePage/Promotion/PromotionItems/promoti
 import Promotion4 from "./pages/client/HomePage/Promotion/PromotionItems/promotion004_TungBungHaiSao";
 import PromotionPage from "./pages/client/HomePage/Promotion/PromotionPage";
 import UserPage from "./pages/client/UserPage/UserPage";
-import MovieDetail from "./pages/client/TicketBooking/MovieInfo/MovieDetail";
+//import MovieDetail from "./pages/client/TicketBooking/MovieInfo/MovieDetail";
 import SearchPage from "./pages/client/SearchPage/SearchPage";
 
 function App() {
@@ -46,6 +46,11 @@ function App() {
         <Route exact path="/">
           <Header />
           <HomePage />
+          <Footer />
+        </Route>
+        <Route exact path="/ticket-booking">
+          <Header />
+          <TicketBooking />
           <Footer />
         </Route>
         <Route
@@ -119,12 +124,12 @@ function App() {
         <Route exact path="/profile">
           <Header /> <UserPage /> <Footer />
         </Route>
-        <Route path="/booking/" >
+        {/* <Route path="/booking/" >
           
                 <Header />
                 <MovieDetail/>
                 <Footer />
-        </Route>
+        </Route> */}
       </Switch>
     </Router>
   );

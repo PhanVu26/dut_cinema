@@ -1,0 +1,39 @@
+.detail-row {
+    border: 1px solid #dedede;
+}
+.detail-title-showtime {
+    background-color: #f26b38;
+    
+}
+p.title-showtime {
+    padding: 16px;
+    color: white;
+}
+.item {
+    border: 1px solid #dedede;
+    text-align: center;
+    padding: 10px 10px;
+}
+.item:hover {
+    cursor: pointer;
+    border: 1px solid #f26b38;
+    color: #f26b38;
+}
+.detail-showtime-item {
+    margin: 25px 0px;
+}
+
+.session {
+    border: 1px solid #dedede;
+    text-align: center;
+    padding: 10px 20px;
+    width: 85px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.session:hover {
+    color: #f26b38;
+    border-color: #f26b38;
+    cursor: pointer
+}

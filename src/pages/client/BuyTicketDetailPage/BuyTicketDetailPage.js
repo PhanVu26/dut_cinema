@@ -18,6 +18,7 @@ class BuyTicketDetailPage extends Component {
     super(props);
     let {choosing,bookings} = this.props;
     const { movie, date, time } = choosing;
+    console.log(choosing);
     var startTime = date.dateMovie+"T"+time+".000Z";
     var showtimeId = movie.showtimes.map((item)=>{
       if(item.startTime===startTime) return item.id
