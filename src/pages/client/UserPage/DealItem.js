@@ -8,7 +8,7 @@ class ItemDeal extends Component {
     return (
       <>
         <StyledTableRow>
-          <StyledTableCell component="th" scope="row">
+          <StyledTableCell component="th" scope="row" align="center">
             {this.props.myDeal.transaction_time.slice(0, 10)}
           </StyledTableCell>
           <StyledTableCell align="center">
