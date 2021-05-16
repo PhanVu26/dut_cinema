@@ -14,7 +14,7 @@ class SeatPickers extends Component {
   }
 
   handleOnChooseSeat = (item, amountTicket) => {
-    if (item.isReversed === undefined) {
+    if (item.status === undefined) {
       let { arrSeatReserved, choosing } = this.state;
       let newArr = arrSeatReserved.includes(item.id)
         ? arrSeatReserved.filter((i) => i !== item.id)
@@ -41,9 +41,24 @@ class SeatPickers extends Component {
         ArrSeats.push({
           id: i + 1,
           number: (i + 1) % 10 !== 0 ? (i + 1) % 10 : 10,
-          isReversed: true,
+          status: "isReversed",
         });
-      } else {
+      }
+      else if(room.seatBooked.includes(i + 1)){
+        ArrSeats.push({
+          id: i + 1,
+          number: (i + 1) % 10 !== 0 ? (i + 1) % 10 : 10,
+          status: "isBooked",
+        });
+      }
+      else if(room.seatHold.includes(i + 1)){
+        ArrSeats.push({
+          id: i + 1,
+          number: (i + 1) % 10 !== 0 ? (i + 1) % 10 : 10,
+          status: "isHold",
+        });
+      }
+       else {
         ArrSeats.push({
           id: i + 1,
           number: (i + 1) % 10 !== 0 ? (i + 1) % 10 : 10,
@@ -62,8 +77,8 @@ class SeatPickers extends Component {
                 <td className="pr-3">{String.fromCharCode(index + 65)}</td>
                 {arrItem.map((item) => {
                   const style =
-                    item.isReversed !== undefined
-                      ? classes.reversed
+                    item.status !== undefined
+                      ? (item.status==="isReversed"?classes.reversed:(item.status==="isBooked"?classes.booked:classes.hold))
                       : arrSeatReserved.includes(item.id)
                       ? classes.choosing
                       : classes.normal;

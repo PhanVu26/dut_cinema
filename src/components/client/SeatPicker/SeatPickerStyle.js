@@ -35,6 +35,18 @@ const styles = (theme) => ({
         "&:hover": {
             cursor: 'not-allowed'
         }
+    },
+    booked: {
+        backgroundColor: '#ffbb42',
+        "&:hover": {
+            cursor: 'not-allowed'
+        }
+    },
+    hold: {
+        backgroundColor: '#8dafc1',
+        "&:hover": {
+            cursor: 'not-allowed'
+        }
     }
 })
 

@@ -181,13 +181,9 @@ export const actDeleteMovie = (id) => {
 
 export const actFetchDataBookingMovieRequest = (showtimeId) => {
   return (dispatch) => {
-    return callApi(
-      "transactions?relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema",
-      "GET",
-      null
-    ).then((res) => {
-      console.log(res.data);
-      dispatch(actFetchDataBookingMovie(res.data));
+    return callApi(`showtimes/${showtimeId}/tickets`, "GET", null).then((res) => {
+      console.log(res.data)
+        dispatch(actFetchDataBookingMovie(res.data));
     });
   };
 };
@@ -200,19 +196,35 @@ export const actFetchDataBookingMovie = (bookingMovie) => {
 };
 
 export const actCreateBookingRequest = (data) => {
+  axios.interceptors.request.use(function (config) {
+    return config;
+  }, function (error) {
+    return Promise.reject(error);
+  });
+
+  axios.interceptors.response.use(function (response) {
+    return response;
+  }, function (error) {
+    return Promise.reject(error);
+  });
+  var b = localStorage.getItem("accessToken").split('"')
+  var a = String('Bearer '+ b[1])
+  console.log(a.toString())
+  let result = axios.post('https://cinema-nestjs.herokuapp.com/tickets',data,{headers:{"Authorization": a}})
   return (dispatch) => {
-    return callApi("api/bookings/add", "POST", data).then((res) => {
-      if (res.status === 200 || res.status === 201) {
-        alert(
-          "Đặt vé thành công, chúng tôi đã gửi mã QR code qua điện thoại của bạn, vui lòng đem mã số này đến quầy để nhận vé!"
-        );
-        dispatch(actCreateBooking(res.data));
-        setTimeout(() => {
-          history.push("/");
-        }, 0);
-      } else alert("Không thể kết nối dữ liệu!");
+    result.then((res)=>{
+      alert(
+        "Đặt vé thành công, vui lòng đến quầy để nhận vé!"
+      );
+      dispatch(actCreateBooking(res.data));
+      setTimeout(() => {
+      //history.push("/");
+      }, 0);
+    }).catch(function(error){
+      console.log(error)
+      alert("Lỗi kết nối")
     });
-  };
+  }
 };
 
 export const actCreateBooking = (data) => {

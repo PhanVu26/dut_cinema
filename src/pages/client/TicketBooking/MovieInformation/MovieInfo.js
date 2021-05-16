@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import OpenVideo from "../OpenVideoMovie/OpenVideo";
 import Rating from "material-ui-rating";
 import ShowTimesMovie from "../ShowTimesMovie/ShowTimesMovie";
 import { actRatingItemMovieRequest } from "../../../../actions/index";
@@ -95,9 +94,6 @@ function MovieInfo(props) {
               data-was-processed="true"
             />
           </div>
-          {/* <div className="play-bt">
-            <OpenVideo info={itemMovieInfo} />
-          </div> */}
         </div>
         <div className="col-md-12 col-lg-7 movie-information">
           <h4 className="detail-title text-uppercase">{itemMovieInfo.name}</h4>

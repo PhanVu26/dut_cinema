@@ -98,6 +98,7 @@ class BuyTicketPage extends React.Component {
       mv.showtimes.map((i,index) => {
         if(i.startTime.split("T")[0]==item){
           var O={
+            id: i.id,
             time: i.startTime.split("T")[1].split(".")[0],
           }
           ShowTimes.push(O);
@@ -151,14 +152,16 @@ class BuyTicketPage extends React.Component {
       const movie = this.state.active;
       this.props.receiveMovieChoosing(movie, item, session, account.id);
       const slug = movie.name;
-      console.log(movie);
-      var startTime = item.dateMovie+"T"+session+".000Z";
-      var showtimeId = movie.showtimes.map((itm)=>{
-        if(itm.startTime===startTime) return itm.id
-      });
-      console.log(showtimeId[0]);
-      actFetchDataBookingMovieRequest(showtimeId[0]);
-      console.log(showtimeId[0]);
+      // console.log(movie);
+      // console.log(item);
+      // console.log(session)
+      // var startTime = item.dateMovie+"T"+session+".000Z";
+      // var showtimeId = movie.showtimes.filter((itm)=>
+      //   (itm.startTime===startTime)
+      // );
+      // console.log(showtimeId[0]);
+      // actFetchDataBookingMovieRequest(showtimeId[0]);
+      // console.log(showtimeId[0]);
       this.props.history.push(`/buy-ticket-detail/${slug}`);
       // history.go();
     } else {

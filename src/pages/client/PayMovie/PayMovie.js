@@ -20,11 +20,46 @@ const PropsType = {
 const PayMovie = ({ classes, createBooking }) => {
   const [isOpen, setIsOpen] = useState(false);
   let infoMovie = JSON.parse(localStorage.getItem("booking"));
-  console.log("info:", infoMovie);
+  let allTickets = infoMovie.tickets;
+  let seats = infoMovie.seats;
+  let BookedTickets =[];
+  for (let index = 0; index < seats.length; index++) {
+    let checkRow = seats[index].substring(0, 1);;
+    let checkColumn = seats[index].substring(1, 2);
+    for (let ind = 0; ind < allTickets.length; ind++) {
+      if(checkRow === allTickets[ind].seat.row && Number(checkColumn) === allTickets[ind].seat.column){
+        let type_Id = 1;
+        if(allTickets[ind].seat.type!=="Normal") type_Id = 2;
+        BookedTickets.push({
+            "id": allTickets[ind].id,
+            "typeId": type_Id
+          })
+      }
+    }
+  }
+  console.log(BookedTickets)
+  let accessToken = localStorage.getItem("accessToken");
+  let data1 ={
+    tickets: BookedTickets,
+    status: "Hold"
+  }
+  let data2 ={
+    "tickets": BookedTickets,
+    "status": "Booked"
+  }
+  
+  console.log("info:", data2);
 
   const confirmInform = () => {
-    createBooking(infoMovie);
-    setIsOpen(!isOpen);
+    if(accessToken){
+      createBooking(data2);
+      //createBooking(data2);
+      setIsOpen(!isOpen);
+    }else{
+      alert(
+        "Bạn cần đăng nhập trước!"
+      );
+    }
   };
   let total = infoMovie.ticketPrice;
 
@@ -116,6 +151,14 @@ const PayMovie = ({ classes, createBooking }) => {
         onComfirm={confirmInform}
         total={total}
       />
+      <div>
+        <button 
+          // onClick={() => this.handleOnPreviouPage()}
+          // className={`${classes.button} ${classes.buttonNomargin}`}
+        >
+        Hủy đặt vé
+         </button>
+      </div>  
     </div>
   );
 };

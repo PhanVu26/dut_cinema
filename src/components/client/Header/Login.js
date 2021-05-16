@@ -84,6 +84,7 @@ class Login extends Component {
           console.log(dataAccount);
           if (Object.keys(dataAccount).length !== 0) {
             localStorage.setItem("account", JSON.stringify(dataAccount));
+            localStorage.setItem("accessToken", JSON.stringify(res.data.accessToken));
           }
           alert("Logged in successfully");
           this.setState({ isShow: false });

@@ -62,6 +62,7 @@ function MovieReducer(state = stateDefault, action) {
         mv.showtimes.map((i,index) => {
           if(i.startTime.split("T")[0]==item){
             var O={
+              id: i.id,
               time: i.startTime.split("T")[1].split(".")[0],
             }
             ShowTimes.push(O);
