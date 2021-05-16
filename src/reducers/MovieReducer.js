@@ -13,6 +13,7 @@ const stateDefault = {
   getBookingById: {},
   reviewMovie: [],
   bookingMovie: [],
+  transaction: [],
 };
 
 const isMovieShowing = (date) => {
@@ -53,25 +54,25 @@ function MovieReducer(state = stateDefault, action) {
       let newState = { ...state };
       var TOS = [];
       let mv = action.movie;
-      mv.showtimes.map((item,index) => {
+      mv.showtimes.map((item, index) => {
         TOS.push(item.startTime.split("T")[0]);
       });
-      var TiOfS =[];
-      TOS.map((item,index)=>{
-        var ShowTimes =[];
-        mv.showtimes.map((i,index) => {
-          if(i.startTime.split("T")[0]==item){
-            var O={
+      var TiOfS = [];
+      TOS.map((item, index) => {
+        var ShowTimes = [];
+        mv.showtimes.map((i, index) => {
+          if (i.startTime.split("T")[0] == item) {
+            var O = {
               id: i.id,
               time: i.startTime.split("T")[1].split(".")[0],
-            }
+            };
             ShowTimes.push(O);
           }
         });
         var obj = {
           dateMovie: item,
           showtimes: ShowTimes,
-        }
+        };
         TiOfS.push(obj);
       });
       let TimeOfShowtime = Array.from(new Set(TiOfS));
@@ -179,6 +180,11 @@ function MovieReducer(state = stateDefault, action) {
     case Types.FETCH_DATA_BOOKING_MOVIE: {
       let newState = { ...state };
       newState.bookingMovie = action.bookingMovie;
+      return newState;
+    }
+    case Types.FETCH_TRANSACTION: {
+      let newState = { ...state };
+      newState.transaction = action.transaction;
       return newState;
     }
     default: {

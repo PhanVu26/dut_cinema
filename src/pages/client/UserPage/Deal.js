@@ -75,7 +75,7 @@ class Deal extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    bookingMovie: state.MovieReducer.bookingMovie,
+    bookingMovie: state.MovieReducer.transaction,
   };
 };
 

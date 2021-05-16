@@ -179,12 +179,34 @@ export const actDeleteMovie = (id) => {
   };
 };
 
+export const actFetchDataTransactionRequest = () => {
+  return (dispatch) => {
+    return callApi(
+      "transactions?relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema",
+      "GET",
+      null
+    ).then((res) => {
+      console.log(res.data);
+      dispatch(actFetchTransaction(res.data));
+    });
+  };
+};
+
+export const actFetchTransaction = (transaction) => {
+  return {
+    type: Types.FETCH_TRANSACTION,
+    transaction,
+  };
+};
+
 export const actFetchDataBookingMovieRequest = (showtimeId) => {
   return (dispatch) => {
-    return callApi(`showtimes/${showtimeId}/tickets`, "GET", null).then((res) => {
-      console.log(res.data)
+    return callApi(`showtimes/${showtimeId}/tickets`, "GET", null).then(
+      (res) => {
+        console.log(res.data);
         dispatch(actFetchDataBookingMovie(res.data));
-    });
+      }
+    );
   };
 };
 
@@ -196,35 +218,43 @@ export const actFetchDataBookingMovie = (bookingMovie) => {
 };
 
 export const actCreateBookingRequest = (data) => {
-  axios.interceptors.request.use(function (config) {
-    return config;
-  }, function (error) {
-    return Promise.reject(error);
-  });
+  axios.interceptors.request.use(
+    function (config) {
+      return config;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
 
-  axios.interceptors.response.use(function (response) {
-    return response;
-  }, function (error) {
-    return Promise.reject(error);
+  axios.interceptors.response.use(
+    function (response) {
+      return response;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
+  var b = localStorage.getItem("accessToken").split('"');
+  var a = String("Bearer " + b[1]);
+  console.log(a.toString());
+  let result = axios.post("https://cinema-nestjs.herokuapp.com/tickets", data, {
+    headers: { Authorization: a },
   });
-  var b = localStorage.getItem("accessToken").split('"')
-  var a = String('Bearer '+ b[1])
-  console.log(a.toString())
-  let result = axios.post('https://cinema-nestjs.herokuapp.com/tickets',data,{headers:{"Authorization": a}})
   return (dispatch) => {
-    result.then((res)=>{
-      alert(
-        "Đặt vé thành công, vui lòng đến quầy để nhận vé!"
-      );
-      dispatch(actCreateBooking(res.data));
-      setTimeout(() => {
-      //history.push("/");
-      }, 0);
-    }).catch(function(error){
-      console.log(error)
-      alert("Lỗi kết nối")
-    });
-  }
+    result
+      .then((res) => {
+        alert("Đặt vé thành công, vui lòng đến quầy để nhận vé!");
+        dispatch(actCreateBooking(res.data));
+        setTimeout(() => {
+          //history.push("/");
+        }, 0);
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert("Lỗi kết nối");
+      });
+  };
 };
 
 export const actCreateBooking = (data) => {
