@@ -43,9 +43,11 @@ class Deal extends Component {
 
     const account = JSON.parse(localStorage.getItem("account"));
     let arrayBooking = [];
-    for (let i = 0; i < this.props.bookingMovie.results.length; i++) {
-      if (account.id === this.props.bookingMovie.results[i].user.id) {
-        arrayBooking.push(this.props.bookingMovie.results[i]);
+    if (this.props.transaction.hasOwnProperty("results")) {
+      for (let i = 0; i < this.props.transaction.results.length; i++) {
+        if (account.id === this.props.transaction.results[i].user.id) {
+          arrayBooking.push(this.props.transaction.results[i]);
+        }
       }
     }
 
@@ -75,7 +77,7 @@ class Deal extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    bookingMovie: state.MovieReducer.transaction,
+    transaction: state.MovieReducer.transaction,
   };
 };
 

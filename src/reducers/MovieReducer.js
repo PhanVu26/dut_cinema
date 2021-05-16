@@ -13,7 +13,7 @@ const stateDefault = {
   getBookingById: {},
   reviewMovie: [],
   bookingMovie: [],
-  transaction: [],
+  transaction: {},
 };
 
 const isMovieShowing = (date) => {

@@ -185,10 +185,14 @@ export const actFetchDataTransactionRequest = () => {
       "transactions?relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema",
       "GET",
       null
-    ).then((res) => {
-      console.log(res.data);
-      dispatch(actFetchTransaction(res.data));
-    });
+    )
+      .then((res) => {
+        console.log(res.data);
+        dispatch(actFetchTransaction(res.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 };
 
