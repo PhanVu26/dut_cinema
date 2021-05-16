@@ -9,11 +9,16 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import "./UserPageStyles.css";
-
+import { actFetchDataBookingMovieRequest } from "../../../actions/index";
 import InforUser from "./UserInfo";
 import Deal from "./Deal";
+import { connect } from "react-redux";
 
 class UserPage extends React.Component {
+  componentDidMount() {
+    this.props.fetchDataBooking();
+  }
+
   render() {
     let account = JSON.parse(localStorage.getItem("account"));
     let dataAccount = [account];
@@ -23,6 +28,14 @@ class UserPage extends React.Component {
     return <div className="container">{dataInfoUser}</div>;
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchDataBooking: () => {
+      dispatch(actFetchDataBookingMovieRequest());
+    },
+  };
+};
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -115,4 +128,4 @@ function FullWidthTabs(props) {
   );
 }
 
-export default UserPage;
+export default connect(null, mapDispatchToProps)(UserPage);

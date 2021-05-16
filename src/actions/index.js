@@ -181,12 +181,14 @@ export const actDeleteMovie = (id) => {
 
 export const actFetchDataBookingMovieRequest = (showtimeId) => {
   return (dispatch) => {
-    return callApi(`showtimes/${showtimeId}/tickets`, "GET", null).then(
-      (res) => {
-        console.log(res.data);
-        dispatch(actFetchDataBookingMovie(res.data));
-      }
-    );
+    return callApi(
+      "transactions?relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema",
+      "GET",
+      null
+    ).then((res) => {
+      console.log(res.data);
+      dispatch(actFetchDataBookingMovie(res.data));
+    });
   };
 };
 
@@ -404,19 +406,20 @@ export const actRegisterUserRequest = (user) => {
 
 //-------------------------------------------------------
 
-
 // get movie
 export const getMovieRequest = (id) => {
   return (dispatch) => {
-      return callApi(`movies/${id}?relations=actors,genres`, 'GET', null).then((res) => {
-          console.log("res", res.data)
-          dispatch(getMovie(res.data));
-      });
+    return callApi(`movies/${id}?relations=actors,genres`, "GET", null).then(
+      (res) => {
+        console.log("res", res.data);
+        dispatch(getMovie(res.data));
+      }
+    );
   };
-}
+};
 export const getMovie = (movie) => {
   return {
-      type: Types.FETCH_MOVIE,
-      movie
-  }
-}
+    type: Types.FETCH_MOVIE,
+    movie,
+  };
+};

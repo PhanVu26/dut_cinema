@@ -5,34 +5,27 @@ import TableRow from "@material-ui/core/TableRow";
 
 class ItemDeal extends Component {
   render() {
-    console.log(this.props.myDeal);
-
     return (
       <>
         <StyledTableRow>
           <StyledTableCell component="th" scope="row">
-            {this.props.myDeal.date}
+            {this.props.myDeal.transaction_time.slice(0, 10)}
           </StyledTableCell>
           <StyledTableCell align="center">
-            {this.props.myDeal.time}
+            {this.props.myDeal.transaction_time.slice(11, 19)}
           </StyledTableCell>
           <StyledTableCell align="center">
-            {this.props.myDeal.tickCode}
+            {this.props.myDeal.ticket.seat.room.cinema.name}
           </StyledTableCell>
           <StyledTableCell align="center">
-            {this.props.myDeal.room}
+            {this.props.myDeal.ticket.showtime.movie.name}
           </StyledTableCell>
           <StyledTableCell align="center">
-            {this.props.myDeal.nameMovie}
+            {this.props.myDeal.ticket.seat.row +
+              this.props.myDeal.ticket.seat.column}
           </StyledTableCell>
           <StyledTableCell align="center">
-            {this.props.myDeal.seats}
-          </StyledTableCell>
-          <StyledTableCell align="center">
-            {this.props.myDeal.ticketPrice}
-          </StyledTableCell>
-          <StyledTableCell align="center">
-            {this.props.myDeal.foodPrice}
+            {this.props.myDeal.price}
           </StyledTableCell>
         </StyledTableRow>
       </>
