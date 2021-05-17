@@ -13,14 +13,21 @@ import Footer from "../../components/admin/Footer/Footer";
 import Modal from "../../components/admin/Modal/Modal";
 import MainContent from "../../components/admin/MainContain/MainContent";
 import Navbar from "../../components/admin/Navbar/Navbar";
+import UserManagementPage from "./UserManagementPage";
+import UserProfile from "../UserProfile/UserProfile";
 
 const AdminPage = (props) => {
     return (
+
         <Router>
-            <Navbar></Navbar>        
-            <Modal></Modal>
-            <MainContent></MainContent>
-            <Footer></Footer>
+        <Navbar></Navbar>        
+        <Switch>
+            <Route path="/admin" exact component={MainContent}></Route>
+            <Route path="/admin/users" exact component={UserManagementPage}></Route>  
+            <Route path="/admin/sales" exact component={UserManagementPage}></Route>  
+            <Route path="/admin/profile" exact component={UserProfile}></Route>  
+        </Switch>
+        <Footer></Footer>
         </Router>
             
     )

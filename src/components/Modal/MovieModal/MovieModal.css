@@ -1,0 +1,33 @@
+.movie-details .title-detail{
+    font-weight: bold;
+}
+
+.actors-box, .genres-box{
+    overflow: auto;
+    height: 130px;
+    border: rgb(110, 104, 104) solid 0.5px;
+}
+
+.form-group span {
+    font-weight: bold;
+}
+.form-group p {
+    color: darkgoldenrod;
+}
+.selected-actor, .selected-genre{
+    border-radius: 4px;
+    display: inline-block;
+    background-color: rgb(221, 211, 153);
+}
+.selected-actor > a, .selected-genre > a{
+    padding: 3px 7px;
+    cursor: pointer;
+}
+
+.selected-actor > a > i, .selected-genre > a > i{
+    color: rgb(182, 10, 10);
+}
+
+.selected-actor > span{
+    padding: 3px 7px;
+}

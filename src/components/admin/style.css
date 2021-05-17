@@ -73,6 +73,13 @@
     border-radius: 50%;
 }
 
+.fa-toggle-on {
+    color: red !important;
+}
+.fa-toggle-on,.fa-toggle-off{
+    font-size: 25px;
+}
+
 @media (max-width:768px) {
 
 
@@ -102,3 +109,12 @@
 .task-border {
     border-left: 2px solid #f66436;
 }
+
+/* .my-custom-scrollbar {
+    position: relative;
+    height: 350px;
+    overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+    display: block;
+} */

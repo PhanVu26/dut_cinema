@@ -2,7 +2,6 @@ import "./App.css";
 
 import AdminPage from "./pages/admin/AdminPage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import AccountManagementPage from "./pages/admin/AccounManagementPage";
 import Header from "./components/client/Header/Header";
 import Footer from "./components/client/Footer/Footer";
 import HomePage from "./pages/client/HomePage/HomePage";
@@ -19,16 +18,29 @@ import PromotionPage from "./pages/client/HomePage/Promotion/PromotionPage";
 import UserPage from "./pages/client/UserPage/UserPage";
 import MovieDetail from "./pages/client/TicketBooking/MovieInformation/MovieInfo";
 import SearchPage from "./pages/client/SearchPage/SearchPage";
-
+// import routes from "./routes/index.route";
+import UserManagementPage from "./pages/admin/UserManagementPage";
+import MovieManager from "./pages/manager/MovieManager";
+import ActorManager from "./pages/manager/ActorManager/index";
+import ManagerPage from "./pages/manager/index";
+import Login from "./pages/Login/Login";
+import ShowTimeManager from "./pages/ShowTimeManager/HomePage/HomePage";
+import EditShowTimePage from "./pages/ShowTimeManager/EditShowTimePage/EditShowTimePage";
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/admin">
+        <Route path="/admin">
           <AdminPage></AdminPage>
         </Route>
-        <Route exact path="/admin/account">
-          <AccountManagementPage></AccountManagementPage>
+        <Route path="/manager">
+          <ManagerPage></ManagerPage>
+        </Route>
+        <Route path="/login">
+          <Login></Login>
+        </Route>
+        <Route path="/showtime-manager">
+          <ShowTimeManager></ShowTimeManager>
         </Route>
         <Route
           exact
