@@ -6,7 +6,13 @@ import callApi from "../../../utils/ApiCallerServer";
 class InforUser extends Component {
   constructor(props, context) {
     super(props, context);
+    if (!localStorage.getItem("account")) {
+      localStorage.setItem("account", JSON.stringify(""));
+    }
     let account = JSON.parse(localStorage.getItem("account"));
+    if (Object.keys(account).length === 0) {
+      window.location.href = "/";
+    }
     // console.log("account: ", account);
     this.state = {
       txtName: {
@@ -95,9 +101,9 @@ class InforUser extends Component {
 
   updateAccount = (account) => {
     let accountStorage = JSON.parse(localStorage.getItem("account"));
-
-    accountStorage.user.name = account.user.name;
-    accountStorage.user.age = account.user.age;
+    console.log("accountStorage: ", accountStorage.user.name);
+    accountStorage.user.name = account.name;
+    accountStorage.user.age = account.age;
     // accountStorage.phone = account.phone;
     // accountStorage.userName = account.userName;
     // accountStorage.gender = account.gender;

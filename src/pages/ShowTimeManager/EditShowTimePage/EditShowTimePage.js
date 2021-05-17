@@ -147,7 +147,10 @@ class EditShowTimePage extends Component {
           roomId: this.state.showtime.room,
           movieId: this.state.movie.id,
         };
-        actions2.actAddShowtimeRequest(temp).then((res) => console.log(res));
+        actions2
+          .actAddShowtimeRequest(temp)
+          .then((res) => console.log("add: ", res.status))
+          .catch((error) => window.alert("Lỗi! Vui lòng kiểm tra lại giờ."));
         this.setState({ checkMessage: "" });
       }
     }
