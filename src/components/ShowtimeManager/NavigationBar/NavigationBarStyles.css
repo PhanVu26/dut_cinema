@@ -30,7 +30,7 @@ nav ul li a {
   position: relative;
   display: inline-block;
 }
-a::before {
+/* a::before {
   content: attr(data-text);
   color: #fff;
   position: absolute;
@@ -44,7 +44,7 @@ a::before {
 }
 a:hover::before {
   width: 100%;
-}
+} */
 @media (max-width: 700px) {
   nav {
     display: block;

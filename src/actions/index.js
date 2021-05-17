@@ -239,8 +239,8 @@ export const actCreateBookingRequest = (data) => {
       return Promise.reject(error);
     }
   );
-  var b = localStorage.getItem("accessToken").split('"');
-  var a = String("Bearer " + b[1]);
+  var b = localStorage.getItem("account").accessToken
+  var a = String("Bearer " + b);
   console.log(a.toString());
   let result = axios.post("https://cinema-nestjs.herokuapp.com/tickets", data, {
     headers: { Authorization: a },
