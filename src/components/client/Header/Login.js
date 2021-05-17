@@ -78,17 +78,35 @@ class Login extends Component {
 
       actLoginAccountRequest(account)
         .then((res) => {
-          let dataAccount = res.data.user;
+          let dataAccount = res.data;
           let token = res.data.accessToken;
           dataAccount.accessToken = token;
-          console.log(dataAccount);
           if (Object.keys(dataAccount).length !== 0) {
             localStorage.setItem("account", JSON.stringify(dataAccount));
             localStorage.setItem("accessToken", JSON.stringify(res.data.accessToken));
           }
           alert("Logged in successfully");
           this.setState({ isShow: false });
-          window.location.reload();
+          switch(dataAccount.roleName){
+            case "Admin":
+              {
+                window.location.href = "/admin";
+                break;
+              }
+            case "Movie Manager":
+              {
+                window.location.href = "/manager";
+                break;
+              }  
+            case "Theater Manager":
+              {
+                window.location.href = "/showtime-manager";
+                break
+              }  
+            default:
+              window.location.href = "/";
+              break;  
+          }
         })
         .catch(function (error) {
           alert("Khong dung mat khau");

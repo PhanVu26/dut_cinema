@@ -71,30 +71,51 @@ class Login extends Component {
         email: email.value,
       };
 
-        // actions.actLoginAccountRequest(account).then((res) => {
-        //   let dataAccount = res;
-        //   console.log(dataAccount);
-        //     if (Object.keys(dataAccount).length !== 0) {
-        //       localStorage.setItem("account", JSON.stringify(dataAccount));
-        //     }
-        //     alert("Logged in successfully");
-        //     this.setState({ show: false });
-        //     window.location.reload();
-        // }).catch(function(error){
-        //   alert("Khong dung mat khau")
-        // });
-        let response = null;
-        axios.post(`https://cinema-nestjs.herokuapp.com/auth/login`, account)
-            .then(res => {
-                response = res;
-                console.log("response", response);
-                const user = res.data.user;
-                localStorage.setItem("account", JSON.stringify(res.data))
-                console.log(res);
-                console.log(res.data.user);
+        actions.actLoginAccountRequest(account).then((res) => {
+          let dataAccount = res.data;
+          console.log(dataAccount);
+            if (Object.keys(dataAccount).length !== 0) {
+              localStorage.setItem("account", JSON.stringify(dataAccount));
+            }
+            alert("Logged in successfully");
+            console.log("account", dataAccount)
+            switch(dataAccount.roleName){
+              case "Admin":
+                {
+                  window.location.href = "/admin";
+                  break;
+                }
+              case "Movie Manager":
+                {
+                  window.location.href = "/manager";
+                  break;
+                }  
+              case "Theater Manager":
+                {
+                  window.location.href = "/showtime-manager";
+                  break
+                }  
+              default:
+                window.location.href = "/";
+                break;  
+            }
+            // this.setState({ show: false });
+            // window.location.reload();
+        }).catch(function(error){
+          alert("Khong dung mat khau")
+        });
+        // let response = null;
+        // axios.post(`https://cinema-nestjs.herokuapp.com/auth/login`, account)
+        //     .then(res => {
+        //         response = res;
+        //         console.log("response", response);
+        //         const user = res.data.user;
+        //         localStorage.setItem("account", JSON.stringify(res.data))
+        //         console.log(res);
+        //         console.log(res.data.user);
                 
                 
-            })
+        //     })
             
     } else {
       alert("Vui lòng nhập đúng định dạng.");
@@ -152,7 +173,7 @@ class Login extends Component {
         </div>
         <Modal
           {...this.props}
-          show={true}
+          show={this.state.isShow}
           onHide={this.handleHide}
           dialogClassName="custom-modal"
         >
