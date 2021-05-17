@@ -39,6 +39,9 @@ var myReducer = (state = initialState, action) => {
             }     
             console.log("movie edit ", movieInfo)
             return movieInfo
+        case types.FETCH_MOVIE:
+            console.log("movie info ", action.movie)
+            return action.movie
         default: return state;     
     }
     return state;

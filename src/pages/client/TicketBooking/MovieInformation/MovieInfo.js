@@ -70,7 +70,7 @@ class MovieDetail extends Component {
         display: "block",
         };
 
-        const movie = this.props.MovieInfo;
+        const movie = this.props.movieInfo;
 
         return (
             <div className="container my-4">
@@ -195,7 +195,7 @@ class MovieDetail extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        MovieInfo: state.MovieInfo
+        movieInfo: state.movieInfo
     }
 }
 
