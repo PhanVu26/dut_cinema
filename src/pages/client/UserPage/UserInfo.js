@@ -7,14 +7,15 @@ class InforUser extends Component {
   constructor(props, context) {
     super(props, context);
     let account = JSON.parse(localStorage.getItem("account"));
+    // console.log("account: ", account);
     this.state = {
       txtName: {
-        value: account.name,
+        value: account.user.name,
         isInputValid: true,
         errorMessage: "",
       },
       age: {
-        value: account.age || "",
+        value: account.user.age || "",
         isInputValid: true,
         errorMessage: "",
       },
@@ -26,7 +27,7 @@ class InforUser extends Component {
       // txtGender: account.gender,
       // txtBirth: props.account.birth,
       txtEmail: {
-        value: account.email,
+        value: account.user.email,
       },
       txtPassword: {
         value: "",
@@ -49,7 +50,7 @@ class InforUser extends Component {
       //   errorMessage: "",
       // },
       isChecked: false,
-      _id: account.id,
+      _id: account.user.id,
       // currentStar: account.currentStar,
       // targets: account.targets,
     };
@@ -95,8 +96,8 @@ class InforUser extends Component {
   updateAccount = (account) => {
     let accountStorage = JSON.parse(localStorage.getItem("account"));
 
-    accountStorage.name = account.name;
-    accountStorage.age = account.age;
+    accountStorage.user.name = account.user.name;
+    accountStorage.user.age = account.user.age;
     // accountStorage.phone = account.phone;
     // accountStorage.userName = account.userName;
     // accountStorage.gender = account.gender;
