@@ -49,6 +49,38 @@ export const updateUser = (user) => {
   };
 };
 
+export const actGetProfileRequest = (user) => {
+  return (dispatch) => {
+    return callApi(`users/me`, "GET", user).then((res) => {
+      console.log("res get me", res)
+      dispatch(getProfile(res.data));
+    });
+  };
+};
+
+export const getProfile = (user) => {
+  return {
+    type: types.GET_USER_EDITING,
+    user,
+  };
+};
+
+export const actUpdateProfileRequest = (user) => {
+  return (dispatch) => {
+    return callApi(`users/me`, "PATCH", user).then((res) => {
+      console.log("res", res)
+      dispatch(updateProfile(res.data));
+    });
+  };
+};
+
+export const updateProfile = (user) => {
+  return {
+    type: types.GET_USER_EDITING,
+    user,
+  };
+};
+
 export const saveUser = (user) => {
   return {
     type: types.SAVE_USER,

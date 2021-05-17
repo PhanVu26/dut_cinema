@@ -72,16 +72,24 @@ function TabPanel(props) {
     const [user, setUser] = React.useState({})
     const [password, setPassword] = React.useState({})
     const userEditing = useSelector(state => state.userEditing)
+    console.log("userEditing", userEditing)
     
     useEffect(() => {
+      const account =JSON.parse(localStorage.getItem("account"))
+      dispatch(actions.actGetProfileRequest())
+      console.log("user info", userEditing)
       setUser(userEditing)
-    })
+      console.log("state user", user)
+    },[])
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
     const updateProfile = (e) => {
       e.preventDefault()
-      dispatch(actions.actUpdateUserRequest(user))
+      console.log("update user", user)
+      dispatch(actions.actUpdateProfileRequest(user))
+      console.log("after update", userEditing)
+      setUser(userEditing)
 
     }
     const changePassword = (e) => {
@@ -120,9 +128,9 @@ function TabPanel(props) {
                                         height="100px"
                                         src={testAvatar}
                                         ></img>
-                                        <h5 className="title mt-2">Phan Vũ</h5>
+                                        <h5 className="title mt-2">{user.name}</h5>
                                     </a>
-                                    <p className="email">vu@gmail.com</p>
+                                    <p className="email">{user.email}</p>
                                     <p className="phone">0967139958</p>
                                     <p className="address">Gia Lai-Việt Nam</p>
                                     </div>

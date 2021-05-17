@@ -89,11 +89,7 @@ class Login extends Component {
                 response = res;
                 console.log("response", response);
                 const user = res.data.user;
-                localStorage.setItem("account", JSON.stringify({
-                  name : user.name,
-                  accessToken: res.data.accessToken,
-                  role: res.data.roleName
-                }))
+                localStorage.setItem("account", JSON.stringify(res.data))
                 console.log(res);
                 console.log(res.data.user);
                 
