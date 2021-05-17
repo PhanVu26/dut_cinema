@@ -45,12 +45,11 @@ class Deal extends Component {
     let arrayBooking = [];
     if (this.props.transaction.hasOwnProperty("results")) {
       for (let i = 0; i < this.props.transaction.results.length; i++) {
-        if (account.id === this.props.transaction.results[i].user.id) {
+        if (account.user.id === this.props.transaction.results[i].user.id) {
           arrayBooking.push(this.props.transaction.results[i]);
         }
       }
     }
-
     let dataItemDeal = arrayBooking.map((myDeal, index) => {
       return <ItemDeal key={`movie ${index}`} myDeal={myDeal} />;
     });

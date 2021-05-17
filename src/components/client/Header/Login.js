@@ -79,33 +79,33 @@ class Login extends Component {
       actLoginAccountRequest(account)
         .then((res) => {
           let dataAccount = res.data;
-          let token = res.data.accessToken;
-          dataAccount.accessToken = token;
+          // let token = res.data.accessToken;
+          // dataAccount.accessToken = token;
           if (Object.keys(dataAccount).length !== 0) {
             localStorage.setItem("account", JSON.stringify(dataAccount));
-            localStorage.setItem("accessToken", JSON.stringify(res.data.accessToken));
+            localStorage.setItem(
+              "accessToken",
+              JSON.stringify(res.data.accessToken)
+            );
           }
           alert("Logged in successfully");
           this.setState({ isShow: false });
-          switch(dataAccount.roleName){
-            case "Admin":
-              {
-                window.location.href = "/admin";
-                break;
-              }
-            case "Movie Manager":
-              {
-                window.location.href = "/manager";
-                break;
-              }  
-            case "Theater Manager":
-              {
-                window.location.href = "/showtime-manager";
-                break
-              }  
+          switch (dataAccount.roleName) {
+            case "Admin": {
+              window.location.href = "/admin";
+              break;
+            }
+            case "Movie Manager": {
+              window.location.href = "/manager";
+              break;
+            }
+            case "Theater Manager": {
+              window.location.href = "/showtime-manager";
+              break;
+            }
             default:
               window.location.href = "/";
-              break;  
+              break;
           }
         })
         .catch(function (error) {

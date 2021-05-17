@@ -290,7 +290,7 @@ class EditShowTimePage extends Component {
                         {/* <p>{this.state.showtime.date.toString()}</p> */}
                       </div>
                     </div>
-                    <div className="col-3">
+                    <div className="col-3" style={{ marginTop: "5px" }}>
                       <Button onClick={this.loadShowtime}>Load</Button>
                       {/* <label>Chọn phim: </label>
                           <select
@@ -395,41 +395,44 @@ class EditShowTimePage extends Component {
                       </div>
                     </div>
                     <div className="col-3" style={{ marginTop: "8px" }}>
-                      <label>Chọn phim: </label>
-                      <select
-                        className="mr-2 ml-2"
-                        onChange={(e) => {
-                          let val = parseInt(e.target.value);
-                          if (val === 0) {
-                            this.setState((prevState) => ({
-                              movie: {
-                                id: "",
-                                name: "",
-                              },
-                            }));
-                          } else {
-                            let movie_temp = this.props.cinemaInfo.movie.filter(
-                              (item) => item.id === val
+                      <div className="form-group" style={{ display: "flex" }}>
+                        <label>Chọn phim: </label>
+                        <select
+                          className="mr-2 ml-2"
+                          onChange={(e) => {
+                            let val = parseInt(e.target.value);
+                            if (val === 0) {
+                              this.setState((prevState) => ({
+                                movie: {
+                                  id: "",
+                                  name: "",
+                                },
+                              }));
+                            } else {
+                              let movie_temp =
+                                this.props.cinemaInfo.movie.filter(
+                                  (item) => item.id === val
+                                );
+                              movie_temp = movie_temp[0];
+                              this.setState((prevState) => ({
+                                movie: {
+                                  id: movie_temp.id,
+                                  name: movie_temp.name,
+                                },
+                              }));
+                            }
+                          }}
+                        >
+                          <option key={0} value={0}></option>
+                          {this.props.cinemaInfo.movie.map((item, index) => {
+                            return (
+                              <option key={index + 1} value={item.id}>
+                                {item.name}
+                              </option>
                             );
-                            movie_temp = movie_temp[0];
-                            this.setState((prevState) => ({
-                              movie: {
-                                id: movie_temp.id,
-                                name: movie_temp.name,
-                              },
-                            }));
-                          }
-                        }}
-                      >
-                        <option key={0} value={0}></option>
-                        {this.props.cinemaInfo.movie.map((item, index) => {
-                          return (
-                            <option key={index + 1} value={item.id}>
-                              {item.name}
-                            </option>
-                          );
-                        })}
-                      </select>
+                          })}
+                        </select>
+                      </div>
                     </div>
                     <div className="col-1">
                       <button
@@ -453,20 +456,22 @@ class EditShowTimePage extends Component {
                         <article className="book" key={item.id}>
                           <img src={item.movie.image} alt="" />
                           <h4>{item.movie.name}</h4>
-                          <button
-                            key={item.id}
-                            type="button"
-                            className="btn btn-danger"
-                            style={{ marginRight: "10px" }}
-                            value={item.id}
-                            onClick={this.deleteShowtime}
-                          >
-                            <span className="far fa-trash-alt"></span>
-                          </button>
-                          <label>
-                            {item.startTime.slice(11, 16)} -{" "}
-                            {item.endTime.slice(11, 16)}
-                          </label>
+                          <div style={{ display: "flex" }}>
+                            <button
+                              key={item.id}
+                              type="button"
+                              className="btn btn-danger"
+                              style={{ marginRight: "10px" }}
+                              value={item.id}
+                              onClick={this.deleteShowtime}
+                            >
+                              <span className="far fa-trash-alt"></span>
+                            </button>
+                            <h6 style={{ marginTop: "10px" }}>
+                              {item.startTime.slice(11, 16)} -{" "}
+                              {item.endTime.slice(11, 16)}
+                            </h6>
+                          </div>
                         </article>
                       );
                     })}
