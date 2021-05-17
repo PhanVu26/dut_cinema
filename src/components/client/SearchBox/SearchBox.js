@@ -1,29 +1,41 @@
 import React, { Component } from "react";
+import "./styles/SearchBoxStyles.css";
 
 class SearchBox extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      keyword: "",
+      word: "",
     };
   }
 
-  handleOnChange = (e) => {
-    this.setState({
-      keyword: e.target.value,
-    });
-  };
   render() {
-    const { styleSearch } = this.props;
     return (
-      <div className={`${styleSearch} find-header`}>
-        <input
+      <div className={`${this.props.status} find-header`}>
+        {/* <input
+          type="text"
           className="form-control mx-auto"
-          placeholder="Tìm tên phim, diễn viên..."
-          value={this.state.search}
-          onChange={this.handleOnChange}
-          onKeyUp={(e) => this.props.handleOnEnter(e, this.state.keyword)}
-        />
+          placeholder="Search"
+          value={this.state.word}
+          onChange={(e) => this.setState({ word: e.target.value })}
+        /> */}
+        <div class="input-group rounded">
+          <input
+            type="search"
+            class="form-control rounded"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="search-addon"
+            value={this.state.word}
+            onChange={(e) => this.setState({ word: e.target.value })}
+            onKeyUp={(e) => this.props.handleOnEnter(e, this.state.word)}
+          />
+          <button onClick={() => this.props.handleOnClick(this.state.word)}>
+            <span class="input-group-text border-0" id="search-addon">
+              <i class="fas fa-search"></i>
+            </span>
+          </button>
+        </div>
       </div>
     );
   }

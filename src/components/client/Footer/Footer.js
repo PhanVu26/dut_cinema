@@ -1,7 +1,7 @@
 import React from "react";
-import "./styleFooter.css";
-import { Link } from "react-router-dom";
-function Footer() {
+import "./styles/FooterStyles.css";
+
+const Footer = () => {
   return (
     <div className="footer-content">
       <footer className="footer-bg">
@@ -10,104 +10,143 @@ function Footer() {
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-6">
               <ul className="ul-list-items">
                 <li className="li-list-items">
-                  <h5 className="title-widget">giới thiệu</h5>
+                  <h5 className="title-widget">GIỚI THIỆU</h5>
                   <ul className="list-items">
                     <li>
-                      <a href="/#">
-                        <i className="fa fa-angle-double-right"></i>về chúng tôi
+                      <a href="#">
+                        <i className="fa fa-angle-double-right"></i>VỀ CHÚNG TÔI
                       </a>
                     </li>
                     <li>
-                      <a href="/#">
-                        <i className="fa fa-angle-double-right"></i>Thỏa thuận
-                        sử dụng
+                      <a href="#">
+                        <i className="fa fa-angle-double-right"></i>THỎA THUẬN
+                        SỬ DỤNG
                       </a>
                     </li>
                     <li>
-                      <a href="/#">
-                        <i className="fa fa-angle-double-right"></i>chính sách
-                        bảo mật
+                      <a href="#">
+                        <i className="fa fa-angle-double-right"></i>QUY CHẾ HOẠT
+                        ĐỘNG
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i className="fa fa-angle-double-right"></i>CHÍNH SÁCH
+                        BẢO MẬT
                       </a>
                     </li>
                   </ul>
                 </li>
               </ul>
             </div>
+
+            {/* another */}
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-6">
               <ul className="ul-list-items">
                 <li className="li-list-items">
-                  <h5 className="title-widget">góc điện ảnh</h5>
+                  <h5 className="title-widget">GÓC ĐIỆN ẢNH</h5>
                   <ul className="list-items">
                     <li>
-                      <a href="/#">
-                        <i className="fa fa-angle-double-right"></i>thể loại
-                        phim
+                      <a href="#">
+                        <i className="fa fa-angle-double-right"></i>THỂ LOẠI
+                        PHIM
                       </a>
                     </li>
                     <li>
-                      <a href="/#">
-                        <i className="fa fa-angle-double-right"></i>bình luận
-                        phim
+                      <a href="#">
+                        <i className="fa fa-angle-double-right"></i>BÌNH LUẬN
+                        PHIM
                       </a>
                     </li>
                     <li>
-                      <a href="/#">
-                        <i className="fa fa-angle-double-right"></i>blog điện
-                        ảnh
+                      <a href="#">
+                        <i className="fa fa-angle-double-right"></i>BLOG ĐIỆN
+                        ẢNH
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i className="fa fa-angle-double-right"></i>PHIM HAY
+                        THÁNG
                       </a>
                     </li>
                   </ul>
                 </li>
               </ul>
             </div>
+            {/* another */}
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-6">
               <ul className="ul-list-items">
                 <li className="li-list-items">
-                  <h5 className="title-widget">hỗ trợ</h5>
+                  <h5 className="title-widget">HỖ TRỢ</h5>
                   <ul className="list-items">
                     <li>
-                      <Link to="/support" href="contact.html">
-                        <i className="fa fa-angle-double-right"></i>Giải đáp
-                      </Link>
-                    </li>
-                    <li>
-                      <a href="/#">
-                        <i className="fa fa-angle-double-right"></i>sale &#38;
-                        services
+                      <a href="#">
+                        <i className="fa fa-angle-double-right"></i>GÓP Ý
                       </a>
                     </li>
                     <li>
-                      <a href="/#">
-                        <i className="fa fa-angle-double-right"></i> rạp / giá
-                        vé bảo mật
+                      <a href="#">
+                        <i className="fa fa-angle-double-right"></i>SALE &
+                        SERVICES
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i className="fa fa-angle-double-right"></i>RẠP / GIÁ VÉ
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i className="fa fa-angle-double-right"></i>TUYỂN DỤNG
                       </a>
                     </li>
                   </ul>
                 </li>
               </ul>
             </div>
+            {/* another */}
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-6">
               <ul className="ul-list-items">
                 <li className="li-list-items">
-                  <h5 className="title-widget">kết nối cinema</h5>
+                  <h5 className="title-widget">KẾT NỐI CINEMA</h5>
                   <ul className="list-items">
                     <li>
-                      <a href="/#">
+                      <a href="#">
                         <img
-                          alt=""
-                          src="https://img.icons8.com/color/48/000000/facebook-circled.png"
-                        />{" "}
-                      </a>
-                      <a href="/#">
-                        <img
-                          alt=""
-                          src="https://img.icons8.com/bubbles/50/000000/youtube.png"
+                          src="https://img.icons8.com/nolan/32/facebook-new.png"
+                          alt="facebook-icon"
                         />
                       </a>
-                      <a href="/#">
+                      <a href="#">
                         <img
-                          alt=""
-                          src="https://img.icons8.com/cute-clipart/64/000000/instagram-new.png"
+                          src="https://img.icons8.com/fluent/32/000000/youtube-play.png"
+                          alt="youtube-icon"
+                        />
+                      </a>
+                      <a href="#">
+                        <img
+                          src="https://img.icons8.com/fluent/32/000000/instagram-new.png"
+                          alt="instagram-icon"
+                        />
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li className="li-list-items">
+                  <h5 className="title-widget">DOWNLOAD APP</h5>
+                  <ul className="list-items">
+                    <li>
+                      <a href="#">
+                        <img
+                          src="https://img.icons8.com/color/32/000000/apple-app-store--v3.png"
+                          alt="apple-store-icon"
+                        />
+                      </a>
+                      <a href="#">
+                        <img
+                          src="https://img.icons8.com/color/32/000000/google-play.png"
+                          alt="goole-play-icon"
                         />
                       </a>
                     </li>
@@ -115,11 +154,12 @@ function Footer() {
                 </li>
               </ul>
             </div>
+            {/* another */}
           </div>
         </div>
       </footer>
     </div>
   );
-}
+};
 
 export default Footer;

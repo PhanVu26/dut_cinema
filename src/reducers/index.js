@@ -20,6 +20,11 @@ import reducerShowTime from "./ShowTimeReducer/ShowTimeReducer";
 
 import roles from "./UserRoleReducer/UserRoleReducer"
 
+import MovieReducer from "./MovieReducer";
+import ShowTimesReducer from "./ShowTimesReducer";
+import FoodReducer from "./FoodReducer";
+import TicketReducer from "./TicketReducer";
+
 const myReducer = combineReducers({
   users,
   genres,
@@ -36,7 +41,11 @@ const myReducer = combineReducers({
   actorEditing,
   filterActor,
   reducerShowTime,
-  roles
+  roles,
+  MovieReducer,
+  ShowTimesReducer,
+  FoodReducer,
+  TicketReducer,
 });
 
 export default myReducer;
