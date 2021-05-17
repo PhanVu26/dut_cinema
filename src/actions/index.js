@@ -16,9 +16,9 @@ export const addUser = (user) => {
   };
 };
 
-export const toggleForm = () => {
+export const toggleUserForm = () => {
   return {
-    type: Types.TOGGEL_FORM,
+    type: Types.TOGGLE_USER_FORM,
   };
 };
 
@@ -409,4 +409,28 @@ export const getMovie = (movie) => {
       type: Types.FETCH_MOVIE,
       movie
   }
+}
+export const getUserEditing = (user) => {
+  return {
+    type: Types.GET_USER_EDITING,
+    user,
+  };
+};
+
+export const filterUser = (filter) => {
+    return {
+        type: Types.FILTER_USER,
+        filter
+    }
+}
+
+
+// Test Login
+export const actTestLoginAccountRequest = (account) => {
+    //return callApi("auth/login", "POST", account);
+    axios.interceptors.request.use(function (config) {
+      return config;
+    }, function (error) {
+      return Promise.reject(error);
+    });
 }

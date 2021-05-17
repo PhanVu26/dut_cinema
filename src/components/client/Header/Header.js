@@ -16,7 +16,7 @@ class Header extends Component {
     super(props);
     // state openMenu and openSearch use to know when to show menu and search in mobile screen
     this.state = {
-      openMenu: false,
+      openMenu: true,
       openSearch: false,
     };
   }
@@ -148,7 +148,7 @@ function Decentralization(props) {
           {" "}
           User:
           <Link to="/user-page" className="mx-1">
-            {account.name}
+            {account.user.name}
           </Link>{" "}
           |{" "}
         </span>

@@ -69,7 +69,7 @@ class Login extends Component {
       };
 
         actLoginAccountRequest(account).then((res) => {
-          let dataAccount = res.data.user;
+          let dataAccount = res.data;
           console.log(dataAccount);
             if (Object.keys(dataAccount).length !== 0) {
               localStorage.setItem("account", JSON.stringify(dataAccount));
