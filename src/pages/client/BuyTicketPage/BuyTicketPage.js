@@ -165,7 +165,9 @@ class BuyTicketPage extends React.Component {
       this.props.history.push(`/buy-ticket-detail/${slug}`);
       // history.go();
     } else {
+
       alert("Vui lòng đăng nhập!");
+      window.location.href = "/login"
     }
   };
 

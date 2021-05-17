@@ -133,28 +133,28 @@ function MovieReducer(state = stateDefault, action) {
       }
       return newState;
     }
-    case Types.ADD_MOVIE: {
-      return {
-        ...state,
-        movie: [...state.movie, action.data],
-      };
-    }
-    case Types.DELETE_MOVIE: {
-      return {
-        ...state,
-        movie: state.movie.filter((item) => item.id !== action.id),
-      };
-    }
-    case Types.UPDATE_MOVIE: {
-      return {
-        ...state,
-        movie: state.movie.map((item) => {
-          if (item._id === action.data._id) {
-            return action.data;
-          } else return item;
-        }),
-      };
-    }
+    // case Types.ADD_MOVIE: {
+    //   return {
+    //     ...state,
+    //     movie: [...state.movie, action.data],
+    //   };
+    // }
+    // case Types.DELETE_MOVIE: {
+    //   return {
+    //     ...state,
+    //     movie: state.movie.filter((item) => item.id !== action.id),
+    //   };
+    // }
+    // case Types.UPDATE_MOVIE: {
+    //   return {
+    //     ...state,
+    //     movie: state.movie.map((item) => {
+    //       if (item._id === action.data._id) {
+    //         return action.data;
+    //       } else return item;
+    //     }),
+    //   };
+    // }
 
     case Types.SEARCH_MOVIE: {
       const { keyword } = action;
