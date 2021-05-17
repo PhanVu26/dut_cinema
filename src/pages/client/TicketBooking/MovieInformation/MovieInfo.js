@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../../../actions/index';
 import Rating from "material-ui-rating";
 import {Link} from 'react-router-dom'
+import history from "../../../../commons/history";
 
 
 class MovieDetail extends Component {
@@ -13,15 +14,17 @@ class MovieDetail extends Component {
             movie: {},
         }
     }
+    componentDidMount() {
+      this.props.fetchAllDataTheater();
+      console.log(this.props)
+    }
     showRating= false;
-    onRating = () => {
-      if (this.state.showRating === false) {
-        this.setState({
-          showRating: true
-        })
+    onRating(){
+      if (this.showRating === false) {
+        this.showRating= true
       }
     };
-    onChangeRating = (value, rate_, numberOfReviews) => {
+    onChangeRating(value, rate_, numberOfReviews){
       console.log(`Rated with value ${value}`);
       let rate = parseFloat(rate_);
       let number = parseInt(numberOfReviews) + 1;
@@ -30,10 +33,6 @@ class MovieDetail extends Component {
       vote = (rate + value) / number;
       vote = Math.round(vote * 100) / 100;
       console.log(vote);
-      // rate = vote.toString();
-      // numberOfReviews = number.toString();
-      //dispatch(actRatingItemMovieRequest(movie));
-      // localStorage.setItem("movie", JSON.stringify(movie));
       alert(`Bạn đã đánh giá ${value} sao`);
     };
     showGenres(genres){
@@ -123,15 +122,6 @@ class MovieDetail extends Component {
                         ĐÁNH GIÁ
                         </button>
                         </span>
-                        <span>
-                        <button
-                        type="button"
-                        className="btn btn-outline-info btn-sm"
-                        onClick={() => this.onRating()}
-                        >
-                        MUA VÉ
-                        </button>
-                        </span>
                         <Rating
                         style={this.showRating ? showRatingUp : showRatingHide}
                         value={0}
@@ -168,6 +158,16 @@ class MovieDetail extends Component {
                                 {movie.releaseDate}
                             </span>
                         </div>
+                        <div className="detail-info-row mb-3">
+                            <Link
+                              to="/buy-ticket"
+                              href="about.html"
+                            >
+                              <button type="button" className="btn btn-outline-info btn-sm">
+                              MUA VÉ
+                              </button>
+                            </Link>
+                        </div>
                     </div>
                     </div>
                 </div>
@@ -188,24 +188,6 @@ class MovieDetail extends Component {
                         {movie.description}
                     </div>
                 </div>
-        
-                {/* <div className="row pb-2">
-                    <div className="col-md-12">
-                    <div className="mt-3">
-                        <a
-                        className="link hover-2"
-                        href="#tab_default_1"
-                        data-toggle="tab"
-                        aria-expanded="true"
-                        style={linksStyle}
-                        >
-                        suất chiếu
-                        </a>
-                    </div>
-                    </div>
-                </div> */}
-                {/* {dataDateMovie} */}
-                {/* <ShowTimesMovie></ShowTimesMovie> */}
                 </div>
         );
     }
@@ -218,10 +200,13 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch, props) => {
-    return {
-        getMovieInfo : async (id) => {
-            await dispatch(actions.getMovieRequest(id))
-        }
+  return {
+    getMovieInfo : async (id) => {
+      await dispatch(actions.getMovieRequest(id))
+    }, 
+    fetchAllDataTheater:()=>{
+      dispatch(actions.actFetchDataTheaterRequest());
+    },
     }
 }
 
