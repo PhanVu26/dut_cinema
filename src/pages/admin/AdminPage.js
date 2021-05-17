@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     BrowserRouter as Router,
     Switch,
@@ -17,6 +17,12 @@ import UserManagementPage from "./UserManagementPage";
 import UserProfile from "../UserProfile/UserProfile";
 
 const AdminPage = (props) => {
+    useEffect(() =>{
+        const account = JSON.parse(localStorage.getItem("account"));
+        if(account.roleName !== "Admin"){
+            window.location.href = "/login";
+        }
+    },[])
     return (
 
         <Router>

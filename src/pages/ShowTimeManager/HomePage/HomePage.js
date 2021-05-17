@@ -20,7 +20,10 @@ function HomePage(props) {
   useEffect(() => {
     dispatch(actFetchCinemaRequest());
   });
-
+  const account = JSON.parse(localStorage.getItem("account"));
+  if(account.roleName !== "Theater Manager"){
+      window.location.href = "/login";
+  }
   return (
     // <>
     //   <NavigationBar />;

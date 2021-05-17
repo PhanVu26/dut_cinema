@@ -2,7 +2,13 @@ import React from "react";
 
 import "../style.css";
 const TopNavbar = (props) => {
-
+    const logout = () => {
+        let result = window.confirm("Bạn có muốn đăng xuất ?");
+        if (result === true) {
+            window.localStorage.removeItem("account");
+            window.location.href = "/login";
+        }
+    }
     return(
         <div className="col-xl-10 col-lg-9 col-md-8 bg-dark ml-auto fixed-top py-2 top-navbar">
             <div className="row align-items-center">
@@ -29,7 +35,7 @@ const TopNavbar = (props) => {
                                 className="fas fa-bell text-muted fa-lg icon-bullet"></i></a>
                         </li>
                         <li className="nav-item ml-md-auto">
-                            <a href="" data-toggle="modal" data-target="#sign-out" className="nav-link"><i
+                            <a onClick= {logout} data-toggle="modal" data-target="#sign-out" className="nav-link"><i
                                 className="fas text-danger fa-sign-out-alt fa-lg text-muted"></i></a>
                         </li>
                     </ul>

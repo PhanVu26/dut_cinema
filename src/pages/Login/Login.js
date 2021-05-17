@@ -169,11 +169,11 @@ class Login extends Component {
           onClick={this.handleShow}
           style={link}
         >
-          <i className="fas fa-user mr-1"></i> Đăng nhập
+          
         </div>
         <Modal
           {...this.props}
-          show={this.state.isShow}
+          show={true}
           onHide={this.handleHide}
           dialogClassName="custom-modal"
         >
@@ -186,8 +186,7 @@ class Login extends Component {
             <div className="row">
               <div className="col-md-12">
                 <p style={text}>
-                  Vui lòng đăng nhập trước khi mua vé để tích luỹ điểm, cơ hội
-                  nhận thêm nhiều ưu đãi từ chương trình thành viên Cinema.
+                  <span className="text-danger">Bạn không có quyền truy cập vào trang này</span>. Vui lòng đăng nhập trước khi sử dụng hệ thống.
                 </p>
               </div>
             </div>
