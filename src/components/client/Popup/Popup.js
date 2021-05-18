@@ -18,7 +18,7 @@ const PropsType = {
   onComfirm: PropTypes.func,
 };
 
-const PopupComfirm = ({ open, onClose, onComfirm, total }) => {
+const PopupComfirm = ({ open, onClose, onComfirm,onBuy, total }) => {
   const [formState, setFormState] = useState({});
   const handleChange = (e) => {
     e.persist();
@@ -75,7 +75,10 @@ const PopupComfirm = ({ open, onClose, onComfirm, total }) => {
       </ModalBody>
       <ModalFooter>
         <Button className="blue-dark" color="primary" onClick={onComfirm}>
-          Xác nhận
+          Xác nhận đặt
+        </Button>
+        <Button className="blue-dark" color="primary" onClick={onBuy}>
+          Xác nhận mua
         </Button>
         <Button color="secondary" onClick={handleOnClose}>
           close

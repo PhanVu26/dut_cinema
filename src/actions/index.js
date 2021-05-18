@@ -221,7 +221,7 @@ export const actFetchDataBookingMovie = (bookingMovie) => {
   };
 };
 
-export const actCreateBookingRequest = (data) => {
+export const actCreateBookingRequest = (data,type) => {
   axios.interceptors.request.use(
     function (config) {
       return config;
@@ -248,11 +248,18 @@ export const actCreateBookingRequest = (data) => {
   return (dispatch) => {
     result
       .then((res) => {
-        alert("Đặt vé thành công, vui lòng đến quầy để nhận vé!");
-        dispatch(actCreateBooking(res.data));
-        setTimeout(() => {
-          //history.push("/");
-        }, 0);
+        if(type==="Booked"){
+          alert("Đặt vé thành công, vui lòng đến quầy để nhận vé!");
+          dispatch(actCreateBooking(res.data));
+        }
+        else if(type ==="Sold"){
+          alert("Mua vé thành công, vui lòng đến quầy để nhận vé!");
+        }
+        else{
+          alert("Hủy đặt vé thành công!");
+        }
+        history.push("/");
+        history.go();
       })
       .catch(function (error) {
         console.log(error);
@@ -288,6 +295,42 @@ export const actHoldBooking = (data) =>{
     result
       .then((res) => {
         history.push(`/pay-movie`);
+        history.go();
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert("Lỗi kết nối");
+      });
+  };
+}
+export const actCancleHoldBooking = (data) =>{
+  axios.interceptors.request.use(
+    function (config) {
+      return config;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
+
+  axios.interceptors.response.use(
+    function (response) {
+      return response;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
+  var b = JSON.parse(localStorage.getItem("account")).accessToken
+  var a = String("Bearer " + b);
+  console.log(a);
+  let result = axios.post("https://cinema-nestjs.herokuapp.com/tickets", data, {
+    headers: { Authorization: a },
+  });
+  return (dispatch) => {
+    result
+      .then((res) => {
+        history.push(`/buy-ticket`);
         history.go();
       })
       .catch(function (error) {
