@@ -32,6 +32,7 @@ function HomePage(props) {
     <Router>
     <Navbar></Navbar>        
     <Switch>
+        <Route path="/showtime-manager" component={UserProfile}></Route> 
         <Route path="/showtime-manager/movie-showtimes" component={EditShowTimePage}></Route>  
         <Route path="/showtime-manager/profile" component={UserProfile}></Route>  
     </Switch>

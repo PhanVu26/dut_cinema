@@ -40,7 +40,7 @@ function Navbar() {
                 <button className="navbar-toggler ml-auto mb-2 bg-light" data-toggle="collapse" data-target="#myNavbar"><span
                     className="navbar-toggler-icon"></span></button>
                 <div className="collapse navbar-collapse" id="myNavbar">
-                    <SlideBar menus = {listMenus}></SlideBar>
+                    <SlideBar pathname = {pathName} menus = {listMenus}></SlideBar>
                     <TopNavbar></TopNavbar>
                 </div>
             </nav>      

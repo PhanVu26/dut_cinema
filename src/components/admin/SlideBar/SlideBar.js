@@ -26,7 +26,7 @@ const SlideBar = (props) => {
             </div>
             <ul className="navbar-nav mt-4 flex-column ">
                 <li className="nav-item ">
-                    <NavLink to= "/admin" className="nav-link text-white p-2 mb-2 current"><i
+                    <NavLink to= {props.pathname} className="nav-link text-white p-2 mb-2 current"><i
                         className="fas fa-home fa-lg mr-3 text-white"></i>DashBoard</NavLink>
                 </li>
                 {showMenu(menus)}
