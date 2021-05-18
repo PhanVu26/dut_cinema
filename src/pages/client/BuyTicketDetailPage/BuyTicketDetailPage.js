@@ -175,11 +175,13 @@ class BuyTicketDetailPage extends Component {
           }
         }
       }
+      let accessToken = localStorage.getItem("accessToken");
       let data1 ={
         "tickets": BookedTickets,
         "status": "Hold"
       }
       this.props.holdBooking(data1)
+     
     } else if (this.state.arrSeatChoosing.length === 0) {
       alert("Vui lòng chọn ghế!");
     } else {

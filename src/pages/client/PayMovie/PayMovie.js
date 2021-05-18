@@ -12,6 +12,7 @@ import ATM from "../../../assets/images/ATM.png";
 import momo from "../../../assets/images/momo.png";
 import zalo from "../../../assets/images/zalopay.png";
 import PopupComfirm from "../../../components/client/Popup/Popup";
+import { Link } from "react-router-dom";
 
 const PropsType = {
   fetchDataBookingById: PropTypes.func,
@@ -37,29 +38,28 @@ const PayMovie = ({ classes, createBooking }) => {
       }
     }
   }
-  console.log(BookedTickets)
-  let accessToken = localStorage.getItem("accessToken");
-  let data1 ={
+  let data_sold ={
     tickets: BookedTickets,
-    status: "Hold"
+    status: "Sold"
   }
-  let data2 ={
+  let data_booked ={
     "tickets": BookedTickets,
     "status": "Booked"
   }
-  
-  console.log("info:", data2);
-
+  let data_cancle ={
+    "tickets": BookedTickets,
+    "status": "Available"
+  }
   const confirmInform = () => {
-    if(accessToken){
-      createBooking(data2);
-      //createBooking(data2);
-      setIsOpen(!isOpen);
-    }else{
-      alert(
-        "Bạn cần đăng nhập trước!"
-      );
-    }
+    createBooking(data_booked,"Booked");
+    setIsOpen(!isOpen);
+  };
+  const confirmBuy = () => {
+    createBooking(data_sold,"Sold");
+    setIsOpen(!isOpen);
+  };
+  const confirmCancel = () => {
+    createBooking(data_cancle,"Available");
   };
   let total = infoMovie.ticketPrice;
 
@@ -149,15 +149,18 @@ const PayMovie = ({ classes, createBooking }) => {
         open={isOpen}
         onClose={() => setIsOpen(!isOpen)}
         onComfirm={confirmInform}
+        onBuy = {confirmBuy}
         total={total}
       />
-      <div>
+      <div class="p-3 my-3 d-flex align-items-center">
+        <Link>
         <button 
-          // onClick={() => this.handleOnPreviouPage()}
-          // className={`${classes.button} ${classes.buttonNomargin}`}
+          onClick={confirmCancel}
+          className="btn btn-outline-info btn-sm"
         >
         Hủy đặt vé
          </button>
+         </Link>
       </div>  
     </div>
   );
@@ -167,7 +170,7 @@ PayMovie.propTypes = PropsType;
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createBooking: (data) => dispatch(actCreateBookingRequest(data)),
+    createBooking: (data,type) => dispatch(actCreateBookingRequest(data,type)),
   };
 };
 
