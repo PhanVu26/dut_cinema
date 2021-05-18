@@ -89,7 +89,7 @@ class NavigationBar extends Component {
                   onClick={() => this.handleClickFilmMenu("menu1")}
                 >
                   <span
-                    className="nav-link-c text-uppercase nav-link dropdown-toggle"
+                    className="nav-link-c text-uppercase nav-link dropdown-toggle center"
                     id="navbarDropdown"
                     data-toggle="dropdown"
                     aria-haspopup="true"
@@ -98,8 +98,8 @@ class NavigationBar extends Component {
                     Phim
                   </span>
                   <div
-                    className={`dropdown-menu-right dropdown-menu dropdown-c ${styleFilmMenu}`}
-                    aria-labelledby="navbarDropdown"
+                    className={`dropdown-c dropdown-menu dropdown-menu-right ${styleFilmMenu}`}
+                    aria-labelledby="navbarDropdownPortfolio"
                   >
                     <Link
                       to="/now-showing"
@@ -122,7 +122,7 @@ class NavigationBar extends Component {
                   onClick={() => this.handleClickCinemaBlog("menu2")}
                 >
                   <span
-                    className="nav-link-c text-uppercase nav-link dropdown-toggle"
+                    className="nav-link-c text-uppercase nav-link dropdown-toggle center"
                     id="navbarDropdownCinemaBlog"
                     data-toggle="dropdown"
                     aria-haspopup="true"
@@ -131,7 +131,7 @@ class NavigationBar extends Component {
                     Góc điện ảnh
                   </span>
                   <div
-                    className={`dropdown-menu-right dropdown-menu dropdown-c ${styleCinemaBlog}`}
+                    className={`dropdown-c dropdown-menu dropdown-menu-right ${styleCinemaBlog}`}
                     aria-labelledby="navbarDropdownCinemaBlog"
                   >
                     <div className="nav-link-sub text-uppercase dropdown-item">
@@ -151,44 +151,32 @@ class NavigationBar extends Component {
                     </div>
                   </div>
                 </li>
-                <li
-                  className={`nav-item-c nav-item dropdown ${styleEvent}`}
-                  onClick={() => this.handleClickEvent("menu3")}
-                >
-                  <span
-                    className="nav-link-c text-uppercase nav-link dropdown-toggle"
-                    id="navbarDropdownEvent"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded={isExpandEvent}
+                <li className="nav-item-c nav-item">
+                  <Link
+                    to="/promotion"
+                    className="nav-link-c text-uppercase nav-link"
+                    href="portfolio-1-col.html"
                   >
-                    Sự kiện
-                  </span>
-                  <div
-                    className={`dropdown-menu-right dropdown-menu dropdown-c ${styleEvent}`}
-                    aria-labelledby="navbarDropdownEvent"
-                  >
-                    <Link
-                      to="/promotion"
-                      className="nav-link-sub text-uppercase dropdown-item"
-                      href="portfolio-1-col.html"
-                    >
-                      Ưu đãi
-                    </Link>
-                    <div className="nav-link-sub text-uppercase dropdown-item">
-                      Phim hay tháng
-                    </div>
-                  </div>
+                    Ưu đãi
+                  </Link>
                 </li>
                 <li className="nav-item-c nav-item">
-                  <div className="nav-link-c text-uppercase nav-link">
-                    Rạp/giá vé
-                  </div>
+                <Link
+                    to="/"
+                    className="nav-link-c text-uppercase nav-link"
+                    href="portfolio-1-col.html"
+                  >
+                    Rạp/Giá vé
+                  </Link>
                 </li>
                 <li className="nav-item-c nav-item">
-                  <div className="nav-link-c text-uppercase nav-link">
+                  <Link
+                    to="/"
+                    className="nav-link-c text-uppercase nav-link"
+                    href="portfolio-1-col.html"
+                  >
                     Hỗ trợ
-                  </div>
+                  </Link>
                 </li>
                 <Decentralization />
               </ul>
