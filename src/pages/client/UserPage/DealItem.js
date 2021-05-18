@@ -27,6 +27,9 @@ class ItemDeal extends Component {
           <StyledTableCell align="center">
             {this.props.myDeal.price}
           </StyledTableCell>
+          <StyledTableCell align="center">
+            {this.props.myDeal.service}
+          </StyledTableCell>
         </StyledTableRow>
       </>
     );

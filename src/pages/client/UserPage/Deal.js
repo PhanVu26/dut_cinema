@@ -44,11 +44,12 @@ class Deal extends Component {
     const account = JSON.parse(localStorage.getItem("account"));
     let arrayBooking = [];
     if (this.props.transaction.hasOwnProperty("results")) {
-      for (let i = 0; i < this.props.transaction.results.length; i++) {
-        if (account.user.id === this.props.transaction.results[i].user.id) {
-          arrayBooking.push(this.props.transaction.results[i]);
-        }
-      }
+      arrayBooking = this.props.transaction.results;
+      // for (let i = 0; i < this.props.transaction.results.length; i++) {
+      //   if (account.user.id === this.props.transaction.results[i].user.id) {
+      //     arrayBooking.push(this.props.transaction.results[i]);
+      //   }
+      // }
     }
     let dataItemDeal = arrayBooking.map((myDeal, index) => {
       return <ItemDeal key={`movie ${index}`} myDeal={myDeal} />;
@@ -65,6 +66,7 @@ class Deal extends Component {
               <StyledTableCell align="center">Phim</StyledTableCell>
               <StyledTableCell align="center">Ghế</StyledTableCell>
               <StyledTableCell align="center">Giá trị</StyledTableCell>
+              <StyledTableCell align="center">Service</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>{dataItemDeal}</TableBody>
