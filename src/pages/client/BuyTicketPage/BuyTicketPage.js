@@ -5,7 +5,6 @@ import { compose } from "redux";
 import ColumnBlock from "../../../components/client/ColumnBlock/ColumnBlock";
 import styles from "./BuyTicketPageStyles";
 import {
-  actFetchDataTheaterRequest,
   actFetchDataMovieRequest,
   actReceiveMovieChoosing,
   actFetchDataBookingMovieRequest,
@@ -26,7 +25,6 @@ class BuyTicketPage extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.fetchAllDataTheater();
     // this.props.fetchAllDataMovie();
   }
 
@@ -156,20 +154,9 @@ class BuyTicketPage extends React.Component {
   handleOnChooseSession = (item, session, account) => {
     if (account && Object.keys(account).length > 0) {
       const movie = this.state.active;
-      this.props.receiveMovieChoosing(movie, item, session, account.id);
+      this.props.receiveMovieChoosing(movie, item, session, account.user.id);
       const slug = movie.name;
-      // console.log(movie);
-      // console.log(item);
-      // console.log(session)
-      // var startTime = item.dateMovie+"T"+session+".000Z";
-      // var showtimeId = movie.showtimes.filter((itm)=>
-      //   (itm.startTime===startTime)
-      // );
-      // console.log(showtimeId[0]);
-      // actFetchDataBookingMovieRequest(showtimeId[0]);
-      // console.log(showtimeId[0]);
       this.props.history.push(`/buy-ticket-detail/${slug}`);
-      // history.go();
     } else {
 
       alert("Vui lòng đăng nhập!");
@@ -218,9 +205,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAllDataTheater:()=>{
-      dispatch(actFetchDataTheaterRequest());
-    },
     fetchAllDataMovie: () => {
       dispatch(actFetchDataMovieRequest());
     },
