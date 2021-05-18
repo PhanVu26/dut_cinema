@@ -89,6 +89,7 @@ class BuyTicketPage extends React.Component {
 
   handleOnChooseMovie = (mv) => {
     var TOS = [];
+    var dates =[];
     mv.showtimes.map((item,index) => {
       TOS.push(item.startTime.split("T")[0]);
     });
@@ -108,9 +109,14 @@ class BuyTicketPage extends React.Component {
         dateMovie: item,
         showtimes: ShowTimes,
       }
-      TiOfS.push(obj);
+      if(!dates.includes(item)){
+        console.log("a")
+        TiOfS.push(obj)
+        dates.push(item)
+      }
     });
     let TimeOfShowtime = Array.from(new Set(TiOfS));
+    console.log(TimeOfShowtime)
     this.setState({
       timeOfMovie: TimeOfShowtime,
       isShow: true,

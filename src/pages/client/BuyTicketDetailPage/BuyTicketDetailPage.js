@@ -6,6 +6,7 @@ import {
   actFetchDataTicketRequest,
   actCreateBookingRequest,
   actFetchDataBookingMovieRequest,
+  actHoldBooking,
 } from "../../../actions/index";
 import Table from "../../../components/client/Table/Table";
 import styles from "./BuyTicketDetailStyle";
@@ -155,33 +156,30 @@ class BuyTicketDetailPage extends Component {
       console.log("data:", data);
       localStorage.setItem("booking", JSON.stringify(data));
       let infoMovie = JSON.parse(localStorage.getItem("booking"));
-  let allTickets = infoMovie.tickets;
-  let seats = infoMovie.seats;
-  let BookedTickets =[];
-  for (let index = 0; index < seats.length; index++) {
-    let checkRow = seats[index].substring(0, 1);;
-    let checkColumn = seats[index].substring(1, 2);
-    for (let ind = 0; ind < allTickets.length; ind++) {
-      if(checkRow === allTickets[ind].seat.row && Number(checkColumn) === allTickets[ind].seat.column){
-        let type_Id = 1;
-        if(allTickets[ind].seat.type!=="Normal") type_Id = 2;
-        console.log(allTickets[ind].id)
-        console.log(type_Id)
-        BookedTickets.push({
-            "id": allTickets[ind].id,
-            "typeId": type_Id
-          })
+      let allTickets = infoMovie.tickets;
+      let seats = infoMovie.seats;
+      let BookedTickets =[];
+      for (let index = 0; index < seats.length; index++) {
+        let checkRow = seats[index].substring(0, 1);;
+        let checkColumn = seats[index].substring(1, 2);
+        for (let ind = 0; ind < allTickets.length; ind++) {
+          if(checkRow === allTickets[ind].seat.row && Number(checkColumn) === allTickets[ind].seat.column){
+            let type_Id = 1;
+            if(allTickets[ind].seat.type!=="Normal") type_Id = 2;
+            console.log(allTickets[ind].id)
+            console.log(type_Id)
+            BookedTickets.push({
+                "id": allTickets[ind].id,
+                "typeId": type_Id
+              })
+          }
+        }
       }
-    }
-  }
-  let accessToken = localStorage.getItem("accessToken");
-  let data1 ={
-    "tickets": BookedTickets,
-    "status": "Hold"
-  }
-  this.props.createBooking(data1)
-      history.push(`/pay-movie`);
-      history.go();
+      let data1 ={
+        "tickets": BookedTickets,
+        "status": "Hold"
+      }
+      this.props.holdBooking(data1)
     } else if (this.state.arrSeatChoosing.length === 0) {
       alert("Vui lòng chọn ghế!");
     } else {
@@ -379,6 +377,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchDataBooking: (showtimeId) => dispatch(actFetchDataBookingMovieRequest(showtimeId)),
     fetchDataTicket: () => dispatch(actFetchDataTicketRequest()),
     createBooking: (data) => dispatch(actCreateBookingRequest(data)),
+    holdBooking: (data) => dispatch(actHoldBooking(data)),
   };
 };
 

@@ -239,9 +239,9 @@ export const actCreateBookingRequest = (data) => {
       return Promise.reject(error);
     }
   );
-  var b = localStorage.getItem("account").accessToken
+  var b = JSON.parse(localStorage.getItem("account")).accessToken
   var a = String("Bearer " + b);
-  console.log(a.toString());
+  console.log(a);
   let result = axios.post("https://cinema-nestjs.herokuapp.com/tickets", data, {
     headers: { Authorization: a },
   });
@@ -260,7 +260,42 @@ export const actCreateBookingRequest = (data) => {
       });
   };
 };
+export const actHoldBooking = (data) =>{
+  axios.interceptors.request.use(
+    function (config) {
+      return config;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
 
+  axios.interceptors.response.use(
+    function (response) {
+      return response;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
+  var b = JSON.parse(localStorage.getItem("account")).accessToken
+  var a = String("Bearer " + b);
+  console.log(a);
+  let result = axios.post("https://cinema-nestjs.herokuapp.com/tickets", data, {
+    headers: { Authorization: a },
+  });
+  return (dispatch) => {
+    result
+      .then((res) => {
+        history.push(`/pay-movie`);
+        history.go();
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert("Lỗi kết nối");
+      });
+  };
+}
 export const actCreateBooking = (data) => {
   return {
     type: Types.CREATE_BOOKING,
