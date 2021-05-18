@@ -42,6 +42,11 @@ export const admin_menus = [
         label: "Settings",
         icon: "fa-wrench"
     },
+    {
+        url: "/admin/transactions",
+        label: "Transactions",
+        icon: "fas fa-handshake"
+    },
 ]
 
 export const showtime_menus = [

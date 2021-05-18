@@ -25,6 +25,8 @@ import ShowTimesReducer from "./ShowTimesReducer";
 import FoodReducer from "./FoodReducer";
 import TicketReducer from "./TicketReducer";
 
+import transactions from "./TransactionsReducer/index";
+
 const myReducer = combineReducers({
   users,
   genres,
@@ -46,6 +48,7 @@ const myReducer = combineReducers({
   ShowTimesReducer,
   FoodReducer,
   TicketReducer,
+  transactions
 });
 
 export default myReducer;
