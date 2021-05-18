@@ -26,6 +26,8 @@ import FoodReducer from "./FoodReducer";
 import TicketReducer from "./TicketReducer";
 
 import transactions from "./TransactionsReducer/index";
+import transactionInfo from "./TransactionsReducer/transactionInfo";
+import isDisplayTransactionModal from "./TransactionsReducer/displayTransactionModal";
 
 const myReducer = combineReducers({
   users,
@@ -48,7 +50,9 @@ const myReducer = combineReducers({
   ShowTimesReducer,
   FoodReducer,
   TicketReducer,
-  transactions
+  transactions,
+  transactionInfo,
+  isDisplayTransactionModal,
 });
 
 export default myReducer;

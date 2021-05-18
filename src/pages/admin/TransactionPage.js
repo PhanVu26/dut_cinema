@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import TransactionList from "../../components/Table/TransactionTable/TransactionList";
 import Pagination from "../../components/Pagination/Pagination";
 import * as actions from '../../actions/transactionAction/index';
+import TransactionDetail from "../../components/Modal/TransactionModal/TransactionDetail";
 
 class TransactionPage extends Component{
     constructor(props) {
@@ -49,6 +50,7 @@ class TransactionPage extends Component{
         var rowsPerPage = transactions?.slice(startIndex, endIndex + 1);  
         return (
                 <section>
+                    <TransactionDetail></TransactionDetail>
                     <div class="container-fluid mt-5">
                         <div class="row">                   
                             <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">

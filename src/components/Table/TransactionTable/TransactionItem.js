@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Modal, Button} from "react-bootstrap";
 import {connect} from 'react-redux';
+import * as actions from "../../../actions/transactionAction/index"
+import TransactionDetail from '../../Modal/TransactionModal/TransactionDetail';
 
 class TransactionItem extends Component {
 
@@ -11,8 +13,8 @@ class TransactionItem extends Component {
         //this.props.onDeleteMovie(this.props.movie.id);
     }
     getTransaction = () => {
-        // this.props.onToggleModal();
-        // this.props.onGetMovie(this.props.movie.id)
+        this.props.onToggleModal();
+        this.props.onGetTransaction(this.props.transaction)
 
     }
     render() {
@@ -59,18 +61,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) =>{
     return {
-        // onToggleUserForm: () => {
-        //     dispatch(actions.toggleUserForm())
-        // },
-        // onDeleteUser: (id) => {
-        //     dispatch(actions.actDeleteUserRequest(id))
-        // },
-        // onUpdateUserStatus: (user) => {
-        //     dispatch(actions.actUpdateUserStatusRequest(user))
-        // },
-        // onGetUserEditing : (id) => {
-        //     dispatch(actions.actGetUserRequest(id))
-        // }
+        onToggleModal: () => {
+            dispatch(actions.onToggleModal())
+        },
+        onGetTransaction: (transaction) => {
+            dispatch(actions.getTransaction(transaction))
+        }
     }
 }
 

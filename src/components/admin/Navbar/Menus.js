@@ -28,6 +28,11 @@ export const admin_menus = [
         icon: "fa-users"
     },
     {
+        url: "/admin/transactions",
+        label: "Transactions",
+        icon: "fas fa-handshake"
+    },
+    {
         url: "/admin/sales",
         label: "Sales",
         icon: "fa-chart-line"
@@ -41,11 +46,6 @@ export const admin_menus = [
         url: "/admin/settings",
         label: "Settings",
         icon: "fa-wrench"
-    },
-    {
-        url: "/admin/transactions",
-        label: "Transactions",
-        icon: "fas fa-handshake"
     },
 ]
 
