@@ -19,6 +19,7 @@ class TransactionItem extends Component {
     }
     render() {
         const {index, transaction} = this.props;
+        console.log("tr in item", transaction)
         // const {isDisplayUserForm} = this.props;
         // const status = transaction.ticket.status ? ' InActived ' : ' Actived ';  
         //var role = user.role === 1 ? 'Quản lý phim' : user.role === 2 ? 'Quản lý lịch chiếu' : 'Người dùng';
@@ -28,6 +29,7 @@ class TransactionItem extends Component {
                 <td className="text-center">{transaction.id}</td>
                 <td className="text-center">{transaction.ticket.id}</td>
                 <td className="text-center">{transaction.ticket.showtime.movie.name}</td>
+                <td className="text-center">{transaction.ticket.seat.row + transaction.ticket.seat.column}</td>
                 <td className="text-center">{transaction.price}</td>
                 <td className="text-center">{transaction.user.name}</td>
                 <td className="text-center">{transaction.user.email}</td>

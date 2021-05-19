@@ -50,7 +50,7 @@ class TransactionPage extends Component{
         var rowsPerPage = transactions?.slice(startIndex, endIndex + 1);  
         return (
                 <section>
-                    <TransactionDetail></TransactionDetail>
+                    
                     <div class="container-fluid mt-5">
                         <div class="row">                   
                             <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
@@ -101,6 +101,7 @@ class TransactionPage extends Component{
                                             pagesToShow={5}
                                             onChangePage={this.onChangePage}
                                         ></Pagination>
+                                        <TransactionDetail></TransactionDetail>
                                     </div>
                                     
                                 </div>

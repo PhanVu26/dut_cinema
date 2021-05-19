@@ -80,6 +80,7 @@ class TransactionList extends Component {
                         <th className="text-center">ID Transaction</th>
                         <th className="text-center">ID Vé</th>
                         <th className="text-center">Phim</th>
+                        <th className="text-center">Ghế</th>
                         <th className="text-center">Giá</th>
                         <th className="text-center">Người đặt</th>
                         <th className="text-center">Email</th>
