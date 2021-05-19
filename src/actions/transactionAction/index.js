@@ -25,6 +25,17 @@ export const onToggleModal = () => {
     }
 }
 
+export const actGetTransactionRequest = (id) => {
+  return (dispatch) => {
+    return callApi(`transactions/${id}?relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema`, "GET", null).then(
+      (res) => {
+        console.log("res", res.data);
+        dispatch(getTransaction(res.data));
+      }
+    );
+  };
+};
+
 export const getTransaction = (transaction) => {
     return {
         type: Types.GET_TRANSACTION,
