@@ -118,3 +118,9 @@
   display: block;
   padding: 13px 0;
 }
+
+
+.navbar-collapse {
+  z-index: 1000;
+  background-color: black;
+}
