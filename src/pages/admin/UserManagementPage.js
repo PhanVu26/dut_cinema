@@ -40,6 +40,7 @@ class UserManagementPage extends Component{
       };
     render(){
         const {users} = this.props;
+        console.log("users", users)
         var {
             totalPages,
             currentPage,

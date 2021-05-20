@@ -81,6 +81,14 @@ export const updateProfile = (user) => {
   };
 };
 
+export const actSaveUserRequest = (user) => {
+  return (dispatch) => {
+    return callApi(`users`, "POST", user).then((res) => {
+      console.log("res", res)
+      dispatch(saveUser(res.data));
+    });
+  };
+};
 export const saveUser = (user) => {
   return {
     type: types.SAVE_USER,

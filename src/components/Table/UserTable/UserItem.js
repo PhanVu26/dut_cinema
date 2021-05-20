@@ -28,10 +28,10 @@ class UserItem extends Component {
         this.props.onGetUserEditing(this.props.user.id)
     }
     showUserRole = (userRoles) => {
-        const rs = userRoles.map((role, index) => {
+        const rs = userRoles?.map((role, index) => {
             return role.role.name
         })
-        return rs.toString();
+        return rs?.toString();
     }
     render() {
         const {index, user} = this.props;
