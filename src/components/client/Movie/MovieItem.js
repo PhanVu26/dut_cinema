@@ -5,11 +5,11 @@ import * as actions from "../../../actions/index";
 import { useDispatch } from "react-redux";
 
 function MovieItem(props) {
-  const dispatch = useDispatch();
-  const getMovie = async (id) => {
-    await dispatch(actions.getMovieRequest(id))
-  }
   let { movie } = props;
+  const dispatch = useDispatch();
+  const getMovie = (movie) => {
+    dispatch(actions.getMovie(movie))
+  }
   return (
     <div className="col-lg-4 col-md-6 col-sm-6 p-2 mt-2">
       <div className="box">
@@ -20,7 +20,7 @@ function MovieItem(props) {
           <ul className="icon">
             <li>
             <Link to={"/booking/" + movie.name}>
-                  <i onClick={() => getMovie(movie.id)}className="fas fa-shopping-cart"></i>
+                  <i onClick={() => getMovie(movie)}className="fas fa-shopping-cart"></i>
                 </Link>
             </li>
           </ul>
