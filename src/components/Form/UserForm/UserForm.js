@@ -33,9 +33,35 @@ class UserForm extends Component {
         event.preventDefault();
         const isActive = this.state.isActive === "true" ? true: false
         const user = {...this.state, isActive: isActive};
-        console.log("save user", user)
-        this.props.onSaveUser(user);
+        if(this.state.id === ''){
+            const newUser = {
+                name: user.name,
+                email: user.email,
+                password: user.password,
+                roleName: user.roleName,
+            }
+            console.log("save user", newUser)
+            this.props.onSaveUser(newUser);
+        }else {
+            console.log("update user", user)
+            this.props.onUpdateUser(user)
+        }
         this.props.onToggleUserForm();
+    }
+
+    
+    showUserRoles = roles => {
+        console.log("roles",this.props.roles)
+        const userRoles = roles.filter(role =>{
+            return role.name != "Admin"
+        })
+        var result = null;
+        if (userRoles.length > 0) {
+          result = userRoles.map((role, index) => {
+            return <option key={role.id} value={role.name} >{role.name}</option>;
+          });
+        }
+        return result;
     }
 
     // componentDidMount(){
@@ -70,7 +96,8 @@ class UserForm extends Component {
                     <Modal.Header>{this.props.userEditing.id === '' ? 'Thêm người dùng' : 'Chỉnh sửa thông tin'}</Modal.Header>
                     <Modal.Body>
                         <div className="panel-body">
-                        <div className="form-group">
+                        {this.props.userEditing.id === '' ? "" :    
+                            <div className="form-group">
                                 <label>ID :</label>
                                 <input
                                     readOnly ={this.props.userEditing.id !== ''}
@@ -81,6 +108,7 @@ class UserForm extends Component {
                                    
                                 />
                             </div>
+                        }
                             <div className="form-group">
                                 <label>Email :</label>
                                 <input
@@ -117,27 +145,33 @@ class UserForm extends Component {
                                     />
                                 </div>
                             }
-                            <label>Vai trò :</label>
-                            <select
-                                className="form-control"
-                                // value={this.state.role}
-                                // onChange={ this.onHandleChange }
-                                name="role"
-                            >
-                                <option defaultValue={1}>Quản lý phim</option>
-                                <option value={2}>Quản lý lịch chiếu</option>
-                                <option value={3}>Người dùng</option>
-                            </select><br/>
-                            <label>Trạng thái :</label>
-                            <select
-                                className="form-control"
-                                value={this.state.isActive}
-                                onChange={ this.onHandleChange }
-                                name="isActive"
-                            >
-                                <option value={true}>Actived</option>
-                                <option value={false}>InActived</option>
-                            </select><br/>
+                            <div className="form-group">
+                                <label>Vai trò :</label>
+                                <select
+                                    className="form-control"
+                                    value={this.state.roleName}
+                                    onChange={ this.onHandleChange }
+                                    name="roleName"
+                                >
+                                    <option value={-1}>Chọn vai trò</option>
+                                    {this.showUserRoles(this.props.roles)}
+                                </select><br/>
+                            </div>
+                            {this.props.userEditing.id === '' ? "" :    
+                                <div className="form-group">
+                                    <label>Trạng thái :</label>
+                                    <select
+                                        className="form-control"
+                                        value={this.state.isActive}
+                                        onChange={ this.onHandleChange }
+                                        name="isActive"
+                                    >
+                                        <option value={true}>Actived</option>
+                                        <option value={false}>InActived</option>
+                                    </select><br/>
+                                </div>
+                            }
+                            
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
@@ -156,7 +190,8 @@ class UserForm extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userEditing : state.userEditing
+        userEditing : state.userEditing,
+        roles: state.roles
     }
 }
 
@@ -165,9 +200,12 @@ const mapDispatchToProps = (dispatch, props) => {
         onToggleUserForm: ()=>{
             dispatch(actions.toggleUserForm())
         },
-        onSaveUser: (user) => {
+        onUpdateUser: (user) => {
             dispatch(actions.actUpdateUserRequest(user))
-        }
+        },
+        onSaveUser: (user) => {
+            dispatch(actions.actSaveUserRequest(user))
+        },
     }
 }
 

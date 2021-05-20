@@ -29,6 +29,9 @@ class UserManagementPage extends Component{
           totalRecords: this.props.users.length
         });
       }
+      componentDidUpdate(){
+        this.props.onFetchAllUsers();
+      }
       onChangePage = data => {
         this.setState({
             pageLimit: data.pageLimit,
