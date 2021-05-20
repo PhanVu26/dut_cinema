@@ -3,7 +3,7 @@ import callApi from "../../utils/ApiCallerServer";
 
 export const actFetchDataTransactionsRequest = () => {
   return (dispatch) => {
-    return callApi(`transactions?relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema`, "GET", null).then(
+    return callApi(`transactions?page=1&perPage=1000&relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema`, "GET", null).then(
       (res) => {
         console.log("res", res.data.results);
         dispatch(fetchDataTransaction(res.data.results));
