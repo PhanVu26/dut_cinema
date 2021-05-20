@@ -16,7 +16,7 @@ class UserManagementPage extends Component{
         this.state = {
             totalRecords: "",
             totalPages: "",
-            pageLimit: 5,
+            pageLimit: 10,
             currentPage: "",
             startIndex: "",
             endIndex: ""
@@ -28,6 +28,9 @@ class UserManagementPage extends Component{
         this.setState({
           totalRecords: this.props.users.length
         });
+      }
+      componentDidUpdate(){
+        this.props.onFetchAllUsers();
       }
       onChangePage = data => {
         this.setState({
@@ -70,7 +73,6 @@ class UserManagementPage extends Component{
                                                         this.setState({ pageLimit: parseInt(e.target.value) })
                                                     }
                                                     >
-                                                    <option value={5}>5</option>
                                                     <option value={10}>10</option>
                                                     <option value={25}>25</option>
                                                     <option value={50}>50</option>
@@ -96,7 +98,7 @@ class UserManagementPage extends Component{
                                         </div>
                                         <Pagination
                                             totalRecords={users.length}
-                                            pageLimit={pageLimit || 5}
+                                            pageLimit={pageLimit || 10}
                                             initialPage={1}
                                             pagesToShow={5}
                                             onChangePage={this.onChangePage}

@@ -22,7 +22,11 @@ var userReducer = (state = initialState, action) => {
             state = action.users;
             return state;
         case types.SAVE_USER:
+<<<<<<< HEAD
                 state.push(action.user);
+=======
+            state.push(action.user);
+>>>>>>> devTemplate
             return [...state];    
         case types.DELETE_USER:
             index = findIndex(state, action.id)

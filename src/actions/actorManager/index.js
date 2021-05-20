@@ -3,7 +3,7 @@ import callApi from "../../utils/ApiCallerServer";
 
 export const actFetchDataActorsRequest = () => {
     return (dispatch) => {
-      return callApi("actors", "GET", null).then((res) => {
+      return callApi("actors?page=1&perPage=1000", "GET", null).then((res) => {
         dispatch(actFetchDataActors(res.data.results));
       });
     };

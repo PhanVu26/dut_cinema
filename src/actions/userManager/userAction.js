@@ -5,7 +5,7 @@ import callApi from "../../utils/ApiCallerServer";
 
 export const actFetchDataUsersRequest = () => {
     return (dispatch) => {
-      return callApi("users?relations=userRoles,userRoles.role", "GET", null).then((res) => {
+      return callApi("users?relations=userRoles,userRoles.role&page=1&perPage=1000", "GET", null).then((res) => {
         console.log("res", res)
         dispatch(listAllUsers(res.data.results));
       });

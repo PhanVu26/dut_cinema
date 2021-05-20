@@ -124,7 +124,7 @@ export const filterMovie = (filter) => {
 
 export const actFetchDataMoviesRequest = () => {
     return (dispatch) => {
-      return callApi("movies?relations=actors,genres", "GET", null).then((res) => {
+      return callApi("movies?page=1&perPage=1000&relations=actors,genres", "GET", null).then((res) => {
         //console.log("data", res.data.results)
         dispatch(actFetchDataMovies(res.data.results));
       });

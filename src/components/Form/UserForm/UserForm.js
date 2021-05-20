@@ -34,20 +34,35 @@ class UserForm extends Component {
         event.preventDefault();
         const isActive = this.state.isActive === "true" ? true: false
         const user = {...this.state, isActive: isActive};
-        if(this.props.id === ''){
-            console.log("update user", user)
-            this.props.onUpdateUser(user)
-        }else {
+        if(this.state.id === ''){
             const newUser = {
                 name: user.name,
                 email: user.email,
                 password: user.password,
-                roleName: user.roleName
+                roleName: user.roleName,
             }
             console.log("save user", newUser)
             this.props.onSaveUser(newUser);
+        }else {
+            console.log("update user", user)
+            this.props.onUpdateUser(user)
         }
         this.props.onToggleUserForm();
+    }
+
+    
+    showUserRoles = roles => {
+        console.log("roles",this.props.roles)
+        const userRoles = roles.filter(role =>{
+            return role.name != "Admin"
+        })
+        var result = null;
+        if (userRoles.length > 0) {
+          result = userRoles.map((role, index) => {
+            return <option key={role.id} value={role.name} >{role.name}</option>;
+          });
+        }
+        return result;
     }
 
     // componentDidMount(){
@@ -92,7 +107,7 @@ class UserForm extends Component {
                     <Modal.Header>{this.props.userEditing.id === '' ? 'Thêm người dùng' : 'Chỉnh sửa thông tin'}</Modal.Header>
                     <Modal.Body>
                         <div className="panel-body">
-                        {this.props.userEditing.id =='' ? "":
+                        {this.props.userEditing.id === '' ? "" :    
                             <div className="form-group">
                                 <label>ID :</label>
                                 <input
@@ -141,33 +156,33 @@ class UserForm extends Component {
                                     />
                                 </div>
                             }
-                             <div className="form-group">
-                                <label>Vai trò :</label>
-                                <select 
-                                    className="form-control"
-                                    name="roleName"
-                                    onChange={this.onHandleChange}
-                                    value={this.state.roleName} >
-                                        <option value={-1}>---Vai trò---</option>
-                                        {this.showUserRoles(this.props.roles)}
-                                </select><br/>
-                             </div>
-                            
-                            
-                            {this.props.userEditing.id =='' ? "":
                             <div className="form-group">
-                                <label>Trạng thái :</label>
+                                <label>Vai trò :</label>
                                 <select
                                     className="form-control"
-                                    value={this.state.isActive}
+                                    value={this.state.roleName}
                                     onChange={ this.onHandleChange }
-                                    name="isActive"
+                                    name="roleName"
                                 >
-                                    <option value={true}>Actived</option>
-                                    <option value={false}>InActived</option>
+                                    <option value={-1}>Chọn vai trò</option>
+                                    {this.showUserRoles(this.props.roles)}
                                 </select><br/>
                             </div>
+                            {this.props.userEditing.id === '' ? "" :    
+                                <div className="form-group">
+                                    <label>Trạng thái :</label>
+                                    <select
+                                        className="form-control"
+                                        value={this.state.isActive}
+                                        onChange={ this.onHandleChange }
+                                        name="isActive"
+                                    >
+                                        <option value={true}>Actived</option>
+                                        <option value={false}>InActived</option>
+                                    </select><br/>
+                                </div>
                             }
+                            
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
