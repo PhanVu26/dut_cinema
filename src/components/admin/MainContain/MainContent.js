@@ -1,9 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import UserManagementPage from "../../../pages/admin/UserManagementPage";
 import SalesChart from '../Chart/SalesChart'
 
 
 const MainContent  = (props) => {
+    const movies = useSelector(state => state.movies)
+    const users = useSelector(state => state.users)
+    const transactions = useSelector(state => state.transactions)
     return (
         <div className="container-fluid">
             <section>
@@ -15,10 +19,10 @@ const MainContent  = (props) => {
                                     <div className="card card-style">
                                         <div className="card-body ">
                                             <div className="d-flex justify-content-between">
-                                                <i className="fas fa-hashtag fa-3x text-warning"></i>
+                                                <i className="fas fa-film fa-3x text-warning"></i>
                                                 <div className="text-right">
                                                     <h5>Movies</h5>
-                                                <h3>23</h3>
+                                                <h3>{movies.length}</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -33,10 +37,10 @@ const MainContent  = (props) => {
                                     <div className="card card-style">
                                         <div className="card-body">
                                             <div className="d-flex justify-content-between">
-                                                <i className="fas fa-sticky-note fa-3x text-success"></i>
+                                                <i className="fas fa-handshake fa-3x text-success"></i>
                                                 <div className="text-right">
-                                                    <h5>Posts</h5>
-                                                    <h3>123</h3>
+                                                    <h5>Transactions</h5>
+                                                    <h3>{transactions.length}</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -53,7 +57,7 @@ const MainContent  = (props) => {
                                                 <i className="fas fa-users fa-3x text-primary"></i>
                                                 <div className="text-right">
                                                     <h5>Users</h5>
-                                                    <h3>31</h3>
+                                                    <h3>{users.length}</h3>
                                                 </div>
                                             </div>
                                         </div>

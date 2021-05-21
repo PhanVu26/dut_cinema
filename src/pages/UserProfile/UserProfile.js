@@ -78,7 +78,7 @@ function TabPanel(props) {
       const account =JSON.parse(localStorage.getItem("account"))
       dispatch(actions.actGetProfileRequest())
       console.log("user info", userEditing)
-      setUser(userEditing)
+      setUser(account.user)
       console.log("state user", user)
     },[])
     const handleChange = (event, newValue) => {

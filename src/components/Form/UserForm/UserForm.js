@@ -216,7 +216,7 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onSaveUser: (user) => {
             dispatch(actions.actSaveUserRequest(user))
-        },
+        }
     }
 }
 

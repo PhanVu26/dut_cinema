@@ -10,7 +10,7 @@ class TransactionItem extends Component {
         super(props);
     }
     onCancelTransaction = () => {
-        //this.props.onDeleteMovie(this.props.movie.id);
+        this.props.onDeleleTransaction(this.props.transaction.id);
     }
     getTransaction = () => {
         this.props.onToggleModal();
@@ -68,6 +68,9 @@ const mapDispatchToProps = (dispatch, props) =>{
         },
         onGetTransaction: (transaction) => {
             dispatch(actions.getTransaction(transaction))
+        },
+        onDeleleTransaction : (id) => {
+            dispatch(actions.actDeleteTransactionRequest(id))
         }
     }
 }

@@ -42,3 +42,21 @@ export const getTransaction = (transaction) => {
         transaction
     }
 }
+
+export const actDeleteTransactionRequest = (id) => {
+  return (dispatch) => {
+    return callApi(`transactions/${id}`, "DELETE", null).then(
+      (res) => {
+        console.log("res", res.data);
+        dispatch(deleteTransaction(id));
+      }
+    );
+  };
+};
+
+export const deleteTransaction = (id) => {
+    return {
+        type: Types.DELETE_TRANSACTION,
+        id
+    }
+}
