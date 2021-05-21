@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useDispatch } from 'react-redux'
 import {
     BrowserRouter as Router,
     Switch,
@@ -17,12 +18,21 @@ import UserManagementPage from "./UserManagementPage";
 import UserProfile from "../UserProfile/UserProfile";
 import TransactionPage from "./TransactionPage";
 
+import * as userActions from '../../actions/userManager/userAction'
+import * as movieActions from '../../actions/movieManager/index'
+import * as transactionActions from '../../actions/transactionAction/index'
+import * as actions from '../../actions/index'
+
 const AdminPage = (props) => {
+    const dispatch = useDispatch()
     useEffect(() =>{
         const account = JSON.parse(localStorage.getItem("account"));
         if(account.roleName !== "Admin"){
             window.location.href = "/login";
         }
+        dispatch(userActions.actFetchDataUsersRequest())
+        dispatch(movieActions.actFetchDataMoviesRequest())
+        dispatch(transactionActions.actFetchDataTransactionsRequest())
     },[])
     return (
 
