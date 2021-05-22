@@ -24,6 +24,8 @@ import * as userActions from '../../actions/userManager/userAction'
 import * as movieActions from '../../actions/movieManager/index'
 import * as transactionActions from '../../actions/transactionAction/index'
 import * as actions from '../../actions/index'
+import * as cinemaAction from '../../actions/cinemaAction/index'
+
 import RoomManagement from "./RoomManagement";
 
 const AdminPage = (props) => {
@@ -36,6 +38,8 @@ const AdminPage = (props) => {
         dispatch(userActions.actFetchDataUsersRequest())
         dispatch(movieActions.actFetchDataMoviesRequest())
         dispatch(transactionActions.actFetchDataTransactionsRequest())
+        dispatch(cinemaAction.actFetchDataCinemasRequest())
+
     },[])
     return (
 
