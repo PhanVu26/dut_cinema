@@ -24,6 +24,7 @@ import * as userActions from '../../actions/userManager/userAction'
 import * as movieActions from '../../actions/movieManager/index'
 import * as transactionActions from '../../actions/transactionAction/index'
 import * as actions from '../../actions/index'
+import RoomManagement from "./RoomManagement";
 
 const AdminPage = (props) => {
     const dispatch = useDispatch()
@@ -47,6 +48,7 @@ const AdminPage = (props) => {
             <Route path="/admin/profile" exact component={UserProfile}></Route>  
             <Route path="/admin/transactions" exact component={TransactionPage}></Route>  
             <Route path="/admin/cinemas" exact component={CinemaManagement}></Route>  
+            <Route path="/admin/cinemas/*" exact component={RoomManagement}></Route>  
         </Switch>
         <Footer></Footer>
         </Router>

@@ -30,7 +30,7 @@ var myReducer = (state = initialState, action) => {
                 index = findIndex(state, action.cinema.id);
                 console.log("index", index, action.cinema, state)
                 state[index] = action.cinema;
-                return [...state];                  
+            return [...state];                     
         default: return state;     
     }
     return state;

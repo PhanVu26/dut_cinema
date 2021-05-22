@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import {Modal, Button, ThemeProvider} from 'react-bootstrap';
 import {connect} from 'react-redux';
-import * as actions from "../../../actions/cinemaAction/index"
-import CinemaForm from "../../Modal/CinemaModal/CinemaForm"
+import * as actions from "../../../actions/roomAction/index"
+// import roomForm from "../../Modal/roomModal/roomForm"
 
-class CinemaControl extends Component {
+class RoomControl extends Component {
 
     onHandleModal = () => {
-        if(this.props.cinemaEditing.id === '' ){
-            this.props.onToggleCinemaForm();
+        if(this.props.roomEditing.id === '' ){
+            this.props.onToggleRoomForm();
         }else {
-            this.props.onClearCinema({
+            this.props.onClearRoom({
                 id: '',
                 name :'',
-                address: ''
+                roomNumber: ''
 
             })
-            this.props.onToggleCinemaForm();
+            this.props.onToggleRoomForm();
         }
     }
     onSubmit = (event) => {
@@ -30,9 +30,9 @@ class CinemaControl extends Component {
         return (
             <div className = "mb-2 float-left">
                 <button onClick={this.onHandleModal} type="button" className="btn btn-primary">
-                    <span className="fas fa-plus mr-2"></span>Thêm cinema
+                    <span className="fas fa-plus mr-2"></span>Thêm room
                 </button>
-                <CinemaForm></CinemaForm>
+                {/* <roomForm></roomForm> */}
             </div>
         );
     }
@@ -40,21 +40,21 @@ class CinemaControl extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isDisplayCinemaForm : state.isDisplayCinemaForm,
-        cinemaEditing : state.cinemaEditing
+        isDisplayRoomForm : state.isDisplayRoomForm,
+        roomEditing : state.roomEditing
     }
 
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        onToggleCinemaForm: ()=>{
+        onToggleRoomForm: ()=>{
             dispatch(actions.toggleModal())
         },
-        onClearCinema: (cinema) => {
-            dispatch(actions.getCinemaInfo(cinema))
+        onClearRoom: (room) => {
+            dispatch(actions.getRoomInfo(room))
         }
     }
 } 
 
-export default connect(mapStateToProps, mapDispatchToProps ) (CinemaControl);
+export default connect(mapStateToProps, mapDispatchToProps ) (RoomControl);

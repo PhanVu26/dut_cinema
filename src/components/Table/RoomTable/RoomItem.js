@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import {Modal, Button} from "react-bootstrap";
 import {connect} from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import * as actions from '../../../actions/cinemaAction/index'
+import * as actions from '../../../actions/roomAction/index'
 
 
 
-class CinemaItem extends Component {
+class RoomItem extends Component {
 
     constructor(props){
         super(props);
@@ -14,43 +14,42 @@ class CinemaItem extends Component {
     // onHandleModal = () => {
     //     this.props.onToggleUserForm()
     // }
-    onDeleteCinema = () => {
-        this.props.onDeleteCinema(this.props.cinema.id);
-    }
+    // onDeleteroom = () => {
+    //     this.props.onDeleteroom(this.props.room.id);
+    // }
    
-    editCinema = () => {
-        this.props.onToggleCinemaForm();
-        this.props.getCinemaInfo(this.props.cinema)
-    }
+    // editroom = () => {
+    //     this.props.onToggleroomForm();
+    //     this.props.getroomInfo(this.props.room)
+    // }
     
     render() {
-        const {index, cinema} = this.props;
+        const {index, room} = this.props;
  
         return (
             <tr>
-                <td className="text-center">{cinema.id}</td>
-                <td className="text-center">{cinema.name}</td>       
-                <td className="text-center">{cinema.address}</td>
-                <td className='text-center'></td>
+                <td className="text-center">{room.id}</td>
+                <td className="text-center">{room.name}</td>       
+                <td className="text-center">{room.roomNumber}</td>
                 <td className="text-center">
                     <button 
-                        onClick={this.editCinema}
+                        // onClick={this.editroom}
                         type="button" 
                         className="btn btn-warning">
                         <span className="fa fa-pencil"></span>
                     </button>
-                    {/* <cinemaForm></cinemaForm> */}
+                    {/* <roomForm></roomForm> */}
                     <button
-                        onClick={() => {if(window.confirm('Bạn có muốn xóa cinema này?')){this.onDeleteCinema()};}} 
+                        // onClick={() => {if(window.confirm('Bạn có muốn xóa room này?')){this.onDeleteroom()};}} 
                         type="button" 
                         className="btn btn-danger ml-2 mr-2">
                         <span className="far fa-trash-alt"></span>
                     </button>
-                    <NavLink to={"/admin/cinemas/" + cinema.id}>
+                    <NavLink to={"/admin/rooms/" + room.id}>
                         <button 
                             type="button" 
                             className="btn btn-danger"
-                            // onClick={this.getcinemaInfo}
+                            // onClick={this.getroomInfo}
                             >
                             <span className="fas fa-eye"></span>
                         </button>
@@ -70,16 +69,16 @@ const mapDispatchToProps = (dispatch, props) =>{
         // onToggleModal: () => {
         //     dispatch(actions.toggleModal())
         // },
-        onToggleCinemaForm: () => {
+        onToggleRoomForm: () => {
             dispatch(actions.toggleModal())
         },
-        getCinemaInfo : (cinema) => {
-            dispatch(actions.getCinemaInfo(cinema))
+        getRoomInfo : (room) => {
+            dispatch(actions.getRoomInfo(room))
         },
-        onDeleteCinema: (id) => {
-            dispatch(actions.actDeleteCinemaRequest(id))
-        },
+        // onDeleteroom: (id) => {
+        //     dispatch(actions.actDeleteroomRequest(id))
+        // },
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CinemaItem);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomItem);

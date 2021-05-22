@@ -33,6 +33,10 @@ import cinemas from "./CinemaReducer/CinemaReducer";
 import isDisplayCinemaModal from "./CinemaReducer/DisplayCinemaFormReducer";
 import cinemaEditing from "./CinemaReducer/CinemaEditingReducer"
 
+import rooms from "./RoomReducer/RoomReducer";
+import isDisplayRoomModal from "./RoomReducer/DisplayRoomFormReducer";
+import roomEditing from "./RoomReducer/RoomEditingReducer";
+
 const myReducer = combineReducers({
   users,
   genres,
@@ -59,7 +63,10 @@ const myReducer = combineReducers({
   isDisplayTransactionModal,
   cinemas,
   isDisplayCinemaModal,
-  cinemaEditing
+  cinemaEditing,
+  rooms,
+  isDisplayRoomModal,
+  roomEditing
 
 });
 
