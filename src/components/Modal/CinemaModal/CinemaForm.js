@@ -167,7 +167,7 @@ const mapDispatchToProps = (dispatch, props) =>{
         onGetCinemaEditing : (cinema) => {
             dispatch(actions.getCinemaInfo(cinema))
         },
-        onUpdatecinema: (cinema) => {
+        onUpdateCinema: (cinema) => {
             dispatch(actions.actUpdateCinemaRequest(cinema))
         },
         // // onDeleteUser: (id) => {

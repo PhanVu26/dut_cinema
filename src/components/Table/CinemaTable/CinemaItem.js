@@ -40,7 +40,7 @@ class CinemaItem extends Component {
                     </button>
                     {/* <cinemaForm></cinemaForm> */}
                     <button
-                        onClick={() => {if(window.confirm('Bạn có muốn xóa diễn viên này?')){this.onDeleteCinema()};}} 
+                        onClick={() => {if(window.confirm('Bạn có muốn xóa cinema này?')){this.onDeleteCinema()};}} 
                         type="button" 
                         className="btn btn-danger ml-2 mr-2">
                         <span className="far fa-trash-alt"></span>
