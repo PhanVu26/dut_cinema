@@ -29,6 +29,10 @@ import transactions from "./TransactionsReducer/index";
 import transactionInfo from "./TransactionsReducer/transactionInfo";
 import isDisplayTransactionModal from "./TransactionsReducer/displayTransactionModal";
 
+import cinemas from "./CinemaReducer/CinemaReducer";
+import isDisplayCinemaModal from "./CinemaReducer/DisplayCinemaFormReducer";
+import cinemaEditing from "./CinemaReducer/CinemaEditingReducer"
+
 const myReducer = combineReducers({
   users,
   genres,
@@ -53,6 +57,10 @@ const myReducer = combineReducers({
   transactions,
   transactionInfo,
   isDisplayTransactionModal,
+  cinemas,
+  isDisplayCinemaModal,
+  cinemaEditing
+
 });
 
 export default myReducer;

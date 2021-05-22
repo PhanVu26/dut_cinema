@@ -18,6 +18,7 @@ import UserManagementPage from "./UserManagementPage";
 import UserProfile from "../UserProfile/UserProfile";
 import TransactionPage from "./TransactionPage";
 import SaleChartPage from './SaleChartPage';
+import CinemaManagement from './CinemaManagement';
 
 import * as userActions from '../../actions/userManager/userAction'
 import * as movieActions from '../../actions/movieManager/index'
@@ -45,6 +46,7 @@ const AdminPage = (props) => {
             <Route path="/admin/sales" exact component={SaleChartPage}></Route>  
             <Route path="/admin/profile" exact component={UserProfile}></Route>  
             <Route path="/admin/transactions" exact component={TransactionPage}></Route>  
+            <Route path="/admin/cinemas" exact component={CinemaManagement}></Route>  
         </Switch>
         <Footer></Footer>
         </Router>
