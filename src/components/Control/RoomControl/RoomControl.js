@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Modal, Button, ThemeProvider} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import * as actions from "../../../actions/roomAction/index"
-// import roomForm from "../../Modal/roomModal/roomForm"
+import RoomForm from '../../Modal/RoomModal/RoomForm'
 
 class RoomControl extends Component {
 
@@ -32,7 +32,7 @@ class RoomControl extends Component {
                 <button onClick={this.onHandleModal} type="button" className="btn btn-primary">
                     <span className="fas fa-plus mr-2"></span>Thêm room
                 </button>
-                {/* <roomForm></roomForm> */}
+                <RoomForm></RoomForm>
             </div>
         );
     }
