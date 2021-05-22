@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import {Modal, Button, ThemeProvider} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import * as actions from "../../../actions/cinemaAction/index"
-// import cinemaForm from '../../Modal/cinemaModal/cinemaForm';
+import CinemaForm from "../../Modal/CinemaModal/CinemaForm"
 
 class CinemaControl extends Component {
 
     onHandleModal = () => {
-        if(this.props.CinemaEditing.id === '' ){
+        if(this.props.cinemaEditing.id === '' ){
             this.props.onToggleCinemaForm();
         }else {
             this.props.onClearCinema({
@@ -32,7 +32,7 @@ class CinemaControl extends Component {
                 <button onClick={this.onHandleModal} type="button" className="btn btn-primary">
                     <span className="fas fa-plus mr-2"></span>Thêm cienma
                 </button>
-                {/* <cinemaForm></cinemaForm> */}
+                <CinemaForm></CinemaForm>
             </div>
         );
     }

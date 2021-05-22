@@ -3,7 +3,7 @@ var initialState = false;
 
 var DisplayFormReducer = (state = initialState, action) => {
     switch(action.type){
-        case types.TOGGLE_ACTOR_FORM:
+        case types.TOGGLE_CINEMAS_MODAL:
             return !state;   
         default: return state;     
     }

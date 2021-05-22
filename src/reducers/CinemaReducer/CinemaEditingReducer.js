@@ -2,24 +2,18 @@ import * as types from "../../constants/ActionType";
 var initialState = {
     id: '',
     name :'',
-    birthday: '',
-    image: '',
-    nationality: '',
-    description: '',
+    address:''
 };
 
 var myReducer = (state = initialState, action) => {
     switch(action.type){
-        case types.GET_ACTOR_INFO:
-            var actorEditing = {
-                id: action.actor.id,
-                name: action.actor.name,
-                image: action.actor.image,
-                nationality: action.actor.nationality,
-                birthday: action.actor.birthday,
-                description:action.actor.description,
+        case types.GET_CINEMA_INFO:
+            var cinemaEditing = {
+                id: action.cinema.id,
+                name: action.cinema.name,
+                address: action.cinema.address
             }        
-            return actorEditing
+            return cinemaEditing
         default: return state;     
     }
     return state;
