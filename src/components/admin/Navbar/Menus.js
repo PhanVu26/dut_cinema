@@ -33,6 +33,11 @@ export const admin_menus = [
         icon: "fas fa-handshake"
     },
     {
+        url: "/admin/cinemas",
+        label: "Cinemas",
+        icon: "fa-theater-masks"
+    },
+    {
         url: "/admin/sales",
         label: "Sales",
         icon: "fa-chart-line"

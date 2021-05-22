@@ -8,6 +8,7 @@ const MainContent  = (props) => {
     const movies = useSelector(state => state.movies)
     const users = useSelector(state => state.users)
     const transactions = useSelector(state => state.transactions)
+    const cinemas = useSelector(state => state.cinemas)
     return (
         <div className="container-fluid">
             <section>
@@ -58,6 +59,24 @@ const MainContent  = (props) => {
                                                 <div className="text-right">
                                                     <h5>Users</h5>
                                                     <h3>{users.length}</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="card-footer">
+                                            <i className="fas fa-sync mr-3"></i>
+                                            <span>Updated Know</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="col-xl-3 col-sm-6 p-2">
+                                    <div className="card card-style">
+                                        <div className="card-body">
+                                            <div className="d-flex justify-content-between">
+                                                <i className="fas fa-theater-masks fa-3x text-success"></i>
+                                                <div className="text-right">
+                                                    <h5>Cinemas</h5>
+                                                    <h3>{cinemas.length}</h3>
                                                 </div>
                                             </div>
                                         </div>
