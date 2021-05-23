@@ -161,7 +161,7 @@ class BuyTicketDetailPage extends Component {
       let BookedTickets =[];
       for (let index = 0; index < seats.length; index++) {
         let checkRow = seats[index].substring(0, 1);;
-        let checkColumn = seats[index].substring(1, 2);
+        let checkColumn = seats[index].substring(1);
         for (let ind = 0; ind < allTickets.length; ind++) {
           if(checkRow === allTickets[ind].seat.row && Number(checkColumn) === allTickets[ind].seat.column){
             let type_Id = 1;
