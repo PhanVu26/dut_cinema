@@ -31,9 +31,11 @@ export const deleteUser = (id) => {
 
 export const actFetchDataMovieRequest = () => {
   return (dispatch) => {
-    return callApi("movies?relations=actors,genres", "GET", null).then((res) => {
-      dispatch(actFetchDataMovie(res.data.results));
-    });
+    return callApi("movies?relations=actors,genres", "GET", null).then(
+      (res) => {
+        dispatch(actFetchDataMovie(res.data.results));
+      }
+    );
   };
 };
 
@@ -182,7 +184,7 @@ export const actDeleteMovie = (id) => {
 export const actFetchDataTransactionRequest = () => {
   return (dispatch) => {
     return callApi(
-      "transactions?relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema",
+      "transactions/me?relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema",
       "GET",
       null
     )
@@ -221,7 +223,7 @@ export const actFetchDataBookingMovie = (bookingMovie) => {
   };
 };
 
-export const actCreateBookingRequest = (data,type) => {
+export const actCreateBookingRequest = (data, type) => {
   axios.interceptors.request.use(
     function (config) {
       return config;
@@ -239,7 +241,7 @@ export const actCreateBookingRequest = (data,type) => {
       return Promise.reject(error);
     }
   );
-  var b = JSON.parse(localStorage.getItem("account")).accessToken
+  var b = JSON.parse(localStorage.getItem("account")).accessToken;
   var a = String("Bearer " + b);
   console.log(a);
   let result = axios.post("https://cinema-nestjs.herokuapp.com/tickets", data, {
@@ -248,14 +250,12 @@ export const actCreateBookingRequest = (data,type) => {
   return (dispatch) => {
     result
       .then((res) => {
-        if(type==="Booked"){
+        if (type === "Booked") {
           alert("Đặt vé thành công, vui lòng đến quầy để nhận vé!");
           dispatch(actCreateBooking(res.data));
-        }
-        else if(type ==="Sold"){
+        } else if (type === "Sold") {
           alert("Mua vé thành công, vui lòng đến quầy để nhận vé!");
-        }
-        else{
+        } else {
           alert("Hủy đặt vé thành công!");
         }
         history.push("/");
@@ -267,7 +267,7 @@ export const actCreateBookingRequest = (data,type) => {
       });
   };
 };
-export const actHoldBooking = (data) =>{
+export const actHoldBooking = (data) => {
   axios.interceptors.request.use(
     function (config) {
       return config;
@@ -285,7 +285,7 @@ export const actHoldBooking = (data) =>{
       return Promise.reject(error);
     }
   );
-  var b = JSON.parse(localStorage.getItem("account")).accessToken
+  var b = JSON.parse(localStorage.getItem("account")).accessToken;
   var a = String("Bearer " + b);
   console.log(a);
   let result = axios.post("https://cinema-nestjs.herokuapp.com/tickets", data, {
@@ -302,8 +302,8 @@ export const actHoldBooking = (data) =>{
         alert("Lỗi kết nối");
       });
   };
-}
-export const actCancleHoldBooking = (data) =>{
+};
+export const actCancleHoldBooking = (data) => {
   axios.interceptors.request.use(
     function (config) {
       return config;
@@ -321,7 +321,7 @@ export const actCancleHoldBooking = (data) =>{
       return Promise.reject(error);
     }
   );
-  var b = JSON.parse(localStorage.getItem("account")).accessToken
+  var b = JSON.parse(localStorage.getItem("account")).accessToken;
   var a = String("Bearer " + b);
   console.log(a);
   let result = axios.post("https://cinema-nestjs.herokuapp.com/tickets", data, {
@@ -338,7 +338,7 @@ export const actCancleHoldBooking = (data) =>{
         alert("Lỗi kết nối");
       });
   };
-}
+};
 export const actCreateBooking = (data) => {
   return {
     type: Types.CREATE_BOOKING,
@@ -543,10 +543,10 @@ export const getMovieRequest = (id) => {
 };
 export const getMovie = (movie) => {
   return {
-      type: Types.FETCH_MOVIE,
-      movie
-  }
-}
+    type: Types.FETCH_MOVIE,
+    movie,
+  };
+};
 export const getUserEditing = (user) => {
   return {
     type: Types.GET_USER_EDITING,
@@ -555,23 +555,24 @@ export const getUserEditing = (user) => {
 };
 
 export const filterUser = (filter) => {
-    return {
-        type: Types.FILTER_USER,
-        filter
-    }
-}
-
+  return {
+    type: Types.FILTER_USER,
+    filter,
+  };
+};
 
 // Test Login
 export const actTestLoginAccountRequest = (account) => {
-    //return callApi("auth/login", "POST", account);
-    axios.interceptors.request.use(function (config) {
+  //return callApi("auth/login", "POST", account);
+  axios.interceptors.request.use(
+    function (config) {
       return config;
-    }, function (error) {
+    },
+    function (error) {
       return Promise.reject(error);
-    });
-}
-
+    }
+  );
+};
 
 // export const actFetchDataTransactionRequest = () => {
 //   return (dispatch) => {
