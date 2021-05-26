@@ -3,6 +3,7 @@ import {Modal, Button, ThemeProvider} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import * as actions from "../../../actions/roomAction/index"
 import RoomForm from '../../Modal/RoomModal/RoomForm'
+import SeatForm from '../../Modal/SeatModal/SeatForm';
 
 class RoomControl extends Component {
 
@@ -33,6 +34,7 @@ class RoomControl extends Component {
                     <span className="fas fa-plus mr-2"></span>Thêm room
                 </button>
                 <RoomForm></RoomForm>
+                <SeatForm></SeatForm>
             </div>
         );
     }
