@@ -103,3 +103,9 @@ export const FETCH_DATA_ROOMS = "FETCH_DATA_ROOMS";
 export const TOGGLE_ROOM_MODAL = "TOGGLE_ROOM_MODAL";
 export const SAVE_ROOM = "SAVE_ROOM";
 export const GET_ROOM_INFO = "GET_ROOM_INFO";
+
+
+// seats of room
+// Rooms of cinema
+export const ADD_SEATS = "ADD_SEATS";
+export const TOGGLE_SEAT_MODAL = "TOGGLE_SEAT_MODAL";

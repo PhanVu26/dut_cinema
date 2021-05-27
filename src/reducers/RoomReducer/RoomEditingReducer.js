@@ -9,9 +9,9 @@ var myReducer = (state = initialState, action) => {
     switch(action.type){
         case types.GET_ROOM_INFO:
             var roomEditing = {
-                id: action.cinema.id,
-                name: action.cinema.name,
-                roomNumber: action.cinema.roomNumber
+                id: action.room.id,
+                name: action.room.name,
+                roomNumber: action.room.roomNumber
             }        
             return roomEditing
         default: return state;     
