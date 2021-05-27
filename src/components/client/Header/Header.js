@@ -147,7 +147,7 @@ function Decentralization(props) {
         <span>
           {" "}
           User:
-          <Link to="/user-page" className="mx-1">
+          <Link to="/profile" className="mx-1">
             {account.user.name}
           </Link>{" "}
           |{" "}
