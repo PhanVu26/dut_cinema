@@ -5,14 +5,30 @@ import TableRow from "@material-ui/core/TableRow";
 
 class ItemDeal extends Component {
   render() {
+    let d = new Date(this.props.myDeal.transaction_time);
+    let month = d.getMonth() + 1;
+    let day = d.getDate();
+    if (month < 10) {
+      month = "0" + month.toString();
+    } else {
+      month = month.toString();
+    }
+    if (day < 10) {
+      day = "0" + day.toString();
+    } else {
+      day = day.toString();
+    }
+    // let d = new Date();
+    // d.toISOString
+    let dateString = d.getFullYear().toString() + "-" + month + "-" + day;
     return (
       <>
         <StyledTableRow>
           <StyledTableCell component="th" scope="row" align="center">
-            {this.props.myDeal.transaction_time.slice(0, 10)}
+            {dateString}
           </StyledTableCell>
           <StyledTableCell align="center">
-            {this.props.myDeal.transaction_time.slice(11, 19)}
+            {d.toLocaleTimeString()}
           </StyledTableCell>
           <StyledTableCell align="center">
             {this.props.myDeal.ticket.seat.room.cinema.name}
