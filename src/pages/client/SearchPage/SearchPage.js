@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actions from "../../../actions/index";
 
 class SearchPage extends Component {
   constructor(props) {
@@ -23,9 +24,17 @@ class SearchPage extends Component {
                 <span className="post">{item.producer}</span>
                 <ul className="icon">
                   <li>
-                    <div className="mt-3">
-                      <i className="fas fa-shopping-cart"></i>
-                    </div>
+                    <Link to={"/booking/" + item.name}>
+                      <i
+                        onClick={() => this.props.getMovie(item)}
+                        className="fas fa-shopping-cart"
+                      ></i>
+                    </Link>
+                    {/* <Link to="/buy-ticket">
+                      <div className="mt-3">
+                        <i className="fas fa-shopping-cart"></i>
+                      </div>
+                    </Link> */}
                   </li>
                 </ul>
               </div>
@@ -78,4 +87,14 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default React.memo(connect(mapStateToProps, null)(SearchPage));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getMovie: (movie) => {
+      dispatch(actions.getMovie(movie));
+    },
+  };
+};
+
+export default React.memo(
+  connect(mapStateToProps, mapDispatchToProps)(SearchPage)
+);

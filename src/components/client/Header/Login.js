@@ -125,6 +125,7 @@ class Login extends Component {
           let dataAccount = res.data;
           // let token = res.data.accessToken;
           // dataAccount.accessToken = token;
+          console.log(dataAccount.user);
           if (Object.keys(dataAccount).length !== 0) {
             localStorage.setItem("account", JSON.stringify(dataAccount));
             localStorage.setItem(

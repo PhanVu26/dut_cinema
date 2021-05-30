@@ -166,20 +166,20 @@ class MovieForm extends Component {
         results = actors?.map((actor, index) => {
             //console.log("showActorBox", this.state.selectedActors?.some(act => act.id == actor.id))
             return (
-                <div className="actor-item ml-3" key={index}>
-                    <input 
-                        checked = {this.state.selectedActors?.some(act => act.id == actor.id)}
-                        className="actor-checkbox"
-                        type="checkbox" 
-                        id={'actor'+actor.id} 
-                        onChange = {this.onHandleChange} 
-                        value={actor.id}></input>
-                    <img className="ml-2" src={testImage} width="30px" height="30px">
-                    </img>
-
-                    <label htmlFor={'actor'+actor.id} className="ml-2">{actor.name}</label>
-                    
-                       
+                <div className="actor-item ml-3 row" key={index}>
+                    <div className="col-2">
+                        <input 
+                            checked = {this.state.selectedActors?.some(act => act.id == actor.id)}
+                            className="actor-checkbox"
+                            type="checkbox" 
+                            id={'actor'+actor.id} 
+                            onChange = {this.onHandleChange} 
+                            value={actor.id}>    
+                        </input>
+                    </div>
+                    <div className="col-10">
+                        <label htmlFor={'actor'+actor.id} className="ml-2">{actor.name}</label>
+                    </div>                    
                 </div>
             ) 
         })
@@ -226,15 +226,20 @@ class MovieForm extends Component {
         var results = [];
         results = genres?.map((genre, index) => {
             return (
-                <div className="genre-item ml-3" key={index}>
-                    <input 
-                        checked = {this.state.selectedGenres?.some(g => g.id == genre.id)}
-                        className="genre-checkbox"
-                        type="checkbox" 
-                        id={'genre'+genre.id} 
-                        onChange = {this.onHandleChange} 
-                        value={genre.id}></input>
-                    <label htmlFor={'genre'+genre.id} className="ml-2">{genre.name}</label>           
+                <div className="genre-item ml-3 row" key={index}>
+                    <div className="col-2">
+                        <input 
+                            checked = {this.state.selectedGenres?.some(g => g.id == genre.id)}
+                            className="genre-checkbox"
+                            type="checkbox" 
+                            id={'genre'+genre.id} 
+                            onChange = {this.onHandleChange} 
+                            value={genre.id}>
+                        </input>
+                    </div>
+                    <div className="col-10">
+                        <label htmlFor={'genre'+genre.id} className="ml-2">{genre.name}</label> 
+                    </div>          
                 </div>
             ) 
         })
@@ -452,7 +457,7 @@ class MovieForm extends Component {
                                     <input 
                                         name="filterGenre"
                                         value = {this.state.filterGenre}
-                                        className="ml-2" 
+                                        className="ml-2 form-control" 
                                         placeholder="Tìm theo thể loại"
                                         onChange = {this.onHandleSearchChange}>
                                     </input><br></br>
@@ -474,7 +479,7 @@ class MovieForm extends Component {
                                     <input 
                                         name="filterActor"
                                         value={this.state.filterActor}
-                                        className="ml-2" 
+                                        className="ml-2 form-control" 
                                         placeholder="Tìm theo tên diễn viên"
                                         onChange = {this.onHandleSearchChange}>                                       
                                     </input><br></br>
