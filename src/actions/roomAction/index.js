@@ -23,9 +23,12 @@ export const actFetchDataRooms = (rooms) => {
 export const actSaveRoomRequest = (room, id) => {
     return (dispatch) => {
         return callApi(`cinemas/${id}/rooms`, "POST", room).then((res) => {
-            console.log("post cinema", res.data)
+            alert("Thêm phòng thành công")
             dispatch(saveRoom(res.data.rooms));
-      });
+        })
+        .catch(err => {
+            alert("Lỗi kết nối !!!")
+        })
     };
 };
 
@@ -40,9 +43,14 @@ export const actSaveSeatRequest = (seat, id) => {
     return (dispatch) => {
         console.log(id)
         return callApi(`rooms/${id}/seats`, "POST", seat).then((res) => {
-            console.log("post seat", res.data)
-            dispatch(saveSeat(res.data));
-      });
+            if(res.statusCode !== 400){
+                alert("Thêm ghế thành công.")
+                dispatch(saveSeat(res.data));
+            }
+        })
+        .catch(err => {
+            alert("Lỗi kết nối !!!")
+        })
     };
 };
 
@@ -73,6 +81,45 @@ export const toggleSeatModal = () => {
 export const getRoomInfo = (room) => {
     return {
         type: types.GET_ROOM_INFO,
+        room
+    }
+}
+
+
+export const actDeleteRoomRequest = (id) => {
+    return (dispatch) => {
+        return callApi(`rooms/${id}`, "DELETE", null).then((res) => {
+            alert("Xóa phòng thành công")
+            dispatch(deleteRoom(id));
+        })
+        .catch(err => {
+            alert("Lỗi kết nối !!!")
+        })
+    };
+};
+
+export const deleteRoom = (id) => {
+    return {
+        type: types.DELETE_ROOM,
+        id
+    }
+}
+
+export const actUpdateRoomRequest = (room) => {
+    return (dispatch) => {
+        return callApi(`rooms/${room.id}`, "PATCH", room).then((res) => {
+            alert("Cập nhật thành công.")
+            dispatch(actUpdateRoom(res.data));
+        })
+        .catch(err => {
+            alert("Lỗi kết nối !!!")
+        })
+    };
+};
+
+export const actUpdateRoom = (room) => {
+    return {
+        type: types.UPDATE_ROOM,
         room
     }
 }

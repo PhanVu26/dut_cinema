@@ -298,8 +298,12 @@ class MovieForm extends Component {
                 data.append("country", newMovie.country)
                 data.append("actorIds", newMovie.actors)
                 data.append("releaseDate", newMovie.releaseDate)
-                data.append("mainImage", newMovie.mainImage)
-                data.append("thumbnailImage", newMovie.thumbnailImage)
+                if(typeof newMovie.mainImage !== 'string'){
+                    data.append("mainImage", newMovie.mainImage)
+                }
+                if(typeof newMovie.thumbnailImage !== 'string'){
+                    data.append("thumbnailImage", newMovie.thumbnailImage)
+                }
                 data.append("description", newMovie.description)
 
                 console.log("form-data: ---", data)
