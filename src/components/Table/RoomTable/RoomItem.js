@@ -14,14 +14,14 @@ class RoomItem extends Component {
     // onHandleModal = () => {
     //     this.props.onToggleUserForm()
     // }
-    // onDeleteroom = () => {
-    //     this.props.onDeleteroom(this.props.room.id);
-    // }
+    onDeleteRoom = () => {
+        this.props.onDeleteRoom(this.props.room.id);
+    }
    
-    // editroom = () => {
-    //     this.props.onToggleroomForm();
-    //     this.props.getroomInfo(this.props.room)
-    // }
+    editRoom = () => {
+        this.props.onToggleRoomForm();
+        this.props.getRoomInfo(this.props.room)
+    }
     addSeats = () => {
         this.props.onToggleSeatModal();
         this.props.getRoomInfo(this.props.room)
@@ -33,18 +33,18 @@ class RoomItem extends Component {
         return (
             <tr>
                 <td className="text-center">{room.id}</td>
-                <td className="text-center">{room.name}</td>       
+                <td className="text-center">{"Phòng " + room.roomNumber}</td>       
                 <td className="text-center">{room.roomNumber}</td>
                 <td className="text-center">
                     <button 
-                        // onClick={this.editroom}
+                        onClick={this.editRoom}
                         type="button" 
                         className="btn btn-warning">
                         <span className="fa fa-pencil"></span>
                     </button>
                     {/* <roomForm></roomForm> */}
                     <button
-                        // onClick={() => {if(window.confirm('Bạn có muốn xóa room này?')){this.onDeleteroom()};}} 
+                        onClick={() => {if(window.confirm('Bạn có muốn xóa room này?')){this.onDeleteRoom()};}} 
                         type="button" 
                         className="btn btn-danger ml-2 mr-2">
                         <span className="far fa-trash-alt"></span>
@@ -77,9 +77,9 @@ const mapDispatchToProps = (dispatch, props) =>{
         getRoomInfo : (room) => {
             dispatch(actions.getRoomInfo(room))
         },
-        // onDeleteroom: (id) => {
-        //     dispatch(actions.actDeleteroomRequest(id))
-        // },
+        onDeleteRoom: (id) => {
+            dispatch(actions.actDeleteRoomRequest(id))
+        },
     }
 }
 

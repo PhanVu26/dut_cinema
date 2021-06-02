@@ -19,8 +19,18 @@ var myReducer = (state = initialState, action) => {
             var newState = action.rooms
             return newState;
         case types.SAVE_ROOM:
-            return action.rooms                    
-        default: return state;     
+            return action.rooms  
+        case types.DELETE_ROOM:
+            index = findIndex(state, action.id)
+            state.splice(index, 1);
+            return [...state];  
+        case types.UPDATE_ROOM:               
+            index = findIndex(state, action.room.id);
+            console.log("index", index, action.room, state)
+            state[index] = action.room;
+            return [...state];                          
+        default: return state; 
+            
     }
     return state;
 }

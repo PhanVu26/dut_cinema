@@ -103,6 +103,8 @@ export const FETCH_DATA_ROOMS = "FETCH_DATA_ROOMS";
 export const TOGGLE_ROOM_MODAL = "TOGGLE_ROOM_MODAL";
 export const SAVE_ROOM = "SAVE_ROOM";
 export const GET_ROOM_INFO = "GET_ROOM_INFO";
+export const DELETE_ROOM = "DELETE_ROOM";
+export const UPDATE_ROOM = "UPDATE_ROOM";
 
 
 // seats of room

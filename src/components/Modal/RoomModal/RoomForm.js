@@ -162,18 +162,18 @@ const mapDispatchToProps = (dispatch, props) =>{
         onGetRoomEditing : (room) => {
             dispatch(actions.getRoomInfo(room))
         },
-        // onUpdateRoom: (room) => {
-        //     dispatch(actions.actUpdateRoomRequest(room))
-        // },
+        onUpdateRoom: (room) => {
+            dispatch(actions.actUpdateRoomRequest(room))
+        },
         // // onDeleteUser: (id) => {
         // //     dispatch(actions.deleteUser(id))
         // // },
         // // onUpdateUserStatus: (id) => {
         // //     dispatch(actions.updateUserStatus(id))
         // // },
-        // getroomInfo : (room) => {
-        //     dispatch(actions.getroomInfo(room))
-        // }
+        getRoomInfo : (room) => {
+            dispatch(actions.getRoomInfo(room))
+        }
     }
 }
 

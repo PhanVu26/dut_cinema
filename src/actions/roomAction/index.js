@@ -84,3 +84,42 @@ export const getRoomInfo = (room) => {
         room
     }
 }
+
+
+export const actDeleteRoomRequest = (id) => {
+    return (dispatch) => {
+        return callApi(`rooms/${id}`, "DELETE", null).then((res) => {
+            alert("Xóa phòng thành công")
+            dispatch(deleteRoom(id));
+        })
+        .catch(err => {
+            alert("Lỗi kết nối !!!")
+        })
+    };
+};
+
+export const deleteRoom = (id) => {
+    return {
+        type: types.DELETE_ROOM,
+        id
+    }
+}
+
+export const actUpdateRoomRequest = (room) => {
+    return (dispatch) => {
+        return callApi(`rooms/${room.id}`, "PATCH", room).then((res) => {
+            alert("Cập nhật thành công.")
+            dispatch(actUpdateRoom(res.data));
+        })
+        .catch(err => {
+            alert("Lỗi kết nối !!!")
+        })
+    };
+};
+
+export const actUpdateRoom = (room) => {
+    return {
+        type: types.UPDATE_ROOM,
+        room
+    }
+}
