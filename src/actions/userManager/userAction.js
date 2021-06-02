@@ -36,9 +36,12 @@ export const listAllRoles = (roles) => {
 export const actUpdateUserRequest = (user) => {
   return (dispatch) => {
     return callApi(`users/${user.id}`, "PATCH", user).then((res) => {
-      console.log("res", res)
+      alert("Cập nhật User thành công.")
       dispatch(updateUser(res.data));
-    });
+    })
+    .catch(err => {
+      alert("Lỗi kết nối !!!")
+  })
   };
 };
 
@@ -68,9 +71,12 @@ export const getProfile = (user) => {
 export const actUpdateProfileRequest = (user) => {
   return (dispatch) => {
     return callApi(`users/me`, "PATCH", user).then((res) => {
-      console.log("res", res)
+      alert("Cập nhật thành công.")
       dispatch(updateProfile(res.data));
-    });
+    })
+    .catch(err => {
+      alert("Lỗi kết nối !!!")
+  })
   };
 };
 
@@ -84,9 +90,12 @@ export const updateProfile = (user) => {
 export const actSaveUserRequest = (user) => {
   return (dispatch) => {
     return callApi(`users`, "POST", user).then((res) => {
-      console.log("res", res)
+      alert("Thêm thành công.")
       dispatch(saveUser(res.data));
-    });
+    })
+    .catch(err => {
+      alert("Lỗi kết nối !!!")
+  })
   };
 };
 export const saveUser = (user) => {
@@ -104,11 +113,14 @@ export const toggleUserForm = () => {
 export const actDeleteUserRequest = (id) => {
   return (dispatch) => {
     return callApi(`users/${id}`, "DELETE", null).then((res) => {
-      console.log("delete: res", res)
+      alert("Xóa thành công.")
       if(res.status === 200){
         dispatch(deleteUser(id));
       }
-    });
+    })
+    .catch(err => {
+      alert("Lỗi kết nối !!!")
+  })
   };
 };
 export const deleteUser = (id) => {
@@ -121,9 +133,12 @@ export const deleteUser = (id) => {
 export const actUpdateUserStatusRequest = (user) => {
   return (dispatch) => {
     return callApi(`users/${user.id}`, "PATCH", user).then((res) => {
-      console.log("res", res)
+      alert("Cập nhật thành công")
       dispatch(updateUserStatus(res.data.id));
-    });
+    })
+    .catch(err => {
+      alert("Lỗi kết nối !!!")
+  })
   };
 };
 export const updateUserStatus = (id) => {

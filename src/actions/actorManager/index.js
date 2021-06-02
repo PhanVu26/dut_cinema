@@ -25,9 +25,12 @@ export const listAllActors = () => {
 export const actSaveActorsRequest = (actor) => {
     return (dispatch) => {
         return callApi("actors", "POST", actor).then((res) => {
-            console.log("post actor", res.data)
+            alert("Thêm thành công.")
             dispatch(saveActor(res.data));
-      });
+      })
+      .catch(err => {
+        alert("Lỗi kết nối !!!")
+      })
     };
 };
 
@@ -59,9 +62,12 @@ export const getActorInfo = (actor) => {
 export const actDeleteActorsRequest = (id) => {
     return (dispatch) => {
         return callApi(`actors/${id}`, "DELETE", null).then((res) => {
-            console.log("delete actor", res)
+            alert("Xóa thành công.")
             dispatch(deleteActor(id));
-      });
+        })
+        .catch(err => {
+            alert("Lỗi kết nối !!!")
+        })
     };
 };
 export const deleteActor = (id) => {
@@ -81,9 +87,12 @@ export const filterActor = (filter) => {
 export const actUpdateActorsRequest = (actor) => {
     return (dispatch) => {
         return callApi(`actors/${actor.id}`, "PATCH", actor).then((res) => {
-            console.log("post actor", res.data)
+            alert("Cập nhật thành công.")
             dispatch(actUpdateActor(res.data));
-      });
+        })
+        .catch(err => {
+            alert("Lỗi kết nối !!!")
+        })
     };
 };
 

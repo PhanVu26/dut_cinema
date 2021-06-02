@@ -40,9 +40,12 @@ export const actAddMovieRequest = (movie) => {
     console.log("p movie", movie)
     return (dispatch) => {
         return callApi("movies", "POST", movie).then((res) => {
-          console.log("post movie", movie)  
+          alert("Thêm phim thành công.")
           dispatch(addMovie(res.data));
-        });
+        })
+        .catch(err => {
+          alert("Lỗi kết nối !!!")
+        })
     };
 }
 
@@ -89,10 +92,13 @@ export const actDeleteMovieRequest = (id) => {
     return (dispatch) => {
         return callApi(`movies/${id}`, 'DELETE', null).then((res) => {
             //console.log("movie delete", movie)
+            alert("Xóa phim thành công.")
             console.log("res update", res)
             dispatch(deleteMovie(id));
-          
-        });
+        })
+        .catch(err => {
+          alert("Lỗi kết nối !!!")
+        })
       };
 }
 
@@ -100,11 +106,12 @@ export const actDeleteMovieRequest = (id) => {
 export const actUpdateMovieRequest = (movie, id) => {
     return (dispatch) => {
         return callApi(`movies/${id}`, 'PATCH', movie).then((res) => {
-            console.log("movie update", movie)
-            console.log("res update", res.data)
-            dispatch(updateMovie(res.data));
-          
-        });
+          alert("Cập nhật phim thành công.")
+          dispatch(updateMovie(res.data));
+        })
+        .catch(err => {
+          alert("Lỗi kết nối !!!")
+        })
       };
 }
 

@@ -23,9 +23,12 @@ export const actFetchDataRooms = (rooms) => {
 export const actSaveRoomRequest = (room, id) => {
     return (dispatch) => {
         return callApi(`cinemas/${id}/rooms`, "POST", room).then((res) => {
-            console.log("post cinema", res.data)
+            alert("Thêm phòng thành công")
             dispatch(saveRoom(res.data.rooms));
-      });
+        })
+        .catch(err => {
+            alert("Lỗi kết nối !!!")
+        })
     };
 };
 
@@ -40,9 +43,14 @@ export const actSaveSeatRequest = (seat, id) => {
     return (dispatch) => {
         console.log(id)
         return callApi(`rooms/${id}/seats`, "POST", seat).then((res) => {
-            console.log("post seat", res.data)
-            dispatch(saveSeat(res.data));
-      });
+            if(res.statusCode !== 400){
+                alert("Thêm ghế thành công.")
+                dispatch(saveSeat(res.data));
+            }
+        })
+        .catch(err => {
+            alert("Lỗi kết nối !!!")
+        })
     };
 };
 

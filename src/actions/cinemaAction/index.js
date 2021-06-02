@@ -21,9 +21,12 @@ export const actFetchDataCinemas = (cinemas) => {
 export const actSaveCinemaRequest = (cinema) => {
     return (dispatch) => {
         return callApi("cinemas", "POST", cinema).then((res) => {
-            console.log("post cinema", res.data)
+            alert("Thêm thành công.")
             dispatch(saveCinema(res.data));
-      });
+        })
+        .catch(err => {
+            alert("Lỗi kết nối !!!")
+        })
     };
 };
 
@@ -55,9 +58,12 @@ export const getCinemaInfo = (cinema) => {
 export const actDeleteCinemaRequest = (id) => {
     return (dispatch) => {
         return callApi(`cinemas/${id}`, "DELETE", null).then((res) => {
-            console.log("delete cinema", res)
+            alert("Xóa thành công.")
             dispatch(deleteCinema(id));
-      });
+        })
+        .catch(err => {
+            alert("Lỗi kết nối !!!")
+        })
     };
 };
 export const deleteCinema = (id) => {
@@ -77,9 +83,12 @@ export const deleteCinema = (id) => {
 export const actUpdateCinemaRequest = (cinema) => {
     return (dispatch) => {
         return callApi(`cinemas/${cinema.id}`, "PATCH", cinema).then((res) => {
-            console.log("post cinema", res.data)
+            alert("Cập nhật thành công.")
             dispatch(actUpdateCinema(res.data));
-      });
+        })
+        .catch(err => {
+            alert("Lỗi kết nối !!!")
+        })
     };
 };
 
