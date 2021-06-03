@@ -184,7 +184,7 @@ export const actDeleteMovie = (id) => {
 export const actFetchDataTransactionRequest = () => {
   return (dispatch) => {
     return callApi(
-      'transactions/me?orderBy={"transaction_time": "DESC"}&perPage=100&relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema',
+      'transactions/me?filter={"service":{"notequal": "Draft"}}&orderBy={"transaction_time": "DESC"}&perPage=100&relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema',
       "GET",
       null
     )
