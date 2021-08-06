@@ -16,10 +16,12 @@ class UserList extends Component {
     }
 
     showUserRoles = roles => {
-        console.log("roles",this.props.roles)
+        const userRoles = roles.filter(role =>{
+            return role.name.toLowerCase() != "Admin".toLowerCase();
+        })
         var result = null;
-        if (roles.length > 0) {
-          result = roles.map((role, index) => {
+        if (userRoles.length > 0) {
+          result = userRoles.map((role, index) => {
             return <option key={role.id} value={role.id} >{role.name}</option>;
           });
         }
