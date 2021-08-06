@@ -18,11 +18,12 @@ class SalesChart extends Component{
         this.props.fetchDataTransaction();
         const transactions = this.countOccurrences(this.props.transactions);
         const tickets = this.props.transactions.filter(tran => {
-            return  tran.service.toLowerCase() === "buy";
+            return tran.service === "Buy";
         });
+        console.log("tickets", tickets)
 
         // Tính số lượng vé trên mỗi phim
-        const bookedQuanties = this.countBookedTickets(this.props.transactions);
+        const bookedQuanties = this.countBookedTickets(tickets);
         const movieTickets = [];
         const keys = Object.keys(bookedQuanties);
         const values = Object.values(bookedQuanties);
