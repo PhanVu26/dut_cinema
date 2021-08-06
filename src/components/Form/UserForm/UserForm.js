@@ -52,9 +52,8 @@ class UserForm extends Component {
 
     
     showUserRoles = roles => {
-        console.log("roles",this.props.roles)
         const userRoles = roles.filter(role =>{
-            return role.name != "Admin"
+            return role.name.toLowerCase() != "Admin".toLowerCase();
         })
         var result = null;
         if (userRoles.length > 0) {
@@ -78,16 +77,16 @@ class UserForm extends Component {
     //         })
     //     }
     // }
-    showUserRoles = roles => {
-        console.log("roles",this.props.roles)
-        var result = null;
-        if (roles.length > 0) {
-          result = roles.map((role, index) => {
-            return <option key={role.id} value={role.name} >{role.name}</option>;
-          });
-        }
-        return result;
-    }
+    // showUserRoles = roles => {
+    //     console.log("roles",this.props.roles)
+    //     var result = null;
+    //     if (roles.length > 0) {
+    //       result = roles.map((role, index) => {
+    //         return <option key={role.id} value={role.name} >{role.name}</option>;
+    //       });
+    //     }
+    //     return result;
+    // }
     componentWillReceiveProps(nextProps) {
         if(nextProps.userEditing && nextProps.userEditing.id !== ''){
             this.setState({
