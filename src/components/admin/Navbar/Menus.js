@@ -48,6 +48,21 @@ export const admin_menus = [
         icon: "fa-user"
     },
     {
+        url: "/movies",
+        label: "Movies",
+        icon: "fa-film"
+    },
+    {
+        url: "/actors",
+        label: "Actors",
+        icon: "fa-walking"
+    },
+    {
+        url: "/movie-showtimes",
+        label: "Showtimes",
+        icon: "fa-calendar-alt"
+    },
+    {
         url: "/admin/settings",
         label: "Settings",
         icon: "fa-wrench"
