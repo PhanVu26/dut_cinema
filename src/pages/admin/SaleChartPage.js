@@ -21,7 +21,6 @@ class SaleChartPage extends Component{
                             <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
                                 <div class="row ">
                                     <div class="col-xl-12 col-12 mb-4 mb-xl-0">
-                                        <h2 class="text-center mb-3 mt-2">Biểu đồ doanh thu</h2>
                                         <SalesChart></SalesChart>
                                     </div>
                                     

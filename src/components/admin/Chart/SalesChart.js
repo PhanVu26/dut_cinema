@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, LineChart, Line } from 'recharts';
-import { Pie } from 'react-chartjs-2';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, LineChart } from 'recharts';
+import { Pie, Line } from 'react-chartjs-2';
 import {connect} from 'react-redux';
 import * as actions from '../../../actions/transactionAction/index';
 
@@ -9,14 +9,30 @@ class SalesChart extends Component{
     constructor(props){
         super(props);
         this.state = {
-            transactions: {}
+            transactions: {},
+            bookedQuanties: {}
         }
     }
 
     componentDidMount() {
         this.props.fetchDataTransaction();
         const transactions = this.countOccurrences(this.props.transactions);
-        
+        const tickets = this.props.transactions.filter(tran => {
+            return  tran.service.toLowerCase() === "buy";
+        });
+
+        // Tính số lượng vé trên mỗi phim
+        const bookedQuanties = this.countBookedTickets(this.props.transactions);
+        const movieTickets = [];
+        const keys = Object.keys(bookedQuanties);
+        const values = Object.values(bookedQuanties);
+        for(let i = 0 ; i < keys.length; i ++){
+            movieTickets.push({
+                name: keys[i],
+                quantity: values[i]
+            })
+        }
+
         this.setState({
             transactions: {
                 labels: Object.keys(transactions),
@@ -38,76 +54,67 @@ class SalesChart extends Component{
                       ],
                       borderWidth: 1,
                     },
-                  ],
-            }
+                ],
+            },
+            bookedQuanties : movieTickets
         })
-        console.log("tran", transactions);
     }
     countOccurrences = arr => arr.reduce((prev, curr) => (prev[curr.service] = ++prev[curr.service] || 1, prev), {});
+    countBookedTickets = arr => arr.reduce((prev, curr) => (prev[curr.ticket.showtime.movie.name] = ++prev[curr.ticket.showtime.movie.name] || 1, prev), {});
+    countSales = arr => arr.reduce((prev, curr) => (prev[curr.transaction_time] = prev[curr.transaction_time] || 1, prev), {});
     render(){
-        var {transactions} = this.state;
+        var {transactions, bookedQuanties} = this.state;
 
-        const data = [
-            {name: '1', vnđ: 50},
-            {name: '2', vnđ: 350},
-            {name: '3', vnđ: 200},
-            {name: '4', vnđ: 400},
-            {name: '5', vnđ: 320},
-            {name: '6', vnđ: 290},
-            {name: '7', vnđ: 360},
-            {name: '8', vnđ: 240},
-            {name: '9', vnđ: 300},
-            {name: '10', vnđ: 365},
-            {name: '11', vnđ: 300},
-            {name: '12', vnđ: 310}
-        ];
-        const data2 = {
-            labels: ['Draft', 'Buy', 'Cancel', 'Book'],
+        const data = {
+            labels: ['1', '2', '3', '4', '5', '6'],
             datasets: [
               {
                 label: '# of Votes',
-                data: [100, 350, 50, 120],
-                backgroundColor: [
-                  'rgba(253, 204, 69, 1)',
-                  'rgba(38, 38, 205, 1)',
-                  'rgba(255, 0, 0, 1)',
-                  'rgba(75, 192, 192, 1)',
-                ],
-                borderColor: [
-                  'rgba(253, 204, 69, 1)',
-                  'rgba(38, 38, 205, 1)',
-                  'rgba(255, 0, 0, 1)',
-                  'rgba(75, 192, 192, 1)',
-                ],
-                borderWidth: 1,
+                data: [12, 19, 3, 5, 2, 3],
+                fill: false,
+                backgroundColor: 'rgb(255, 0, 0)',
+                borderColor: 'rgba(255, 0, 0, 0.2)',
               },
             ],
+          };
+          
+          const options = {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
           };
         return (
             <div>
                 <div className="row">
-                    <div className="col-md-8">
-                        <BarChart width={600} height={450} data={data}>
+                    <div className="col-md-12">
+                        <h4 className="mb-5 text-center">Biểu đồ số lượng vé đã đặt theo phim</h4>
+                        <BarChart width={1150} height={450} data={bookedQuanties}>
                             <XAxis dataKey="name" stroke="#8884d8" />
                             <YAxis />
                             <Tooltip wrapperStyle={{ width: 100, backgroundColor: '#ccc' }} />
                             <Legend width={100} wrapperStyle={{ top: 40, right: 20, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} />
                             <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                            <Bar dataKey="vnđ" fill="#8884d8" barSize={30} />
+                            <Bar dataKey="quantity" fill="#8884d8" barSize={30} />
                         </BarChart>
                     </div>
-                    <div className="col-md-4">
-                        <Pie data={transactions} />
-                    </div>
                 </div>
-                
-                <LineChart width={600} height={300} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                    <Line type="monotone" dataKey="vnđ" stroke="#8884d8" />
-                    <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                </LineChart>
+                <div className="row mt-5">
+                        <div className="col-md-4">
+                            <h5 className="text-center mb-4">Biểu đồ trạng thái giao dịch</h5>
+                            <Pie data={transactions} />
+                        </div>
+                        <div className="col-md-8">
+                            <h5 className="text-center mb-4">Biểu đồ doanh thu</h5>
+                            <Line data={data} options={options} />
+                        </div>
+
+                    </div>
             </div>
         )
     }

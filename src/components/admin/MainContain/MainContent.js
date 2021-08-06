@@ -114,7 +114,6 @@ const MainContent  = (props) => {
                         <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
                             <div className="row ">
                                 <div className="col-md-12 col-12 mb-4 mb-xl-0">
-                                    <h2 className="text-muted text-center mb-5">Biểu đồ</h2>
                                     <SalesChart></SalesChart>
                                     
                                 </div>
