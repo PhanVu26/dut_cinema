@@ -17,7 +17,7 @@ class SearchPage extends Component {
             <div className="box">
               <img
                 alt=""
-                src="https://www.galaxycine.vn/media/2020/10/29/450-anime_1603948617423.jpg"
+                src={item.image?.mainUrl} 
               />
               <div className="box-content">
                 <h6 className="title">{item.name}</h6>

@@ -76,7 +76,7 @@ class BuyTicketPage extends React.Component {
         >
           <div className={`${classes.link} ${active} row no-gutters p-3`}>
             <span className="col-3">
-              <img alt="" className={classes.img} src="https://www.galaxycine.vn/media/2020/10/29/450-anime_1603948617423.jpg" />
+              <img alt="" className={classes.img} src={item.image?.mainUrl}  />
             </span>
             <p className={`${classes.title} col-9 pl-4`}>{item.name}</p>
           </div>

@@ -300,7 +300,7 @@ class BuyTicketDetailPage extends Component {
               <img
                 alt=""
                 className={classes.imageMovie}
-                src="https://www.galaxycine.vn/media/2020/10/29/450-anime_1603948617423.jpg"
+                src={movie.image?.mainUrl} 
               ></img>
               <div className="text-uppercase text-center font-weight-bold pt-1">
                 {movie.name}

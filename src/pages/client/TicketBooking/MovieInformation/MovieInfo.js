@@ -93,8 +93,10 @@ class MovieDetail extends Component {
                     <div className="col-md-12 col-lg-5 img">
                     <div className="default-img">
                         <img
+                        height = "400"
+                        width = "300"
                         alt=""
-                        src={movie.image.mainImage? movie.image.mainImage : "https://www.galaxycine.vn/media/2020/10/29/300-anime_1603948612503.jpg"}
+                        src={movie.image?.mainUrl}
                         className="loading"
                         data-was-processed="true"
                         />
