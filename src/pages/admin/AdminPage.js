@@ -56,9 +56,9 @@ const AdminPage = (props) => {
             <Route path="/admin/transactions" exact component={TransactionPage}></Route>  
             <Route path="/admin/cinemas" exact component={CinemaManagement}></Route>  
             <Route path="/admin/cinemas/*" exact component={RoomManagement}></Route>  
-            <Route path="/movies" exact component={MovieManager}></Route>  
-            <Route path="/actors" exact component={ActorManager}></Route>
-            <Route path="/movie-showtimes" exact component={EditShowTimePage}></Route>
+            <Route path="/admin/movies" exact component={MovieManager}></Route>  
+            <Route path="/admin/actors" exact component={ActorManager}></Route>
+            <Route path="/admin/movie-showtimes" exact component={EditShowTimePage}></Route>
         </Switch>
         <Footer></Footer>
         </Router>
