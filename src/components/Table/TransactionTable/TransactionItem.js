@@ -37,7 +37,7 @@ class TransactionItem extends Component {
                 <td className="text-center">{transaction.service}</td>
                 <td className="text-center">   
                     <button
-                        onClick={() => {if(window.confirm('Bạn có muốn hủy giao dịch này?')){this.onCancelTransaction()};}} 
+                        onClick={() => {if(window.confirm('Bạn có muốn xóa giao dịch này?')){this.onCancelTransaction()};}} 
                         type="button" 
                         className="btn btn-danger mr-1 px-1">
                         <i className="far fa-trash-alt"></i>
