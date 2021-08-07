@@ -14,56 +14,63 @@ class SalesChart extends Component{
         }
     }
 
-    componentDidMount() {
-        this.props.fetchDataTransaction();
-        const transactions = this.countOccurrences(this.props.transactions);
-        const tickets = this.props.transactions.filter(tran => {
-            return tran.service === "Buy";
-        });
-        console.log("tickets", tickets)
+    static getDerivedStateFromProps(props, state) {
+        if(props.transactions){
+            const tickets = props.transactions.filter(tran => {
+                return tran.service === "Buy";
+            });
+            const transactions = props.transactions.reduce((prev, curr) => (prev[curr.service] = ++prev[curr.service] || 1, prev), {});
 
-        // Tính số lượng vé trên mỗi phim
-        const bookedQuanties = this.countBookedTickets(tickets);
-        const movieTickets = [];
-        const keys = Object.keys(bookedQuanties);
-        const values = Object.values(bookedQuanties);
-        for(let i = 0 ; i < keys.length; i ++){
-            movieTickets.push({
-                name: keys[i],
-                quantity: values[i]
-            })
+            // Tính số lượng vé trên mỗi phim
+            const bookedQuanties = tickets.reduce((prev, curr) => (prev[curr.ticket.showtime.movie.name] = ++prev[curr.ticket.showtime.movie.name] || 1, prev), {});
+            const movieTickets = [];
+            const keys = Object.keys(bookedQuanties);
+            const values = Object.values(bookedQuanties);
+            for(let i = 0 ; i < keys.length; i ++){
+                movieTickets.push({
+                    name: keys[i],
+                    quantity: values[i]
+                })
+            }
+
+            return{
+                transactions: {
+                    labels: Object.keys(transactions),
+                    datasets: [
+                        {
+                        label: 'Trạng thái đặt vé',
+                        data: Object.values(transactions),
+                        backgroundColor: [
+                            'rgba(253, 204, 69, 1)',
+                            'rgba(38, 38, 205, 1)',
+                            'rgba(255, 0, 0, 1)',
+                            'rgba(75, 192, 192, 1)',
+                        ],
+                        borderColor: [
+                            'rgba(253, 204, 69, 1)',
+                            'rgba(38, 38, 205, 1)',
+                            'rgba(255, 0, 0, 1)',
+                            'rgba(75, 192, 192, 1)',
+                        ],
+                        borderWidth: 1,
+                        },
+                    ],
+                },
+                bookedQuanties : movieTickets
+            }
+        }else {
+            return {
+                transactions:{},
+                bookedQuanties: {}
+
+            };
         }
+      }
 
-        this.setState({
-            transactions: {
-                labels: Object.keys(transactions),
-                datasets: [
-                    {
-                      label: 'Trạng thái đặt vé',
-                      data: Object.values(transactions),
-                      backgroundColor: [
-                        'rgba(253, 204, 69, 1)',
-                        'rgba(38, 38, 205, 1)',
-                        'rgba(255, 0, 0, 1)',
-                        'rgba(75, 192, 192, 1)',
-                      ],
-                      borderColor: [
-                        'rgba(253, 204, 69, 1)',
-                        'rgba(38, 38, 205, 1)',
-                        'rgba(255, 0, 0, 1)',
-                        'rgba(75, 192, 192, 1)',
-                      ],
-                      borderWidth: 1,
-                    },
-                ],
-            },
-            bookedQuanties : movieTickets
-        })
-    }
-    countOccurrences = arr => arr.reduce((prev, curr) => (prev[curr.service] = ++prev[curr.service] || 1, prev), {});
-    countBookedTickets = arr => arr.reduce((prev, curr) => (prev[curr.ticket.showtime.movie.name] = ++prev[curr.ticket.showtime.movie.name] || 1, prev), {});
+   
     countSales = arr => arr.reduce((prev, curr) => (prev[curr.transaction_time] = prev[curr.transaction_time] || 1, prev), {});
     render(){
+        console.log("state", this.state)
         var {transactions, bookedQuanties} = this.state;
 
         const data = {
