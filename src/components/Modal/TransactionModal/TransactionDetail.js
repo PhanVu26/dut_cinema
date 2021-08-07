@@ -60,7 +60,7 @@ class MovieDetail extends Component {
                                                     <span className="text-success">{transaction.service}</span>
                                                 </td>
                                             </tr>
-                                            {/* <tr>
+                                            <tr>
                                                 <td>
                                                     <span className="title-detail">ID ticket:</span>
                                                 </td>
@@ -161,7 +161,7 @@ class MovieDetail extends Component {
                                                 <td>
                                                     <span>{transaction.ticket.showtime.startTime.split('T')[1].slice(0,5)}</span>
                                                 </td>
-                                            </tr> */}
+                                            </tr> 
                                             
                                         </tbody>
                                         
