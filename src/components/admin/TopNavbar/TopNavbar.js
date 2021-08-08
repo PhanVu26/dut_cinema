@@ -26,14 +26,6 @@ const TopNavbar = (props) => {
                 </div>
                 <div className="col-md-3">
                     <ul className="navbar-nav">
-                        <li className="nav-item icon-parent">
-                            <a href="#" className="nav-link"><i
-                                className="fas fa-comments fa-lg text-muted icon-bullet"></i></a>
-                        </li>
-                        <li className="nav-item">
-                            <a href="#" className="nav-link"><i
-                                className="fas fa-bell text-muted fa-lg icon-bullet"></i></a>
-                        </li>
                         <li className="nav-item ml-md-auto">
                             <a onClick= {logout} data-toggle="modal" data-target="#sign-out" className="nav-link"><i
                                 className="fas text-danger fa-sign-out-alt fa-lg text-muted"></i></a>
