@@ -181,10 +181,10 @@ export const actDeleteMovie = (id) => {
   };
 };
 
-export const actFetchDataTransactionRequest = () => {
+export const actFetchDataTransactionRequest = (listType) => {
   return (dispatch) => {
     return callApi(
-      'transactions/me?filter={"service":{"notequal": "Draft"}}&orderBy={"transaction_time": "DESC"}&perPage=100&relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema',
+      `transactions/me?filter={"service":{"in": ${listType}}}&orderBy={"transaction_time": "DESC"}&perPage=100&relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema`,
       "GET",
       null
     )
@@ -195,6 +195,10 @@ export const actFetchDataTransactionRequest = () => {
         console.log(error);
       });
   };
+};
+
+export const actDeleteBooking = (payload) => {
+  return callApi(`tickets`, "POST", payload);
 };
 
 export const actFetchTransaction = (transaction) => {

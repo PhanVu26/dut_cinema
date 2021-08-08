@@ -45,7 +45,8 @@ class Deal extends Component {
     let arrayBooking = [];
     if (this.props.transaction.hasOwnProperty("results")) {
       arrayBooking = this.props.transaction.results;
-      console.log(arrayBooking);
+      arrayBooking = arrayBooking.filter((item) => item.service === "Buy");
+      console.log("test", arrayBooking);
       // for (let i = 0; i < this.props.transaction.results.length; i++) {
       //   if (account.user.id === this.props.transaction.results[i].user.id) {
       //     arrayBooking.push(this.props.transaction.results[i]);
