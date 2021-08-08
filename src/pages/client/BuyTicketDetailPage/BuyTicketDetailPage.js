@@ -132,6 +132,7 @@ class BuyTicketDetailPage extends Component {
   };
 
   handleSubmit = (
+    type,
     choosing,
     roomName,
     amountTicket,
@@ -142,6 +143,7 @@ class BuyTicketDetailPage extends Component {
       let tickCode = this.makeid(8);
       console.log(this.state.arrSeatChoosing);
       let data = {
+        type_transac: type,
         idUser: choosing.idUser,
         idMovie: choosing.movie.id,
         room: roomName,
@@ -350,11 +352,19 @@ class BuyTicketDetailPage extends Component {
                   </button>
                   <button
                     onClick={() =>
-                      this.handleSubmit(choosing, roomid, amountTicket,totalAllTicket,bookings)
+                      this.handleSubmit("book",choosing, roomid, amountTicket,totalAllTicket,bookings)
                     }
                     className={`${classes.button} ${classes.buttonNomargin} ml-2`}
                   >
                     Đặt vé <i className="pl-2 fas fa-arrow-right"></i>
+                  </button>
+                  <button
+                    onClick={() =>
+                      this.handleSubmit("buy",choosing, roomid, amountTicket,totalAllTicket,bookings)
+                    }
+                    className={`${classes.button} ${classes.buttonNomargin} ml-2`}
+                  >
+                    Mua vé <i className="pl-2 fas fa-arrow-right"></i>
                   </button>
                 </span>
               )}
