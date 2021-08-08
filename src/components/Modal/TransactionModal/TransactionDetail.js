@@ -48,7 +48,7 @@ class MovieDetail extends Component {
                                                     <span className="title-detail">ID transaction:</span>
                                                 </td>
                                                 <td>
-                                                    <span>{transaction.id}</span>
+                                                    <span>{transaction?.id}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -57,16 +57,16 @@ class MovieDetail extends Component {
                                                 </td>
                                                 
                                                 <td>
-                                                    <span className="text-success">{transaction.service}</span>
+                                                    <span className="text-success">{transaction?.service}</span>
                                                 </td>
                                             </tr>
-                                            {/* <tr>
+                                            <tr>
                                                 <td>
                                                     <span className="title-detail">ID ticket:</span>
                                                 </td>
                                                 
                                                 <td>
-                                                    <span>{transaction.ticket.id}</span>
+                                                    <span>{transaction.ticket?.id}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -75,7 +75,7 @@ class MovieDetail extends Component {
                                                 </td>
                                                 
                                                 <td>
-                                                    <span className="text-success">{transaction.ticket.status}</span>
+                                                    <span className="text-success">{transaction.ticket?.status}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -84,7 +84,7 @@ class MovieDetail extends Component {
                                                 </td>
                                                 
                                                 <td>
-                                                    <span>{transaction.ticket.seat.type}</span>
+                                                    <span>{transaction.ticket?.seat.type}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -102,7 +102,7 @@ class MovieDetail extends Component {
                                                 </td>
                                                 
                                                 <td>
-                                                    <span className="text-primary">{transaction.user.name}</span>
+                                                    <span className="text-primary">{transaction.user?.name}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -111,7 +111,7 @@ class MovieDetail extends Component {
                                                 </td>
                                                 
                                                 <td>
-                                                    <span>{transaction.user.email}</span>
+                                                    <span>{transaction.user?.email}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -119,7 +119,7 @@ class MovieDetail extends Component {
                                                     <span className="title-detail"> Số ghế:</span>
                                                 </td>
                                                 <td>
-                                                    <span>{transaction.ticket.seat.column}</span>
+                                                    <span>{transaction.ticket?.seat.row + transaction.ticket?.seat.column}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -127,7 +127,7 @@ class MovieDetail extends Component {
                                                     <span className="title-detail">Phòng:</span>
                                                 </td>
                                                 <td>
-                                                    <span>{transaction.ticket.seat.room.roomNumber}</span>
+                                                    <span>{transaction.ticket?.seat.room.roomNumber}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -135,7 +135,7 @@ class MovieDetail extends Component {
                                                     <span className="title-detail">Tên phim:</span>
                                                 </td>
                                                 <td>
-                                                    <span>{transaction.ticket.showtime.movie.name}</span>
+                                                    <span>{transaction.ticket?.showtime.movie.name}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -143,7 +143,7 @@ class MovieDetail extends Component {
                                                     <span className="title-detail">Rạp chiếu:</span>
                                                 </td>
                                                 <td>
-                                                    <span>{transaction.ticket.seat.room.cinema.name}</span>
+                                                    <span>{transaction.ticket?.seat.room.cinema.name}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -151,7 +151,7 @@ class MovieDetail extends Component {
                                                     <span className="title-detail">Ngày chiếu:</span>
                                                 </td>
                                                 <td>
-                                                    <span>{transaction.ticket.showtime.startTime.split('T')[0]}</span>
+                                                    <span>{transaction.ticket?.showtime.startTime.split('T')[0]}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -159,9 +159,9 @@ class MovieDetail extends Component {
                                                     <span className="title-detail">Giờ chiếu:</span>
                                                 </td>
                                                 <td>
-                                                    <span>{transaction.ticket.showtime.startTime.split('T')[1].slice(0,5)}</span>
+                                                    <span>{transaction.ticket?.showtime.startTime.split('T')[1].slice(0,5)}</span>
                                                 </td>
-                                            </tr> */}
+                                            </tr> 
                                             
                                         </tbody>
                                         
