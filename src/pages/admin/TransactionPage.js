@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Loader from 'react-loader-advanced';
 import 'font-awesome/css/font-awesome.min.css';  
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -38,7 +39,7 @@ class TransactionPage extends Component{
         });
       };
     render(){
-        const {transactions} = this.props;
+        const {transactions, loading} = this.props;
         console.log("tr", transactions)
         var {
             totalPages,
@@ -49,8 +50,8 @@ class TransactionPage extends Component{
           } = this.state;
         var rowsPerPage = transactions?.slice(startIndex, endIndex + 1);  
         return (
-                <section>
-                    
+            <Loader show={loading} message={'Loading.......'}> 
+                <section>                   
                     <div class="container-fluid mt-5">
                         <div class="row">                   
                             <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
@@ -108,14 +109,15 @@ class TransactionPage extends Component{
                         </div>
                     </div>
                 </section> 
-                
+            </Loader>    
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        transactions : state.transactions
+        transactions : state.transactions.transactions,
+        loading: state.transactions.loading
     }
 }
 

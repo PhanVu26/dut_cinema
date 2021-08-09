@@ -129,7 +129,7 @@ class SalesChart extends Component{
 }
 const mapStateToProps = (state) => {
     return {
-        transactions : state.transactions
+        transactions : state.transactions.transactions
     }
 }
 
