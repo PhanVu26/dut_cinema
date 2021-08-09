@@ -5,6 +5,7 @@ import callApi from "../../utils/ApiCallerServer";
 
 export const actFetchDataUsersRequest = () => {
     return (dispatch) => {
+      dispatch(loadUser());
       return callApi("users?relations=userRoles,userRoles.role&page=1&perPage=1000", "GET", null).then((res) => {
         console.log("res", res)
         dispatch(listAllUsers(res.data.results));
@@ -35,6 +36,7 @@ export const listAllRoles = (roles) => {
 
 export const actUpdateUserRequest = (user) => {
   return (dispatch) => {
+    dispatch(loadUser());
     return callApi(`users/${user.id}`, "PATCH", user).then((res) => {
       alert("Cập nhật User thành công.")
       dispatch(updateUser(res.data));
@@ -54,6 +56,7 @@ export const updateUser = (user) => {
 
 export const actGetProfileRequest = (user) => {
   return (dispatch) => {
+    dispatch(loadUser());
     return callApi(`users/me`, "GET", user).then((res) => {
       console.log("res get me", res)
       dispatch(getProfile(res.data));
@@ -70,6 +73,7 @@ export const getProfile = (user) => {
 
 export const actUpdateProfileRequest = (user) => {
   return (dispatch) => {
+    dispatch(loadUser());
     return callApi(`users/me`, "PATCH", user).then((res) => {
       alert("Cập nhật thành công.")
       dispatch(updateProfile(res.data));
@@ -89,12 +93,13 @@ export const updateProfile = (user) => {
 
 export const actSaveUserRequest = (user) => {
   return (dispatch) => {
+    dispatch(loadUser());
     return callApi(`users`, "POST", user).then((res) => {
-      alert("Thêm thành công.")
       dispatch(saveUser(res.data));
+      alert("Thêm thành công.")
     })
     .catch(err => {
-      alert("Lỗi kết nối !!!")
+      alert(err)
   })
   };
 };
@@ -112,10 +117,11 @@ export const toggleUserForm = () => {
 };
 export const actDeleteUserRequest = (id) => {
   return (dispatch) => {
+    dispatch(loadUser());
     return callApi(`users/${id}`, "DELETE", null).then((res) => {
-      alert("Xóa thành công.")
       if(res.status === 200){
         dispatch(deleteUser(id));
+        alert("Thêm thành công.")
       }
     })
     .catch(err => {
@@ -132,9 +138,10 @@ export const deleteUser = (id) => {
 
 export const actUpdateUserStatusRequest = (user) => {
   return (dispatch) => {
+    dispatch(loadUser());
     return callApi(`users/${user.id}`, "PATCH", user).then((res) => {
-      alert("Cập nhật thành công")
       dispatch(updateUserStatus(res.data.id));
+      alert("Cập nhật thành công")
     })
     .catch(err => {
       alert("Lỗi kết nối !!!")
@@ -168,6 +175,12 @@ export const filterUser = (filter) => {
         type: types.FILTER_USER,
         filter
     }
+}
+
+export const loadUser = () => {
+  return {
+      type: types.USER_LOADING,
+  }
 }
 
 

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Loader from 'react-loader-advanced';
 import 'font-awesome/css/font-awesome.min.css';  
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -40,7 +41,7 @@ class UserManagementPage extends Component{
         this.props.onFetchAllUsers()
       };
     render(){
-        const {users} = this.props;
+        const {users, loading} = this.props;
         console.log("users", users)
         var {
             totalPages,
@@ -51,6 +52,7 @@ class UserManagementPage extends Component{
           } = this.state;
         var rowsPerPage = users.slice(startIndex, endIndex + 1);  
         return (
+            <Loader show={loading} message={'Loading.......'}> 
                 <section>
                     <div class="container-fluid mt-5">
                         <div class="row">                   
@@ -108,14 +110,15 @@ class UserManagementPage extends Component{
                         </div>
                     </div>
                 </section> 
-                
+            </Loader>    
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        users : state.users
+        users : state.users.users,
+        loading: state.users.loading
     }
 }
 
