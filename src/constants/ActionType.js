@@ -25,6 +25,14 @@ export const FILTER_MOVIE = "FILTER_MOVIE";
 export const GET_MOVIE_INFO = "GET_MOVIE_INFO";
 // Genres
 export const LIST_ALL_GENRES = "LIST_ALL_GENRES";
+export const SAVE_GENRE = "SAVE_GENRE";
+export const TOGGLE_GENRE_MODAL = "TOGGLE_GENRE_MODAL";
+export const TOGGLE_GENRE_FORM = "TOGGLE_GENRE_FORM";
+export const DELETE_GENRE = "DELETE_GENRE";
+export const GET_GENRE_INFO = "GET_GENRE_INFO";
+export const UPDATE_GENRE = "UPDATE_GENRE";
+export const FILTER_GENRE = "FILTER_GENRE";
+export const GENRE_LOADING = "GENRE_LOADING";
 
 // Actors
 
