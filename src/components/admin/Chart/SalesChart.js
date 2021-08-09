@@ -10,14 +10,15 @@ class SalesChart extends Component{
         super(props);
         this.state = {
             transactions: {},
-            bookedQuanties: {}
+            bookedQuanties: {},
+            saleData:{}
         }
     }
 
     static getDerivedStateFromProps(props, state) {
         if(props.transactions){
             const tickets = props.transactions.filter(tran => {
-                return tran.service === "Buy";
+                return tran.service === "Buy" || tran.service === "Book";
             });
             const transactions = props.transactions.reduce((prev, curr) => (prev[curr.service] = ++prev[curr.service] || 1, prev), {});
 
@@ -33,6 +34,51 @@ class SalesChart extends Component{
                 })
             }
 
+            // count sale data
+            const saleData = tickets.sort(function(a,b){
+                return new Date(Date.parse(a.transaction_time)) - new Date(b.transaction_time);
+            });
+            console.log("saleData", saleData);
+            let sales = [];
+            let pre_time = "";
+            let money = 0;
+            for (let i = 0; i < saleData.length; i++) {
+                let item = saleData[i];
+                let time = item.transaction_time.slice(0, 7);
+                if (pre_time === time) {
+                    if (item.service === "Buy") {
+                    money += item.price;
+                    } else {
+                    money += item.price / 10;
+                    }
+                } else {
+                    let obj = {
+                    time: pre_time,
+                    money: money,
+                    };
+                    sales.push(obj);
+                    pre_time = time;
+                    if (item.service === "Buy") {
+                    money += item.price;
+                    } else {
+                    money += item.price / 10;
+                    }
+                }
+            }
+            let obj = {
+            time: pre_time,
+            money: money,
+            };
+            sales.push(obj);
+            sales.shift();
+            var months = []
+            var salesData = []
+            sales.forEach(data =>{
+                months.push(data.time);
+                salesData.push(data.money)
+            })
+
+            
             return{
                 transactions: {
                     labels: Object.keys(transactions),
@@ -56,7 +102,19 @@ class SalesChart extends Component{
                         },
                     ],
                 },
-                bookedQuanties : movieTickets
+                bookedQuanties : movieTickets,
+                sales: {
+                    labels: months,
+                    datasets: [
+                        {
+                            label: 'Doanh thu(vnđ)',
+                            data: salesData,
+                            fill: false,
+                            backgroundColor: 'rgb(255, 0, 0)',
+                            borderColor: 'rgba(255, 0, 0, 0.2)',
+                        },
+                    ],
+                }
             }
         }else {
             return {
@@ -71,27 +129,14 @@ class SalesChart extends Component{
     countSales = arr => arr.reduce((prev, curr) => (prev[curr.transaction_time] = prev[curr.transaction_time] || 1, prev), {});
     render(){
         console.log("state", this.state)
-        var {transactions, bookedQuanties} = this.state;
-
-        const data = {
-            labels: ['1', '2', '3', '4', '5', '6'],
-            datasets: [
-              {
-                label: 'Doanh thu(vnđ)',
-                data: [12, 19, 3, 5, 2, 3],
-                fill: false,
-                backgroundColor: 'rgb(255, 0, 0)',
-                borderColor: 'rgba(255, 0, 0, 0.2)',
-              },
-            ],
-          };
+        var {transactions, bookedQuanties, sales} = this.state;
           
           const options = {
             scales: {
               yAxes: [
                 {
                   ticks: {
-                    beginAtZero: true,
+                    beginAtZero: false,
                   },
                 },
               ],
@@ -119,7 +164,7 @@ class SalesChart extends Component{
                         </div>
                         <div className="col-md-8">
                             <h5 className="text-center mb-4">Biểu đồ doanh thu</h5>
-                            <Line data={data} options={options} />
+                            <Line data={sales} options={options} />
                         </div>
 
                     </div>
