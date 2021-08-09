@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Loader from 'react-loader-advanced';
 import {connect} from 'react-redux';
 import Pagination from '../../components/Pagination/Pagination';
 import SeatControl from '../../components/Control/SeatControl/SeatControl';
@@ -13,7 +14,8 @@ class SeatManager extends Component{
             pageLimit: 10,
             currentPage: "",
             startIndex: "",
-            endIndex: ""
+            endIndex: "",
+            seats: []
         };
       }
       componentDidMount() {
@@ -34,6 +36,30 @@ class SeatManager extends Component{
           totalRecords: results.length
         });
       }
+
+      static getDerivedStateFromProps(props, state) {
+        //const id = window.location.pathname.split('/')[3] 
+        //props.fetchDataSeats(id);
+        if(props.seats != state.seats){ 
+            console.log("khác")
+            const {seats} = props;
+            const data = seats.reduce((prev, curr) => (prev[curr.row] = ++prev[curr.row] || 1, prev), {});
+            const results = [];
+            const keys = Object.keys(data);
+            const values = Object.values(data);
+            for(let i = 0 ; i < keys.length; i ++){
+                results.push({
+                    row: keys[i],
+                    quantity: values[i]
+                })
+            }
+            console.log("results", results);
+            return{
+                totalRecords: results.length,
+                seats: results
+            };
+        }
+      }
       onChangePage = data => {
         this.setState({
             pageLimit: data.pageLimit,
@@ -44,17 +70,9 @@ class SeatManager extends Component{
         });
       };
     render(){
-        const {seats} = this.props;
-        const data = seats.reduce((prev, curr) => (prev[curr.row] = ++prev[curr.row] || 1, prev), {});
-        const results = [];
-        const keys = Object.keys(data);
-        const values = Object.values(data);
-        for(let i = 0 ; i < keys.length; i ++){
-            results.push({
-                row: keys[i],
-                quantity: values[i]
-            })
-        }
+        const {loading} = this.props;
+        const seats = this.state.seats;
+        console.log("seat state", seats)
         var {
             totalPages,
             currentPage,
@@ -62,8 +80,9 @@ class SeatManager extends Component{
             startIndex,
             endIndex
           } = this.state;
-        var rowsPerPage = results.slice(startIndex, endIndex + 1);  
+        var rowsPerPage = seats.slice(startIndex, endIndex + 1);  
         return (       
+            <Loader show={loading} message={'Loading.......'}>
             <section>
                 <div className="container-fluid">
                     <div className="row">
@@ -109,7 +128,7 @@ class SeatManager extends Component{
                                             </p>
                                         </div>
                                         <Pagination
-                                            totalRecords={results.length}
+                                            totalRecords={seats.length}
                                             pageLimit={pageLimit || 10}
                                             initialPage={1}
                                             pagesToShow={5}
@@ -123,14 +142,15 @@ class SeatManager extends Component{
                     </div>
                 </div>            
             </section> 
-                
+              </Loader>  
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        seats : state.seats.seats
+        seats : state.seats.seats,
+        loading: state.seats.loading
     }
 }
 

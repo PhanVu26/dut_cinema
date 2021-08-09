@@ -52,7 +52,7 @@ class CinemaItem extends Component {
                             className="btn btn-danger"
                             // onClick={this.getcinemaInfo}
                             >
-                            <span className="fas fa-eye"></span>
+                            <span className="fas fa-eye">DS phòng</span>
                         </button>
                     </NavLink>
                 </td>

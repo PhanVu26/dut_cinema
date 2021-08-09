@@ -39,44 +39,12 @@ export const saveRoom = (rooms) => {
     }
 }
 
-export const actSaveSeatRequest = (seat, id) => {
-    return (dispatch) => {
-        console.log(id)
-        return callApi(`rooms/${id}/seats`, "POST", seat).then((res) => {
-            if(res.statusCode !== 400){
-                alert("Thêm ghế thành công.")
-                dispatch(saveSeat(res.data));
-            }
-        })
-        .catch(err => {
-            alert("Lỗi kết nối !!!")
-        })
-    };
-};
-
-export const saveSeat = (room) => {
-    return {
-        type: types.ADD_SEATS,
-        room
-    }
-}
-
 export const toggleModal = () => {
     return {
         type: types.TOGGLE_ROOM_MODAL,
     }
 }
 
-export const toggleSeatModal = () => {
-    return {
-        type: types.TOGGLE_SEAT_MODAL,
-    }
-}
-// export const toggleActorForm = () => {
-//     return {
-//         type: types.TOGGLE_ACTOR_FORM,
-//     }
-// }
 
 export const getRoomInfo = (room) => {
     return {

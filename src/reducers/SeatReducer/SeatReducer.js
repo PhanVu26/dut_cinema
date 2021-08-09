@@ -13,10 +13,10 @@ var SeatReducer = (state = initialState, action) => {
             }; 
         case types.ADD_SEATS:
             var seats = [...state.seats];
-            seats.unshift(action.room);
+            var newSeats = seats.concat(action.seats)
             return {
                 ...state,
-                seats: seats,
+                seats: newSeats,
                 loading: false
             }; 
         case types.GET_SEATS:
