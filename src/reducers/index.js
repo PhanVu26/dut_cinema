@@ -46,6 +46,11 @@ import isDisplayGenreForm from "./GenreReducer/DisplayGenreFormReducer";
 import genreEditing from "./GenreReducer/GenreEditingReducer";
 import filterGenre from "./GenreReducer/FilterGenreReducer";
 
+import ticketTypes from './TicketTypeReducer/TicketTypeReducer';
+import isDisplayTicketTypeForm from "./TicketTypeReducer/DisplayTicketTypeFormReducer";
+import ticketTypeEditing from "./TicketTypeReducer/TicketTypeEditingReducer";
+import filterTicketType from "./TicketTypeReducer/FilterTicketTypeReducer";
+
 const myReducer = combineReducers({
   users,
   genres,
@@ -82,6 +87,11 @@ const myReducer = combineReducers({
   isDisplayGenreForm,
   genreEditing,
   filterGenre,
+
+  ticketTypes,
+  isDisplayTicketTypeForm,
+  ticketTypeEditing,
+  filterTicketType,
 
 });
 

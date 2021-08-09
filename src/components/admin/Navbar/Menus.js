@@ -43,6 +43,11 @@ export const admin_menus = [
         icon: "fa-transgender-alt"
     },
     {
+        url: "/admin/ticket-types",
+        label: "Ticket-types",
+        icon: "fa-ticket-alt"
+    },
+    {
         url: "/admin/sales",
         label: "Sales",
         icon: "fa-chart-line"
