@@ -1,7 +1,7 @@
 import { Button, Modal } from 'react-bootstrap';
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../../actions/roomAction/index';
+import * as actions from '../../../actions/seatAction/index';
 import * as acts from '../../../actions/index';
 
 class SeatForm extends Component {
@@ -60,8 +60,9 @@ class SeatForm extends Component {
     // }
     saveSeat = (event) => {
         event.preventDefault();
-        console.log(this.state)
-        this.props.onSaveSeat(this.state.seat, this.props.roomEditing.id)
+        console.log("roomediting", this.props.roomEditing.id)
+        const roomId = window.location.pathname.split('/')[3];
+        this.props.onSaveSeat(this.state.seat, roomId)
         this.props.onToggleSeatForm();
         
         // if(this.validateRoom() === true) {

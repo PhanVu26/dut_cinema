@@ -22,10 +22,6 @@ class RoomItem extends Component {
         this.props.onToggleRoomForm();
         this.props.getRoomInfo(this.props.room)
     }
-    addSeats = () => {
-        this.props.onToggleSeatModal();
-        this.props.getRoomInfo(this.props.room)
-    }
     
     render() {
         const {index, room} = this.props;
@@ -49,13 +45,6 @@ class RoomItem extends Component {
                         className="btn btn-danger ml-2 mr-2">
                         <span className="far fa-trash-alt"></span>
                     </button>
-                    <button 
-                        type="button" 
-                        className="btn btn-primary"
-                        onClick={this.addSeats}
-                        >
-                        <span className="fas fa-plus">Thêm ghế</span>
-                    </button>
                     <NavLink to={"/admin/rooms/" + room.id + "/seats"}>
                         <button 
                             type="button" 
@@ -76,9 +65,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) =>{
     return {
-        onToggleSeatModal: () => {
-            dispatch(actions.toggleSeatModal())
-        },
         onToggleRoomForm: () => {
             dispatch(actions.toggleModal())
         },

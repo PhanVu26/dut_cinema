@@ -7,17 +7,7 @@ import SeatForm from '../../Modal/SeatModal/SeatForm';
 class SeatControl extends Component {
 
     onHandleModal = () => {
-        // if(this.props.roomEditing.id === '' ){
-        //     this.props.onToggleRoomForm();
-        // }else {
-        //     this.props.onClearRoom({
-        //         id: '',
-        //         name :'',
-        //         roomNumber: ''
-
-        //     })
-        //     this.props.onToggleRoomForm();
-        // }
+       this.props.onToggleSeatForm();
     }
     onSubmit = (event) => {
         event.preventDefault();
@@ -41,19 +31,16 @@ class SeatControl extends Component {
 const mapStateToProps = (state) => {
     return {
         // isDisplayRoomForm : state.isDisplayRoomForm,
-        // roomEditing : state.roomEditing
+        roomEditing : state.roomEditing
     }
 
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        // onToggleRoomForm: ()=>{
-        //     dispatch(actions.toggleModal())
-        // },
-        // onClearRoom: (room) => {
-        //     dispatch(actions.getRoomInfo(room))
-        // }
+        onToggleSeatForm: ()=>{
+            dispatch(actions.toggleSeatModal())
+        }
     }
 } 
 

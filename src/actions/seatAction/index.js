@@ -7,7 +7,6 @@ export const actFetchDataSeatsRequest = (romId) => {
     return (dispatch) => {
         dispatch(loadSeat())
       return callApi(`rooms/${romId}/seats?page=1&perPage=1000`, "GET", null).then((res) => {
-        console.log("seats", res.data)
         dispatch(actFetchDataSeats(res.data.seats));
       });
     };
@@ -27,8 +26,8 @@ export const actSaveSeatRequest = (seat, id) => {
         console.log(id)
         return callApi(`rooms/${id}/seats`, "POST", seat).then((res) => {
             if(res.statusCode !== 400){
+                dispatch(saveSeat(res.data.seats));
                 alert("Thêm ghế thành công.")
-                dispatch(saveSeat(res.data));
             }
         })
         .catch(err => {
@@ -37,10 +36,10 @@ export const actSaveSeatRequest = (seat, id) => {
     };
 };
 
-export const saveSeat = (room) => {
+export const saveSeat = (seats) => {
     return {
         type: types.ADD_SEATS,
-        room
+        seats
     }
 }
 export const toggleSeatModal = () => {
