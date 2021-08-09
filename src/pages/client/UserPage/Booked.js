@@ -72,13 +72,11 @@ class Booked extends Component {
         if (id1 < id2) {
           arrayBooking.push(JSON.parse(JSON.stringify(arrayBooking1[i])));
           i++;
-        }
-        if (id1 === id2) {
+        } else if (id1 === id2) {
           i++;
           j++;
-        }
-        if (id1 > id2) {
-          id2++;
+        } else {
+          j++;
         }
       }
       for (; i < arrayBooking1.length; i++) {
