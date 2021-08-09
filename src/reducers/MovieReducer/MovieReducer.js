@@ -1,5 +1,8 @@
 import * as types from "../../constants/ActionType";
-var initialState = []
+var initialState = {
+    movies: [],
+    loading: false
+}
 
 const findIndex = (users, id) => {
     var result = -1;
@@ -19,9 +22,21 @@ var myReducer = (state = initialState, action) => {
     var index = -1;
     switch(action.type){
         case types.LIST_ALL_MOVIES:
-            var state = action.movies;
-            return state;
+            return {
+                ...state,
+                movies: action.movies,
+                loading: false
+            }
+        case types.MOVIE_LOADING:
+            console.log("movie loading......")
+            return {
+                ...state,
+                loading: true
+            
+            };    
         case types.ADD_MOVIE:
+            console.log("Add done");
+            var movies = [...state.movies];
             var movieInfo = {
                 id: action.movie.id,
                 name: action.movie.name,
@@ -35,10 +50,14 @@ var myReducer = (state = initialState, action) => {
                 image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
             } 
-            console.log("movie infor in reducer", movieInfo)
-            state.push(movieInfo);
-            return [...state]; 
+            movies.push(movieInfo);
+            return {
+                ...state,
+                movies: movies,
+                loading: false
+            }; 
         case types.UPDATE_MOVIE:
+            var movies = [...state.movies];
             var movieEditting = {
                 id: action.movie.id,
                 name: action.movie.name,
@@ -52,25 +71,24 @@ var myReducer = (state = initialState, action) => {
                 image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
             } 
-            console.log("update movie", movieEditting)
-            index = findIndex(state, movieEditting.id);
-            state[index] = movieEditting;
-            return [...state];       
+            index = findIndex(movies, movieEditting.id);
+            movies[index] = movieEditting;
+            return {
+                ...state,
+                movies: movies,
+                loading: false
+            };       
         case types.DELETE_MOVIE:
-            index = findIndex(state, action.id)
-            state.splice(index, 1);
-            return [...state];       
-        // case types.UPDATE_USER_STATUS:
-        //     index = findIndex(state, action.id);
-        //     state[index] = {
-        //         ...state[index],
-        //         status: !state[index].status
-        //     }
-        //     console.log(action);
-        //     return [...state];            
-        default: return state;     
+            var movies = [...state.movies];
+            index = findIndex(movies, action.id)
+            movies.splice(index, 1);
+            return {
+                ...state,
+                movies: movies,
+                loading: false
+            };                  
+        default: return {...state};     
     }
-    return state;
 }
 
 
