@@ -38,6 +38,11 @@ export const admin_menus = [
         icon: "fa-theater-masks"
     },
     {
+        url: "/admin/genres",
+        label: "Genres",
+        icon: "fa-transgender-alt"
+    },
+    {
         url: "/admin/sales",
         label: "Sales",
         icon: "fa-chart-line"

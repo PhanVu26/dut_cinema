@@ -42,6 +42,10 @@ import seatRoom from './SeatReducer/SeatReducer';
 
 import seats from './SeatReducer/SeatReducer';
 
+import isDisplayGenreForm from "./GenreReducer/DisplayGenreFormReducer";
+import genreEditing from "./GenreReducer/GenreEditingReducer";
+import filterGenre from "./GenreReducer/FilterGenreReducer";
+
 const myReducer = combineReducers({
   users,
   genres,
@@ -74,7 +78,10 @@ const myReducer = combineReducers({
   roomEditing,
   isDisplaySeatModal,
   seatRoom,
-  seats
+  seats,
+  isDisplayGenreForm,
+  genreEditing,
+  filterGenre,
 
 });
 

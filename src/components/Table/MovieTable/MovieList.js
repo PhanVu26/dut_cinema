@@ -170,8 +170,8 @@ class MovieList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    movies: state.movies,
-    genres: state.genres,
+    movies: state.movies.movies,
+    genres: state.genres.genres,
     filterMovie: state.filterMovie,
     // pageInfo: state.pageInfo
   };
