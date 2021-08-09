@@ -3,8 +3,8 @@ import callApi from "../../utils/ApiCallerServer";
 
 export const actFetchDataCinemasRequest = () => {
     return (dispatch) => {
+        dispatch(loadCinema())
       return callApi("cinemas?page=1&perPage=1000&relations=rooms", "GET", null).then((res) => {
-        console.log("cinemas", res.data)
         dispatch(actFetchDataCinemas(res.data.results));
       });
     };
@@ -17,12 +17,19 @@ export const actFetchDataCinemas = (cinemas) => {
     }
 }
 
+export const loadCinema = () => {
+    return {
+        type: types.CINEMA_LOADING,
+    }
+}
+
 
 export const actSaveCinemaRequest = (cinema) => {
     return (dispatch) => {
+        dispatch(loadCinema())
         return callApi("cinemas", "POST", cinema).then((res) => {
-            alert("Thêm thành công.")
             dispatch(saveCinema(res.data));
+            alert("Thêm thành công.")
         })
         .catch(err => {
             alert("Lỗi kết nối !!!")
@@ -57,9 +64,10 @@ export const getCinemaInfo = (cinema) => {
 }
 export const actDeleteCinemaRequest = (id) => {
     return (dispatch) => {
+        dispatch(loadCinema())
         return callApi(`cinemas/${id}`, "DELETE", null).then((res) => {
-            alert("Xóa thành công.")
             dispatch(deleteCinema(id));
+            alert("Xóa thành công.")
         })
         .catch(err => {
             alert("Lỗi kết nối !!!")
@@ -82,9 +90,10 @@ export const deleteCinema = (id) => {
 
 export const actUpdateCinemaRequest = (cinema) => {
     return (dispatch) => {
+        dispatch(loadCinema())
         return callApi(`cinemas/${cinema.id}`, "PATCH", cinema).then((res) => {
-            alert("Cập nhật thành công.")
             dispatch(actUpdateCinema(res.data));
+            alert("Cập nhật thành công.")
         })
         .catch(err => {
             alert("Lỗi kết nối !!!")

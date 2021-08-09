@@ -99,6 +99,7 @@ export const SAVE_CINEMA = "SAVE_CINEMA";
 export const TOGGLE_CINEMAS_MODAL = "TOGGLE_CINEMAS_MODAL";
 export const GET_CINEMA_INFO = "GET_CINEMA_INFO";
 export const UPDATE_CINEMA = "UPDATE_CINEMA";
+export const CINEMA_LOADING = "CINEMA_LOADING";
 
 
 // Rooms of cinema
