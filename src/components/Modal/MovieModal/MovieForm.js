@@ -166,8 +166,8 @@ class MovieForm extends Component {
         results = actors?.map((actor, index) => {
             //console.log("showActorBox", this.state.selectedActors?.some(act => act.id == actor.id))
             return (
-                <div className="actor-item ml-3 row" key={index}>
-                    <div className="col-2">
+                <div className="actor-item ml-3 row " key={index}>
+                    <div className="col-1">
                         <input 
                             checked = {this.state.selectedActors?.some(act => act.id == actor.id)}
                             className="actor-checkbox"
@@ -227,7 +227,7 @@ class MovieForm extends Component {
         results = genres?.map((genre, index) => {
             return (
                 <div className="genre-item ml-3 row" key={index}>
-                    <div className="col-2">
+                    <div className="col-1">
                         <input 
                             checked = {this.state.selectedGenres?.some(g => g.id == genre.id)}
                             className="genre-checkbox"
@@ -447,11 +447,14 @@ class MovieForm extends Component {
                                         onChange={ this.onHandleChange }
                                     
                                     />
-                                    <img 
-                                        src={this.state.movie.previewImage} 
-                                        width='200px'
-                                        height='200px'
-                                    ></img>
+                                    <div className="image-preview">
+                                        <img 
+                                            src={this.state.movie.previewImage} 
+                                            width = '100%'
+                                            height = '100%'
+                                            
+                                            ></img>
+                                    </div>
                                 </div> 
                             </div>
 
