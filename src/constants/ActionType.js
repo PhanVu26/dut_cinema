@@ -13,6 +13,7 @@ export const FILTER_USER = "FILTER_USER";
 
 export const LIST_ALL_MOVIES = "LIST_ALL_MOVIES";
 export const ADD_MOVIE = "ADD_MOVIE";
+export const MOVIE_LOADING = "MOVIE_LOADING";
 export const SAVE_MOVIE = "SAVE_MOVIE";
 export const TOGGLE_MOVIE_MODAL = "TOGGLE_MOVIE_MODAL";
 export const TOGGLE_MOVIE_FORM = "TOGGLE_MOVIE_FORM";

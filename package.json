@@ -39,6 +39,7 @@
     "react-dom": "^17.0.1",
     "react-flickity-component": "^3.5.0",
     "react-fontawesome": "^1.7.1",
+    "react-loader-advanced": "^1.7.1",
     "react-lodash": "^0.1.2",
     "react-modal-video": "^1.2.3",
     "react-redux": "^7.2.3",
