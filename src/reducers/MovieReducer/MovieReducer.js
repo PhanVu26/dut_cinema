@@ -50,7 +50,7 @@ var myReducer = (state = initialState, action) => {
                 image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
             } 
-            movies.push(movieInfo);
+            movies.unshift(movieInfo);
             return {
                 ...state,
                 movies: movies,
