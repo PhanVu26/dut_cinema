@@ -102,7 +102,7 @@ class SalesChart extends Component{
                 <div className="row">
                     <div className="col-md-12">
                         <h4 className="mb-5 text-center">Biểu đồ số lượng vé đã đặt theo phim</h4>
-                        <BarChart width={1150} height={450} data={bookedQuanties}>
+                        <BarChart width={1300} height={450} data={bookedQuanties}>
                             <XAxis dataKey="name" stroke="#8884d8" />
                             <YAxis />
                             <Tooltip wrapperStyle={{ width: 100, backgroundColor: '#ccc' }} />
