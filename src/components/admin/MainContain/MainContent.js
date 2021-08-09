@@ -7,10 +7,10 @@ import SalesChart from '../Chart/SalesChart'
 
 const MainContent  = (props) => {
     const movies = useSelector(state => state.movies.movies)
-    const users = useSelector(state => state.users)
+    const users = useSelector(state => state.users.users)
     const transactions = useSelector(state => state.transactions.transactions)
     const loading = useSelector(state => state.transactions.loading)
-    const cinemas = useSelector(state => state.cinemas)
+    const cinemas = useSelector(state => state.cinemas.cinemas)
     return (
         <Loader show={loading} message={'Loading.......'}>
             <div className="container-fluid">
