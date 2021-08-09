@@ -30,6 +30,7 @@ import RoomManagement from "./RoomManagement";
 import MovieManager from "../manager/MovieManager";
 import ActorManager from "../manager/ActorManager";
 import EditShowTimePage from "../ShowTimeManager/EditShowTimePage/EditShowTimePage";
+import SeatManagement from "./SeatManagement";
 
 const AdminPage = (props) => {
     const dispatch = useDispatch()
@@ -55,7 +56,8 @@ const AdminPage = (props) => {
             <Route path="/admin/profile" exact component={UserProfile}></Route>  
             <Route path="/admin/transactions" exact component={TransactionPage}></Route>  
             <Route path="/admin/cinemas" exact component={CinemaManagement}></Route>  
-            <Route path="/admin/cinemas/*" exact component={RoomManagement}></Route>  
+            <Route path="/admin/cinemas/*/rooms" exact component={RoomManagement}></Route>
+            <Route path="/admin/rooms/*/seats" exact component={SeatManagement}></Route>  
             <Route path="/admin/movies" exact component={MovieManager}></Route>  
             <Route path="/admin/actors" exact component={ActorManager}></Route>
             <Route path="/admin/movie-showtimes" exact component={EditShowTimePage}></Route>

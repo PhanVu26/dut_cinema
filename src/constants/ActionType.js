@@ -113,6 +113,7 @@ export const UPDATE_ROOM = "UPDATE_ROOM";
 
 
 // seats of room
-// Rooms of cinema
 export const ADD_SEATS = "ADD_SEATS";
+export const GET_SEATS = "GET_SEATS";
+export const SEAT_LOADING = "SEAT_LOADING";
 export const TOGGLE_SEAT_MODAL = "TOGGLE_SEAT_MODAL";
