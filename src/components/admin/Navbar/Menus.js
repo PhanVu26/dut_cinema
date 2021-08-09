@@ -33,6 +33,11 @@ export const admin_menus = [
         icon: "fas fa-handshake"
     },
     {
+        url: "/admin/movies",
+        label: "Movies",
+        icon: "fa-film"
+    },
+    {
         url: "/admin/cinemas",
         label: "Cinemas",
         icon: "fa-theater-masks"
@@ -48,29 +53,24 @@ export const admin_menus = [
         icon: "fa-ticket-alt"
     },
     {
-        url: "/admin/sales",
-        label: "Sales",
-        icon: "fa-chart-line"
-    },
-    {
-        url: "/admin/profile",
-        label: "Profile",
-        icon: "fa-user"
-    },
-    {
-        url: "/admin/movies",
-        label: "Movies",
-        icon: "fa-film"
-    },
-    {
         url: "/admin/actors",
         label: "Actors",
         icon: "fa-walking"
     },
     {
+        url: "/admin/sales",
+        label: "Sales",
+        icon: "fa-chart-line"
+    },
+    {
         url: "/admin/movie-showtimes",
         label: "Showtimes",
         icon: "fa-calendar-alt"
+    },
+    {
+        url: "/admin/profile",
+        label: "Profile",
+        icon: "fa-user"
     },
     {
         url: "/admin/settings",
