@@ -11,6 +11,8 @@ const MainContent  = (props) => {
     const transactions = useSelector(state => state.transactions.transactions)
     const loading = useSelector(state => state.transactions.loading)
     const cinemas = useSelector(state => state.cinemas.cinemas)
+    const genres = useSelector(state => state.genres.genres)
+    const ticketTypes = useSelector(state => state.ticketTypes.ticketTypes)
     return (
         <Loader show={loading} message={'Loading.......'}>
             <div className="container-fluid">
@@ -80,6 +82,40 @@ const MainContent  = (props) => {
                                                     <div className="text-right">
                                                         <h5>Cinemas</h5>
                                                         <h3>{cinemas.length}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="card-footer">
+                                                <i className="fas fa-sync mr-3"></i>
+                                                <span>Updated Know</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-xl-3 col-sm-6 p-2">
+                                        <div className="card card-style">
+                                            <div className="card-body">
+                                                <div className="d-flex justify-content-between">
+                                                    <i className="fas fa-chart-line fa-3x text-danger"></i>
+                                                    <div className="text-right">
+                                                        <h5>Genres</h5>
+                                                        <h3>{genres.length}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="card-footer">
+                                                <i className="fas fa-sync mr-3"></i>
+                                                <span>Updated Know</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-xl-3 col-sm-6 p-2">
+                                        <div className="card card-style">
+                                            <div className="card-body">
+                                                <div className="d-flex justify-content-between">
+                                                    <i className="fas fa-chart-line fa-3x text-danger"></i>
+                                                    <div className="text-right">
+                                                        <h5>Ticket types</h5>
+                                                        <h3>{ticketTypes.length}</h3>
                                                     </div>
                                                 </div>
                                             </div>

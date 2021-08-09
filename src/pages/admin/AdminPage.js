@@ -25,6 +25,8 @@ import * as movieActions from '../../actions/movieManager/index'
 import * as transactionActions from '../../actions/transactionAction/index'
 import * as actions from '../../actions/index'
 import * as cinemaAction from '../../actions/cinemaAction/index'
+import * as genreAction from '../../actions/genreAction/index'
+import * as ticketTypeAction from '../../actions/ticketTypeAction/index'
 
 import RoomManagement from "./RoomManagement";
 import MovieManager from "../manager/MovieManager";
@@ -33,6 +35,7 @@ import EditShowTimePage from "../ShowTimeManager/EditShowTimePage/EditShowTimePa
 import SeatManagement from "./SeatManagement";
 import GenreManagementPage from './GenreManagement';
 import TicketTypeManagementPage from './TicketTypeManagement';
+
 
 const AdminPage = (props) => {
     const dispatch = useDispatch()
@@ -45,6 +48,8 @@ const AdminPage = (props) => {
         dispatch(movieActions.actFetchDataMoviesRequest())
         dispatch(transactionActions.actFetchDataTransactionsRequest())
         dispatch(cinemaAction.actFetchDataCinemasRequest())
+        dispatch(genreAction.actFetchDataGenresRequest())
+        dispatch(ticketTypeAction.actFetchDataTicketTypesRequest())
 
     },[])
     return (
