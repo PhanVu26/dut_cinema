@@ -8,6 +8,7 @@ export const GET_USER_EDITING = "GET_USER_EDITING";
 export const UPDATE_USER_STATUS = "UPDATE_USER_STATUS";
 export const UPDATE_USER = "UPDATE_USER";
 export const FILTER_USER = "FILTER_USER";
+export const USER_LOADING = "USER_LOADING";
 
 // Movies manager
 
