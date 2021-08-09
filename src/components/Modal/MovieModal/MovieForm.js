@@ -534,7 +534,7 @@ class MovieForm extends Component {
 const mapStateToProps = (state) => {
     return {
         genres : state.genres,
-        actors: state.actors,
+        actors: state.actors.actors,
         isDisplayMovieForm : state.isDisplayMovieForm,
         movieInfo: state.movieInfo
     }
