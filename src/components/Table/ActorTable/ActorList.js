@@ -59,7 +59,6 @@ class ActorList extends Component {
                         <th className="text-center">STT</th>
                         <th className="text-center">ID</th>
                         <th className="text-center">Tên diễn viên</th>
-                        <th className="text-center">Hình ảnh</th>
                         <th className="text-center">Ngày sinh</th>
                         <th className="text-center">Quốc tịch</th>
                         <th className="text-center">Hành Động</th>
@@ -78,7 +77,6 @@ class ActorList extends Component {
                                 value={this.state.filterByName}>
                             </input>
                         </td>
-                        <td></td>
                         <td></td>
                         <td>
                             <input 
