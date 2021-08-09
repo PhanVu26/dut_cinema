@@ -1,6 +1,8 @@
 import * as types from "../../constants/ActionType";
-var initialState = [
-];
+var initialState = {
+    cinemas: [],
+    loading: false
+}
 
 const findIndex = (cinemas, id) => {
     var result = -1;
@@ -15,23 +17,46 @@ const findIndex = (cinemas, id) => {
 var myReducer = (state = initialState, action) => {
     var index = -1;
     switch(action.type){
+        case types.CINEMA_LOADING:
+            return {
+                ...state,
+                loading: true
+            }
         case types.FETCH_DATA_CINEMAS:
-            var newState = action.cinemas
-            return newState;
+            return {
+                ...state,
+                cinemas: action.cinemas,
+                loading: false
+            }
+
         case types.SAVE_CINEMA:
+            var cinemas = [...state.cinemas];
             var newCinema = action.cinema
-            state.push(newCinema);
-            return [...state];    
+            cinemas.unshift(newCinema);
+            return {
+                ...state,
+                cinemas: cinemas,
+                loading: false
+            }    
         case types.DELETE_CINEMA:
-            index = findIndex(state, action.id)
-            state.splice(index, 1);
-            return [...state];     
-            case types.UPDATE_CINEMA:               
-                index = findIndex(state, action.cinema.id);
-                console.log("index", index, action.cinema, state)
-                state[index] = action.cinema;
-            return [...state];                     
-        default: return state;     
+            var cinemas = [...state.cinemas];
+            index = findIndex(cinemas, action.id)
+            cinemas.splice(index, 1);
+            return {
+                ...state,
+                cinemas: cinemas,
+                loading: false
+            }     
+            case types.UPDATE_CINEMA:  
+                var cinemas = [...state.cinemas];             
+                index = findIndex(cinemas, action.cinema.id);
+                cinemas[index] = action.cinema;
+                return {
+                    ...state,
+                    cinemas: cinemas,
+                    loading: false
+                }                     
+        default: return {...state};     
     }
     return state;
 }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Loader from 'react-loader-advanced';
 import {connect} from 'react-redux';
 import Pagination from '../../components/Pagination/Pagination';
 import CinemaControl from '../../components/Control/CinemaControl/CinemaControl';
@@ -32,7 +33,7 @@ class CinemaManager extends Component{
         });
       };
     render(){
-        const {cinemas} = this.props;
+        const {cinemas, loading} = this.props;
         var {
             totalPages,
             currentPage,
@@ -42,6 +43,7 @@ class CinemaManager extends Component{
           } = this.state;
         var rowsPerPage = cinemas.slice(startIndex, endIndex + 1);  
         return (       
+            <Loader show={loading} message={'Loading.......'}>
             <section>
                 <div className="container-fluid">
                     <div className="row">
@@ -101,6 +103,7 @@ class CinemaManager extends Component{
                     </div>
                 </div>            
             </section> 
+            </Loader>
                 
         )
     }
@@ -108,7 +111,8 @@ class CinemaManager extends Component{
 
 const mapStateToProps = (state) => {
     return {
-        cinemas : state.cinemas
+        cinemas : state.cinemas.cinemas,
+        loading: state.cinemas.loading
     }
 }
 
