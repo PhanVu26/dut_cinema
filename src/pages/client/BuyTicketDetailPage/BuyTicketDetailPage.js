@@ -97,9 +97,11 @@ class BuyTicketDetailPage extends Component {
     let dataSeats = [];
     if(bookings.tickets!==undefined){
       for (let i = 0; i < num_seat; i++) {
-        if ( bookings.tickets[i].status === type) {
-          dataSeats.push(bookings.tickets[i].seat);
-        }
+	if(bookings.tickets[i]){
+          if ( bookings.tickets[i].status === type) {
+            dataSeats.push(bookings.tickets[i].seat);
+          }
+	}
       }
     }
     let seats = [];
