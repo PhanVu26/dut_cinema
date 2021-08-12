@@ -1,0 +1,24 @@
+.toolbar {
+    display: "content";
+  }
+  .header {
+    color: "#4267B2";
+    border-bottom: "2px solid #4267B2";
+  }
+  .modalHeader {
+    border-bottom: "none";
+  }
+  .text {
+    font-size: "14px";
+    color: "#a0a3a7";
+  }
+  .Buttonn {
+    background-color: #4267b2;
+    border: "1px solid #4267B2";
+  }
+  .link {
+    display: "inline";
+    font-size: "14px";
+    color: "#a0a3a7";
+    cursor: "pointer";
+  }
