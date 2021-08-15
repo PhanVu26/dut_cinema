@@ -40,20 +40,7 @@ class MovieDetail extends Component {
         }) 
         return results.toString();
     }
-    
-    // componentDidMount(){   
-    //     this.setState({
-    //         id: this.props.movieInfo.id,
-    //         name: this.props.movieInfo.name,
-    //         genres: this.props.movieInfo.genres,
-    //         director: this.props.movieInfo.director,
-    //         producer: this.props.movieInfo.producer,
-    //         releaseDate: this.props.movieInfo.releaseDate,
-    //         actors: this.props.movieInfo.actors,
-    //         image: this.props.movieInfo.image
-    //     })
-        
-    // }
+
     render() {
         const {isDisplayMovieModal} = this.props;
         const movie = this.props.movieInfo;
@@ -103,14 +90,6 @@ class MovieDetail extends Component {
                                                 </td>
                                                 <td>
                                                     <span>{this.showGenres(movie.genres)}</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span className="title-detail">Đạo diễn:</span>
-                                                </td>
-                                                <td>
-                                                    <span>{movie.director}</span>
                                                 </td>
                                             </tr>
                                             <tr>
