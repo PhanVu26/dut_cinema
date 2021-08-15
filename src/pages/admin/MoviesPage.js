@@ -206,6 +206,13 @@ export default function EnhancedTable() {
     return result;
   };
 
+  const getMovie = (id) => {
+    console.log("cleck")
+    dispatch(actions.getMovieRequest(id));
+    dispatch(actions.toggleModal());
+
+}
+
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -359,6 +366,7 @@ export default function EnhancedTable() {
                                       &nbsp;
                                       <button
                                         type="button"
+                                        onClick={() => getMovie(row.id)}
                                         className="btn btn-primary"
                                       >
                                         <span className="far fa-eye"></span>
