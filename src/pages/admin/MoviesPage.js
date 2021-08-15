@@ -14,9 +14,12 @@ import Paper from "@material-ui/core/Paper";
 import Loader from "react-loader-advanced";
 
 import * as actions from "../../actions/movieManager/index";
+import * as actorActions from '../../actions/actorManager/index';
 import MovieControl from "../../components/Control/MovieControl/MovieControl";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import SearchIcon from "@material-ui/icons/Search";
+import MovieForm from "../../components/Modal/MovieModal/MovieForm";
+import MovieDetail from "../../components/Modal/MovieModal/MovieDetail";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -154,6 +157,7 @@ export default function EnhancedTable() {
   useEffect(() => {
     dispatch(actions.actFetchDataMoviesRequest());
     dispatch(actions.actFetchDataGenresRequest());
+    dispatch(actorActions.actFetchDataActorsRequest());
   }, []);
 
   const handleRequestSort = (event, property) => {
@@ -173,19 +177,12 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  const showUserRole = (userRoles) => {
-    const rs = userRoles?.map((role, index) => {
-      return role.role.name;
-    });
-    return rs?.toString();
-  };
-
   const onDeleteMovie = (id) => {
     dispatch(actions.actDeleteMovieRequest(id));
   };
 
   const getMovieEditing = (id) => {
-    dispatch(actions.getMovie(id));
+    dispatch(actions.getMovieRequest(id));
     dispatch(actions.toggleMovieForm());
   };
 
@@ -201,19 +198,22 @@ export default function EnhancedTable() {
     // dispatch(actions.actFetchDataUsersFilterRequest(filter));
   };
 
-  const showGenres = (genres)=>{
+  const showGenres = (genres) => {
     var result = null;
-    result = genres?.map(genre => {
-        return <li key={genre.id}>{genre.name}</li>
-    }) 
+    result = genres?.map((genre) => {
+      return <li key={genre.id}>{genre.name}</li>;
+    });
     return result;
-  }
+  };
+
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
     <Loader show={loading} message={"Loading......."}>
       <section style={{ backgroundColor: "#f3f3f4" }}>
+        <MovieForm></MovieForm>
+        <MovieDetail></MovieDetail>
         <div class="container-fluid">
           <div class="row">
             <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
