@@ -35,7 +35,14 @@ var userReducer = (state = initialState, action) => {
             }     
         case types.SAVE_USER:
             var users = [...state.users]
-            users.unshift(action.user);
+            var newUser = {
+                id: action.user.user.id,
+                name: action.user.user.name,
+                email: action.user.user.email,
+                userRoles: [{id: action.user.role.id, role: {name: action.user.role.name}}],
+                isActive: action.user.status === 'true' ? true: false}
+            users.unshift(newUser);
+            console.log("user", users)
             return {
                 ...state,
                 users: users,
