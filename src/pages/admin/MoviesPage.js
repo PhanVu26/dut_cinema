@@ -145,7 +145,7 @@ export default function EnhancedTable() {
   const [order, setOrder] = React.useState("desc");
   const [orderBy, setOrderBy] = React.useState("id");
   const [page, setPage] = React.useState(0);
-  const [movieName, setMovieName] = React.useState("");
+  const [movieFilter, setMovieFilter] = React.useState({});
   const [producer, setProducer] = React.useState("");
   const [dense, setDense] = React.useState(false);
   const loading = useSelector((state) => state.movies.loading);
@@ -188,14 +188,13 @@ export default function EnhancedTable() {
 
   const refreshData = () => {
     dispatch(actions.actFetchDataMoviesRequest());
-    setMovieName("");
-    setProducer("");
+    setMovieFilter({movieName: "", producer: ""});
   };
 
   const searchMovieQuery = (e) => {
     e.preventDefault();
-    // const filter = `filter={"name": {"like": "${name}"}, "email": {"like": "${email}"}}`;
-    // dispatch(actions.actFetchDataUsersFilterRequest(filter));
+    const filter = `filter={"name": {"like": "${movieFilter.movieName}"}, "producer": {"like": "${movieFilter.producer}"}}`;
+    dispatch(actions.actFetchDataMoviesFilterRequest(filter));
   };
 
   const showGenres = (genres) => {
@@ -246,9 +245,9 @@ export default function EnhancedTable() {
                           <input
                             className="form-control"
                             placeholder="Nhập tên phim"
-                            value={movieName}
+                            value={movieFilter.movieName}
                             onChange={(e) => {
-                              setMovieName(e.target.value);
+                              setMovieFilter({...movieFilter, movieName: e.target.value});
                             }}
                           ></input>
                         </div>
@@ -257,9 +256,9 @@ export default function EnhancedTable() {
                           <input
                             className="form-control"
                             placeholder="Nhập tên nhà sản xuất"
-                            value={producer}
+                            value={movieFilter.producer}
                             onChange={(e) => {
-                              setProducer(e.target.value);
+                              setMovieFilter({...movieFilter, producer: e.target.value});
                             }}
                           ></input>
                         </div>
