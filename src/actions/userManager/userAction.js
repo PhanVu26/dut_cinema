@@ -12,6 +12,19 @@ export const actFetchDataUsersRequest = () => {
       });
     };
 };
+
+export const actFetchDataUsersFilterRequest = (query) => {
+  return (dispatch) => {
+    dispatch(loadUser());
+    return callApi(`users?${query}&relations=userRoles,userRoles.role&page=1&perPage=1000`, "GET", null).then((res) => {
+      console.log("res", res)
+      dispatch(listAllUsers(res.data.results));
+    })
+    .catch(err => {
+      alert("Lỗi kết nối !!!")
+    })
+  };
+};
 export const listAllUsers = (users) => {
   return {
     type: types.LIST_ALL_USERS,
@@ -35,11 +48,12 @@ export const listAllRoles = (roles) => {
 };
 
 export const actUpdateUserRequest = (user) => {
+  console.log("update user", user)
   return (dispatch) => {
     dispatch(loadUser());
     return callApi(`users/${user.id}`, "PATCH", user).then((res) => {
-      alert("Cập nhật User thành công.")
       dispatch(updateUser(res.data));
+      alert("Cập nhật User thành công.")
     })
     .catch(err => {
       alert("Lỗi kết nối !!!")
@@ -75,8 +89,8 @@ export const actUpdateProfileRequest = (user) => {
   return (dispatch) => {
     dispatch(loadUser());
     return callApi(`users/me`, "PATCH", user).then((res) => {
-      alert("Cập nhật thành công.")
       dispatch(updateProfile(res.data));
+      alert("Cập nhật thành công.")
     })
     .catch(err => {
       alert("Lỗi kết nối !!!")
@@ -140,6 +154,7 @@ export const actUpdateUserStatusRequest = (user) => {
   return (dispatch) => {
     dispatch(loadUser());
     return callApi(`users/${user.id}`, "PATCH", user).then((res) => {
+      console.log("update user", res)
       dispatch(updateUserStatus(res.data.id));
       alert("Cập nhật thành công")
     })

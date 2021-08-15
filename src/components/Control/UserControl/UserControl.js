@@ -34,7 +34,7 @@ class UserControl extends Component {
     render() {
         const {isDisplayUserForm} = this.props;
         return (
-            <div className = "mb-2 float-left">
+            <div className = "mb-2 float-left ml-2 mt-2">
                 <button onClick={this.onHandleModal} type="button" className="btn btn-primary">
                     <span className="fas fa-plus mr-2"></span>Thêm User
                 </button>
