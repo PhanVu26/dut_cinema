@@ -35,6 +35,7 @@ import EditShowTimePage from "../ShowTimeManager/EditShowTimePage/EditShowTimePa
 import SeatManagement from "./SeatManagement";
 import GenreManagementPage from './GenreManagement';
 import TicketTypeManagementPage from './TicketTypeManagement';
+import UsersPage from './UsersPage';
 
 
 const AdminPage = (props) => {
@@ -58,7 +59,7 @@ const AdminPage = (props) => {
         <Navbar></Navbar>        
         <Switch>
             <Route path="/admin" exact component={MainContent}></Route>
-            <Route path="/admin/users" exact component={UserManagementPage}></Route>  
+            <Route path="/admin/users" exact component={UsersPage}></Route>  
             <Route path="/admin/genres" exact component={GenreManagementPage}></Route> 
             <Route path="/admin/ticket-types" exact component={TicketTypeManagementPage}></Route> 
             <Route path="/admin/sales" exact component={SaleChartPage}></Route>  
