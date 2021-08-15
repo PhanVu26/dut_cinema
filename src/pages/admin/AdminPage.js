@@ -16,7 +16,7 @@ import MainContent from "../../components/admin/MainContain/MainContent";
 import Navbar from "../../components/admin/Navbar/Navbar";
 import UserManagementPage from "./UserManagementPage";
 import UserProfile from "../UserProfile/UserProfile";
-import TransactionPage from "./TransactionPage";
+import TransactionsPage from "./TransactionsPage";
 import SaleChartPage from './SaleChartPage';
 import CinemaManagement from './CinemaManagement';
 
@@ -64,7 +64,7 @@ const AdminPage = (props) => {
             <Route path="/admin/ticket-types" exact component={TicketTypeManagementPage}></Route> 
             <Route path="/admin/sales" exact component={SaleChartPage}></Route>  
             <Route path="/admin/profile" exact component={UserProfile}></Route>  
-            <Route path="/admin/transactions" exact component={TransactionPage}></Route>  
+            <Route path="/admin/transactions" exact component={TransactionsPage}></Route>  
             <Route path="/admin/cinemas" exact component={CinemaManagement}></Route>  
             <Route path="/admin/cinemas/*/rooms" exact component={RoomManagement}></Route>
             <Route path="/admin/rooms/*/seats" exact component={SeatManagement}></Route>  
