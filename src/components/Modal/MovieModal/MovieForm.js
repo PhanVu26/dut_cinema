@@ -17,7 +17,7 @@ class MovieForm extends Component {
                 genres: [],
                 producer:"",
                 country:"",
-                duration: 0,
+                duration: '',
                 actors: [],
                 releaseDate: "",
                 mainImage: "",
@@ -379,10 +379,10 @@ class MovieForm extends Component {
                     <form onSubmit={this.addMovie} encType="multipart/form-data">
                         <div className='row'>
                             <div className='col-md-6 col-lg-6'>
-                                <div className="form-group">
+                                {/* <div className="form-group">
                                     <label>ID phim :</label>
                                     <span className="form-control">{movie.id}</span>
-                                </div>
+                                </div> */}
                                 <div className="form-group">
                                     <label>Tên phim :</label>
                                     <input
