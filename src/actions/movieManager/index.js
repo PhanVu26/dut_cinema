@@ -145,6 +145,16 @@ export const actFetchDataMoviesRequest = () => {
       });
     };
   };
+
+  export const actFetchDataMoviesFilterRequest = (query) => {
+    return (dispatch) => {
+      dispatch(movieLoading());
+      return callApi(`movies?${query}&page=1&perPage=1000&relations=actors,genres`, "GET", null).then((res) => {
+        //console.log("data", res.data.results)
+        dispatch(actFetchDataMovies(res.data.results));
+      });
+    };
+  };  
   
   export const actFetchDataMovies = (movies) => {
     return {
