@@ -37,6 +37,7 @@ import GenreManagementPage from './GenreManagement';
 import TicketTypeManagementPage from './TicketTypeManagement';
 import UsersPage from './UsersPage';
 import MoviesPage from '../manager/MovieManager/MoviesPage';
+import GenresPage from './GenresPage';
 
 
 const AdminPage = (props) => {
@@ -61,7 +62,7 @@ const AdminPage = (props) => {
         <Switch>
             <Route path="/admin" exact component={MainContent}></Route>
             <Route path="/admin/users" exact component={UsersPage}></Route>  
-            <Route path="/admin/genres" exact component={GenreManagementPage}></Route> 
+            <Route path="/admin/genres" exact component={GenresPage}></Route> 
             <Route path="/admin/ticket-types" exact component={TicketTypeManagementPage}></Route> 
             <Route path="/admin/sales" exact component={SaleChartPage}></Route>  
             <Route path="/admin/profile" exact component={UserProfile}></Route>  
