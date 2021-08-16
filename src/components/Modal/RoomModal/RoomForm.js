@@ -107,21 +107,14 @@ class RoomForm extends Component {
                                     </div>
                                 }
                                 <div className="form-group">
-                                    <label>room number:</label>
+                                    <label>Số phòng:</label>
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="form-control"
                                         name="roomNumber"
                                         value={room.roomNumber}
                                         onChange={ this.onHandleChange }
                                     
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label>Description :</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
                                     />
                                 </div>
                             </div>                      
