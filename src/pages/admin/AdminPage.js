@@ -36,7 +36,7 @@ import SeatManagement from "./SeatManagement";
 import GenreManagementPage from './GenreManagement';
 import TicketTypeManagementPage from './TicketTypeManagement';
 import UsersPage from './UsersPage';
-import MoviesPage from './MoviesPage';
+import MoviesPage from '../manager/MovieManager/MoviesPage';
 
 
 const AdminPage = (props) => {
