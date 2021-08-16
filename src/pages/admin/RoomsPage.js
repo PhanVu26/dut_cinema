@@ -133,12 +133,12 @@ export default function EnhancedTable() {
   const [dense, setDense] = React.useState(false);
   const loading = useSelector((state) => state.rooms.loading);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const rows = useSelector((state) => state.rooms);
-  let location = useLocation();
+  const rows = useSelector((state) => state.rooms.rooms);
+  const cinemaId = window.location.pathname.split('/')[3];
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(actions.actFetchDataRoomsRequest(parseInt(location.cinemaId)));
+    dispatch(actions.actFetchDataRoomsRequest(parseInt(cinemaId)));
   }, []);
 
   const handleRequestSort = (event, property) => {
@@ -166,7 +166,7 @@ export default function EnhancedTable() {
   };
 
   const refreshData = () => {
-    dispatch(actions.actFetchDataRoomsRequest());
+    dispatch(actions.actFetchDataRoomsRequest(cinemaId));
     setRoomFilter({ roomNumber: ""});
   };
 
@@ -180,7 +180,7 @@ export default function EnhancedTable() {
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
-    <Loader show={false} message={"Loading......."}>
+    <Loader show={loading} message={"Loading......."}>
       <section style={{ backgroundColor: "#f3f3f4" }}>
         <RoomForm></RoomForm>
         <div class="container-fluid">
