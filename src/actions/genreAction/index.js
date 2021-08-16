@@ -11,6 +11,16 @@ export const actFetchDataGenresRequest = () => {
     };
 };
 
+export const actFetchDataGenresFilterRequest = (query) => {
+    return (dispatch) => {
+        dispatch(loadGenre())
+      return callApi(`genres?${query}&page=1&perPage=1000`, "GET", null).then((res) => {
+          console.log("genres", res.data.results)
+        dispatch(actFetchDataGenres(res.data.results));
+      });
+    };
+};
+
 export const actFetchDataGenres = (genres) => {
     return {
         type: types.LIST_ALL_GENRES,
@@ -55,6 +65,16 @@ export const toggleGenreForm = () => {
         type: types.TOGGLE_GENRE_MODAL,
     }
 }
+
+export const actGetGenreRequest = (id) => {
+    return (dispatch) => {
+        dispatch(loadGenre())
+      return callApi(`genres/${id}`, "GET", null).then((res) => {
+          console.log("genres", res.data)
+        dispatch(getGenreInfo(res.data));
+      });
+    };
+};
 
 
 export const getGenreInfo = (genre) => {
