@@ -316,7 +316,7 @@ export default function EnhancedTable() {
                                       </button>&nbsp;
                                       <NavLink
                                         to={{
-                                          pathname : "/admin/cinemas/" + row.name + "/rooms",
+                                          pathname : "/admin/cinemas/" + row.id + "/rooms",
                                           cinemaId: row.id
                                         }}
                                         
