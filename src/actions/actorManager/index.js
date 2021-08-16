@@ -10,6 +10,28 @@ export const actFetchDataActorsRequest = () => {
     };
 };
 
+export const actFetchDataActorsFilterRequest = (query) => {
+    return (dispatch) => {
+        dispatch(loadActor())
+      return callApi(`actors?${query}&page=1&perPage=1000`, "GET", null).then((res) => {
+        dispatch(actFetchDataActors(res.data.results));
+      });
+    };
+};
+
+
+export const actGetActorRequest = (id) => {
+    return (dispatch) => {
+        dispatch(loadActor())
+      return callApi(`actors/${id}`, "GET", null).then((res) => {
+        dispatch(getActorInfo(res.data));
+      })
+      .catch(err => {
+        alert("Lỗi kết nối");
+      })
+    };
+};
+
 export const actFetchDataActors = (actors) => {
     return {
         type: types.LIST_ALL_ACTORS,
