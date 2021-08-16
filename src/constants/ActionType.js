@@ -56,6 +56,8 @@ export const GET_CINEMA_ROOMS = "GET_CINEMA_ROOMS";
 export const GET_ALL_MOVIES_SHOWTIMES = "GET_ALL_MOVIES_SHOWTIMES";
 export const ADD_SHOWTIME = "ADD_SHOWTIME";
 export const DELETE_SHOWTIME = "DELETE_SHOWTIME";
+export const GET_ALL_SHOWTIMES = "GET_ALL_SHOWTIMES";
+export const GET_SHOWTIME_INFO = "GET_SHOWTIME_INFO";
 
 // Roles
 
@@ -89,7 +91,6 @@ export const FETCH_DATA_TICKETS = "FETCH_DATA_TICKETS";
 export const FETCH_DATA_FOOD = "FETCH_DATA_FOOD";
 export const FETCH_TRANSACTION = "FETCH_TRANSACTION";
 
-
 //transactions
 
 export const FETCH_DATA_TRANSACTION = "FETCH_DATA_TRANSACTION";
@@ -110,7 +111,6 @@ export const GET_CINEMA_INFO = "GET_CINEMA_INFO";
 export const UPDATE_CINEMA = "UPDATE_CINEMA";
 export const CINEMA_LOADING = "CINEMA_LOADING";
 
-
 // Rooms of cinema
 export const FETCH_DATA_ROOMS = "FETCH_DATA_ROOMS";
 export const TOGGLE_ROOM_MODAL = "TOGGLE_ROOM_MODAL";
@@ -119,7 +119,6 @@ export const GET_ROOM_INFO = "GET_ROOM_INFO";
 export const DELETE_ROOM = "DELETE_ROOM";
 export const UPDATE_ROOM = "UPDATE_ROOM";
 export const ROOM_LOADING = "ROOM_LOADING";
-
 
 // seats of room
 export const ADD_SEATS = "ADD_SEATS";

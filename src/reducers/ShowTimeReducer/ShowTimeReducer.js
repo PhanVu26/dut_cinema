@@ -85,6 +85,8 @@ var initialState = {
     },
   ],
   movie: [],
+  allShowtimes: [],
+  totalShowtimes: 0,
 };
 
 function reducerShowTime(
@@ -122,6 +124,13 @@ function reducerShowTime(
       return {
         ...state,
         movie: action.movie,
+      };
+    }
+    case types.GET_ALL_SHOWTIMES: {
+      return {
+        ...state,
+        allShowtimes: action.allShowtimes,
+        totalShowtimes: action.totalShowtimes,
       };
     }
     default:
