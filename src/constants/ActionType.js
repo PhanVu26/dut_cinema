@@ -118,6 +118,7 @@ export const SAVE_ROOM = "SAVE_ROOM";
 export const GET_ROOM_INFO = "GET_ROOM_INFO";
 export const DELETE_ROOM = "DELETE_ROOM";
 export const UPDATE_ROOM = "UPDATE_ROOM";
+export const ROOM_LOADING = "ROOM_LOADING";
 
 
 // seats of room
