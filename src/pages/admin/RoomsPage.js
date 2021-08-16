@@ -12,12 +12,13 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import Loader from "react-loader-advanced";
+import { useLocation} from "react-router-dom"
 
-import * as actions from "../../actions/cinemaAction/index";
-import CinemaControl from "../../components/Control/CinemaControl/CinemaControl";
+import * as actions from "../../actions/roomAction/index";
+import RoomControl from "../../components/Control/RoomControl/RoomControl";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import SearchIcon from "@material-ui/icons/Search";
-import CinemaForm from "../../components/Modal/CinemaModal/CinemaForm";
+import RoomForm from "../../components/Modal/RoomModal/RoomForm";
 import { NavLink } from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {
@@ -48,8 +49,7 @@ function stableSort(array, comparator) {
 
 const headCells = [
   { id: "id", numeric: false, disablePadding: true, label: "ID" },
-  { id: "name", numeric: false, disablePadding: false, label: "Tên rạp chiếu" },
-  { id: "address", numeric: false, disablePadding: false, label: "Địa chỉ" },
+  { id: "roomNumber", numeric: false, disablePadding: false, label: "Số phòng" },
 ];
 
 function EnhancedTableHead(props) {
@@ -129,15 +129,16 @@ export default function EnhancedTable() {
   const [order, setOrder] = React.useState("desc");
   const [orderBy, setOrderBy] = React.useState("id");
   const [page, setPage] = React.useState(0);
-  const [cinemaFilter, setCinemaFilter] = React.useState({});
+  const [roomFilter, setRoomFilter] = React.useState({});
   const [dense, setDense] = React.useState(false);
-  const loading = useSelector((state) => state.cinemas.loading);
+  const loading = useSelector((state) => state.rooms.loading);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const rows = useSelector((state) => state.cinemas.cinemas);
+  const rows = useSelector((state) => state.rooms);
+  let location = useLocation();
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(actions.actFetchDataCinemasRequest());
+    dispatch(actions.actFetchDataRoomsRequest(parseInt(location.cinemaId)));
   }, []);
 
   const handleRequestSort = (event, property) => {
@@ -147,49 +148,47 @@ export default function EnhancedTable() {
   };
 
   const handleChangePage = (event, newPage) => {
-    console.log("page", newPage);
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    console.log("perpage", event.target.value);
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
-  const onDeleteCinema = (id) => {
-    dispatch(actions.actDeleteCinemaRequest(id));
+  const onDeleteRoom = (id) => {
+    dispatch(actions.actDeleteRoomRequest(id));
   };
 
-  const getCinemaEditing = (id) => {
-    dispatch(actions.actGetCinemaRequest(id));
+  const getRoomEditing = (room) => {
+    dispatch(actions.getRoomInfo(room));
     dispatch(actions.toggleModal());
   };
 
   const refreshData = () => {
-    dispatch(actions.actFetchDataCinemasRequest());
-    setCinemaFilter({ name: "", address: "" });
+    dispatch(actions.actFetchDataRoomsRequest());
+    setRoomFilter({ roomNumber: ""});
   };
 
-  const searchCinemaQuery = (e) => {
+  const searchRoomQuery = (e) => {
     e.preventDefault();
-    const filter = `filter={"name": {"like": "${cinemaFilter.name}"}, "address": { "like": "${cinemaFilter.address}"}}`;
-    dispatch(actions.actFetchDataCinemasFilterRequest(filter));
+    // const filter = `filter={"roomNumber": {"like": "${roomFilter.roomNumber}"}}`;
+    // dispatch(actions.actFetchDataCinemasFilterRequest(filter));
   };
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
-    <Loader show={loading} message={"Loading......."}>
+    <Loader show={false} message={"Loading......."}>
       <section style={{ backgroundColor: "#f3f3f4" }}>
-        <CinemaForm></CinemaForm>
+        <RoomForm></RoomForm>
         <div class="container-fluid">
           <div class="row">
             <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
               <div class={"row " + classes.searchBar}>
                 <div class="col-xl-12 col-12 mb-xl-0">
-                  <h3 class="text-left mb-2 pt-3">Quản lý rạp chiếu</h3>
+                  <h3 class="text-left mb-2 pt-3">Quản lý phòng</h3>
                   <div className="mb-3 mt-3">
                     <div
                       className="col-12"
@@ -202,36 +201,23 @@ export default function EnhancedTable() {
                     >
                       <form
                         class="form-inline pt-3 pb-3"
-                        onSubmit={searchCinemaQuery}
+                        onSubmit={searchRoomQuery}
                       >
                         <div class="form-group mb-2 mr-5">
-                          <lable>Tên rạp:</lable>&nbsp;
+                          <lable>Số phòng:</lable>&nbsp;
                           <input
                             className="form-control"
-                            placeholder="Nhập tên rạp"
-                            value={cinemaFilter.name}
+                            placeholder="Nhập số phòng"
+                            value={roomFilter.roomNumber}
                             onChange={(e) => {
-                              setCinemaFilter({
-                                ...cinemaFilter,
-                                name: e.target.value,
+                              setRoomFilter({
+                                ...roomFilter,
+                                roomNumber: e.target.value,
                               });
                             }}
                           ></input>
                         </div>
-                        <div class="form-group mb-2 mr-5">
-                          <lable>Địa chỉ:</lable>&nbsp;
-                          <input
-                            className="form-control"
-                            placeholder="Nhập địa chỉ"
-                            value={cinemaFilter.address}
-                            onChange={(e) => {
-                              setCinemaFilter({
-                                ...cinemaFilter,
-                                address: e.target.value,
-                              });
-                            }}
-                          ></input>
-                        </div>
+                        
                         <div class="form-group mb-2">
                           <button type="submit" className="btn btn-primary">
                             <SearchIcon>Tìm kiếm</SearchIcon>
@@ -250,7 +236,7 @@ export default function EnhancedTable() {
                     </div>
                   </div>
                   <div className={classes.root}>
-                    <CinemaControl></CinemaControl>
+                    <RoomControl></RoomControl>
                     <Paper className={classes.paper}>
                       <TableContainer>
                         <Table
@@ -284,17 +270,14 @@ export default function EnhancedTable() {
                                       {row.id}
                                     </TableCell>
                                     <TableCell align="center">
-                                      {row.name}
-                                    </TableCell>
-                                    <TableCell align="center">
-                                      {row.address}
+                                      {row.roomNumber}
                                     </TableCell>
 
                                     <TableCell align="center">
                                       <button
                                         type="button"
                                         className="btn btn-warning"
-                                        onClick={() => getCinemaEditing(row.id)}
+                                        onClick={() => getRoomEditing(row)}
                                       >
                                         <span className="fa fa-pencil"></span>
                                       </button>
@@ -305,21 +288,17 @@ export default function EnhancedTable() {
                                         onClick={() => {
                                           if (
                                             window.confirm(
-                                              "Bạn có muốn xóa thể loại này?"
+                                              "Bạn có muốn xóa phòng này?"
                                             )
                                           ) {
-                                            onDeleteCinema(row.id);
+                                            onDeleteRoom(row.id);
                                           }
                                         }}
                                       >
                                         <span className="far fa-trash-alt"></span>
                                       </button>&nbsp;
                                       <NavLink
-                                        to={{
-                                          pathname : "/admin/cinemas/" + row.name + "/rooms",
-                                          cinemaId: row.id
-                                        }}
-                                        
+                                        to={"/admin/rooms/" + row.id + "/seats"}
                                       >
                                         <button
                                           type="button"
@@ -327,7 +306,7 @@ export default function EnhancedTable() {
                                           // onClick={this.getcinemaInfo}
                                         >
                                           <span className="fas fa-eye">
-                                            DS phòng
+                                            DS ghế
                                           </span>
                                         </button>
                                       </NavLink>
