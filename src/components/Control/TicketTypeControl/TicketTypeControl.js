@@ -27,7 +27,7 @@ class TicketTypeControl extends Component {
     }
     render() {
         return (
-            <div className = "mb-2 float-left">
+            <div className = "mb-2 float-left ml-3 mt-3">
                 <button onClick={this.onHandleModal} type="button" className="btn btn-primary">
                     <span className="fas fa-plus mr-2"></span>Thêm loại vé
                 </button>
