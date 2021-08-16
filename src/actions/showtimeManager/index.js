@@ -74,3 +74,24 @@ export const actAddShowtimeRequest = (showtime) => {
 export const actDeleteShowtimeRequest = (showtimeID) => {
   return callApi(`showtimes/${showtimeID}`, "DELETE", null);
 };
+
+export const actFetchShowtimes = (res) => {
+  return {
+    type: types.GET_ALL_SHOWTIMES,
+    allShowtimes: res.results,
+    totalShowtimes: res.total,
+  };
+};
+
+export const actFetchAllShowtimesRequest = () => {
+  return (dispatch) => {
+    return callApi(
+      `showtimes?page=1&perPage=1000&relations=movie`,
+      "GET",
+      null
+    ).then((res) => {
+      console.log(res.data);
+      dispatch(actFetchShowtimes(res.data));
+    });
+  };
+};
