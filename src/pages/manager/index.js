@@ -4,6 +4,7 @@ import {
   } from "react-router-dom";
 
 import MovieManager from './MovieManager/index';
+import MoviesPage from './MovieManager/MoviesPage';
 import ActorManager from './ActorManager/index';
 import UserProfile from '../UserProfile/UserProfile';
 import Navbar from '../../components/admin/Navbar/Navbar';
@@ -32,7 +33,7 @@ class ManagerPage extends Component{
             <Navbar></Navbar>        
             <Switch>
                     <Route path="/manager" exact component={UserProfile}></Route> 
-                    <Route path="/manager/movies" exact component={MovieManager}></Route>  
+                    <Route path="/manager/movies" exact component={MoviesPage}></Route>  
                     <Route path="/manager/actors" exact component={ActorManager}></Route>  
                     <Route path="/manager/profile" exact component={UserProfile}></Route>  
             </Switch>
