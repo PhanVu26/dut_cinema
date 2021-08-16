@@ -41,6 +41,7 @@ import GenresPage from './GenresPage';
 import TicketTypesPage from './TicketTypesPage';
 import ActorsPage from '../manager/ActorManager/ActorsPage';
 import CinemasPage from './CinemasPage';
+import RoomsPage from './RoomsPage';
 
 
 const AdminPage = (props) => {
@@ -71,7 +72,7 @@ const AdminPage = (props) => {
             <Route path="/admin/profile" exact component={UserProfile}></Route>  
             <Route path="/admin/transactions" exact component={TransactionsPage}></Route>  
             <Route path="/admin/cinemas" exact component={CinemasPage}></Route>  
-            <Route path="/admin/cinemas/*/rooms" exact component={RoomManagement}></Route>
+            <Route path="/admin/cinemas/*/rooms" exact component={RoomsPage}></Route>
             <Route path="/admin/rooms/*/seats" exact component={SeatManagement}></Route>  
             <Route path="/admin/movies" exact component={MoviesPage}></Route>  
             <Route path="/admin/actors" exact component={ActorsPage}></Route>
