@@ -11,6 +11,24 @@ export const actFetchDataTicketTypesRequest = () => {
     };
 };
 
+export const actFetchDataTicketTypesFilterRequest = (query) => {
+    return (dispatch) => {
+        dispatch(loadTicketType())
+      return callApi(`ticket-types?${query}&page=1&perPage=1000`, "GET", null).then((res) => {
+        dispatch(actFetchDataTicketTypes(res.data.results));
+      });
+    };
+};
+
+export const actGetTicketTypeRequest = (id) => {
+    return (dispatch) => {
+        dispatch(loadTicketType())
+      return callApi(`ticket-types/${id}`, "GET", null).then((res) => {
+        dispatch(getTicketTypeInfo(res.data));
+      });
+    };
+};
+
 export const actFetchDataTicketTypes = (ticketTypes) => {
     return {
         type: types.LIST_ALL_TICKET_TYPE,
