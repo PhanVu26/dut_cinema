@@ -10,6 +10,24 @@ export const actFetchDataCinemasRequest = () => {
     };
 };
 
+export const actFetchDataCinemasFilterRequest = (query) => {
+    return (dispatch) => {
+        dispatch(loadCinema())
+      return callApi(`cinemas?${query}&page=1&perPage=1000&relations=rooms`, "GET", null).then((res) => {
+        dispatch(actFetchDataCinemas(res.data.results));
+      });
+    };
+};
+
+export const actGetCinemaRequest = (id) => {
+    return (dispatch) => {
+        dispatch(loadCinema())
+      return callApi(`cinemas/${id}`, "GET", null).then((res) => {
+        dispatch(getCinemaInfo(res.data));
+      });
+    };
+};
+
 export const actFetchDataCinemas = (cinemas) => {
     return {
         type: types.FETCH_DATA_CINEMAS,
