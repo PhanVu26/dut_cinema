@@ -91,3 +91,9 @@ export const actUpdateRoom = (room) => {
         room
     }
 }
+
+export const loadRoom = () => {
+    return {
+        type: types.ROOM_LOADING,
+    }
+}
