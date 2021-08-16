@@ -180,9 +180,9 @@ class EditShowTimePage extends Component {
                 <br />
                 <form onSubmit={this.saveMovie}>
                   <div className="row justify-content-md-center">
-                    <div className="col-3">
+                    <div className="col-3" align="center">
                       <div className="form-group">
-                        <label>Chọn rạp chiếu:</label>
+                        <p style={{ color: "black" }}>Chọn rạp chiếu:</p>
                         <select
                           className="mr-2 ml-2"
                           onChange={(e) => {
@@ -243,9 +243,9 @@ class EditShowTimePage extends Component {
                         </select>
                       </div>
                     </div>
-                    <div className="col-3">
+                    <div className="col-2" align="center">
                       <div className="form-group">
-                        <label>Chọn phòng chiếu:</label>
+                        <p style={{ color: "black" }}>Chọn phòng chiếu:</p>
                         <select
                           className="mr-2 ml-2"
                           value={this.state.showtime.room}
@@ -270,13 +270,11 @@ class EditShowTimePage extends Component {
                         {/* <p>{this.state.showtime.room}</p> */}
                       </div>
                     </div>
-                  </div>
-                  <div className="row justify-content-md-center">
-                    <div className="col-3">
+                    <div className="col-3" align="center">
                       <div className="form-group">
-                        <label style={{ marginRight: "5px" }}>
+                        <p style={{ marginRight: "5px", color: "black" }}>
                           Chọn ngày:{" "}
-                        </label>
+                        </p>
                         <DatePicker
                           selected={this.state.showtime.date}
                           onChange={(selectedDate) =>
@@ -293,33 +291,12 @@ class EditShowTimePage extends Component {
                         {/* <p>{this.state.showtime.date.toString()}</p> */}
                       </div>
                     </div>
-                    <div className="col-3" style={{ marginTop: "5px" }}>
+                    <div
+                      className="col-2"
+                      align="center"
+                      style={{ marginTop: "42px" }}
+                    >
                       <Button onClick={this.loadShowtime}>Load</Button>
-                      {/* <label>Chọn phim: </label>
-                          <select
-                            className="mr-2 ml-2"
-                            value={this.state.movie}
-                            onChange={(e) => {
-                              const movie_temp = movies.filter(
-                                (item) => item.id === e.target.value
-                              );
-                              this.setState((prevState) => ({
-                                movie: {
-                                  id: movie_temp.id,
-                                  name: movie_temp.name,
-                                },
-                              }));
-                            }}
-                          >
-                            <option key={0}></option>
-                            {movies.map((item, index) => {
-                              return (
-                                <option key={index + 1} value={item.id}>
-                                  {item.name}
-                                </option>
-                              );
-                            })}
-                          </select> */}
                     </div>
                   </div>
                 </form>
@@ -356,7 +333,7 @@ class EditShowTimePage extends Component {
                                 />
                             
                                 */}
-                        <label>Chọn giờ: </label>
+                        <p style={{ color: "black" }}>Chọn giờ: </p>
                         <select
                           className="mr-2 ml-2"
                           onChange={(e) => {
@@ -399,7 +376,7 @@ class EditShowTimePage extends Component {
                     </div>
                     <div className="col-3" style={{ marginTop: "8px" }}>
                       <div className="form-group" style={{ display: "flex" }}>
-                        <label>Chọn phim: </label>
+                        <p style={{ color: "black" }}>Chọn phim: </p>
                         <select
                           className="mr-2 ml-2"
                           onChange={(e) => {
@@ -441,7 +418,7 @@ class EditShowTimePage extends Component {
                       <button
                         type="button"
                         className="btn btn-primary"
-                        style={{ marginLeft: "5px" }}
+                        style={{ marginLeft: "5px", marginTop: "5px" }}
                         onClick={this.addShowtime}
                       >
                         <span className="fa fa-plus"></span>
@@ -457,8 +434,12 @@ class EditShowTimePage extends Component {
                     {this.props.cinemaInfo.showtimes.map((item, index) => {
                       return (
                         <article className="book" key={item.id}>
-                          <img src={item.movie.image} alt="" />
-                          <h4>{item.movie.name}</h4>
+                          <img
+                            style={{ width: 200, height: 300 }}
+                            src={item.movie.image?.mainUrl}
+                            alt=""
+                          />
+                          <h5>{item.movie.name}</h5>
                           <div style={{ display: "flex" }}>
                             <button
                               key={item.id}
