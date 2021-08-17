@@ -42,6 +42,7 @@ import TicketTypesPage from './TicketTypesPage';
 import ActorsPage from '../manager/ActorManager/ActorsPage';
 import CinemasPage from './CinemasPage';
 import RoomsPage from './RoomsPage';
+import SeatsPage from './SeatsPage';
 
 
 const AdminPage = (props) => {
@@ -73,7 +74,7 @@ const AdminPage = (props) => {
             <Route path="/admin/transactions" exact component={TransactionsPage}></Route>  
             <Route path="/admin/cinemas" exact component={CinemasPage}></Route>  
             <Route path="/admin/cinemas/*/rooms" exact component={RoomsPage}></Route>
-            <Route path="/admin/rooms/*/seats" exact component={SeatManagement}></Route>  
+            <Route path="/admin/rooms/*/seats" exact component={SeatsPage}></Route>  
             <Route path="/admin/movies" exact component={MoviesPage}></Route>  
             <Route path="/admin/actors" exact component={ActorsPage}></Route>
             <Route path="/admin/movie-showtimes" exact component={EditShowTimePage}></Route>
