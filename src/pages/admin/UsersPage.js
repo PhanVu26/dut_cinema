@@ -49,7 +49,7 @@ const headCells = [
   { id: "name", numeric: false, disablePadding: false, label: "Name" },
   { id: "email", numeric: false, disablePadding: false, label: "Email" },
   { id: "age", numeric: false, disablePadding: false, label: "Tuổi" },
-  { id: "role", numeric: false, disablePadding: false, label: "Vai trò" },
+  { id: "userRoles", numeric: false, disablePadding: false, label: "Vai trò" },
   {
     id: "isActive",
     numeric: false,
@@ -128,6 +128,9 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: 20,
     width: 1,
+  },
+  container: {
+    maxHeight: 280,
   },
 }));
 
@@ -300,7 +303,7 @@ export default function EnhancedTable() {
                         className="btn btn-warning"
                         onClick={()=>{refreshData()}}
                       >
-                        <RefreshIcon color="secondary">
+                        <RefreshIcon>
                         Làm mới</RefreshIcon></button>
                     </div>
                   </form>
@@ -310,11 +313,11 @@ export default function EnhancedTable() {
                 <div className={classes.root}>
                 <UserControl></UserControl>
                   <Paper className={classes.paper}>
-                    <TableContainer>
-                      <Table
+                    <TableContainer className={classes.container}>
+                      <Table stickyHeader aria-label="sticky table"
                         className={classes.table}
                         aria-labelledby="tableTitle"
-                        size={dense ? "small" : "medium"}
+                        size={dense ? "small" : "small"}
                         aria-label="enhanced table"
                       >
                         <EnhancedTableHead
@@ -378,8 +381,8 @@ export default function EnhancedTable() {
                                       className="btn btn-warning"
                                       onClick={() => getUserEditing(row.id)}
                                     >
-                                      <span className="fa fa-pencil mr-2"></span>
-                                      Sửa
+                                      <span className="fa fa-pencil"></span>
+                                      
                                     </button>                                  
                                     &nbsp;
                                     <button
@@ -395,8 +398,8 @@ export default function EnhancedTable() {
                                         }
                                       }}
                                     >
-                                      <span className="far fa-trash-alt mr-2"></span>
-                                      Xóa
+                                      <span className="far fa-trash-alt"></span>
+                                      
                                     </button>
                                   </TableCell>
                                 </TableRow>
@@ -404,7 +407,7 @@ export default function EnhancedTable() {
                             })}
                           {emptyRows > 0 && (
                             <TableRow
-                              style={{ height: (dense ? 33 : 53) * emptyRows }}
+                              style={{ height: (dense ? 33 : 33) * emptyRows }}
                             >
                               <TableCell colSpan={6} />
                             </TableRow>
