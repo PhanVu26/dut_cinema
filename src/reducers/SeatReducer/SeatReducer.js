@@ -16,7 +16,7 @@ var SeatReducer = (state = initialState, action) => {
             var newSeats = seats.concat(action.seats)
             return {
                 ...state,
-                seats: newSeats,
+                seats: action.seats,
                 loading: false
             }; 
         case types.GET_SEATS:
