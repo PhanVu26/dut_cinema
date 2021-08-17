@@ -159,21 +159,13 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
-  const [role, setRole] = React.useState(-1);
+  const [role, setRole] = React.useState("");
   const [dense, setDense] = React.useState(false);
   const loading = useSelector((state) => state.users.loading);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const rows = useSelector((state) => state.users.users);
   const roles = useSelector((state) => state.roles)
 
-//   var rows = [...users];
-//   if(role !== -1){
-//     rows = users.filter((user) => {
-//         return user.userRoles.some(role => {
-//             return role.role.id == role
-//         })
-//     })
-// }
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -227,13 +219,28 @@ export default function EnhancedTable() {
     dispatch(userActions.actFetchDataUsersRequest());
     setName('');
     setEmail('');
+    setRole('');
   }
 
   const searchUserQuery = (e) => {
     e.preventDefault();
-    const filter = `filter={"name": {"like": "${name}"}, "email": {"like": "${email}"}}`;
+    console.log("role", role)
+    var filter = `filter={"name": {"like": "${name}"}, "email": {"like": "${email}"}}`;
+    if(role !== ""){
+      filter = filter + `&roleName=${role}`;
+    }
     dispatch(userActions.actFetchDataUsersFilterRequest(filter));
   };
+
+  const onChangeRole = (e) => {
+    const role = e.target.value;
+    setRole(role);
+    var filter = `filter={"name": {"like": "${name}"}, "email": {"like": "${email}"}}`;
+    if(role !== ""){
+      filter = filter + `&roleName=${role}`;
+    }
+    dispatch(userActions.actFetchDataUsersFilterRequest(filter));
+  }
 
   const showUserRoles = roles => {
     const userRoles = roles.filter(role =>{
@@ -242,22 +249,11 @@ export default function EnhancedTable() {
     var result = null;
     if (userRoles.length > 0) {
       result = userRoles.map((role, index) => {
-        return <option key={role.id} value={role.id} >{role.name}</option>;
+        return <option key={role.id} value={role.name} >{role.name}</option>;
       });
     }
     return result;
 }
-
-// const onChangeRole = (e) => {
-//   setRole(e.target.value);
-//   if(role !== -1){
-//     rows = users.filter((user) => {
-//         return user.userRoles.some(role => {
-//             return role.role.id == role
-//         })
-//     })
-//   setData(rows)
-// }
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -313,17 +309,17 @@ export default function EnhancedTable() {
                         onChange={e=> {setEmail(e.target.value)}}>                       
                         </input>
                     </div>
-                    {/* <div class="form-group mb-2 mr-5">
+                    <div class="form-group mb-2 mr-5">
                       <lable>Vai trò:</lable>&nbsp;
                       <select 
                         name="roleFilter"
                         className="form-control"
                         onChange={onChangeRole}
                         value={role} >
-                            <option value={-1}>Tất cả</option>
+                            <option value="">Tất cả</option>
                             {showUserRoles(roles)}
                             </select>
-                    </div> */}
+                    </div>
                     
                     <div class="form-group mb-2">
                       <button 
