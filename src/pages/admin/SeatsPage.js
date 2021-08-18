@@ -12,6 +12,9 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import Loader from "react-loader-advanced";
+import Typography from '@material-ui/core/Typography';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import HomeIcon from '@material-ui/icons/Home';
 
 import * as actions from "../../actions/seatAction/index";
 import SeatControl from "../../components/Control/SeatControl/SeatControl";
@@ -120,6 +123,22 @@ const useStyles = makeStyles((theme) => ({
     top: 20,
     width: 1,
   },
+  container: {
+    maxHeight: 281
+  },
+  link: {
+    display: 'flex',
+  },
+  icon: {
+    marginRight: theme.spacing(0.5),
+    width: 20,
+    height: 20,
+  },
+  breadcrumb: {
+    height: '10px',
+    backgroundColor: '#f3f3f4',
+    paddingLeft: '0px'
+  },
 }));
 
 export default function EnhancedTable() {
@@ -201,7 +220,24 @@ export default function EnhancedTable() {
             <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
               <div class={"row " + classes.searchBar}>
                 <div class="col-xl-12 col-12 mb-xl-0">
-                  <h3 class="text-left mb-2 pt-3">Quản lý ghế</h3>
+                  <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumb}>
+                    <NavLink                     
+                      to={"/admin"}                     
+                      className={classes.link}
+                    >
+                      <HomeIcon className={classes.icon} />
+                      Trang chủ
+                    </NavLink>
+                    <Typography color="textPrimary" className={classes.link}>
+                      Rạp chiếu
+                    </Typography>
+                    <Typography color="textPrimary" className={classes.link}>
+                      Phòng
+                    </Typography>
+                    <Typography color="textPrimary" className={classes.link}>
+                      Ghế
+                    </Typography>
+                  </Breadcrumbs>
                   <div className="mb-3 mt-3">
                     <div
                       className="col-12"
@@ -251,11 +287,12 @@ export default function EnhancedTable() {
                   <div className={classes.root}>
                     <SeatControl></SeatControl>
                     <Paper className={classes.paper}>
-                      <TableContainer>
+                      <TableContainer className={classes.container}>
                         <Table
+                          stickyHeader aria-label="sticky table"
                           className={classes.table}
                           aria-labelledby="tableTitle"
-                          size={dense ? "small" : "medium"}
+                          size="medium"
                           aria-label="enhanced table"
                         >
                           <EnhancedTableHead
