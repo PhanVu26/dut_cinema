@@ -11,30 +11,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "../../components/admin/style.css";
 import Footer from "../../components/admin/Footer/Footer";
-import Modal from "../../components/admin/Modal/Modal";
 import MainContent from "../../components/admin/MainContain/MainContent";
 import Navbar from "../../components/admin/Navbar/Navbar";
-import UserManagementPage from "./UserManagementPage";
 import UserProfile from "../UserProfile/UserProfile";
 import TransactionsPage from "./TransactionsPage";
 import SaleChartPage from './SaleChartPage';
-import CinemaManagement from './CinemaManagement';
+
 
 import * as userActions from '../../actions/userManager/userAction'
 import * as movieActions from '../../actions/movieManager/index'
 import * as transactionActions from '../../actions/transactionAction/index'
-import * as actions from '../../actions/index'
 import * as cinemaAction from '../../actions/cinemaAction/index'
 import * as genreAction from '../../actions/genreAction/index'
 import * as ticketTypeAction from '../../actions/ticketTypeAction/index'
 
-import RoomManagement from "./RoomManagement";
-import MovieManager from "../manager/MovieManager";
-import ActorManager from "../manager/ActorManager";
+
 import EditShowTimePage from "../ShowTimeManager/EditShowTimePage/EditShowTimePage";
-import SeatManagement from "./SeatManagement";
-import GenreManagementPage from './GenreManagement';
-import TicketTypeManagementPage from './TicketTypeManagement';
 import UsersPage from './UsersPage';
 import MoviesPage from '../manager/MovieManager/MoviesPage';
 import GenresPage from './GenresPage';

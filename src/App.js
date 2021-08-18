@@ -18,14 +18,9 @@ import PromotionPage from "./pages/client/HomePage/Promotion/PromotionPage";
 import UserPage from "./pages/client/UserPage/UserPage";
 import MovieDetail from "./pages/client/TicketBooking/MovieInformation/MovieInfo";
 import SearchPage from "./pages/client/SearchPage/SearchPage";
-// import routes from "./routes/index.route";
-import UserManagementPage from "./pages/admin/UserManagementPage";
-import MovieManager from "./pages/manager/MovieManager";
-import ActorManager from "./pages/manager/ActorManager/index";
 import ManagerPage from "./pages/manager/index";
 import Login from "./pages/Login/Login";
 import ShowTimeManager from "./pages/ShowTimeManager/HomePage/HomePage";
-import EditShowTimePage from "./pages/ShowTimeManager/EditShowTimePage/EditShowTimePage";
 function App() {
   return (
     <Router>
