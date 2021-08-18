@@ -79,7 +79,7 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
-        <TableCell>Hành động</TableCell>
+        <TableCell align="center">Hành động</TableCell>
       </TableRow>
     </TableHead>
   );
@@ -119,6 +119,29 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: 20,
     width: 1,
+  },
+  container: {
+    maxHeight: 280
+  },
+  link: {
+    display: 'flex',
+  },
+  icon: {
+    marginRight: theme.spacing(0.5),
+    width: 20,
+    height: 20,
+  },
+  breadcrumb: {
+    height: '10px',
+    backgroundColor: '#f3f3f4',
+    paddingLeft: '0px'
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -233,11 +256,12 @@ export default function EnhancedTable() {
                   <div className={classes.root}>
                     <GenreControl></GenreControl>
                     <Paper className={classes.paper}>
-                      <TableContainer>
+                      <TableContainer className={classes.container}>
                         <Table
+                          stickyHeader aria-label="sticky table"
                           className={classes.table}
                           aria-labelledby="tableTitle"
-                          size={dense ? "small" : "medium"}
+                          size="small"
                           aria-label="enhanced table"
                         >
                           <EnhancedTableHead
@@ -270,7 +294,7 @@ export default function EnhancedTable() {
                                     </TableCell>
                                     
 
-                                    <TableCell>
+                                    <TableCell align="center">
                                       <button
                                         type="button"
                                         className="btn btn-warning"
