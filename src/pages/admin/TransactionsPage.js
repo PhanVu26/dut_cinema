@@ -52,12 +52,11 @@ function stableSort(array, comparator) {
 
 const headCells = [
   { id: "id", numeric: false, disablePadding: true, label: "Id" },
-  { id: "cinema", numeric: false, disablePadding: true, label: "Rạp chiếu" },
+  { id: "cinema", numeric: false, disablePadding: true, label: "Rạp" },
   { id: "name", numeric: false, disablePadding: false, label: "Tên phim" },
   { id: "seat", numeric: false, disablePadding: false, label: "Ghế" },
-  { id: "price", numeric: false, disablePadding: false, label: "Giá vé" },
+  { id: "price", numeric: false, disablePadding: false, label: "Giá" },
   { id: "user", numeric: false, disablePadding: false, label: "Người đặt" },
-  { id: "email", numeric: false, disablePadding: false, label: "Email người đặt" },
   { id: "transaction_time", numeric: false, disablePadding: false, label: "Thời gian" },
   { id: "service", numeric: false, disablePadding: false, label: "Trạng thái" },
 ];
@@ -145,7 +144,10 @@ const useStyles = makeStyles((theme) => ({
     height: '10px',
     backgroundColor: '#f3f3f4',
     paddingLeft: '0px'
-  }
+  },
+  container: {
+    maxHeight: 342
+  },
 }));
 
 export default function EnhancedTable() {
@@ -157,7 +159,7 @@ export default function EnhancedTable() {
   const [movieName, setMovieName] = React.useState('');
   const [cinemaName, setCinemaName] = React.useState('');
   const loading = useSelector((state) => state.transactions.loading);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const rows = useSelector((state) => state.transactions.transactions);
   const roles = useSelector((state) => state.roles)
   const dispatch = useDispatch();
@@ -278,12 +280,12 @@ export default function EnhancedTable() {
                     </div>
                     <div className={classes.root}>
                     <Paper className={classes.paper}>
-                        <TableContainer>
+                        <TableContainer className={classes.container}>
                         <Table
+                            stickyHeader aria-label="sticky table"
                             className={classes.table}
                             aria-labelledby="tableTitle"
-                            size={dense ? "small" : "medium"}
-                            aria-label="enhanced table"
+                            size="small"
                         >
                             <EnhancedTableHead
                             classes={classes}
@@ -326,9 +328,6 @@ export default function EnhancedTable() {
                                         {row.user.name}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {row.user.email}
-                                    </TableCell>
-                                    <TableCell align="left">
                                         {row.transaction_time.slice(0,10)}
                                     </TableCell>
                                     <TableCell align="left">
@@ -340,8 +339,8 @@ export default function EnhancedTable() {
                                         className="btn btn-primary"
                                         onClick={() => getTransaction(row)}
                                         >
-                                        <span className="fa fa-eye mr-2"></span>
-                                        Xem
+                                        <span className="fa fa-eye"></span>
+                                      
                                         </button>                                  
                                         &nbsp;
                                         <button
@@ -357,8 +356,8 @@ export default function EnhancedTable() {
                                             }
                                         }}
                                         >
-                                        <span className="far fa-trash-alt mr-2"></span>
-                                        Xóa
+                                        <span className="far fa-trash-alt"></span>
+                                        
                                         </button>
                                     </TableCell>
                                     </TableRow>
@@ -366,7 +365,7 @@ export default function EnhancedTable() {
                                 })}
                             {emptyRows > 0 && (
                                 <TableRow
-                                style={{ height: (dense ? 33 : 53) * emptyRows }}
+                                style={{ height: (dense ? 33 : 33) * emptyRows }}
                                 >
                                 <TableCell colSpan={6} />
                                 </TableRow>
@@ -375,7 +374,7 @@ export default function EnhancedTable() {
                         </Table>
                         </TableContainer>
                         <TablePagination
-                        rowsPerPageOptions={[5, 10, 25]}
+                        rowsPerPageOptions={[10, 20, 30]}
                         component="div"
                         count={rows.length}
                         rowsPerPage={rowsPerPage}
