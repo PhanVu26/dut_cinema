@@ -128,6 +128,9 @@ const useStyles = makeStyles((theme) => ({
     top: 20,
     width: 1,
   },
+  container: {
+    maxHeight: 281
+  },
   link: {
     display: 'flex',
   },
@@ -137,9 +140,10 @@ const useStyles = makeStyles((theme) => ({
     height: 20,
   },
   breadcrumb: {
+    height: '10px',
     backgroundColor: '#f3f3f4',
     paddingLeft: '0px'
-  }
+  },
 }));
 
 function handleClick(event) {
@@ -290,11 +294,12 @@ export default function EnhancedTable() {
                   <div className={classes.root}>
                     <CinemaControl></CinemaControl>
                     <Paper className={classes.paper}>
-                      <TableContainer>
+                      <TableContainer className={classes.container}>
                         <Table
+                          stickyHeader aria-label="sticky table"
                           className={classes.table}
                           aria-labelledby="tableTitle"
-                          size={dense ? "small" : "medium"}
+                          size="small"
                           aria-label="enhanced table"
                         >
                           <EnhancedTableHead
