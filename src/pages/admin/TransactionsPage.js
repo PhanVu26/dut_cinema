@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import {makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -11,17 +11,26 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
-import Loader from 'react-loader-advanced';
+import Loader from "react-loader-advanced";
 import { NavLink } from "react-router-dom";
-import Typography from '@material-ui/core/Typography';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import HomeIcon from '@material-ui/icons/Home';
-import GrainIcon from '@material-ui/icons/Grain';
+import Typography from "@material-ui/core/Typography";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import HomeIcon from "@material-ui/icons/Home";
+import GrainIcon from "@material-ui/icons/Grain";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider
+} from '@material-ui/pickers'
 
-import RefreshIcon from '@material-ui/icons/Refresh';
-import SearchIcon from '@material-ui/icons/Search';
+import RefreshIcon from "@material-ui/icons/Refresh";
+import SearchIcon from "@material-ui/icons/Search";
 
-import * as actions from '../../actions/transactionAction/index';
+import * as actions from "../../actions/transactionAction/index";
 import TransactionDetail from "../../components/Modal/TransactionModal/TransactionDetail";
 
 function descendingComparator(a, b, orderBy) {
@@ -57,7 +66,12 @@ const headCells = [
   { id: "seat", numeric: false, disablePadding: false, label: "Ghế" },
   { id: "price", numeric: false, disablePadding: false, label: "Giá" },
   { id: "user", numeric: false, disablePadding: false, label: "Người đặt" },
-  { id: "transaction_time", numeric: false, disablePadding: false, label: "Thời gian" },
+  {
+    id: "transaction_time",
+    numeric: false,
+    disablePadding: false,
+    label: "Thời gian",
+  },
   { id: "service", numeric: false, disablePadding: false, label: "Trạng thái" },
 ];
 
@@ -133,7 +147,7 @@ const useStyles = makeStyles((theme) => ({
     width: 1,
   },
   link: {
-    display: 'flex',
+    display: "flex",
   },
   icon: {
     marginRight: theme.spacing(0.5),
@@ -141,12 +155,19 @@ const useStyles = makeStyles((theme) => ({
     height: 20,
   },
   breadcrumb: {
-    height: '10px',
-    backgroundColor: '#f3f3f4',
-    paddingLeft: '0px'
+    height: "10px",
+    backgroundColor: "#f3f3f4",
+    paddingLeft: "0px",
   },
   container: {
-    maxHeight: 342
+    maxHeight: 325,
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -156,14 +177,11 @@ export default function EnhancedTable() {
   const [orderBy, setOrderBy] = React.useState("id");
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [movieName, setMovieName] = React.useState('');
-  const [cinemaName, setCinemaName] = React.useState('');
+  const [transactionFilter, setTransactionFilter] = React.useState({tranTime: new Date()});
   const loading = useSelector((state) => state.transactions.loading);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const rows = useSelector((state) => state.transactions.transactions);
-  const roles = useSelector((state) => state.roles)
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     dispatch(actions.actFetchDataTransactionsRequest());
@@ -197,34 +215,50 @@ export default function EnhancedTable() {
 
   const refreshData = () => {
     dispatch(actions.actFetchDataTransactionsRequest());
-    setMovieName('');
-    setCinemaName('');
+    setTransactionFilter({movieName: "", cinemaName: "", status: "", tranTime: new Date()});
+  };
+
+  const handleChangeStatus = (e) => {
+    setTransactionFilter({
+      ...transactionFilter,
+      status: (e.target.value)
+    });
+    const serviceFilter = transactionFilter.status === "" ? "" : `",service": {"equal": "${transactionFilter.status}"}`;
+    const tranTimeFilter = transactionFilter.tranTime === "" ? "" : `",transaction_time": {"equal": "${transactionFilter.tranTime}"}`;
+    var filter = "";
+    if(serviceFilter !== "" || tranTimeFilter !== ""){
+      filter = `filter={${serviceFilter}${tranTimeFilter}}`;
+    }
+    dispatch(actions.actFetchDataTransactionsFilterRequest(filter));
   }
 
-  const searchUserQuery = (e) => {
+  const searchTransactionQuery = (e) => {
     e.preventDefault();
-    // const filter = `filter={"name": {"like": "${name}"}, "email": {"like": "${email}"}}`;
-    // dispatch(userActions.actFetchDataUsersFilterRequest(filter));
+    const serviceFilter = transactionFilter.status === "" ? "" : `",service": {"equal": "${transactionFilter.status}"}`;
+    const tranTimeFilter = transactionFilter.tranTime === "" ? "" : `",transaction_time": {"equal": "${transactionFilter.tranTime}"}`;
+    var filter = "";
+    if(serviceFilter !== "" || tranTimeFilter !== ""){
+      filter = `filter={${serviceFilter}${tranTimeFilter}}`;
+    }
+    dispatch(actions.actFetchDataTransactionsFilterRequest(filter));
   };
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
-    <Loader show={loading} message={'Loading.......'}> 
-        <TransactionDetail></TransactionDetail>
-        <section style={{backgroundColor:"#f3f3f4"}}>
+    <Loader show={loading} message={"Loading......."}>
+      <TransactionDetail></TransactionDetail>
+      <section style={{ backgroundColor: "#f3f3f4" }}>
         <div class="container-fluid">
-            <div class="row">
+          <div class="row">
             <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
-                <div class={"row " + classes.searchBar}>
+              <div class={"row " + classes.searchBar}>
                 <div class="col-xl-12 col-12 mb-xl-0">
-                <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumb}>
-                    <NavLink
-                      
-                      to={"/admin"}
-                      
-                      className={classes.link}
-                    >
+                  <Breadcrumbs
+                    aria-label="breadcrumb"
+                    className={classes.breadcrumb}
+                  >
+                    <NavLink to={"/admin"} className={classes.link}>
                       <HomeIcon className={classes.icon} />
                       Trang chủ
                     </NavLink>
@@ -233,147 +267,204 @@ export default function EnhancedTable() {
                       Lịch sử giao dịch
                     </Typography>
                   </Breadcrumbs>
-                    <div className="mb-3 mt-3">
-                    <div 
-                        className="col-12" 
-                        style={{boxShadow: "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)", 
-                        backgroundColor:"white",
-                        borderRadius: "4px"
-                        }} >
-                    <form 
-                        class="form-inline pt-3 pb-3" 
-                        onSubmit={searchUserQuery}>
+                  <div className="mb-3 mt-3">
+                    <div
+                      className="col-12"
+                      style={{
+                        boxShadow:
+                          "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+                        backgroundColor: "white",
+                        borderRadius: "4px",
+                      }}
+                    >
+                      <form
+                        class="form-inline"
+                        onSubmit={searchTransactionQuery}
+                      >
                         <div class="form-group mb-2 mr-5">
-                        <lable>Tên phim:</lable>&nbsp;
-                        <input 
+                          <lable>Tên phim:</lable>&nbsp;
+                          <input
                             className="form-control"
                             placeholder="Nhập tên phim"
-                            value= {movieName}
-                            onChange={e=> {setMovieName(e.target.value)}}>                       
-                            </input>
+                            value={transactionFilter.movieName}
+                            onChange={(e) => {
+                              setTransactionFilter({
+                                ...transactionFilter,
+                                movieName: (e.target.value)});
+                            }}
+                          ></input>
                         </div>
-                        <div class="form-group mb-2 mr-5">
-                        <lable>Tên rạp chiếu:</lable>&nbsp;
-                        <input 
+                        {/* <div class="form-group mb-2 mr-5">
+                          <lable>Tên rạp chiếu:</lable>&nbsp;
+                          <input
                             className="form-control"
                             placeholder="Nhập tên rạp chiếu"
-                            value= {cinemaName}
-                            onChange={e=> {setCinemaName(e.target.value)}}>                       
-                            </input>
-                        </div>                        
-                        <div class="form-group mb-2">
-                        <button 
-                            type="submit"
-                            className="btn btn-primary"
-                            ><SearchIcon>Tìm kiếm</SearchIcon></button>&nbsp;
-                        <button 
-                            
-                            className="btn btn-warning"
-                            onClick={()=>{refreshData()}}
-                        >
-                            <RefreshIcon color="secondary">
-                            Làm mới</RefreshIcon></button>
+                            value={transactionFilter.cinemaName}
+                            onChange={(e) => {
+                              setTransactionFilter({
+                                ...transactionFilter,
+                                cinemaName: (e.target.value)});
+                            }}
+                          ></input>
+                        </div> */}
+                        <div class="form-group mb-4 mr-5">
+                          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                              disableToolbar
+                              variant="inline"
+                              format="dd/MM/yyyy"
+                              margin="normal"
+                              id="date-picker-inline"
+                              label="Ngày"
+                              value={transactionFilter.tranTime}
+                              onChange={(date) => {setTransactionFilter({
+                                ...transactionFilter,
+                                tranTime: date
+                              })}}
+                              KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                              }}
+                            />
+                          </MuiPickersUtilsProvider>  
                         </div>
-                    </form>
+                        <div class="form-group mb-4 mr-5">
+                          <FormControl className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-helper-label">
+                              Trạng thái
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-helper-label"
+                              id="demo-simple-select-helper"
+                              value={transactionFilter.status}
+                              onChange={handleChangeStatus}
+                            >
+                              <MenuItem value="">
+                                <em>None</em>
+                              </MenuItem>
+                              <MenuItem value="Book">Book</MenuItem>
+                              <MenuItem value="Cancel">Cancel</MenuItem>
+                              <MenuItem value="Buy">Buy</MenuItem>
+                              <MenuItem value="Draft">Draft</MenuItem>
+                            </Select>
+                          </FormControl>
+                        </div>
+                        <div class="form-group mb-2">
+                          <button type="submit" className="btn btn-primary">
+                            <SearchIcon>Tìm kiếm</SearchIcon>
+                          </button>
+                          &nbsp;
+                          <button
+                            className="btn btn-warning"
+                            onClick={() => {
+                              refreshData();
+                            }}
+                          >
+                            <RefreshIcon color="secondary">Làm mới</RefreshIcon>
+                          </button>
+                        </div>
+                      </form>
                     </div>
-                    
-                    </div>
-                    <div className={classes.root}>
+                  </div>
+                  <div className={classes.root}>
                     <Paper className={classes.paper}>
-                        <TableContainer className={classes.container}>
+                      <TableContainer className={classes.container}>
                         <Table
-                            stickyHeader aria-label="sticky table"
-                            className={classes.table}
-                            aria-labelledby="tableTitle"
-                            size="small"
+                          stickyHeader
+                          aria-label="sticky table"
+                          className={classes.table}
+                          aria-labelledby="tableTitle"
+                          size="small"
                         >
-                            <EnhancedTableHead
+                          <EnhancedTableHead
                             classes={classes}
                             order={order}
                             orderBy={orderBy}
                             onRequestSort={handleRequestSort}
-                            />
-                            <TableBody>
+                          />
+                          <TableBody>
                             {stableSort(rows, getComparator(order, orderBy))
-                                .slice(
+                              .slice(
                                 page * rowsPerPage,
                                 page * rowsPerPage + rowsPerPage
-                                )
-                                .map((row, index) => {
+                              )
+                              .map((row, index) => {
                                 const labelId = `enhanced-table-checkbox-${index}`;
                                 const status = row.isActive
-                                    ? " khóa"
-                                    : " kích hoạt";
+                                  ? " khóa"
+                                  : " kích hoạt";
                                 return (
-                                    <TableRow>
+                                  <TableRow>
                                     <TableCell
-                                        component="th"
-                                        id={labelId}
-                                        scope="row"
-                                        padding="20px"
+                                      component="th"
+                                      id={labelId}
+                                      scope="row"
+                                      padding="20px"
                                     >
-                                        {row.id}
+                                      {row.id}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {row.ticket?.seat.room.cinema.name}
+                                      {row.ticket?.seat.room.cinema.name}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {row.ticket.showtime.movie.name}
-                                    </TableCell>
-                                    <TableCell align="left">{row.ticket.seat.row + row.ticket.seat.column}</TableCell>
-                                    <TableCell align="left">
-                                        {row.price}
+                                      {row.ticket.showtime.movie.name}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {row.user.name}
+                                      {row.ticket.seat.row +
+                                        row.ticket.seat.column}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {row.transaction_time.slice(0,10)}
+                                      {row.price}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {row.service}
+                                      {row.user.name}
+                                    </TableCell>
+                                    <TableCell align="left">
+                                      {row.transaction_time.slice(0, 10)}
+                                    </TableCell>
+                                    <TableCell align="left">
+                                      {row.service}
                                     </TableCell>
                                     <TableCell>
-                                        <button
+                                      <button
                                         type="button"
                                         className="btn btn-primary"
                                         onClick={() => getTransaction(row)}
-                                        >
+                                      >
                                         <span className="fa fa-eye"></span>
-                                      
-                                        </button>                                  
-                                        &nbsp;
-                                        <button
+                                      </button>
+                                      &nbsp;
+                                      <button
                                         type="button"
                                         className="btn btn-danger"
                                         onClick={() => {
-                                            if (
+                                          if (
                                             window.confirm(
-                                                "Bạn có muốn xóa giao dịch này?"
+                                              "Bạn có muốn xóa giao dịch này?"
                                             )
-                                            ) {
+                                          ) {
                                             onDeleteTransaction(row.id);
-                                            }
+                                          }
                                         }}
-                                        >
+                                      >
                                         <span className="far fa-trash-alt"></span>
-                                        
-                                        </button>
+                                      </button>
                                     </TableCell>
-                                    </TableRow>
+                                  </TableRow>
                                 );
-                                })}
+                              })}
                             {emptyRows > 0 && (
-                                <TableRow
-                                style={{ height: (dense ? 33 : 33) * emptyRows }}
-                                >
+                              <TableRow
+                                style={{
+                                  height: (dense ? 33 : 33) * emptyRows,
+                                }}
+                              >
                                 <TableCell colSpan={6} />
-                                </TableRow>
+                              </TableRow>
                             )}
-                            </TableBody>
+                          </TableBody>
                         </Table>
-                        </TableContainer>
-                        <TablePagination
+                      </TableContainer>
+                      <TablePagination
                         rowsPerPageOptions={[10, 20, 30]}
                         component="div"
                         count={rows.length}
@@ -381,15 +472,15 @@ export default function EnhancedTable() {
                         page={page}
                         onPageChange={handleChangePage}
                         onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
+                      />
                     </Paper>
-                    </div>
-                </div>              
+                  </div>
                 </div>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
-        </section>
+      </section>
     </Loader>
   );
 }
