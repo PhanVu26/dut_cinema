@@ -12,6 +12,11 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import Loader from "react-loader-advanced";
+import { NavLink } from "react-router-dom";
+import Typography from '@material-ui/core/Typography';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import HomeIcon from '@material-ui/icons/Home';
+import GrainIcon from '@material-ui/icons/Grain';
 
 import * as actions from "../../../actions/actorManager/index";
 import ActorControl from "../../../components/Control/ActorControl/ActorControl";
@@ -64,7 +69,6 @@ function EnhancedTableHead(props) {
           <TableCell
             key={headCell.id}
             align="left"
-            padding="20px"
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
@@ -81,7 +85,7 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
-        <TableCell>Hành động</TableCell>
+        <TableCell align="center">Hành động</TableCell>
       </TableRow>
     </TableHead>
   );
@@ -121,6 +125,22 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: 20,
     width: 1,
+  },
+  container: {
+    maxHeight: 289
+  },
+  link: {
+    display: 'flex',
+  },
+  icon: {
+    marginRight: theme.spacing(0.5),
+    width: 20,
+    height: 20,
+  },
+  breadcrumb: {
+    height: '10px',
+    backgroundColor: '#f3f3f4',
+    paddingLeft: '0px'
   },
 }));
 
@@ -189,7 +209,19 @@ export default function EnhancedTable() {
             <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
               <div class={"row " + classes.searchBar}>
                 <div class="col-xl-12 col-12 mb-xl-0">
-                  <h3 class="text-left mb-2 pt-3">Danh sách diễn viên</h3>
+                  <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumb}>
+                    <NavLink           
+                      to="/"         
+                      className={classes.link}
+                    >
+                      <HomeIcon className={classes.icon} />
+                      Trang chủ
+                    </NavLink>
+                    <Typography color="textPrimary" className={classes.link}>
+                      <GrainIcon className={classes.icon} />
+                      Diễn viên
+                    </Typography>
+                  </Breadcrumbs>
                   <div className="mb-3 mt-3">
                     <div
                       className="col-12"
@@ -235,11 +267,12 @@ export default function EnhancedTable() {
                   <div className={classes.root}>
                     <ActorControl></ActorControl>
                     <Paper className={classes.paper}>
-                      <TableContainer>
+                      <TableContainer className={classes.container}>
                         <Table
+                          stickyHeader aria-label="sticky table"
                           className={classes.table}
                           aria-labelledby="tableTitle"
-                          size={dense ? "small" : "medium"}
+                          size="small"
                           aria-label="enhanced table"
                         >
                           <EnhancedTableHead
@@ -259,10 +292,10 @@ export default function EnhancedTable() {
                                 return (
                                   <TableRow>
                                     <TableCell
+                                     align="left"
                                       component="th"
                                       id={labelId}
                                       scope="row"
-                                      padding="20px"
                                     >
                                       {row.id}
                                     </TableCell>
@@ -274,7 +307,7 @@ export default function EnhancedTable() {
                                       {row.description}
                                     </TableCell>
 
-                                    <TableCell>
+                                    <TableCell align="center">
                                       <button
                                         type="button"
                                         className="btn btn-warning"
@@ -289,7 +322,7 @@ export default function EnhancedTable() {
                                         onClick={() => {
                                           if (
                                             window.confirm(
-                                              "Bạn có muốn xóa phim này?"
+                                              "Bạn có muốn xóa diễn viên này?"
                                             )
                                           ) {
                                             onDeleteActor(row.id);
