@@ -1,7 +1,6 @@
 import React from "react";
 import Loader from 'react-loader-advanced';
 import { useSelector } from "react-redux";
-import UserManagementPage from "../../../pages/admin/UserManagementPage";
 import SalesChart from '../Chart/SalesChart'
 
 
