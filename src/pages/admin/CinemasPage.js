@@ -348,7 +348,7 @@ export default function EnhancedTable() {
                                         onClick={() => {
                                           if (
                                             window.confirm(
-                                              "Bạn có muốn xóa thể loại này?"
+                                              "Bạn có muốn xóa cinema này?"
                                             )
                                           ) {
                                             onDeleteCinema(row.id);
