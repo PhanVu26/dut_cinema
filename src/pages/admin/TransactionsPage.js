@@ -177,7 +177,7 @@ export default function EnhancedTable() {
   const [orderBy, setOrderBy] = React.useState("id");
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [transactionFilter, setTransactionFilter] = React.useState({tranTime: new Date()});
+  const [transactionFilter, setTransactionFilter] = React.useState({status:"", tranTime: new Date()});
   const loading = useSelector((state) => state.transactions.loading);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const rows = useSelector((state) => state.transactions.transactions);
@@ -186,6 +186,16 @@ export default function EnhancedTable() {
   useEffect(() => {
     dispatch(actions.actFetchDataTransactionsRequest());
   }, []);
+
+  useEffect(() => {
+    const serviceFilter = transactionFilter.status === "" ? "" : `",service": {"equal": "${transactionFilter.status}"}`;
+    const tranTimeFilter = transactionFilter.tranTime === "" ? "" : `",transaction_time": {"equal": "${transactionFilter.tranTime}"}`;
+    var filter = "";
+    if(serviceFilter !== "" || tranTimeFilter !== ""){
+      filter = `filter={${serviceFilter}${tranTimeFilter}}`;
+    }
+    dispatch(actions.actFetchDataTransactionsFilterRequest(filter));
+  }, [transactionFilter.status, transactionFilter.tranTime]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -223,13 +233,6 @@ export default function EnhancedTable() {
       ...transactionFilter,
       status: (e.target.value)
     });
-    const serviceFilter = transactionFilter.status === "" ? "" : `",service": {"equal": "${transactionFilter.status}"}`;
-    const tranTimeFilter = transactionFilter.tranTime === "" ? "" : `",transaction_time": {"equal": "${transactionFilter.tranTime}"}`;
-    var filter = "";
-    if(serviceFilter !== "" || tranTimeFilter !== ""){
-      filter = `filter={${serviceFilter}${tranTimeFilter}}`;
-    }
-    dispatch(actions.actFetchDataTransactionsFilterRequest(filter));
   }
 
   const searchTransactionQuery = (e) => {
@@ -294,19 +297,6 @@ export default function EnhancedTable() {
                             }}
                           ></input>
                         </div>
-                        {/* <div class="form-group mb-2 mr-5">
-                          <lable>Tên rạp chiếu:</lable>&nbsp;
-                          <input
-                            className="form-control"
-                            placeholder="Nhập tên rạp chiếu"
-                            value={transactionFilter.cinemaName}
-                            onChange={(e) => {
-                              setTransactionFilter({
-                                ...transactionFilter,
-                                cinemaName: (e.target.value)});
-                            }}
-                          ></input>
-                        </div> */}
                         <div class="form-group mb-4 mr-5">
                           <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <KeyboardDatePicker
