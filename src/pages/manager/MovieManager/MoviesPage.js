@@ -315,11 +315,12 @@ export default function EnhancedTable() {
                   <div className={classes.root}>
                     <MovieControl></MovieControl>
                     <Paper className={classes.paper}>
-                      <TableContainer>
+                      <TableContainer className={classes.container}>
                         <Table
+                          stickyHeader aria-label="sticky table"
                           className={classes.table}
                           aria-labelledby="tableTitle"
-                          size={dense ? "small" : "medium"}
+                          size="small"
                           aria-label="enhanced table"
                         >
                           <EnhancedTableHead
@@ -352,8 +353,8 @@ export default function EnhancedTable() {
                                     <TableCell align="left">
                                       <img
                                         src={row.image?.mainUrl}
-                                        height="80px"
-                                        width="80px"
+                                        height="30px"
+                                        width="30px"
                                       ></img>
                                     </TableCell>
                                     <TableCell align="left">
@@ -410,7 +411,7 @@ export default function EnhancedTable() {
                             {emptyRows > 0 && (
                               <TableRow
                                 style={{
-                                  height: (dense ? 33 : 53) * emptyRows,
+                                  height: (dense ? 33 : 33) * emptyRows,
                                 }}
                               >
                                 <TableCell colSpan={6} />
