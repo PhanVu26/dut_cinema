@@ -17,6 +17,10 @@ import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import GrainIcon from '@material-ui/icons/Grain';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 import * as actions from "../../../actions/movieManager/index";
 import * as actorActions from '../../../actions/actorManager/index';
@@ -158,7 +162,14 @@ const useStyles = makeStyles((theme) => ({
     height: '10px',
     backgroundColor: '#f3f3f4',
     paddingLeft: '0px'
-  }
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 export default function EnhancedTable() {
@@ -166,8 +177,11 @@ export default function EnhancedTable() {
   const [order, setOrder] = React.useState("desc");
   const [orderBy, setOrderBy] = React.useState("id");
   const [page, setPage] = React.useState(0);
-  const [movieFilter, setMovieFilter] = React.useState({});
-  const [producer, setProducer] = React.useState("");
+  const [movieFilter, setMovieFilter] = React.useState({
+    movieName:"",
+    producer:"",
+    genre:""
+  });
   const [dense, setDense] = React.useState(false);
   const loading = useSelector((state) => state.movies.loading);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -180,6 +194,14 @@ export default function EnhancedTable() {
     dispatch(actions.actFetchDataGenresRequest());
     dispatch(actorActions.actFetchDataActorsRequest());
   }, []);
+
+  useEffect(() => {
+    var filter = `filter={"name": {"like": "${movieFilter.movieName}"}, "producer": {"like": "${movieFilter.producer}"}}`;
+    if(movieFilter.genre !== ""){
+      filter = filter + `&genreId=${movieFilter.genre}`;
+    }
+    dispatch(actions.actFetchDataMoviesFilterRequest(filter));
+  }, [movieFilter.genre]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -209,12 +231,15 @@ export default function EnhancedTable() {
 
   const refreshData = () => {
     dispatch(actions.actFetchDataMoviesRequest());
-    setMovieFilter({movieName: "", producer: ""});
+    setMovieFilter({movieName: "", producer: "", genre: ""});
   };
 
   const searchMovieQuery = (e) => {
     e.preventDefault();
-    const filter = `filter={"name": {"like": "${movieFilter.movieName}"}, "producer": {"like": "${movieFilter.producer}"}}`;
+    var filter = `filter={"name": {"like": "${movieFilter.movieName}"}, "producer": {"like": "${movieFilter.producer}"}}`;
+    if(movieFilter.genre !== ""){
+      filter = filter + `&genreId=${movieFilter.genre}`;
+    }
     dispatch(actions.actFetchDataMoviesFilterRequest(filter));
   };
 
@@ -226,13 +251,25 @@ export default function EnhancedTable() {
     return result;
   };
 
+  const showMenuItemGenre = () => {
+    console.log("gen",genres)
+    var result = null;
+    result = genres?.map((genre) => {
+      return <MenuItem value={genre.id}>{genre.name}</MenuItem>;
+    });
+    return result;
+  }
+
   const getMovie = (id) => {
-    console.log("cleck")
     dispatch(actions.getMovieRequest(id));
     dispatch(actions.toggleModal());
-
-}
-
+  }
+  const onChangeGenre = (e) => {
+    setMovieFilter({
+      ...movieFilter, 
+      genre: e.target.value
+    });
+  }
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -294,6 +331,24 @@ export default function EnhancedTable() {
                               setMovieFilter({...movieFilter, producer: e.target.value});
                             }}
                           ></input>
+                        </div>
+                        <div class="form-group mb-4 mr-5">
+                          <FormControl className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-helper-label">
+                              Thể loại
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-helper-label"
+                              id="demo-simple-select-helper"
+                              value={movieFilter.genre}
+                              onChange={onChangeGenre}
+                            >
+                              <MenuItem value="">
+                                <em>None</em>
+                              </MenuItem>
+                              {showMenuItemGenre(genres)}
+                            </Select>
+                          </FormControl>
                         </div>
                         <div class="form-group mb-2">
                           <button type="submit" className="btn btn-primary">
