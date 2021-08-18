@@ -22,19 +22,19 @@ class MovieItem extends Component {
   //     this.props.onUpdateUserStatus(this.props.user.id)
   // }
   // getUserEditing = () => {
-  //     console.log("get user editing", this.props.user)
+  //     
   //     this.props.onToggleUserForm();
   //     this.props.getUserEditing(this.props.user)
   // }
   getMovieInfo = () => {
     this.props.onToggleModal();
     this.props.getMovieInfo(this.props.movie);
-    console.log("xem movie:", this.props.movie);
+    
   };
   editMovie = () => {
     this.props.onToggleMovieForm();
     this.props.getMovieInfo(this.props.movie);
-    console.log("edit moviessss:", this.props.movie);
+    
   };
   showGenres(genres) {
     var result = null;

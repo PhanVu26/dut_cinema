@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from "react";
 export default function Paypal({data1,onComfirm}) {
   const paypal = useRef();
 
-  console.log(data1)
+  
   useEffect(() => {
     window.paypal
       .Buttons({
@@ -23,11 +23,11 @@ export default function Paypal({data1,onComfirm}) {
         },
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
-          console.log(order);
+          
           onComfirm();
         },
         onError: (err) => {
-          console.log(err);
+          
         },
       })
       .render(paypal.current);

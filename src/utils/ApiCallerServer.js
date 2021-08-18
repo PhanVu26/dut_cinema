@@ -12,7 +12,7 @@ export default function callApi(endpoint, method = "GET", body) {
       url: `${Config.API_URL}/${endpoint}`,
       data: body,
     }).catch((err) => {
-      console.log(err);
+      
     });
   } else {
     // axios.interceptors.request.use(
@@ -29,7 +29,7 @@ export default function callApi(endpoint, method = "GET", body) {
     //   url: `${Config.API_URL}/${endpoint}`,
     //   data: body,
     // }).catch((err) => {
-    //   console.log(err);
+    //   
     // });
 
     const authAxios = axios.create({
@@ -43,7 +43,7 @@ export default function callApi(endpoint, method = "GET", body) {
       url: `${Config.API_URL}/${endpoint}`,
       data: body,
     }).catch((err) => {
-      console.log(err);
+      
     });
   }
 }

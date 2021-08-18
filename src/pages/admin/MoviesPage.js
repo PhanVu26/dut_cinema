@@ -167,12 +167,12 @@ export default function EnhancedTable() {
   };
 
   const handleChangePage = (event, newPage) => {
-    console.log("page", newPage);
+    
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    console.log("perpage", event.target.value);
+    
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -206,7 +206,7 @@ export default function EnhancedTable() {
   };
 
   const getMovie = (id) => {
-    console.log("cleck")
+    
     dispatch(actions.getMovieRequest(id));
     dispatch(actions.toggleModal());
 

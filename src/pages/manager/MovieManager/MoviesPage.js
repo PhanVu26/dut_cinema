@@ -210,12 +210,12 @@ export default function EnhancedTable() {
   };
 
   const handleChangePage = (event, newPage) => {
-    console.log("page", newPage);
+    
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    console.log("perpage", event.target.value);
+    
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -252,7 +252,7 @@ export default function EnhancedTable() {
   };
 
   const showMenuItemGenre = () => {
-    console.log("gen",genres)
+    
     var result = null;
     result = genres?.map((genre) => {
       return <MenuItem value={genre.id}>{genre.name}</MenuItem>;

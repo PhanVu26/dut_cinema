@@ -60,8 +60,8 @@ class Booked extends Component {
       arrayBooking1 = arrayBooking1.filter((item) => item.service === "Book");
       arrayBooking2 = this.props.transaction.results;
       arrayBooking2 = arrayBooking2.filter((item) => item.service === "Cancel");
-      console.log("test1", arrayBooking1);
-      console.log("test2", arrayBooking2);
+      
+      
       arrayBooking1.sort(compare);
       arrayBooking2.sort(compare);
       let i = 0,
@@ -92,7 +92,7 @@ class Booked extends Component {
     let dataBookedItem = arrayBooking.map((myBooked, index) => {
       return <BookedItem key={`booked ${index}`} myBooked={myBooked} />;
     });
-    console.log("test3", dataBookedItem);
+    
     return (
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">

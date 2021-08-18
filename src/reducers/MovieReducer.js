@@ -126,7 +126,7 @@ function MovieReducer(state = stateDefault, action) {
     case Types.RATING_ITEM_REVIEW_MOVIE: {
       let newState = { ...state };
       for (let i = 0; i < newState.reviewMovie.length; i++) {
-        console.log(action.reviewMovie._id);
+        
         if (newState.reviewMovie[i]._id === action.reviewMovie._id) {
           newState.reviewMovie[i] = action.reviewMovie;
         }
@@ -174,7 +174,7 @@ function MovieReducer(state = stateDefault, action) {
           newState.searchMovie.push(data);
         }
       });
-      console.log("result: ", newState.searchMovie);
+      
       return newState;
     }
     case Types.FETCH_DATA_BOOKING_MOVIE: {

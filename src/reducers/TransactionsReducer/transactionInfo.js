@@ -5,7 +5,7 @@ var initialState = {
 var myReducer = (state = initialState, action) => {
     switch(action.type){       
         case types.GET_TRANSACTION:
-            console.log("transaction info ", action.transaction)
+            
             return action.transaction
         default: return state;     
     }

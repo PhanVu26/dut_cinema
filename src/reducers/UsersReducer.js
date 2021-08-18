@@ -53,12 +53,12 @@ var userReducer = (state = initialState, action) => {
         status: action.user.status === true ? "actived" : "InActived",
       };
       state.push(newUser);
-      console.log(action);
+      
       return [...state];
     case types.DELETE_USER:
       const index = findIndex(state, action.id);
       state.splice(index, 1);
-      console.log(action);
+      
       return [...state];
     case types.UPDATE_USER:
       return state;

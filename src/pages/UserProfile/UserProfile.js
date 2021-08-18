@@ -106,7 +106,7 @@ function TabPanel(props) {
     }
     const onHanndleChangePassword = (e) =>{
       const {name, value} = e.target;
-      console.log(password)
+      
       setPassword({...password,[name]: value})
     }
     return (

@@ -41,10 +41,10 @@ class UserForm extends Component {
                 password: user.password,
                 roleName: user.roleName,
             }
-            console.log("save user", newUser)
+            
             this.props.onSaveUser(newUser);
         }else {
-            console.log("update user", user)
+            
             this.props.onUpdateUser(user)
         }
         this.props.onToggleUserForm();
@@ -65,7 +65,7 @@ class UserForm extends Component {
     }
 
     // componentDidMount(){
-    //     console.log("get user", this.props.userEditing)
+    //     
     //     if(this.props.userEditing && this.props.userEditing.id !== ''){
     //         this.setState({
     //             id: this.props.userEditing.id,
@@ -78,7 +78,7 @@ class UserForm extends Component {
     //     }
     // }
     // showUserRoles = roles => {
-    //     console.log("roles",this.props.roles)
+    //     
     //     var result = null;
     //     if (roles.length > 0) {
     //       result = roles.map((role, index) => {

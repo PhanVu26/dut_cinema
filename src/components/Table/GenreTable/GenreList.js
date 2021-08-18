@@ -40,7 +40,7 @@ class GenreList extends Component {
 
     render() {
         var{rowsPerPage, filterGenre} = this.props;
-        console.log("data", rowsPerPage, filterGenre)
+        
         if(filterGenre.name){
             rowsPerPage = rowsPerPage.filter((genre) => {
                 return genre.name.toLowerCase().indexOf(filterGenre.name.toLowerCase()) !== -1

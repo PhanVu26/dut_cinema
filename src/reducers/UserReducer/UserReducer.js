@@ -28,7 +28,7 @@ var userReducer = (state = initialState, action) => {
                 loading: false
             };
         case types.USER_LOADING:
-            console.log("users loading.......")
+            
             return {
                 ...state,
                 loading: true
@@ -42,7 +42,7 @@ var userReducer = (state = initialState, action) => {
                 userRoles: [{id: action.user.role.id, role: {name: action.user.role.name}}],
                 isActive: action.user.status === 'true' ? true: false}
             users.unshift(newUser);
-            console.log("user", users)
+            
             return {
                 ...state,
                 users: users,

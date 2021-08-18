@@ -51,7 +51,7 @@ class ForgotPassword extends Component {
   onSave = (e) => {
     e.preventDefault();
     let { email } = this.state;
-    console.log(email.value + " " + email.isValid);
+    
     if (email.value !== "" && email.isValid === true) {
       let account = {
         email: email.value,

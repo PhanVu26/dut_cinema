@@ -29,7 +29,7 @@ var myReducer = (state = initialState, action) => {
             //     image: action.movie.image,
             //     releaseDate: action.movie.releaseDate,
             // }     
-            console.log("movieInfo in action", action.movie)
+            
             return action.movie
         default: return state;     
     }

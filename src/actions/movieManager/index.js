@@ -22,7 +22,7 @@ export const listAllActors = () => {
 export const actFetchDataGenresRequest = () => {
     return (dispatch) => {
       return callApi("genres", "GET", null).then((res) => {
-        //console.log("data", res.data.results)
+        //
         dispatch(actFetchDataGenres(res.data.results));
       });
     };
@@ -82,7 +82,7 @@ export const toggleMovieForm = () => {
 export const getMovieRequest = (id) => {
     return (dispatch) => {
         return callApi(`movies/${id}`, 'GET', null).then((res) => {
-            //console.log("res", res.data)
+            //
             dispatch(getMovie(res.data));
         });
     };
@@ -97,9 +97,9 @@ export const actDeleteMovieRequest = (id) => {
     return (dispatch) => {
       dispatch(movieLoading());
         return callApi(`movies/${id}`, 'DELETE', null).then((res) => {
-            //console.log("movie delete", movie)
+            //
             alert("Xóa phim thành công.")
-            console.log("res update", res)
+            
             dispatch(deleteMovie(id));
         })
         .catch(err => {
@@ -140,7 +140,7 @@ export const actFetchDataMoviesRequest = () => {
     return (dispatch) => {
       dispatch(movieLoading());
       return callApi("movies?page=1&perPage=1000&relations=actors,genres", "GET", null).then((res) => {
-        //console.log("data", res.data.results)
+        //
         dispatch(actFetchDataMovies(res.data.results));
       });
     };
@@ -150,7 +150,7 @@ export const actFetchDataMoviesRequest = () => {
     return (dispatch) => {
       dispatch(movieLoading());
       return callApi(`movies?${query}&page=1&perPage=1000&relations=actors,genres`, "GET", null).then((res) => {
-        //console.log("data", res.data.results)
+        //
         dispatch(actFetchDataMovies(res.data.results));
       });
     };

@@ -37,10 +37,10 @@ var myReducer = (state = initialState, action) => {
                 image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
             }     
-            console.log("movie edit ", movieInfo)
+            
             return movieInfo
         case types.FETCH_MOVIE:
-            console.log("movie info ", action.movie)
+            
             return action.movie
         default: return state;     
     }
