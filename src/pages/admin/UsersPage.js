@@ -17,6 +17,10 @@ import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import GrainIcon from '@material-ui/icons/Grain';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 import * as userActions from "../../actions/userManager/userAction";
 import UserControl from "../../components/Control/UserControl/UserControl";
@@ -135,7 +139,7 @@ const useStyles = makeStyles((theme) => ({
     width: 1,
   },
   container: {
-    maxHeight: 289
+    maxHeight: 280
   },
   link: {
     display: 'flex',
@@ -149,7 +153,14 @@ const useStyles = makeStyles((theme) => ({
     height: '10px',
     backgroundColor: '#f3f3f4',
     paddingLeft: '0px'
-  }
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 export default function EnhancedTable() {
@@ -157,9 +168,11 @@ export default function EnhancedTable() {
   const [order, setOrder] = React.useState("desc");
   const [orderBy, setOrderBy] = React.useState("id");
   const [page, setPage] = React.useState(0);
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [role, setRole] = React.useState("");
+  const [userFilter, setUserFilter] = React.useState({
+    name:"",
+    email:"",
+    role:""
+  })
   const [dense, setDense] = React.useState(false);
   const loading = useSelector((state) => state.users.loading);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -174,6 +187,14 @@ export default function EnhancedTable() {
     console.log("userss", rows);
   }, []);
 
+  useEffect(() => {
+    var filter = `filter={"name": {"like": "${userFilter.name}"}, "email": {"like": "${userFilter.email}"}}`;
+    if(userFilter.role !== ""){
+      filter = filter + `&roleName=${userFilter.role}`;
+    }
+    dispatch(userActions.actFetchDataUsersFilterRequest(filter));
+  }, [userFilter.role]);
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -181,12 +202,10 @@ export default function EnhancedTable() {
   };
 
   const handleChangePage = (event, newPage) => {
-    console.log("page", newPage);
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    console.log("perpage", event.target.value);
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -217,29 +236,29 @@ export default function EnhancedTable() {
 
   const refreshData = () => {
     dispatch(userActions.actFetchDataUsersRequest());
-    setName('');
-    setEmail('');
-    setRole('');
+    setUserFilter({
+      ...userFilter,
+      name:"",
+      email: "",
+      role: ""
+    })
   }
 
   const searchUserQuery = (e) => {
     e.preventDefault();
-    console.log("role", role)
-    var filter = `filter={"name": {"like": "${name}"}, "email": {"like": "${email}"}}`;
-    if(role !== ""){
-      filter = filter + `&roleName=${role}`;
+    var filter = `filter={"name": {"like": "${userFilter.name}"}, "email": {"like": "${userFilter.email}"}}`;
+    if(userFilter.role !== ""){
+      filter = filter + `&roleName=${userFilter.role}`;
     }
     dispatch(userActions.actFetchDataUsersFilterRequest(filter));
   };
 
   const onChangeRole = (e) => {
-    const role = e.target.value;
-    setRole(role);
-    var filter = `filter={"name": {"like": "${name}"}, "email": {"like": "${email}"}}`;
-    if(role !== ""){
-      filter = filter + `&roleName=${role}`;
-    }
-    dispatch(userActions.actFetchDataUsersFilterRequest(filter));
+    setUserFilter({
+      ...userFilter, 
+      role: e.target.value
+    });
+
   }
 
   const showUserRoles = roles => {
@@ -249,7 +268,7 @@ export default function EnhancedTable() {
     var result = null;
     if (userRoles.length > 0) {
       result = userRoles.map((role, index) => {
-        return <option key={role.id} value={role.name} >{role.name}</option>;
+        return <MenuItem value={role.name} >{role.name}</MenuItem>;
       });
     }
     return result;
@@ -266,11 +285,9 @@ export default function EnhancedTable() {
           <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
             <div class={"row " + classes.searchBar}>
               <div class="col-xl-12 col-12 mb-xl-0">
-              <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumb}>
-                    <NavLink
-                      
-                      to={"/admin"}
-                      
+                <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumb}>
+                    <NavLink                      
+                      to={"/admin"}                     
                       className={classes.link}
                     >
                       <HomeIcon className={classes.icon} />
@@ -289,15 +306,15 @@ export default function EnhancedTable() {
                       borderRadius: "4px"
                       }} >
                   <form 
-                    class="form-inline pt-3 pb-3" 
+                    class="form-inline" 
                     onSubmit={searchUserQuery}>
                     <div class="form-group mb-2 mr-5">
                       <lable>Name:</lable>&nbsp;
                       <input 
                         className="form-control"
                         placeholder="Nhập tên"
-                        value= {name}
-                        onChange={e=> {setName(e.target.value)}}>                       
+                        value= {userFilter.name}
+                        onChange={e=> setUserFilter({...userFilter, name: e.target.value})}>                       
                         </input>
                     </div>
                     <div class="form-group mb-2 mr-5">
@@ -305,20 +322,27 @@ export default function EnhancedTable() {
                       <input 
                         className="form-control"
                         placeholder="Nhập Email"
-                        value= {email}
-                        onChange={e=> {setEmail(e.target.value)}}>                       
+                        value= {userFilter.email}
+                        onChange={e=> {setUserFilter({...userFilter, email: e.target.value})}}>                       
                         </input>
                     </div>
-                    <div class="form-group mb-2 mr-5">
-                      <lable>Vai trò:</lable>&nbsp;
-                      <select 
-                        name="roleFilter"
-                        className="form-control"
-                        onChange={onChangeRole}
-                        value={role} >
-                            <option value="">Tất cả</option>
-                            {showUserRoles(roles)}
-                            </select>
+                    <div class="form-group mb-4 mr-5">
+                      <FormControl className={classes.formControl}>
+                        <InputLabel id="demo-simple-select-helper-label">
+                          Vai trò
+                        </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-helper-label"
+                          id="demo-simple-select-helper"
+                          value={userFilter.role}
+                          onChange={onChangeRole}
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          {showUserRoles(roles)}
+                        </Select>
+                      </FormControl>
                     </div>
                     
                     <div class="form-group mb-2">
