@@ -184,7 +184,7 @@ export default function EnhancedTable() {
   useEffect(() => {
     dispatch(userActions.actFetchDataUsersRequest());
     dispatch(userActions.actFetchDataRolesRequest());
-    console.log("userss", rows);
+    
   }, []);
 
   useEffect(() => {

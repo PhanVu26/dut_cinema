@@ -24,7 +24,7 @@ class UserItem extends Component {
     }
     getUserEditing = () => {
         this.props.onToggleUserForm();
-        console.log("id", this.props.user.id)
+        
         this.props.onGetUserEditing(this.props.user.id)
     }
     showUserRole = (userRoles) => {

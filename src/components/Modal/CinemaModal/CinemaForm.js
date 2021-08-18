@@ -53,7 +53,7 @@ class CinemaForm extends Component {
         event.preventDefault();
         if(this.validateCinema() === true) {
             if(this.props.cinemaEditing.id){
-                console.log("update cinemaId", this.props.cinemaEditing.id, this.state.cinema)
+                
                 this.props.onUpdateCinema(this.state.cinema)
                 this.props.onToggleCinemaForm()
             }else {

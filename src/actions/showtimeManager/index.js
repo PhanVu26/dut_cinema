@@ -15,7 +15,7 @@ export const actFetchShowtimesRequest = (roomId, dateString) => {
       "GET",
       null
     ).then((res) => {
-      console.log("res: ", res);
+      
       dispatch(getShowtime(res.data.showtimes));
     });
   };
@@ -61,7 +61,7 @@ export const actFetchMovies = (movie) => {
 export const actFetchMoviesRequest = () => {
   return (dispatch) => {
     return callApi("movies", "GET", null).then((res) => {
-      console.log("test: ", res.data.results);
+      
       dispatch(actFetchMovies(res.data.results));
     });
   };

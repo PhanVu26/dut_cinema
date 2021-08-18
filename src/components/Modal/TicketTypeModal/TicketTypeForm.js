@@ -63,7 +63,7 @@ class TicketTypeForm extends Component {
         event.preventDefault();
         if(this.validateTicketType() === true) {
             if(this.props.ticketTypeEditing.id){
-                console.log("update ticketTypeId", this.props.ticketTypeEditing.id, this.state.ticketType)
+                
                 this.props.onUpdateTicketType(this.state.ticketType)
                 this.props.onToggleTicketTypeForm()
             }else {

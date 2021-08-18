@@ -5,7 +5,7 @@ export const actFetchDataGenresRequest = () => {
     return (dispatch) => {
         dispatch(loadGenre())
       return callApi("genres?page=1&perPage=1000", "GET", null).then((res) => {
-          console.log("genres", res.data.results)
+          
         dispatch(actFetchDataGenres(res.data.results));
       });
     };
@@ -15,7 +15,7 @@ export const actFetchDataGenresFilterRequest = (query) => {
     return (dispatch) => {
         dispatch(loadGenre())
       return callApi(`genres?${query}&page=1&perPage=1000`, "GET", null).then((res) => {
-          console.log("genres", res.data.results)
+          
         dispatch(actFetchDataGenres(res.data.results));
       });
     };
@@ -70,7 +70,7 @@ export const actGetGenreRequest = (id) => {
     return (dispatch) => {
         dispatch(loadGenre())
       return callApi(`genres/${id}`, "GET", null).then((res) => {
-          console.log("genres", res.data)
+          
         dispatch(getGenreInfo(res.data));
       });
     };

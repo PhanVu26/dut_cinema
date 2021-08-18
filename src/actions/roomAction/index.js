@@ -7,7 +7,7 @@ export const actFetchDataRoomsRequest = (id) => {
     return (dispatch) => {
         dispatch(loadRoom());
       return callApi(`cinemas/${id}/rooms?page=1&perPage=1000`, "GET", null).then((res) => {
-        console.log("cinemas", res.data)
+        
         dispatch(actFetchDataRooms(res.data.rooms));
       });
     };

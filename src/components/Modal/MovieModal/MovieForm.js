@@ -55,14 +55,14 @@ class MovieForm extends Component {
     }
 
     onHandleChange = (e) => {
-        //console.log("e ,", e)
+        //
         var target = e.target;
         var name = target.name;
         var value = target.value;
         var id = e.target.id;
 
-        //console.log("value", e)
-        //console.log("checked", e.target.checked)
+        //
+        //
         var file = null;
         var image = null;
         if(e.target.files != null){
@@ -164,7 +164,7 @@ class MovieForm extends Component {
         
         var results = [];
         results = actors?.map((actor, index) => {
-            //console.log("showActorBox", this.state.selectedActors?.some(act => act.id == actor.id))
+            //
             return (
                 <div className="actor-item ml-3 row " key={index}>
                     <div className="col-1">
@@ -187,7 +187,7 @@ class MovieForm extends Component {
     }
 
     removeSelectedActor = (id) =>{
-        //console.log("remove ", id)
+        //
         this.setState((prevState) => ({
             selectedActors: prevState.selectedActors.filter(actor => actor.id !== id),
             movie: {
@@ -208,9 +208,9 @@ class MovieForm extends Component {
     }
 
     showChoosedActor = (actors) => {
-        console.log("actors", actors)
+        
         let rs = []
-        //console.log("actors",actors);
+        //
         rs = actors?.map(actor => {
             return (
                 <div className="selected-actor ml-2  mt-2">
@@ -289,7 +289,7 @@ class MovieForm extends Component {
                 const newMovie = this.state.movie;
 
                 
-                console.log("newMovie", newMovie)
+                
                 data.append("name", newMovie.name)
                 data.append("genreIds", newMovie.genres)
                 // data.append("director", newMovie.director)
@@ -306,15 +306,15 @@ class MovieForm extends Component {
                 }
                 data.append("description", newMovie.description)
 
-                console.log("form-data: ---", data)
-                console.log("image", data.mainImage);
+                
+                
             if(this.props.movieInfo.id == ""){
-                //console.log("edit moive id", this.props.movieInfo.id)
-                console.log("save movie", this.state.movie.duration)
+                //
+                
                 this.props.onAddMovie(data)
             }else {
                 //data.append("id", newMovie.id)
-                console.log("data update", data)
+                
                 this.props.onUpdateMovie(data, newMovie.id)
             }
             this.props.onToggleMovieForm();          
@@ -353,7 +353,7 @@ class MovieForm extends Component {
         const {movie} = this.state
         const movieInfo = this.props.movieInfo;
         var {genres, actors} = this.props
-        console.log("state", this.state);
+        
         genres = genres.filter((genre) => {
             return genre.name.toLowerCase().indexOf(this.state.filterGenre.toLowerCase()) !== -1
         });
@@ -365,7 +365,7 @@ class MovieForm extends Component {
         if(movie.id){
             showImage = movieInfo.image.thumbnailUrl
         }else showImage = this.state.previewImage;
-        console.log("show image", showImage, this.state.previewImage, movie.id)
+        
 
         return (
            <div>  
