@@ -148,7 +148,7 @@ const useStyles = makeStyles((theme) => ({
     width: 1,
   },
   container: {
-    maxHeight: 289
+    maxHeight: 280
   },
   link: {
     display: 'flex',
@@ -307,7 +307,7 @@ export default function EnhancedTable() {
                       }}
                     >
                       <form
-                        class="form-inline pt-3 pb-3"
+                        class="form-inline"
                         onSubmit={searchMovieQuery}
                       >
                         <div class="form-group mb-2 mr-5">
