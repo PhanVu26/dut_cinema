@@ -16,7 +16,7 @@ class MovieDetail extends Component {
     }
     componentDidMount() {
       this.props.fetchAllDataTheater();
-      console.log(this.props)
+      
     }
     showRating= false;
     onRating(){
@@ -25,14 +25,14 @@ class MovieDetail extends Component {
       }
     };
     onChangeRating(value, rate_, numberOfReviews){
-      console.log(`Rated with value ${value}`);
+      
       let rate = parseFloat(rate_);
       let number = parseInt(numberOfReviews) + 1;
       let vote;
       rate = rate * numberOfReviews;
       vote = (rate + value) / number;
       vote = Math.round(vote * 100) / 100;
-      console.log(vote);
+      
       alert(`Bạn đã đánh giá ${value} sao`);
     };
     showGenres(genres){
@@ -40,11 +40,11 @@ class MovieDetail extends Component {
         genres?.forEach(genre => {
             results.push(genre.name)
         }) 
-        console.log("result", results)
+        
         return results.toString();
     }
     showActors(actors){
-        console.log("actors", actors)
+        
         var results = [];
         actors?.forEach(actor => {
             results.push(actor.name)

@@ -38,7 +38,7 @@ class SalesChart extends Component{
             const saleData = tickets.sort(function(a,b){
                 return new Date(Date.parse(a.transaction_time)) - new Date(b.transaction_time);
             });
-            console.log("saleData", saleData);
+            
             let sales = [];
             let pre_time = "";
             let money = 0;
@@ -128,7 +128,7 @@ class SalesChart extends Component{
    
     countSales = arr => arr.reduce((prev, curr) => (prev[curr.transaction_time] = prev[curr.transaction_time] || 1, prev), {});
     render(){
-        console.log("state", this.state)
+        
         var {transactions, bookedQuanties, sales} = this.state;
           
           const options = {

@@ -5,9 +5,9 @@ import Row from "../Row/Row";
 
 function Table(props) {
   let { classes, type, arrData, countAllTotal, totalAll } = props;
-  // console.log("type:", type);
-  // console.log("arrData:", arrData);
-  // console.log("totalAll:", totalAll);
+  // 
+  // 
+  // 
   return (
     <table className={`${classes.table} mb-0 table table-striped`}>
       <thead className={classes.tableHead}>

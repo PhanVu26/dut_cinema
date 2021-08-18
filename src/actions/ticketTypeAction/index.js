@@ -5,7 +5,7 @@ export const actFetchDataTicketTypesRequest = () => {
     return (dispatch) => {
         dispatch(loadTicketType())
       return callApi("ticket-types?page=1&perPage=1000", "GET", null).then((res) => {
-          console.log("ticketTypes", res.data.results)
+          
         dispatch(actFetchDataTicketTypes(res.data.results));
       });
     };

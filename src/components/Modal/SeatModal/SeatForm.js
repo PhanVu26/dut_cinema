@@ -46,7 +46,7 @@ class SeatForm extends Component {
             },
             room: {...prevState.room}
         }))
-        console.log(this.state.seat)
+        
         
     }
 

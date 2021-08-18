@@ -23,7 +23,7 @@ export const actFetchDataSeats = (seats) => {
 
 export const actSaveSeatRequest = (seat, id) => {
     return (dispatch) => {
-        console.log(id)
+        
         return callApi(`rooms/${id}/seats`, "POST", seat).then((res) => {
             if(res.statusCode !== 400){
                 dispatch(saveSeat(res.data.seats));

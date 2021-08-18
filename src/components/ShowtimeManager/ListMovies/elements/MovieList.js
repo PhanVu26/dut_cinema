@@ -56,7 +56,7 @@ class MovieList extends Component {
 
   render() {
     // var{rowsPerPage} = this.props;
-    // console.log("list movies ", rowsPerPage)
+    // 
     var { rowsPerPage, filterMovie } = this.props;
     if (filterMovie.name) {
       rowsPerPage = rowsPerPage.filter((movie) => {
@@ -91,7 +91,7 @@ class MovieList extends Component {
         var found = movie.genreIds.some((genre) => {
           return genre.id === filterMovie.genre;
         });
-        console.log("found", found);
+        
         return found === true ? true : false;
       });
     }

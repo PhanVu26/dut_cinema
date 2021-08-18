@@ -31,7 +31,7 @@ class SeatPickers extends Component {
   };
 
   render() {
-    console.log("this.state.arrSeatReserved", this.state.arrSeatReserved);
+    
     let { classes, amountTicket, roomDetail } = this.props;
     let { arrSeatReserved } = this.state;
     let room = roomDetail;

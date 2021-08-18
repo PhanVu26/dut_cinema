@@ -47,7 +47,7 @@ export const actGetTransactionRequest = (id) => {
     dispatch(loadTransaction());
     return callApi(`transactions/${id}?relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema`, "GET", null).then(
       (res) => {
-        console.log("get tran", res)
+        
         dispatch(getTransaction(res.data));
       }
     );

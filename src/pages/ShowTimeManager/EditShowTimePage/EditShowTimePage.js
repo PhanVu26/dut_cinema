@@ -55,7 +55,7 @@ class EditShowTimePage extends Component {
     event.preventDefault();
     if (this.validateMovie() === true) {
       this.props.onSaveMovie(this.state.movie);
-      console.log("save movie 1", this.state.movie);
+      
       this.props.onToggleMovieForm();
     } else {
       this.setState({
@@ -90,9 +90,9 @@ class EditShowTimePage extends Component {
         month +
         "-" +
         day;
-      // console.log("dateString: ", dateString);
-      // console.log(this.state.showtime.date.toString());
-      // console.log(this.state.showtime.date.getDay());
+      // 
+      // 
+      // 
       this.props.onLoadShowtime(this.state.showtime.room, dateString);
       this.props.onLoadMovies();
       this.setState({
@@ -138,7 +138,7 @@ class EditShowTimePage extends Component {
           month +
           "-" +
           day;
-        console.log("dateString: ", dateString);
+        
         const temp = {
           date: dateString,
           hour: this.state.addHour,
@@ -213,7 +213,7 @@ class EditShowTimePage extends Component {
                               this.props.onLoadCinemaRooms(
                                 parseInt(e.target.value)
                               );
-                              console.log(this.props.cinemaInfo.rooms);
+                              
                               this.setState((prevState) => ({
                                 showtime: {
                                   ...prevState.showtime,

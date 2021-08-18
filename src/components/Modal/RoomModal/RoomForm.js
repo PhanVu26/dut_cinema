@@ -52,7 +52,7 @@ class RoomForm extends Component {
         event.preventDefault();
         if(this.validateRoom() === true) {
             if(this.props.roomEditing.id){
-                console.log("update roomId", this.props.roomEditing.id, this.state.room)
+                
                 this.props.onUpdateRoom(this.state.room)
                 this.props.onToggleRoomForm()
             }else {

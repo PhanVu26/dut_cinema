@@ -52,7 +52,7 @@ class GenreForm extends Component {
         event.preventDefault();
         if(this.validateGenre() === true) {
             if(this.props.genreEditing.id){
-                console.log("update genreId", this.props.genreEditing.id, this.state.genre)
+                
                 this.props.onUpdateGenre(this.state.genre)
                 this.props.onToggleGenreForm()
             }else {

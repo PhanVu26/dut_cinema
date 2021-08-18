@@ -8,17 +8,17 @@ function ShowTimesMovie(props) {
   const dispatch = useDispatch();
 
   const receiveMovieChoosing = (movie, date, time, idUser) => {
-    console.log(movie)
+    
     dispatch(actReceiveMovieChoosing(movie, date, time, idUser));
   };
 
   const handleOnChooseSession = (item, session, account, movie) => {
-    console.log(account);
+    
     if (account && Object.keys(account).length > 0) {
-      console.log(movie)
+      
       receiveMovieChoosing(movie, item, session, account.id);
       const slug = movie.name;
-      console.log(item)
+      
       var showtimeId;
       for (let index = 0; index < movie.showtimes.length; index++) {
         const element = movie.showtimes[index];
@@ -32,11 +32,11 @@ function ShowTimesMovie(props) {
           }
         }
       }
-      console.log(showtimeId);
+      
       dispatch(actFetchDataBookingMovieRequest(showtimeId));
-      console.log(props);
+      
       this.props.history.push(`/buy-ticket-detail/${slug}`);
-      console.log(history)
+      
       history.go();
     } else {
       alert("Vui lòng đăng nhập!");
@@ -44,7 +44,7 @@ function ShowTimesMovie(props) {
   };
 
   let { date, account, itemMovieInfo } = props;
-  console.log(itemMovieInfo)
+  
   let dataShowtime = date.showtimes.map((frameTime, index) => {
     let session = frameTime.time;
     return (
