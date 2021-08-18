@@ -12,6 +12,17 @@ export const actFetchDataTransactionsRequest = () => {
   };
 };
 
+export const actFetchDataTransactionsFilterRequest = (query) => {
+  return (dispatch) => {
+    dispatch(loadTransaction());
+    return callApi(`transactions?${query}&page=1&perPage=1000&relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema`, "GET", null).then(
+      (res) => {
+        dispatch(fetchDataTransaction(res.data.results));
+      }
+    );
+  };
+};
+
 export const fetchDataTransaction = (transactions) => {
     return {
         type: Types.FETCH_DATA_TRANSACTION,
