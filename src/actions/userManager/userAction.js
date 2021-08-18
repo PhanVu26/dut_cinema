@@ -7,7 +7,7 @@ export const actFetchDataUsersRequest = () => {
     return (dispatch) => {
       dispatch(loadUser());
       return callApi("users?relations=userRoles,userRoles.role&page=1&perPage=1000", "GET", null).then((res) => {
-        console.log("res", res)
+        
         dispatch(listAllUsers(res.data.results));
       });
     };
@@ -17,7 +17,7 @@ export const actFetchDataUsersFilterRequest = (query) => {
   return (dispatch) => {
     dispatch(loadUser());
     return callApi(`users?${query}&relations=userRoles,userRoles.role&page=1&perPage=1000`, "GET", null).then((res) => {
-      console.log("res", res)
+      
       dispatch(listAllUsers(res.data.results));
     })
     .catch(err => {
@@ -35,7 +35,7 @@ export const listAllUsers = (users) => {
 export const actFetchDataRolesRequest = () => {
   return (dispatch) => {
     return callApi("roles", "GET", null).then((res) => {
-      console.log("res", res)
+      
       dispatch(listAllRoles(res.data));
     });
   };
@@ -48,7 +48,7 @@ export const listAllRoles = (roles) => {
 };
 
 export const actUpdateUserRequest = (user) => {
-  console.log("update user", user)
+  
   return (dispatch) => {
     dispatch(loadUser());
     return callApi(`users/${user.id}`, "PATCH", user).then((res) => {
@@ -72,7 +72,7 @@ export const actGetProfileRequest = (user) => {
   return (dispatch) => {
     dispatch(loadUser());
     return callApi(`users/me`, "GET", user).then((res) => {
-      console.log("res get me", res)
+      
       dispatch(getProfile(res.data));
     });
   };
@@ -154,7 +154,7 @@ export const actUpdateUserStatusRequest = (user) => {
   return (dispatch) => {
     dispatch(loadUser());
     return callApi(`users/${user.id}`, "PATCH", user).then((res) => {
-      console.log("update user", res)
+      
       dispatch(updateUserStatus(res.data.id));
       alert("Cập nhật thành công")
     })
@@ -173,7 +173,7 @@ export const updateUserStatus = (id) => {
 export const actGetUserRequest = (id) => {
   return (dispatch) => {
     return callApi(`users/${id}`, "GET", null).then((res) => {
-      console.log("res", res)
+      
       dispatch(getUserEditing(res.data));
     });
   };

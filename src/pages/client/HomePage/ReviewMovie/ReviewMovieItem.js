@@ -18,14 +18,14 @@ function ItemReviewMovie(props) {
   };
 
   const onChangeRating = (value, reviewMovie) => {
-    console.log(`Rated with value ${value}`);
+    
     let rate = parseFloat(reviewMovie.vote.rate);
     let number = parseInt(reviewMovie.vote.numberOfReviews) + 1;
     let vote;
     rate = rate * reviewMovie.vote.numberOfReviews;
     vote = (rate + value) / number;
     vote = Math.round(vote * 100) / 100;
-    console.log(vote);
+    
     reviewMovie.vote.rate = vote.toString();
     reviewMovie.vote.numberOfReviews = number.toString();
     dispatch(actRatingItemReviewMovieRequest(reviewMovie));

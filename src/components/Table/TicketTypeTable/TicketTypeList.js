@@ -40,7 +40,7 @@ class TicketTypeList extends Component {
 
     render() {
         var{rowsPerPage, filterTicketType} = this.props;
-        console.log("data", rowsPerPage, filterTicketType)
+        
         if(filterTicketType.name){
             rowsPerPage = rowsPerPage.filter((ticketType) => {
                 return ticketType.name.toLowerCase().indexOf(filterTicketType.name.toLowerCase()) !== -1

@@ -56,7 +56,7 @@ class ActorForm extends Component {
         event.preventDefault();
         if(this.validateActor() === true) {
             if(this.props.actorEditing.id){
-                console.log("update actorId", this.props.actorEditing.id, this.state.actor)
+                
                 this.props.onUpdateActor(this.state.actor)
                 this.props.onToggleActorForm()
             }else {

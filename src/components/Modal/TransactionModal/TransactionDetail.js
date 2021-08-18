@@ -27,7 +27,7 @@ class MovieDetail extends Component {
   render() {
     const { isDisplayTransactionModal } = this.props;
     const transaction = this.props.transactionInfo;
-    console.log("transaction: ", transaction);
+    
     return (
       <div>
         <form>

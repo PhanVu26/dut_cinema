@@ -6,7 +6,7 @@ import MovieInfo from "./MovieInformation/MovieInfo";
 function TicketBooking() {
   var itemMovieInfo =
     useSelector((state) => state.MovieReducer.showInfoMovie) || [];
-  console.log(itemMovieInfo)
+  
   if (Object.keys(itemMovieInfo).length !== 0) {
     localStorage.setItem("movie", JSON.stringify(itemMovieInfo));
   } else {

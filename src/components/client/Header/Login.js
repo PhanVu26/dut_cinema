@@ -100,15 +100,6 @@ class Login extends Component {
   onSave = (e) => {
     e.preventDefault();
     let { password, email } = this.state;
-    console.log(
-      email.value +
-        " " +
-        email.isValid +
-        " " +
-        password.value +
-        " " +
-        password.isValid
-    );
     if (
       password.value !== "" &&
       password.isValid === true &&
@@ -123,9 +114,6 @@ class Login extends Component {
       actLoginAccountRequest(account)
         .then((res) => {
           let dataAccount = res.data;
-          // let token = res.data.accessToken;
-          // dataAccount.accessToken = token;
-          console.log(dataAccount.user);
           if (Object.keys(dataAccount).length !== 0) {
             localStorage.setItem("account", JSON.stringify(dataAccount));
             localStorage.setItem(
@@ -164,7 +152,7 @@ class Login extends Component {
   onSave2 = (e) => {
     e.preventDefault();
     let { email2 } = this.state;
-    console.log(email2.value + " " + email2.isValid);
+    
     if (email2.value !== "" && email2.isValid === true) {
       let account = {
         email: email2.value,

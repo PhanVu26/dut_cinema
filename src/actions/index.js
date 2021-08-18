@@ -72,7 +72,7 @@ export const actFetchDataUsers = (users) => {
 //---------------------------------------------------------------------
 
 export const actUpdateUserRequest = (user) => {
-  // console.log("request: ", user);
+  // 
   return (dispatch) => {
     return callApi("users/me", "PATCH", user).then((res) => {
       dispatch(actUpdateUser(res.data));
@@ -192,7 +192,7 @@ export const actFetchDataTransactionRequest = (listType) => {
         dispatch(actFetchTransaction(res.data));
       })
       .catch((error) => {
-        console.log(error);
+        
       });
   };
 };
@@ -212,7 +212,7 @@ export const actFetchDataBookingMovieRequest = (showtimeId) => {
   return (dispatch) => {
     return callApi(`showtimes/${showtimeId}/tickets`, "GET", null).then(
       (res) => {
-        console.log(res.data);
+        
         dispatch(actFetchDataBookingMovie(res.data));
       }
     );
@@ -246,7 +246,7 @@ export const actCreateBookingRequest = (data, type) => {
   );
   var b = JSON.parse(localStorage.getItem("account")).accessToken;
   var a = String("Bearer " + b);
-  console.log(a);
+  
   let result = axios.post("https://cinema-nestjs.herokuapp.com/tickets", data, {
     headers: { Authorization: a },
   });
@@ -265,7 +265,7 @@ export const actCreateBookingRequest = (data, type) => {
         history.go();
       })
       .catch(function (error) {
-        console.log(error);
+        
         alert("Lỗi kết nối");
       });
   };
@@ -290,7 +290,7 @@ export const actHoldBooking = (data) => {
   );
   var b = JSON.parse(localStorage.getItem("account")).accessToken;
   var a = String("Bearer " + b);
-  console.log(a);
+  
   let result = axios.post("https://cinema-nestjs.herokuapp.com/tickets", data, {
     headers: { Authorization: a },
   });
@@ -301,7 +301,7 @@ export const actHoldBooking = (data) => {
         history.go();
       })
       .catch(function (error) {
-        console.log(error);
+        
         alert("Lỗi kết nối");
       });
   };
@@ -326,7 +326,7 @@ export const actCancleHoldBooking = (data) => {
   );
   var b = JSON.parse(localStorage.getItem("account")).accessToken;
   var a = String("Bearer " + b);
-  console.log(a);
+  
   let result = axios.post("https://cinema-nestjs.herokuapp.com/tickets", data, {
     headers: { Authorization: a },
   });
@@ -337,7 +337,7 @@ export const actCancleHoldBooking = (data) => {
         history.go();
       })
       .catch(function (error) {
-        console.log(error);
+        
         alert("Lỗi kết nối");
       });
   };
@@ -362,7 +362,7 @@ export function addMovieInformation(movie) {
 export const actFetchDataSupportRequest = () => {
   return (dispatch) => {
     return callApi("api/supports", "GET", null).then((res) => {
-      console.log(res);
+      
       dispatch(actFetchDataSupport(res.data));
     });
   };
@@ -457,7 +457,7 @@ export const actFetchDataData = (data) => {
 export const actFetchDataTicketRequest = () => {
   return (dispatch) => {
     return callApi("ticket-types", "GET", null).then((res) => {
-      console.log(res.data.results);
+      
       dispatch(actFetchDataTicket(res.data.results));
     });
   };
@@ -475,7 +475,7 @@ export const actFetchDataTicket = (data) => {
 export const actFetchDataTheaterRequest = () => {
   return (dispatch) => {
     return callApi("cinemas", "GET", null).then((res) => {
-      console.log(res.data.results);
+      
       dispatch(actFetchMovieByTheater(res.data.results));
     });
   };
@@ -486,7 +486,7 @@ export const actFetchMovieByTheater = (tt) => {
     let theater = [];
     tt.map((item, index, tt) => {
       callApi(`cinemas/${item.id}/showtimes`, "GET", null).then((res) => {
-        console.log(res.data);
+        
         theater.push(res.data);
       });
     });
@@ -538,7 +538,7 @@ export const getMovieRequest = (id) => {
   return (dispatch) => {
     return callApi(`movies/${id}?relations=actors,genres`, "GET", null).then(
       (res) => {
-        console.log("res", res.data);
+        
         dispatch(getMovie(res.data));
       }
     );
@@ -581,7 +581,7 @@ export const actTestLoginAccountRequest = (account) => {
 //   return (dispatch) => {
 //     return callApi(`transactions?relations=user,ticket,ticket.showtime,ticket.showtime.movie`, "GET", null).then(
 //       (res) => {
-//         console.log("res", res.data);
+//         
 //         dispatch(fetchDataTransaction(res.data));
 //       }
 //     );

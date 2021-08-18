@@ -46,7 +46,7 @@ class Deal extends Component {
     if (this.props.transaction.hasOwnProperty("results")) {
       arrayBooking = this.props.transaction.results;
       arrayBooking = arrayBooking.filter((item) => item.service === "Buy");
-      console.log("test", arrayBooking);
+      
       // for (let i = 0; i < this.props.transaction.results.length; i++) {
       //   if (account.user.id === this.props.transaction.results[i].user.id) {
       //     arrayBooking.push(this.props.transaction.results[i]);
@@ -98,7 +98,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Deal);
 //   const dispatch = useDispatch();
 //   var bookingMovie =
 //     useSelector((state) => state.reducerMovie.bookingMovie) || [];
-//   console.log(bookingMovie);
+//   
 //   //   useEffect(() => {
 //   //     dispatch(actFetchDataBookingMovieRequest());
 //   //   }, [dispatch]);

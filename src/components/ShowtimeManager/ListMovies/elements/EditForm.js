@@ -71,14 +71,14 @@ class MovieForm extends Component {
   };
 
   onHandleChange = (e) => {
-    //console.log("e ,", e)
+    //
     var target = e.target;
     var name = target.name;
     var value = target.value;
-    //console.log("value,", value)
+    //
     var id = e.target.id;
 
-    //console.log(id)
+    //
     var thumbnail =
       e.target.files != null
         ? URL.createObjectURL(e.target.files[0])
@@ -195,10 +195,6 @@ class MovieForm extends Component {
   showGenreCheckbox = (genres) => {
     var results = [];
     results = genres.map((genre) => {
-      console.log(
-        "checked",
-        this.state.selectedGenres.some((genreName) => genreName === genre.name)
-      );
       return (
         <div className="genre-item ml-3">
           <label htmlFor={"genre" + genre.id} className="mr-2">
@@ -265,7 +261,7 @@ class MovieForm extends Component {
     event.preventDefault();
     if (this.validateMovie() === true) {
       this.props.onSaveMovie(this.state.movie);
-      console.log("save movie 1", this.state.movie);
+      
       this.props.onToggleMovieForm();
     } else {
       this.setState({
@@ -286,7 +282,7 @@ class MovieForm extends Component {
         roomId: this.state.showtime.room,
         date: this.state.showtime.date,
       };
-      console.log(temp);
+      
       this.props.onLoadShowtime(temp);
       this.setState({
         optionRoom: this.props.cinemaInfo.showtime,
@@ -651,7 +647,7 @@ class MovieForm extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("abc", state.reducerShowTime);
+  
   return {
     genres: state.genres,
     actors: state.actors,
@@ -673,7 +669,7 @@ const mapDispatchToProps = (dispatch, props) => {
       dispatch(actions.getMovieInfo(movie));
     },
     onLoadShowtime: (showtime) => {
-      console.log("dispatch");
+      
       dispatch(actions2.getShowtime(showtime));
     },
     // // onDeleteUser: (id) => {

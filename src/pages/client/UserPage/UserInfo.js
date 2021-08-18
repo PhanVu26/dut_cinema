@@ -13,7 +13,7 @@ class InforUser extends Component {
     if (Object.keys(account).length === 0) {
       window.location.href = "/";
     }
-    // console.log("account: ", account);
+    // 
     this.state = {
       txtName: {
         value: account.user.name,
@@ -101,7 +101,7 @@ class InforUser extends Component {
 
   updateAccount = (account) => {
     let accountStorage = JSON.parse(localStorage.getItem("account"));
-    console.log("accountStorage: ", accountStorage.user.name);
+    
     accountStorage.user.name = account.name;
     accountStorage.user.age = account.age;
     // accountStorage.phone = account.phone;
@@ -168,13 +168,13 @@ class InforUser extends Component {
           };
           callApi("auth/login", "POST", temp_account)
             .then((res) => {
-              console.log("user: ", res.status);
+              
               this.props.onUpdateUser(accountUser);
               this.updateAccount(accountUser);
               alert("Lưu thông tin thành công");
             })
             .catch((error) => {
-              console.log("error: ", error);
+              
               alert("Vui lòng kiểm tra lại thông tin");
             });
         }

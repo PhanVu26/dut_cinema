@@ -120,7 +120,7 @@ class Register extends Component {
       };
 
       actRegisterUserRequest(user).then((res) => {
-        console.log(res);
+        
         let notification = res.data.message;
 
         if (res.status !== 201) {

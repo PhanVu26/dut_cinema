@@ -28,14 +28,14 @@ var myReducer = (state = initialState, action) => {
                 loading: false
             }
         case types.MOVIE_LOADING:
-            console.log("movie loading......")
+            
             return {
                 ...state,
                 loading: true
             
             };    
         case types.ADD_MOVIE:
-            console.log("Add done");
+            
             var movies = [...state.movies];
             var movieInfo = {
                 id: action.movie.id,
