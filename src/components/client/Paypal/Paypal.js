@@ -12,7 +12,7 @@ export default function Paypal({data1,onComfirm}) {
             intent: "CAPTURE",
             purchase_units: [
               {
-                description: "Cool looking table",
+                description: "Ticket",
                 amount: {
                   currency_code: "USD",
                   value: data1,
