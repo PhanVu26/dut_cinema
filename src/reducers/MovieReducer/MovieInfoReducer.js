@@ -10,7 +10,8 @@ var initialState = {
     releaseDate: "",
     image: "",
     releaseDate: "",
-    description: ""
+    description: "",
+    trailer:""
 };
 
 var myReducer = (state = initialState, action) => {
@@ -36,6 +37,7 @@ var myReducer = (state = initialState, action) => {
                 actors: actors,
                 image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
+                trailer: action.movie.trailer
             }     
             
             return movieInfo

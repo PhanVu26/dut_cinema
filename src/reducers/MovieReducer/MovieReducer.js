@@ -49,6 +49,7 @@ var myReducer = (state = initialState, action) => {
                 actors: action.movie.actors,
                 image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
+                trailer: action.movie.trailer
             } 
             movies.unshift(movieInfo);
             return {
@@ -70,6 +71,7 @@ var myReducer = (state = initialState, action) => {
                 actors: action.movie.actors,
                 image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
+                trailer: action.movie.trailer
             } 
             index = findIndex(movies, movieEditting.id);
             movies[index] = movieEditting;
