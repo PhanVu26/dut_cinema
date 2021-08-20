@@ -26,6 +26,7 @@ import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider
 } from '@material-ui/pickers'
+import moment from 'moment';
 
 import RefreshIcon from "@material-ui/icons/Refresh";
 import SearchIcon from "@material-ui/icons/Search";
@@ -184,18 +185,20 @@ export default function EnhancedTable() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("tran", transactionFilter)
     dispatch(actions.actFetchDataTransactionsRequest());
   }, []);
 
   useEffect(() => {
-    const serviceFilter = transactionFilter.status === "" ? "" : `",service": {"equal": "${transactionFilter.status}"}`;
-    const tranTimeFilter = transactionFilter.tranTime === "" ? "" : `",transaction_time": {"equal": "${transactionFilter.tranTime}"}`;
+    console.log("sadasd")
+    const serviceFilter = `"service": {"like": "${transactionFilter.status}"}`;
+    const tranTimeFilter = transactionFilter.tranTime === "" ? "" : `,transaction_time": {"equal": "${transactionFilter.tranTime}"}`;
     var filter = "";
     if(serviceFilter !== "" || tranTimeFilter !== ""){
-      filter = `filter={${serviceFilter}${tranTimeFilter}}`;
+      filter = `filter={${serviceFilter}}`;
     }
     dispatch(actions.actFetchDataTransactionsFilterRequest(filter));
-  }, [transactionFilter.status, transactionFilter.tranTime]);
+  }, [transactionFilter.status]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -225,7 +228,7 @@ export default function EnhancedTable() {
 
   const refreshData = () => {
     dispatch(actions.actFetchDataTransactionsRequest());
-    setTransactionFilter({movieName: "", cinemaName: "", status: "", tranTime: new Date()});
+    setTransactionFilter({movieName: "", cinemaName: "", status: "", tranTime: ""});
   };
 
   const handleChangeStatus = (e) => {
@@ -237,6 +240,7 @@ export default function EnhancedTable() {
 
   const searchTransactionQuery = (e) => {
     e.preventDefault();
+    console.log("tran", transactionFilter)
     const serviceFilter = transactionFilter.status === "" ? "" : `",service": {"equal": "${transactionFilter.status}"}`;
     const tranTimeFilter = transactionFilter.tranTime === "" ? "" : `",transaction_time": {"equal": "${transactionFilter.tranTime}"}`;
     var filter = "";
@@ -302,14 +306,14 @@ export default function EnhancedTable() {
                             <KeyboardDatePicker
                               disableToolbar
                               variant="inline"
-                              format="dd/MM/yyyy"
+                              format="yyyy-MM-dd"
                               margin="normal"
                               id="date-picker-inline"
                               label="Ngày"
                               value={transactionFilter.tranTime}
                               onChange={(date) => {setTransactionFilter({
                                 ...transactionFilter,
-                                tranTime: date
+                                tranTime: moment(date).format('YYYY-MM-DD')
                               })}}
                               KeyboardButtonProps={{
                                 'aria-label': 'change date',
