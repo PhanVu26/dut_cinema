@@ -22,7 +22,7 @@ function MyVerticallyCenteredModal(props) {
           <iframe
             title="video"
             className="embed-responsive-item"
-            src={props.info.video}
+            src={props.info.trailer}
           ></iframe>
         </div>
       </Modal.Body>
