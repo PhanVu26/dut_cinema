@@ -22,7 +22,8 @@ class MovieForm extends Component {
                 releaseDate: "",
                 mainImage: "",
                 thumbnailImage:"",
-                description: ""
+                description: "",
+                trailer:""
             },
             selectedActors: [],
             selectedGenres: [],
@@ -304,6 +305,7 @@ class MovieForm extends Component {
                 if(typeof newMovie.thumbnailImage !== 'string'){
                     data.append("thumbnailImage", newMovie.thumbnailImage)
                 }
+                data.append("trailer", newMovie.trailer)
                 data.append("description", newMovie.description)
 
                 
@@ -500,6 +502,17 @@ class MovieForm extends Component {
                                         <span>Đã chọn:</span>
                                         {this.showChoosedActor(this.state.selectedActors)}
                                     </div>    
+                                </div>
+                                <div className="form-group">
+                                    <label>Trailer phim :</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        name="trailer"
+                                        value={movie.trailer}
+                                        onChange={ this.onHandleChange }
+                                    
+                                    />
                                 </div>
                                 <div className="form-group">
                                     <label>Mô tả phim :</label>
