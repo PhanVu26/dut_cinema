@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../../../actions/index';
 import Rating from "material-ui-rating";
+import OpenVideo from "../OpenVideoMovie/OpenVideo";
 import {Link} from 'react-router-dom'
 import history from "../../../../commons/history";
 
@@ -91,16 +92,19 @@ class MovieDetail extends Component {
                 </div>
                 <div className="row mt-3">
                     <div className="col-md-12 col-lg-5 img">
-                    <div className="default-img">
-                        <img
-                        height = "400"
-                        width = "300"
-                        alt=""
-                        src={movie.image?.mainUrl}
-                        className="loading"
-                        data-was-processed="true"
-                        />
-                    </div>
+                        <div className="default-img">
+                            <img
+                            height = "400"
+                            width = "300"
+                            alt=""
+                            src={movie.image?.mainUrl}
+                            className="loading"
+                            data-was-processed="true"
+                            />
+                        </div>
+                        <div className="play-bt">
+                            <OpenVideo info={movie} />
+                        </div>
                     </div>
                     <div className="col-md-12 col-lg-7 movie-information">
                     <h4 className="detail-title text-uppercase">{movie.name}</h4>
