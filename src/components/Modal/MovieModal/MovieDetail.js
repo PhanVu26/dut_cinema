@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../../actions/movieManager/index';
 
-import testImage from '../../../assets/images/logo.png';
-import style from '../MovieModal/MovieModal.css'
+
+import OpenVideo from '../../../pages/client/TicketBooking/OpenVideoMovie/OpenVideo'
 class MovieDetail extends Component {
 
     constructor(props) {
@@ -132,7 +132,11 @@ class MovieDetail extends Component {
                                     <img 
                                         width="100%"                                        
                                         src={movie.image.thumbnailUrl}></img>
+                                    <div className="play-bt" style={{left:"15%", top:"35%"}}>
+                                        <OpenVideo info={movie} />
+                                    </div>
                                 </div>
+                                
                             </div>
                         </Modal.Body>
                         <Modal.Footer>
