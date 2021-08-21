@@ -280,7 +280,7 @@ class EditShowTimePage extends Component {
                           {this.props.cinemaInfo.rooms.map((item, index) => {
                             return (
                               <option key={index + 1} value={item.id}>
-                                {item.roomNumber}
+                                Phòng {item.roomNumber}
                               </option>
                             );
                           })}
