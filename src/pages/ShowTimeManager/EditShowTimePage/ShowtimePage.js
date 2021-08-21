@@ -17,10 +17,46 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import SearchIcon from "@material-ui/icons/Search";
 
 function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
+  let value1 = "",
+    value2 = "";
+  switch (orderBy) {
+    case "id":
+      value1 = a.id;
+      value2 = b.id;
+      break;
+    case "day":
+      value1 = a.id;
+      value2 = b.id;
+      break;
+    case "startTime":
+      value1 = a.startTime.slice(11, 16);
+      value2 = b.startTime.slice(11, 16);
+      break;
+    case "endTime":
+      value1 = a.endTime.slice(11, 16);
+      value2 = b.endTime.slice(11, 16);
+      break;
+    case "movieName":
+      value1 = a.movie.name;
+      value2 = b.movie.name;
+      break;
+    case "cinema":
+      value1 = a.room.cinema.name;
+      value2 = b.room.cinema.name;
+      break;
+    case "room":
+      value1 = a.room.roomNumber;
+      value2 = b.room.roomNumber;
+      break;
+    default:
+      value1 = a[orderBy];
+      value2 = b[orderBy];
+  }
+
+  if (value2 < value1) {
     return -1;
   }
-  if (b[orderBy] > a[orderBy]) {
+  if (value2 > value1) {
     return 1;
   }
   return 0;
@@ -48,6 +84,8 @@ const headCells = [
   { id: "startTime", numeric: false, disablePadding: false, label: "Bắt đầu" },
   { id: "endTime", numeric: false, disablePadding: false, label: "Kết thúc" },
   { id: "movieName", numeric: false, disablePadding: false, label: "Tên phim" },
+  { id: "cinema", numeric: false, disablePadding: false, label: "Phòng chiếu" },
+  { id: "room", numeric: false, disablePadding: false, label: "Rạp chiếu" },
 ];
 
 function EnhancedTableHead(props) {
@@ -132,6 +170,7 @@ export default function EnhancedTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const rows = useSelector((state) => state.reducerShowTime.allShowtimes);
   const [name, setName] = React.useState("");
+  const [cinema, setCinema] = React.useState("");
   //   var rows = [...users];
   //   if(role !== -1){
   //     rows = users.filter((user) => {
@@ -165,13 +204,6 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  const showUserRole = (userRoles) => {
-    const rs = userRoles?.map((role, index) => {
-      return role.role.name;
-    });
-    return rs?.toString();
-  };
-
   const onDeleteShowtime = (id) => {
     showtimeActions.actDeleteShowtimeRequest(id);
     dispatch(showtimeActions.actFetchAllShowtimesRequest());
@@ -180,13 +212,21 @@ export default function EnhancedTable() {
   const refreshData = () => {
     dispatch(showtimeActions.actFetchAllShowtimesRequest());
     setName("");
+    setCinema("");
   };
 
   const searchUserQuery = (e) => {
     e.preventDefault();
-    const filterAns = rows.filter((row) =>
-      row.movie.name.toLowerCase().includes(name.toLowerCase())
-    );
+    const filterAns = rows.filter((row) => {
+      if (
+        row.movie.name.toLowerCase().includes(name.trim().toLowerCase()) &&
+        row.room.cinema.name.toLowerCase().includes(cinema.trim().toLowerCase())
+      ) {
+        console.log(row);
+        return true;
+      }
+      return false;
+    });
     const res = {
       results: filterAns,
       total: filterAns.length,
@@ -261,6 +301,18 @@ export default function EnhancedTable() {
                           }}
                         ></input>
                       </div>
+                      <div class="form-group mb-2 mr-5">
+                        <lable style={{ marginRight: "20px" }}>Cinema:</lable>
+                        &nbsp;
+                        <input
+                          className="form-control"
+                          placeholder="Nhập rạp chiếu"
+                          value={cinema}
+                          onChange={(e) => {
+                            setCinema(e.target.value);
+                          }}
+                        ></input>
+                      </div>
                       <div class="form-group mb-2">
                         <button type="submit" className="btn btn-primary">
                           <SearchIcon>Tìm kiếm</SearchIcon>
@@ -327,6 +379,12 @@ export default function EnhancedTable() {
                                   </TableCell>
                                   <TableCell align="left">
                                     {row.movie.name}
+                                  </TableCell>
+                                  <TableCell align="left">
+                                    {row.room.cinema.name}
+                                  </TableCell>
+                                  <TableCell align="left">
+                                    Phòng {row.room.roomNumber}
                                   </TableCell>
                                   <TableCell>
                                     <button
