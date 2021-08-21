@@ -12,15 +12,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import Loader from "react-loader-advanced";
-import { NavLink } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import HomeIcon from "@material-ui/icons/Home";
-import GrainIcon from "@material-ui/icons/Grain";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from "@date-io/date-fns";
 import {
   KeyboardDatePicker,
@@ -32,6 +24,7 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import SearchIcon from "@material-ui/icons/Search";
 
 import * as actions from "../../../actions/transactionAction/index";
+import * as analysisActions from "../../../actions/analysisAction/index";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -179,6 +172,7 @@ export default function EnhancedTable() {
     status: "",
     tranTime: new Date(),
   });
+  const [year, setYear] = React.useState(new Date().getFullYear());
   const loading = useSelector((state) => state.transactions.loading);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const rows = useSelector((state) => state.transactions.transactions);
@@ -243,20 +237,10 @@ export default function EnhancedTable() {
 
   const searchTransactionQuery = (e) => {
     e.preventDefault();
-    console.log("tran", transactionFilter);
-    const serviceFilter =
-      transactionFilter.status === ""
-        ? ""
-        : `",service": {"equal": "${transactionFilter.status}"}`;
-    const tranTimeFilter =
-      transactionFilter.tranTime === ""
-        ? ""
-        : `",transaction_time": {"equal": "${transactionFilter.tranTime}"}`;
-    var filter = "";
-    if (serviceFilter !== "" || tranTimeFilter !== "") {
-      filter = `filter={${serviceFilter}${tranTimeFilter}}`;
-    }
-    dispatch(actions.actFetchDataTransactionsFilterRequest(filter));
+    var query = `?year=${year}`;
+    dispatch(analysisActions.actFetchDataSaleAnalysisRequest(query));
+    dispatch(analysisActions.actFetchDataServiceAnalysisRequest(query));
+    //dispatch(actions.actFetchDataTransactionsFilterRequest(filter));
   };
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -277,26 +261,11 @@ export default function EnhancedTable() {
             >
               <form class="form-inline" onSubmit={searchTransactionQuery}>
                 <div class="form-group mb-4 mr-5">
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                      disableToolbar
-                      variant="inline"
-                      format="yyyy-MM-dd"
-                      margin="normal"
-                      id="date-picker-inline"
-                      label="Ngày"
-                      value={transactionFilter.tranTime}
-                      onChange={(date) => {
-                        setTransactionFilter({
-                          ...transactionFilter,
-                          tranTime: moment(date).format("YYYY-MM-DD"),
-                        });
-                      }}
-                      KeyboardButtonProps={{
-                        "aria-label": "change date",
-                      }}
-                    />
-                  </MuiPickersUtilsProvider>
+                  <TextField 
+                    id="year" 
+                    value={year} 
+                    label="Năm"
+                    onChange={(e) => {setYear(e.target.value)}}/>
                 </div>
 
                 <div class="form-group mb-2">
