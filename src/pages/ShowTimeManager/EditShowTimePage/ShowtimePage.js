@@ -13,6 +13,8 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import * as showtimeActions from "../../../actions/showtimeManager/index";
 import { Link } from "react-router-dom";
+import RefreshIcon from "@material-ui/icons/Refresh";
+import SearchIcon from "@material-ui/icons/Search";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -129,7 +131,7 @@ export default function EnhancedTable() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const rows = useSelector((state) => state.reducerShowTime.allShowtimes);
-
+  const [name, setName] = React.useState("");
   //   var rows = [...users];
   //   if(role !== -1){
   //     rows = users.filter((user) => {
@@ -175,6 +177,23 @@ export default function EnhancedTable() {
     dispatch(showtimeActions.actFetchAllShowtimesRequest());
   };
 
+  const refreshData = () => {
+    dispatch(showtimeActions.actFetchAllShowtimesRequest());
+    setName("");
+  };
+
+  const searchUserQuery = (e) => {
+    e.preventDefault();
+    const filterAns = rows.filter((row) =>
+      row.movie.name.toLowerCase().includes(name.toLowerCase())
+    );
+    const res = {
+      results: filterAns,
+      total: filterAns.length,
+    };
+    dispatch(showtimeActions.actFetchShowtimes(res));
+  };
+
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -184,27 +203,83 @@ export default function EnhancedTable() {
         <div class="row">
           <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
             <div class={"row " + classes.searchBar}>
-              <div class="col-xl-12 col-12 mb-xl-0 row">
-                <h3 class="text-left mb-2 pt-3">Danh sách lịch chiếu</h3>
-                <Link
-                  to={(location) => {
-                    let path = location.pathname;
-                    if (
-                      path === "/showtime-manager/movie-showtimes" ||
-                      path === "/admin/movie-showtimes"
-                    ) {
-                      path += "/add";
-                    }
-                    return path;
-                  }}
-                  align="right"
-                  class="text-left mb-2 pt-3 col-3"
-                >
-                  <button type="button" className="btn btn-warning">
-                    <span className="fa fa-pencil mr-2"></span>
-                    Thêm
-                  </button>
-                </Link>
+              <div class="col-xl-12 col-12 mb-xl-0 ">
+                <div class="row">
+                  <h3
+                    class="text-left mb-2 pt-3"
+                    style={{ marginLeft: "15px" }}
+                  >
+                    Danh sách lịch chiếu
+                  </h3>
+                  <Link
+                    to={(location) => {
+                      let path = location.pathname;
+                      if (
+                        path === "/showtime-manager/movie-showtimes" ||
+                        path === "/admin/movie-showtimes"
+                      ) {
+                        path += "/add";
+                      }
+                      return path;
+                    }}
+                    align="right"
+                    class="text-left mb-2 pt-3 col-3"
+                  >
+                    <button type="button" className="btn btn-warning">
+                      <span className="fa fa-pencil mr-2"></span>
+                      Thêm
+                    </button>
+                  </Link>
+                </div>
+                {/*--------------------------------------*/}
+
+                <div className="mb-3 mt-3">
+                  <div
+                    className="col-12"
+                    style={{
+                      boxShadow:
+                        "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+                      backgroundColor: "white",
+                      borderRadius: "4px",
+                    }}
+                  >
+                    <form
+                      class="form-inline pt-3 pb-3"
+                      onSubmit={searchUserQuery}
+                    >
+                      <div class="form-group mb-2 mr-5">
+                        <lable style={{ marginRight: "20px" }}>
+                          Movie Name:
+                        </lable>
+                        &nbsp;
+                        <input
+                          className="form-control"
+                          placeholder="Nhập tên phim"
+                          value={name}
+                          onChange={(e) => {
+                            setName(e.target.value);
+                          }}
+                        ></input>
+                      </div>
+                      <div class="form-group mb-2">
+                        <button type="submit" className="btn btn-primary">
+                          <SearchIcon>Tìm kiếm</SearchIcon>
+                        </button>
+                        &nbsp;
+                        <button
+                          className="btn btn-warning"
+                          onClick={() => {
+                            refreshData();
+                          }}
+                        >
+                          <RefreshIcon color="secondary">Làm mới</RefreshIcon>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                {/*--------------------------------------*/}
                 <div className={classes.root}>
                   <Paper className={classes.paper}>
                     <TableContainer>
