@@ -50,6 +50,7 @@ import ticketTypes from './TicketTypeReducer/TicketTypeReducer';
 import isDisplayTicketTypeForm from "./TicketTypeReducer/DisplayTicketTypeFormReducer";
 import ticketTypeEditing from "./TicketTypeReducer/TicketTypeEditingReducer";
 import filterTicketType from "./TicketTypeReducer/FilterTicketTypeReducer";
+import analysisReducer from "./AnalysisReducer/AnalysisReducer";
 
 const myReducer = combineReducers({
   users,
@@ -92,6 +93,7 @@ const myReducer = combineReducers({
   isDisplayTicketTypeForm,
   ticketTypeEditing,
   filterTicketType,
+  analysisReducer
 
 });
 
