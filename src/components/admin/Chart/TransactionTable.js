@@ -248,78 +248,6 @@ export default function EnhancedTable() {
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
-    <Loader show={loading} message={"Loading......."}>
-      <div class={"row " + classes.searchBar}>
-        <div class="col-xl-12 col-12 mb-xl-0 pr-0" >
-          <div className="">
-            <div
-              className="col-12"
-              style={{
-                boxShadow:
-                "1px 2px 5px #999",
-                backgroundColor: "white",
-                borderRadius: "4px",
-              }}
-            >
-              <form class="form-inline" onSubmit={searchTransactionQuery}>
-                <div class="form-group mb-4 mr-5">
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                      disableToolbar
-                      variant="inline"
-                      format="dd-MM-yyyy"
-                      margin="normal"
-                      id="date-picker-inline"
-                      label="Từ ngày"
-                      value={transactionFilter.startTime}
-                      onChange={(date) => {setTransactionFilter({
-                        ...transactionFilter,
-                        startTime: moment(date).format('MM-DD-YYYY')
-                      })}}
-                      KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                      }}
-                    />
-                  </MuiPickersUtilsProvider>
-                </div>
-                <div class="form-group mb-4 mr-5">
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                      disableToolbar
-                      variant="inline"
-                      format="dd-MM-yyyy"
-                      margin="normal"
-                      id="date-picker-inline"
-                      label="Đến ngày"
-                      value={transactionFilter.endTime}
-                      onChange={(date) => {setTransactionFilter({
-                        ...transactionFilter,
-                        endTime: moment(date).format('MM-DD-YYYY')
-                      })}}
-                      KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                      }}
-                    />
-                  </MuiPickersUtilsProvider>
-                </div>
-
-                <div class="form-group mb-2">
-                  <button type="submit" className="btn btn-primary">
-                    <SearchIcon>Tìm kiếm</SearchIcon>
-                  </button>
-                  &nbsp;
-                  <button
-                    className="btn btn-warning"
-                    onClick={() => {
-                      refreshData();
-                    }}
-                  >
-                    <RefreshIcon color="secondary">Làm mới</RefreshIcon>
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
           <div className={classes.root}>
             <Paper className={classes.paper}>
               <TableContainer className={classes.container}>
@@ -396,8 +324,5 @@ export default function EnhancedTable() {
               />
             </Paper>
           </div>
-        </div>
-      </div>
-    </Loader>
   );
 }
