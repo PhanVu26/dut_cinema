@@ -1,9 +1,10 @@
 import React,{useState } from "react"
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const SlideBar = (props) => {
+    const location = useLocation();
     const menus = props.menus;
-    const [active, setActive] = useState("");
+    const [active, setActive] = useState(location.pathname);
     const showMenu = (menus) => {       
         const results = menus.map((item, index) => {
             return (
@@ -29,7 +30,7 @@ const SlideBar = (props) => {
             <ul className="navbar-nav mt-4 flex-column ">
                 <li className="nav-item ">
                     <NavLink 
-                        to= {props.pathname} 
+                        to= {"/" + props.pathname.split('/')[1]} 
                         onClick={() => {setActive("")}}
                         className={`nav-link text-white p-2 mb-2 ${active === "" ? "current":""}`}>
                             <i className="fas fa-home fa-lg mr-3 text-white"></i>DashBoard</NavLink>
