@@ -28,13 +28,6 @@ const SlideBar = (props) => {
                 <a href="" className="text-white">{account.user.name}</a>
             </div>
             <ul className="navbar-nav mt-4 flex-column ">
-                <li className="nav-item ">
-                    <NavLink 
-                        to= {"/" + props.pathname.split('/')[1]} 
-                        onClick={() => {setActive("")}}
-                        className={`nav-link text-white p-2 mb-2 ${active === "" ? "current":""}`}>
-                            <i className="fas fa-home fa-lg mr-3 text-white"></i>DashBoard</NavLink>
-                </li>
                 {showMenu(menus)}
             </ul>
         </div>
