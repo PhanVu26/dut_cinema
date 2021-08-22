@@ -4,7 +4,8 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    Redirect
   } from "react-router-dom";
 import 'font-awesome/css/font-awesome.min.css';  
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -36,6 +37,7 @@ import ActorsPage from '../manager/ActorManager/ActorsPage';
 import CinemasPage from './CinemasPage';
 import RoomsPage from './RoomsPage';
 import SeatsPage from './SeatsPage';
+import NotFoundPage from "../error/404/NotFoundPage";
 
 
 const AdminPage = (props) => {
@@ -72,6 +74,9 @@ const AdminPage = (props) => {
             <Route path="/admin/movies" exact component={MoviesPage}></Route>  
             <Route path="/admin/actors" exact component={ActorsPage}></Route>
             <Route path="/admin/movie-showtimes" exact component={EditShowTimePage}></Route>
+            <Route path='/admin/404' component={NotFoundPage} />
+            <Redirect from='*' to='/admin/404' />
+            <Route path='*' exact={true} component={NotFoundPage} />
         </Switch>
         <Footer></Footer>
         </Router>

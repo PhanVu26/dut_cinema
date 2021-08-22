@@ -12,23 +12,16 @@ function Navbar() {
     const movie_manager_menus = menus.movie_manager_menus;
     const showtime_menus = menus.showtime_menus;
     const admin_menus = menus.admin_menus;
+
     const setMenus = (pathName) => {
-        switch(pathName){
-            case "/admin": {
-                setListMenus(admin_menus)
-                break;
-            }
-            case "/manager": {
-                setListMenus(movie_manager_menus);
-                break;
-            }
-            case "/showtime-manager": {
-                setListMenus(showtime_menus);
-                break;
-            }
-            default: setListMenus([]);
-                break
+        if(pathName.includes("/admin")){
+            setListMenus(admin_menus)
+        }else if(pathName.includes("/manager")){
+            setListMenus(movie_manager_menus)
+        }else {
+            setMenus(showtime_menus)
         }
+        
     }
     useEffect(() => {
         let pathName = location.pathname;
