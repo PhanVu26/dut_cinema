@@ -143,7 +143,7 @@ class SalesChart extends Component {
     var serviceAnalysis = this.mapToPieChartData(this.props.serviceAnalysis);
     return (
       <div>
-        <div className="row mb-2">
+        <div className="row mb-2 p-2">
           <div
             className="col-12"
             style={{
@@ -226,7 +226,7 @@ class SalesChart extends Component {
             </form>
           </div>
         </div>
-        <div className="row">
+        <div className="row p-2">
           <div
             className="col-md-12"
             style={{
@@ -287,7 +287,7 @@ class SalesChart extends Component {
             </div>
           </div>
         </div>
-        <div className="row mt-5 mb-5">
+        <div className="row mt-5 mb-5 p-2">
           <div
             className="col-md-12"
             style={{
