@@ -12,6 +12,15 @@ const MainContent  = (props) => {
     const cinemas = useSelector(state => state.cinemas.cinemas)
     const genres = useSelector(state => state.genres.genres)
     const ticketTypes = useSelector(state => state.ticketTypes.ticketTypes)
+    const saleAnalysis = useSelector(state => state.analysisReducer.saleAnalysis);
+
+    const countSalesTotal = (saleAnalysis) => {
+        let sum = 0;
+        saleAnalysis.forEach(ele => {
+            sum += parseInt(ele.sumSales)
+        });
+        return sum;
+    }
     return (
         <Loader show={loading} message={'Loading.......'}>
             <div className="container-fluid">
@@ -19,7 +28,7 @@ const MainContent  = (props) => {
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
-                                <div className="row mt-md-3 pt-md-5 mb-3">
+                                <div className="row mt-md-3 pt-md-2 mb-2">
                                     <div className="col-xl-3 col-sm-6 p-2">
                                         <div className="card card-style">
                                             <div className="card-body ">
@@ -32,8 +41,8 @@ const MainContent  = (props) => {
                                                 </div>
                                             </div>
                                             <div className="card-footer">
-                                                <i className="fas fa-sync mr-3"></i>
-                                                <span>Updated Know</span>
+                                                
+                                                
                                             </div>
                                         </div>
 
@@ -50,8 +59,7 @@ const MainContent  = (props) => {
                                                 </div>
                                             </div>
                                             <div className="card-footer">
-                                                <i className="fas fa-sync mr-3"></i>
-                                                <span>Updated Know</span>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -67,8 +75,7 @@ const MainContent  = (props) => {
                                                 </div>
                                             </div>
                                             <div className="card-footer">
-                                                <i className="fas fa-sync mr-3"></i>
-                                                <span>Updated Know</span>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -85,8 +92,7 @@ const MainContent  = (props) => {
                                                 </div>
                                             </div>
                                             <div className="card-footer">
-                                                <i className="fas fa-sync mr-3"></i>
-                                                <span>Updated Know</span>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -102,8 +108,7 @@ const MainContent  = (props) => {
                                                 </div>
                                             </div>
                                             <div className="card-footer">
-                                                <i className="fas fa-sync mr-3"></i>
-                                                <span>Updated Know</span>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -119,8 +124,7 @@ const MainContent  = (props) => {
                                                 </div>
                                             </div>
                                             <div className="card-footer">
-                                                <i className="fas fa-sync mr-3"></i>
-                                                <span>Updated Know</span>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -131,13 +135,12 @@ const MainContent  = (props) => {
                                                     <i className="fas fa-chart-line fa-3x text-danger"></i>
                                                     <div className="text-right">
                                                         <h5>Sales</h5>
-                                                        <h3>$135,000</h3>
+                                                        <h3>{countSalesTotal(saleAnalysis)}</h3>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="card-footer">
-                                                <i className="fas fa-sync mr-3"></i>
-                                                <span>Updated Know</span>
+                                                
                                             </div>
                                         </div>
                                     </div>

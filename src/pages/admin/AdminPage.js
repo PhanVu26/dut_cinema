@@ -24,6 +24,7 @@ import * as transactionActions from '../../actions/transactionAction/index'
 import * as cinemaAction from '../../actions/cinemaAction/index'
 import * as genreAction from '../../actions/genreAction/index'
 import * as ticketTypeAction from '../../actions/ticketTypeAction/index'
+import * as analysisAction from '../../actions/analysisAction/index'
 
 
 import EditShowTimePage from "../ShowTimeManager/EditShowTimePage/EditShowTimePage";
@@ -50,6 +51,7 @@ const AdminPage = (props) => {
         dispatch(cinemaAction.actFetchDataCinemasRequest())
         dispatch(genreAction.actFetchDataGenresRequest())
         dispatch(ticketTypeAction.actFetchDataTicketTypesRequest())
+        dispatch(analysisAction.actFetchDataSaleAnalysisRequest(""));
 
     },[])
     return (
