@@ -11,8 +11,19 @@ import {
 } from "recharts";
 import { Pie, Line } from "react-chartjs-2";
 import { connect } from "react-redux";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
+import moment from "moment";
+
+import RefreshIcon from "@material-ui/icons/Refresh";
+import SearchIcon from "@material-ui/icons/Search";
+
 import * as actions from "../../../actions/analysisAction/index";
 import TransactionTable from "./TransactionTable";
+import { filter } from "lodash";
 
 class SalesChart extends Component {
   constructor(props) {
@@ -31,13 +42,17 @@ class SalesChart extends Component {
             },
           ],
         },
+      },
+      filter:{
+        startDate: null,
+        endDate: null
       }
     };
   }
 
   componentDidMount(){
     console.log("didmount")
-    this.props.fetchDataMovieAnalysis();
+    this.props.fetchDataMovieAnalysis("");
     this.props.fetchDataSaleAnalysis("");
     this.props.fetchDataServiceAnalysis("");
   }
@@ -92,11 +107,119 @@ class SalesChart extends Component {
       ],
     }
   }
+
+  refreshData = () => {
+    this.props.fetchDataMovieAnalysis("");
+    this.props.fetchDataSaleAnalysis("");
+    this.props.fetchDataServiceAnalysis("");
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        filter: {
+          startDate: null,
+          endDate: null
+        }
+      }  
+    });
+  };
+
+  searchTransactionQuery = (e) => {
+    e.preventDefault();
+    if(this.state.filter.startDate !== null && this.state.filter.endDate !== null){
+      var filter = `?startDate=${this.state.filter.startDate}&endDate=${this.state.filter.endDate}`;
+      this.props.fetchDataMovieAnalysis(filter);
+      this.props.fetchDataSaleAnalysis(filter);
+      this.props.fetchDataServiceAnalysis(filter);
+    }
+  };
   render() {
     var saleAnalysis = this.mapToLineChartData(this.props.saleAnalysis);
     var serviceAnalysis = this.mapToPieChartData(this.props.serviceAnalysis);
     return (
       <div>
+        <div className="row mb-2">
+          <div
+            className="col-12"
+            style={{
+              boxShadow:
+              "1px 2px 5px #999",
+              backgroundColor: "white",
+              borderRadius: "4px",
+            }}
+          >
+            <form class="form-inline" onSubmit={this.searchTransactionQuery}>
+              <div class="form-group mb-4 mr-5">
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="dd-MM-yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="Từ ngày"
+                    value={this.state.filter.startDate}
+                    onChange={(date) => {
+                      this.setState((prevState) => {
+                        return {
+                          ...prevState,
+                          filter: {
+                            ...prevState.filter,
+                            startDate: moment(date).format('MM-DD-YYYY')
+                          }
+                        }
+                      })
+                    }}
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date',
+                    }}
+                  />
+                </MuiPickersUtilsProvider>
+              </div>
+              <div class="form-group mb-4 mr-5">
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="dd-MM-yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="Đến ngày"
+                    value={this.state.filter.endDate}
+                    onChange={(date) => {
+                      this.setState((prevState) => {
+                        return {
+                          ...prevState,
+                          filter: {
+                            ...prevState.filter,
+                            endDate: moment(date).format('MM-DD-YYYY')
+                          }
+                        }
+                      })
+                    }}
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date',
+                    }}
+                  />
+                </MuiPickersUtilsProvider>
+              </div>
+
+              <div class="form-group mb-2">
+                <button type="submit" className="btn btn-primary">
+                  <SearchIcon>Tìm kiếm</SearchIcon>
+                </button>
+                &nbsp;
+                <button
+                  className="btn btn-warning"
+                  onClick={() => {
+                    this.refreshData();
+                  }}
+                >
+                  <RefreshIcon color="secondary">Làm mới</RefreshIcon>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
         <div className="row">
           <div
             className="col-md-12"
@@ -130,21 +253,32 @@ class SalesChart extends Component {
           </div>
         </div>
         <div className="row mt-3">
-          <div
-            className="col-md-4"
-            style={{
-              boxShadow: "1px 2px 5px #999",
-              backgroundColor: "white",
-              borderRadius: "4px",
-            }}
-          >
-            <h5 className="text-center mb-4 mt-3">
-              Biểu đồ trạng thái giao dịch
-            </h5>
-            <Pie data={serviceAnalysis} />
+          <div className="col-md-4">
+            <div
+              className="p-2"
+              style={{
+                boxShadow: "1px 2px 5px #999",
+                backgroundColor: "white",
+                borderRadius: "4px",
+              }}
+            >
+              <h5 className="text-center mb-4 mt-3">
+                Biểu đồ trạng thái giao dịch
+              </h5>
+              <Pie data={serviceAnalysis} />
+            </div>
           </div>
           <div className="col-md-8">
-            <TransactionTable></TransactionTable>
+            <div
+              className="p-2"
+              style={{
+                boxShadow: "1px 2px 5px #999",
+                backgroundColor: "white",
+                borderRadius: "4px",
+              }}>
+              <h5 className="text-center mb-3 mt-3">Bảng chi tiết lịch sử giao dịch</h5>
+              <TransactionTable></TransactionTable>
+            </div>
           </div>
         </div>
         <div className="row mt-5 mb-5">
@@ -174,8 +308,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    fetchDataMovieAnalysis: () => {
-      dispatch(actions.actFetchDataMovieAnalysisRequest());
+    fetchDataMovieAnalysis: (query) => {
+      dispatch(actions.actFetchDataMovieAnalysisRequest(query));
     },
     fetchDataServiceAnalysis: (query) => {
       dispatch(actions.actFetchDataServiceAnalysisRequest(query));
