@@ -22,6 +22,7 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import SearchIcon from "@material-ui/icons/Search";
 
 import * as actions from "../../../actions/analysisAction/index";
+import * as transactionActions from "../../../actions/transactionAction/index";
 import TransactionTable from "./TransactionTable";
 import { filter } from "lodash";
 
@@ -55,6 +56,7 @@ class SalesChart extends Component {
     this.props.fetchDataMovieAnalysis("");
     this.props.fetchDataSaleAnalysis("");
     this.props.fetchDataServiceAnalysis("");
+    this.props.fetchDataTransactions("");
   }
   
   mapToPieChartData(serviceAnalysis){
@@ -112,6 +114,7 @@ class SalesChart extends Component {
     this.props.fetchDataMovieAnalysis("");
     this.props.fetchDataSaleAnalysis("");
     this.props.fetchDataServiceAnalysis("");
+    this.props.fetchDataTransactions("");
     this.setState((prevState) => {
       return {
         ...prevState,
@@ -127,9 +130,11 @@ class SalesChart extends Component {
     e.preventDefault();
     if(this.state.filter.startDate !== null && this.state.filter.endDate !== null){
       var filter = `?startDate=${this.state.filter.startDate}&endDate=${this.state.filter.endDate}`;
+      var tranFilter = `startDate=${this.state.filter.startDate}&endDate=${this.state.filter.endDate}`;
       this.props.fetchDataMovieAnalysis(filter);
       this.props.fetchDataSaleAnalysis(filter);
       this.props.fetchDataServiceAnalysis(filter);
+      this.props.fetchDataTransactions(tranFilter);
     }
   };
   render() {
@@ -316,6 +321,9 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     fetchDataSaleAnalysis: (query) => {
       dispatch(actions.actFetchDataSaleAnalysisRequest(query));
+    },
+    fetchDataTransactions: (query) => {
+      dispatch(transactionActions.actFetchDataTransactionsFilterRequest(query));
     },
   };
 };
