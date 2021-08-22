@@ -14,11 +14,6 @@ export const movie_manager_menus = [
         label: "Profile",
         icon: "fa-user"
     },
-    {
-        url: "/manager/settings",
-        label: "Settings",
-        icon: "fa-wrench"
-    },
 ]
 
 export const admin_menus = [
@@ -72,11 +67,6 @@ export const admin_menus = [
         label: "Profile",
         icon: "fa-user"
     },
-    {
-        url: "/admin/settings",
-        label: "Settings",
-        icon: "fa-wrench"
-    },
 ]
 
 export const showtime_menus = [
@@ -89,10 +79,5 @@ export const showtime_menus = [
         url: "/showtime-manager/profile",
         label: "Profile",
         icon: "fa-user"
-    },
-    {
-        url: "/showtime-manager/settings",
-        label: "Settings",
-        icon: "fa-wrench"
     },
 ]
