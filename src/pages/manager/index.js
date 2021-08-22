@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {
-    BrowserRouter as Router, Route, Switch,
+    BrowserRouter as Router, Redirect, Route, Switch,
   } from "react-router-dom";
 
 import MovieManager from './MovieManager/index';
@@ -10,6 +10,7 @@ import ActorsPage from './ActorManager/ActorsPage';
 import UserProfile from '../UserProfile/UserProfile';
 import Navbar from '../../components/admin/Navbar/Navbar';
 import Footer from '../../components/admin/Footer/Footer';
+import NotFoundPage from '../error/404/NotFoundPage';
 
 class ManagerPage extends Component{
     constructor(props) {
@@ -37,6 +38,9 @@ class ManagerPage extends Component{
                     <Route path="/manager/movies" exact component={MoviesPage}></Route>  
                     <Route path="/manager/actors" exact component={ActorsPage}></Route>  
                     <Route path="/manager/profile" exact component={UserProfile}></Route>  
+                    <Route path='/manager/404' component={NotFoundPage} />
+                    <Redirect from='*' to='/manager/404' />
+                    <Route path='*' exact={true} component={NotFoundPage} />
             </Switch>
             <Footer></Footer>
         </Router>
