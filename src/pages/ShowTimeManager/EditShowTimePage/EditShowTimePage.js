@@ -154,11 +154,37 @@ class EditShowTimePage extends Component {
         };
         actions2
           .actAddShowtimeRequest(temp)
-          .then((res) => console.log("add: ", res.status))
+          .then((res) => {
+            console.log("add: ", res.status);
+            let month = this.state.showtime.date.getMonth() + 1;
+            let day = this.state.showtime.date.getDate();
+            if (month < 10) {
+              month = "0" + month.toString();
+            } else {
+              month = month.toString();
+            }
+            if (day < 10) {
+              day = "0" + day.toString();
+            } else {
+              day = day.toString();
+            }
+            // let d = new Date();
+            // d.toISOString
+            let dateString =
+              this.state.showtime.date.getFullYear().toString() +
+              "-" +
+              month +
+              "-" +
+              day;
+            // console.log("dateString: ", dateString);
+            // console.log(this.state.showtime.date.toString());
+            // console.log(this.state.showtime.date.getDay());
+            this.props.onLoadShowtime(this.state.showtime.room, dateString);
+            this.props.onLoadMovies();
+          })
           .catch((error) => window.alert("Lỗi! Vui lòng kiểm tra lại giờ."));
         this.setState({ checkMessage: "" });
       }
-      this.setState({ showEdit: "hideMenu" });
     }
   };
 
