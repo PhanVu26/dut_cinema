@@ -43,6 +43,7 @@ function stableSort(array, comparator) {
 const headCells = [
   { id: "id", numeric: false, disablePadding: true, label: "Id" },
   { id: "cinema", numeric: false, disablePadding: true, label: "Rạp" },
+  { id: "room", numeric: false, disablePadding: false, label: "Phòng" },
   { id: "name", numeric: false, disablePadding: false, label: "Tên phim" },
   { id: "seat", numeric: false, disablePadding: false, label: "Ghế" },
   { id: "price", numeric: false, disablePadding: false, label: "Giá" },
@@ -239,6 +240,9 @@ export default function EnhancedTable() {
                             </TableCell>
                             <TableCell align="left">
                               {row.ticket?.seat.room.cinema.name}
+                            </TableCell>
+                            <TableCell align="left">
+                              {"Phòng " + row.ticket?.seat.room.roomNumber}
                             </TableCell>
                             <TableCell align="left">
                               {row.ticket.showtime.movie.name}
