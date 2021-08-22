@@ -90,9 +90,10 @@ class SalesChart extends Component {
     }
   }
   mapToLineChartData(saleAnalysis){
+    var sortedSaleAnalysis = saleAnalysis.sort((a, b) => (a.month_year > b.month_year) ? 1 : -1)
     var months = [];
     var salesData = [];
-    saleAnalysis.forEach((data) => {
+    sortedSaleAnalysis.forEach((data) => {
       months.push(data.month_year);
       salesData.push(data.sumSales);
     });
