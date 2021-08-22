@@ -13,7 +13,7 @@ const TopNavbar = (props) => {
         <div className="col-xl-10 col-lg-9 col-md-8 bg-dark ml-auto fixed-top py-2 top-navbar">
             <div className="row align-items-center">
                 <div className="col-md-4">
-                    <h4 className="text-light text-uppercase mb-0">DashBoard</h4>
+                    
                 </div>
                 <div className="col-md-5">
                     <form>
