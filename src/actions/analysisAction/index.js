@@ -1,9 +1,9 @@
 import * as types from "../../constants/ActionType";
 import callApi from "../../utils/ApiCallerServer";
 
-export const actFetchDataMovieAnalysisRequest = () => {
+export const actFetchDataMovieAnalysisRequest = (query) => {
     return (dispatch) => {
-      return callApi("transactions/movie-analysis", "GET", null).then((res) => {
+      return callApi(`transactions/movie-analysis${query}`, "GET", null).then((res) => {
         dispatch(actFetchDataMovieAnalysis(res.data));
       });
     };
