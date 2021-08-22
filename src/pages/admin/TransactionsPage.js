@@ -164,7 +164,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: 325,
   },
   formControl: {
-    margin: theme.spacing(1),
+    marginTop: theme.spacing(1.1),
     minWidth: 120,
   },
   selectEmpty: {
@@ -178,27 +178,33 @@ export default function EnhancedTable() {
   const [orderBy, setOrderBy] = React.useState("id");
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [transactionFilter, setTransactionFilter] = React.useState({status:"", tranTime: new Date()});
+  const [transactionFilter, setTransactionFilter] = React.useState({
+    status:"", 
+    startDate: null, 
+    endDate: null,
+    cinemaName:""
+  });
   const loading = useSelector((state) => state.transactions.loading);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const rows = useSelector((state) => state.transactions.transactions);
+  const cinemas = useSelector((state) => state.cinemas.cinemas); 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("tran", transactionFilter)
     dispatch(actions.actFetchDataTransactionsRequest());
   }, []);
 
   useEffect(() => {
-    console.log("sadasd")
-    const serviceFilter = `"service": {"like": "${transactionFilter.status}"}`;
-    const tranTimeFilter = transactionFilter.tranTime === "" ? "" : `,transaction_time": {"equal": "${transactionFilter.tranTime}"}`;
-    var filter = "";
-    if(serviceFilter !== "" || tranTimeFilter !== ""){
-      filter = `filter={${serviceFilter}}`;
+    var filter = `filter={"service": {"like": "${transactionFilter.status}"}}`;
+    if(transactionFilter.startDate !== null && transactionFilter.endDate !== null){
+      const tranFilter = `&startDate=${transactionFilter.startDate}&endDate=${transactionFilter.endDate}`;
+      filter += tranFilter;
+    }
+    if(transactionFilter.cinema !== ""){
+      filter += `&cinemaId=${transactionFilter.cinema}`
     }
     dispatch(actions.actFetchDataTransactionsFilterRequest(filter));
-  }, [transactionFilter.status]);
+  }, [transactionFilter.status, transactionFilter.cinema]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -228,7 +234,13 @@ export default function EnhancedTable() {
 
   const refreshData = () => {
     dispatch(actions.actFetchDataTransactionsRequest());
-    setTransactionFilter({movieName: "", cinemaName: "", status: "", tranTime: ""});
+    setTransactionFilter({
+      movieName: "", 
+      cinemaName: "", 
+      status: "", 
+      startDate: null, 
+      endDate: null, 
+      cinema:""});
   };
 
   const handleChangeStatus = (e) => {
@@ -240,15 +252,34 @@ export default function EnhancedTable() {
 
   const searchTransactionQuery = (e) => {
     e.preventDefault();
-    console.log("tran", transactionFilter)
-    const serviceFilter = transactionFilter.status === "" ? "" : `",service": {"equal": "${transactionFilter.status}"}`;
-    const tranTimeFilter = transactionFilter.tranTime === "" ? "" : `",transaction_time": {"equal": "${transactionFilter.tranTime}"}`;
-    var filter = "";
-    if(serviceFilter !== "" || tranTimeFilter !== ""){
-      filter = `filter={${serviceFilter}${tranTimeFilter}}`;
+    var filter = `filter={"service": {"like": "${transactionFilter.status}"}}`;
+    if(transactionFilter.startDate !== null && transactionFilter.endDate !== null){
+      const tranFilter = `&startDate=${transactionFilter.startDate}&endDate=${transactionFilter.endDate}`;
+      filter += tranFilter;
+    }
+    if(transactionFilter.cinema !== ""){
+      filter += `&cinemaId=${transactionFilter.cinema}`
     }
     dispatch(actions.actFetchDataTransactionsFilterRequest(filter));
   };
+
+  const onChangeCinema = (e) => {
+    setTransactionFilter({
+      ...transactionFilter, 
+      cinema: e.target.value
+    });
+
+  }
+
+  const showCinemas = cinemas => {
+    var result = null;
+    if (cinemas.length > 0) {
+      result = cinemas.map((cinema, index) => {
+        return <MenuItem value={cinema.id} >{cinema.name}</MenuItem>;
+      });
+    }
+    return result;
+}
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -288,38 +319,23 @@ export default function EnhancedTable() {
                         class="form-inline"
                         onSubmit={searchTransactionQuery}
                       >
-                        <div class="form-group mb-2 mr-5">
-                          <lable>Tên phim:</lable>&nbsp;
-                          <input
-                            className="form-control"
-                            placeholder="Nhập tên phim"
-                            value={transactionFilter.movieName}
-                            onChange={(e) => {
-                              setTransactionFilter({
-                                ...transactionFilter,
-                                movieName: (e.target.value)});
-                            }}
-                          ></input>
-                        </div>
                         <div class="form-group mb-4 mr-5">
-                          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <KeyboardDatePicker
-                              disableToolbar
-                              variant="inline"
-                              format="yyyy-MM-dd"
-                              margin="normal"
-                              id="date-picker-inline"
-                              label="Ngày"
-                              value={transactionFilter.tranTime}
-                              onChange={(date) => {setTransactionFilter({
-                                ...transactionFilter,
-                                tranTime: moment(date).format('YYYY-MM-DD')
-                              })}}
-                              KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                              }}
-                            />
-                          </MuiPickersUtilsProvider>  
+                          <FormControl className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-helper-label">
+                              Rạp chiếu
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-helper-label"
+                              id="demo-simple-select-helper"
+                              value={transactionFilter.cinema}
+                              onChange={onChangeCinema}
+                            >
+                              <MenuItem value="">
+                                <em>None</em>
+                              </MenuItem>
+                              {showCinemas(cinemas)}
+                            </Select>
+                          </FormControl>
                         </div>
                         <div class="form-group mb-4 mr-5">
                           <FormControl className={classes.formControl}>
@@ -342,6 +358,47 @@ export default function EnhancedTable() {
                             </Select>
                           </FormControl>
                         </div>
+                        <div class="form-group mb-4 mr-5">
+                          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                              disableToolbar
+                              variant="inline"
+                              format="dd-MM-yyyy"
+                              margin="normal"
+                              id="date-picker-inline"
+                              label="Từ ngày"
+                              value={transactionFilter.startDate}
+                              onChange={(date) => {setTransactionFilter({
+                                ...transactionFilter,
+                                startDate: moment(date).format('MM-DD-YYYY')
+                              })}}
+                              KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                              }}
+                            />
+                          </MuiPickersUtilsProvider>  
+                        </div>
+                        <div class="form-group mb-4 mr-5">
+                          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                              disableToolbar
+                              variant="inline"
+                              format="dd-MM-yyyy"
+                              margin="normal"
+                              id="date-picker-inline"
+                              label="Tới ngày"
+                              value={transactionFilter.endDate}
+                              onChange={(date) => {setTransactionFilter({
+                                ...transactionFilter,
+                                endDate: moment(date).format('MM-DD-YYYY')
+                              })}}
+                              KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                              }}
+                            />
+                          </MuiPickersUtilsProvider>  
+                        </div>
+                        
                         <div class="form-group mb-2">
                           <button type="submit" className="btn btn-primary">
                             <SearchIcon>Tìm kiếm</SearchIcon>
