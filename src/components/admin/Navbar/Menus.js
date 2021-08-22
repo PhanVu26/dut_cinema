@@ -1,5 +1,10 @@
 export const movie_manager_menus = [
     {
+        url: "/manager",
+        label: "Dashboard",
+        icon: "fa-home"
+    },
+    {
         url: "/manager/movies",
         label: "Movies",
         icon: "fa-film"
@@ -17,6 +22,11 @@ export const movie_manager_menus = [
 ]
 
 export const admin_menus = [
+    {
+        url: "/admin",
+        label: "Dashboard",
+        icon: "fa-home"
+    },
     {
         url: "/admin/users",
         label: "Users",
@@ -70,6 +80,11 @@ export const admin_menus = [
 ]
 
 export const showtime_menus = [
+    {
+        url: "/showtime-manager",
+        label: "Dashboard",
+        icon: "fa-home"
+    },
     {
         url: "/showtime-manager/movie-showtimes",
         label: "Showtimes",
