@@ -11,20 +11,8 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
-import Loader from "react-loader-advanced";
-import TextField from '@material-ui/core/TextField';
-import DateFnsUtils from "@date-io/date-fns";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
-import moment from "moment";
-
-import RefreshIcon from "@material-ui/icons/Refresh";
-import SearchIcon from "@material-ui/icons/Search";
 
 import * as actions from "../../../actions/transactionAction/index";
-import * as analysisActions from "../../../actions/analysisAction/index";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -180,20 +168,9 @@ export default function EnhancedTable() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("tran", transactionFilter);
-    dispatch(actions.actFetchDataTransactionsRequest());
+    console.log("tran", rows);
+    //dispatch(actions.actFetchDataTransactionsRequest());
   }, []);
-
-  //   useEffect(() => {
-  //     console.log("sadasd")
-  //     const serviceFilter = `"service": {"like": "${transactionFilter.status}"}`;
-  //     const tranTimeFilter = transactionFilter.tranTime === "" ? "" : `,transaction_time": {"equal": "${transactionFilter.tranTime}"}`;
-  //     var filter = "";
-  //     if(serviceFilter !== "" || tranTimeFilter !== ""){
-  //       filter = `filter={${serviceFilter}}`;
-  //     }
-  //     dispatch(actions.actFetchDataTransactionsFilterRequest(filter));
-  //   }, [transactionFilter.status]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -210,15 +187,6 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  //   const onDeleteTransaction = (id) => {
-  //     dispatch(actions.actDeleteTransactionRequest(id));
-  //   };
-
-  //   const getTransaction = (transaction) => {
-  //     dispatch(actions.getTransaction(transaction));
-  //     dispatch(actions.onToggleModal());
-  //   };
-
   const refreshData = () => {
     dispatch(actions.actFetchDataTransactionsRequest());
     setTransactionFilter({
@@ -230,20 +198,6 @@ export default function EnhancedTable() {
     });
   };
 
-  //   const handleChangeStatus = (e) => {
-  //     setTransactionFilter({
-  //       ...transactionFilter,
-  //       status: (e.target.value)
-  //     });
-  //   }
-
-  const searchTransactionQuery = (e) => {
-    e.preventDefault();
-    if(transactionFilter.startTime !== null && transactionFilter.endTime !== null){
-      var filter = `startDate=${transactionFilter.startTime}&endDate=${transactionFilter.endTime}`;
-      dispatch(actions.actFetchDataTransactionsFilterRequest(filter));
-    }
-  };
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
