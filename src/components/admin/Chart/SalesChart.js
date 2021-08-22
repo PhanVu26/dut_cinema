@@ -9,7 +9,6 @@ import {
   CartesianGrid,
   Line,
   LineChart,
-  ResponsiveContainer
 } from "recharts";
 import { Pie } from "react-chartjs-2";
 import { connect } from "react-redux";
@@ -98,6 +97,12 @@ class SalesChart extends Component {
     })
   }
 
+  mapToBarChartData(movieAnalysis){
+    return movieAnalysis.map(ele => {
+      return {movieName: ele.movieName, buyQuantity: parseInt(ele.buyQuantity)}
+    })
+  }
+
   refreshData = () => {
     this.props.fetchDataMovieAnalysis("");
     this.props.fetchDataSaleAnalysis("");
@@ -128,6 +133,7 @@ class SalesChart extends Component {
   render() {
     var saleAnalysis = this.mapToLineChartData(this.props.saleAnalysis);
     var serviceAnalysis = this.mapToPieChartData(this.props.serviceAnalysis);
+    var movieAnalysis = this.mapToBarChartData(this.props.movieAnalysis);
     return (
       <div>
         <div className="row mb-2 p-2">
@@ -225,7 +231,7 @@ class SalesChart extends Component {
             <h4 className="mb-5 mt-3 text-center">
               Biểu đồ số lượng vé đã đặt theo phim
             </h4>
-            <BarChart width={1150} height={450} data={this.props.movieAnalysis}>
+            <BarChart width={1150} height={450} data={movieAnalysis}>
               <XAxis dataKey="movieName" stroke="#8884d8" />
               <YAxis />
               <Tooltip wrapperStyle={{ width: 100, backgroundColor: "#ccc" }} />
