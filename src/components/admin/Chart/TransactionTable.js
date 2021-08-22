@@ -170,7 +170,8 @@ export default function EnhancedTable() {
   const [dense, setDense] = React.useState(false);
   const [transactionFilter, setTransactionFilter] = React.useState({
     status: "",
-    tranTime: new Date(),
+    startTime: null,
+    endTime:null
   });
   const [year, setYear] = React.useState(new Date().getFullYear());
   const loading = useSelector((state) => state.transactions.loading);
@@ -224,7 +225,8 @@ export default function EnhancedTable() {
       movieName: "",
       cinemaName: "",
       status: "",
-      tranTime: "",
+      startTime: null,
+      endTime:null
     });
   };
 
@@ -237,10 +239,10 @@ export default function EnhancedTable() {
 
   const searchTransactionQuery = (e) => {
     e.preventDefault();
-    var query = `?year=${year}`;
-    dispatch(analysisActions.actFetchDataSaleAnalysisRequest(query));
-    dispatch(analysisActions.actFetchDataServiceAnalysisRequest(query));
-    //dispatch(actions.actFetchDataTransactionsFilterRequest(filter));
+    if(transactionFilter.startTime !== null && transactionFilter.endTime !== null){
+      var filter = `startDate=${transactionFilter.startTime}&endDate=${transactionFilter.endTime}`;
+      dispatch(actions.actFetchDataTransactionsFilterRequest(filter));
+    }
   };
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -261,11 +263,44 @@ export default function EnhancedTable() {
             >
               <form class="form-inline" onSubmit={searchTransactionQuery}>
                 <div class="form-group mb-4 mr-5">
-                  <TextField 
-                    id="year" 
-                    value={year} 
-                    label="Năm"
-                    onChange={(e) => {setYear(e.target.value)}}/>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                      disableToolbar
+                      variant="inline"
+                      format="dd-MM-yyyy"
+                      margin="normal"
+                      id="date-picker-inline"
+                      label="Từ ngày"
+                      value={transactionFilter.startTime}
+                      onChange={(date) => {setTransactionFilter({
+                        ...transactionFilter,
+                        startTime: moment(date).format('MM-DD-YYYY')
+                      })}}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                    />
+                  </MuiPickersUtilsProvider>
+                </div>
+                <div class="form-group mb-4 mr-5">
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                      disableToolbar
+                      variant="inline"
+                      format="dd-MM-yyyy"
+                      margin="normal"
+                      id="date-picker-inline"
+                      label="Đến ngày"
+                      value={transactionFilter.endTime}
+                      onChange={(date) => {setTransactionFilter({
+                        ...transactionFilter,
+                        endTime: moment(date).format('MM-DD-YYYY')
+                      })}}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                    />
+                  </MuiPickersUtilsProvider>
                 </div>
 
                 <div class="form-group mb-2">
