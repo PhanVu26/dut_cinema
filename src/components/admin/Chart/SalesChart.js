@@ -7,9 +7,11 @@ import {
   Tooltip,
   Legend,
   CartesianGrid,
+  Line,
   LineChart,
+  ResponsiveContainer
 } from "recharts";
-import { Pie, Line } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import { connect } from "react-redux";
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -90,25 +92,10 @@ class SalesChart extends Component {
     }
   }
   mapToLineChartData(saleAnalysis){
-    var sortedSaleAnalysis = saleAnalysis.sort((a, b) => (a.month_year > b.month_year) ? 1 : -1)
-    var months = [];
-    var salesData = [];
-    sortedSaleAnalysis.forEach((data) => {
-      months.push(data.month_year);
-      salesData.push(data.sumSales);
-    });
-    return {
-      labels: months,
-      datasets: [
-        {
-          label: "Doanh thu(vnđ)",
-          data: salesData,
-          fill: false,
-          backgroundColor: "rgb(255, 0, 0)",
-          borderColor: "rgba(255, 0, 0, 0.2)",
-        },
-      ],
-    }
+    var sortedSaleAnalysis = saleAnalysis.sort((a, b) => (a.month_year > b.month_year) ? 1 : -1);
+    return sortedSaleAnalysis.map(ele => {
+      return {month_year: ele.month_year, sumSales: parseInt(ele.sumSales)}
+    })
   }
 
   refreshData = () => {
@@ -297,7 +284,29 @@ class SalesChart extends Component {
             }}
           >
             <h5 className="text-center mb-4 mt-3">Biểu đồ doanh thu</h5>
-            <Line data={saleAnalysis} options={this.state.lineChartOption} />
+            <LineChart
+              width={1100}
+              height={450}
+              data={saleAnalysis}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month_year" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="sumSales"
+                stroke="#8884d8"
+                activeDot={{ r: 8 }}
+              />
+            </LineChart>
           </div>
         </div>
       </div>
