@@ -17,49 +17,59 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import SearchIcon from "@material-ui/icons/Search";
 
 function descendingComparator(a, b, orderBy) {
-  let value1 = "",
-    value2 = "";
-  switch (orderBy) {
-    case "id":
-      value1 = a.id;
-      value2 = b.id;
-      break;
-    case "day":
-      value1 = a.id;
-      value2 = b.id;
-      break;
-    case "startTime":
-      value1 = a.startTime.slice(11, 16);
-      value2 = b.startTime.slice(11, 16);
-      break;
-    case "endTime":
-      value1 = a.endTime.slice(11, 16);
-      value2 = b.endTime.slice(11, 16);
-      break;
-    case "movieName":
-      value1 = a.movie.name;
-      value2 = b.movie.name;
-      break;
-    case "cinema":
-      value1 = a.room.cinema.name;
-      value2 = b.room.cinema.name;
-      break;
-    case "room":
-      value1 = a.room.roomNumber;
-      value2 = b.room.roomNumber;
-      break;
-    default:
-      value1 = a[orderBy];
-      value2 = b[orderBy];
-  }
+  try {
+    let value1 = "",
+      value2 = "";
+    switch (orderBy) {
+      case "id":
+        value1 = a.id;
+        value2 = b.id;
+        break;
+      case "day":
+        value1 = a.id;
+        value2 = b.id;
+        break;
+      case "startTime":
+        value1 = a.startTime.slice(11, 16);
+        value2 = b.startTime.slice(11, 16);
+        break;
+      case "endTime":
+        value1 = a.endTime.slice(11, 16);
+        value2 = b.endTime.slice(11, 16);
+        break;
+      case "movieName":
+        value1 = a.movie.name;
+        value2 = b.movie.name;
+        break;
+      case "cinema":
+        value1 = a.room.cinema.name;
+        value2 = b.room.cinema.name;
+        break;
+      case "room":
+        value1 = a.room.roomNumber;
+        value2 = b.room.roomNumber;
+        break;
+      default:
+        value1 = a[orderBy];
+        value2 = b[orderBy];
+    }
 
-  if (value2 < value1) {
-    return -1;
+    if (value2 < value1) {
+      return -1;
+    }
+    if (value2 > value1) {
+      return 1;
+    }
+    return 0;
+  } catch (error) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
   }
-  if (value2 > value1) {
-    return 1;
-  }
-  return 0;
 }
 
 function getComparator(order, orderBy) {
@@ -84,8 +94,8 @@ const headCells = [
   { id: "startTime", numeric: false, disablePadding: false, label: "Bắt đầu" },
   { id: "endTime", numeric: false, disablePadding: false, label: "Kết thúc" },
   { id: "movieName", numeric: false, disablePadding: false, label: "Tên phim" },
-  { id: "cinema", numeric: false, disablePadding: false, label: "Phòng chiếu" },
-  { id: "room", numeric: false, disablePadding: false, label: "Rạp chiếu" },
+  { id: "cinema", numeric: false, disablePadding: false, label: "Rạp chiếu" },
+  { id: "room", numeric: false, disablePadding: false, label: "Phòng chiếu" },
 ];
 
 function EnhancedTableHead(props) {
@@ -206,7 +216,9 @@ export default function EnhancedTable() {
 
   const onDeleteShowtime = (id) => {
     showtimeActions.actDeleteShowtimeRequest(id);
-    dispatch(showtimeActions.actFetchAllShowtimesRequest());
+    setTimeout(() => {
+      dispatch(showtimeActions.actFetchAllShowtimesRequest());
+    }, 1000);
   };
 
   const refreshData = () => {
@@ -222,7 +234,7 @@ export default function EnhancedTable() {
         row.movie.name.toLowerCase().includes(name.trim().toLowerCase()) &&
         row.room.cinema.name.toLowerCase().includes(cinema.trim().toLowerCase())
       ) {
-        console.log(row);
+        console.log("search", row);
         return true;
       }
       return false;
