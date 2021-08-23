@@ -20,7 +20,6 @@ function UnAuthPage() {
       </div>
       <main>
         <section>
-          <h1>Page Not Found!</h1>
           <div>
             <span>4</span>
             <span className="circle">0</span>

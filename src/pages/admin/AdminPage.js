@@ -38,6 +38,7 @@ import CinemasPage from './CinemasPage';
 import RoomsPage from './RoomsPage';
 import SeatsPage from './SeatsPage';
 import NotFoundPage from "../error/404/NotFoundPage";
+import UnauthPage from "../error/unauth/UnauthPage";
 
 
 const AdminPage = (props) => {
@@ -45,7 +46,7 @@ const AdminPage = (props) => {
     useEffect(() =>{
         const account = JSON.parse(localStorage.getItem("account"));
         if(account.roleName !== "Admin"){
-            window.location.href = "/login";
+            window.location.href = "/403";
         }
         dispatch(userActions.actFetchDataUsersRequest())
         dispatch(movieActions.actFetchDataMoviesRequest())

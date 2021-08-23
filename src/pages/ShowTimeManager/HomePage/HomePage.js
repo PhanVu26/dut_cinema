@@ -22,7 +22,7 @@ function HomePage(props) {
   },[]);
   const account = JSON.parse(localStorage.getItem("account"));
   if(account.roleName !== "Theater Manager"){
-      window.location.href = "/login";
+      window.location.href = "/403";
   }
   return (
     // <>
