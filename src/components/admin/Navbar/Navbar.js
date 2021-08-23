@@ -19,7 +19,7 @@ function Navbar() {
         }else if(pathName.includes("/manager")){
             setListMenus(movie_manager_menus)
         }else {
-            setMenus(showtime_menus)
+            setListMenus(showtime_menus)
         }
         
     }
