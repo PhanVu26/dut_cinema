@@ -211,7 +211,10 @@ export default function EnhancedTable() {
                 <div class="col-xl-12 col-12 mb-xl-0">
                   <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumb}>
                     <NavLink           
-                      to="/"         
+                      to={(location) => {
+                        let path = location.pathname;
+                        return "/" + path.split('/')[1];
+                      }}         
                       className={classes.link}
                     >
                       <HomeIcon className={classes.icon} />
