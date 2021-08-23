@@ -218,7 +218,7 @@ export default function EnhancedTable() {
     showtimeActions.actDeleteShowtimeRequest(id);
     setTimeout(() => {
       dispatch(showtimeActions.actFetchAllShowtimesRequest());
-    }, 1000);
+    }, 500);
   };
 
   const refreshData = () => {
