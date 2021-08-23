@@ -77,7 +77,7 @@ class Login extends Component {
             if (Object.keys(dataAccount).length !== 0) {
               localStorage.setItem("account", JSON.stringify(dataAccount));
             }
-            alert("Logged in successfully");
+            // alert("Logged in successfully");
             
             switch(dataAccount.roleName){
               case "Admin":
@@ -185,9 +185,6 @@ class Login extends Component {
           <Modal.Body>
             <div className="row">
               <div className="col-md-12">
-                <p style={text}>
-                  <span className="text-danger">Bạn không có quyền truy cập vào trang này</span>. Vui lòng đăng nhập trước khi sử dụng hệ thống.
-                </p>
               </div>
             </div>
             <form onSubmit={this.onSave} id="loginForm">
