@@ -18,7 +18,7 @@ const TopNavbar = (props) => {
                 <div className="col-md-5">
                     <form>
                         <div className="input-group">
-                            <input type="text" className="form-control search-input" placeholder="Search.." />
+                            <input type="text" className="form-control search-input" placeholder="Tìm kiếm.." />
                             <button type="button" className="btn btn-white search-button m-0 p-2"><i
                                 className="fas fa-search text-danger"></i></button>
                         </div>
