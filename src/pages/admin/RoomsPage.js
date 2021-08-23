@@ -208,7 +208,7 @@ export default function EnhancedTable() {
             <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
               <div class={"row " + classes.searchBar}>
                 <div class="col-xl-12 col-12 mb-xl-0">
-                <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumb}>
+                  <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumb}>
                     <NavLink                     
                       to={"/admin"}                     
                       className={classes.link}
@@ -216,9 +216,9 @@ export default function EnhancedTable() {
                       <HomeIcon className={classes.icon} />
                       Trang chủ
                     </NavLink>
-                    <Typography color="textPrimary" className={classes.link}>
+                    <NavLink to={"/admin/cinemas"} className={classes.link}>
                       Rạp chiếu
-                    </Typography>
+                    </NavLink>
                     <Typography color="textPrimary" className={classes.link}>
                       Phòng
                     </Typography>
