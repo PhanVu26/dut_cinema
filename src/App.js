@@ -22,6 +22,7 @@ import ManagerPage from "./pages/manager/index";
 import Login from "./pages/Login/Login";
 import ShowTimeManager from "./pages/ShowTimeManager/HomePage/HomePage";
 import NotFoundPage from "./pages/error/404/NotFoundPage";
+import UnAuthPage from "./pages/error/unauth/UnauthPage";
 function App() {
   return (
     <Router>
@@ -138,6 +139,7 @@ function App() {
                 <MovieDetail/>
                 <Footer />
         </Route>
+        <Route path='/403' exact component={UnAuthPage} />
         <Route path='/404' component={NotFoundPage} />
         <Redirect from='*' to='/404' />
         <Route path='*' component={NotFoundPage} />
