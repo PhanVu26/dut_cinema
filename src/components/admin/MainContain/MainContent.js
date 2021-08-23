@@ -35,7 +35,7 @@ const MainContent  = (props) => {
                                                 <div className="d-flex justify-content-between">
                                                     <i className="fas fa-film fa-3x text-warning"></i>
                                                     <div className="text-right">
-                                                        <h5>Movies</h5>
+                                                        <h5>Phim</h5>
                                                     <h3>{movies.length}</h3>
                                                     </div>
                                                 </div>
@@ -53,7 +53,7 @@ const MainContent  = (props) => {
                                                 <div className="d-flex justify-content-between">
                                                     <i className="fas fa-handshake fa-3x text-success"></i>
                                                     <div className="text-right">
-                                                        <h5>Transactions</h5>
+                                                        <h5>Giao dịch</h5>
                                                         <h3>{transactions.length}</h3>
                                                     </div>
                                                 </div>
@@ -69,7 +69,7 @@ const MainContent  = (props) => {
                                                 <div className="d-flex justify-content-between">
                                                     <i className="fas fa-users fa-3x text-primary"></i>
                                                     <div className="text-right">
-                                                        <h5>Users</h5>
+                                                        <h5>Người dùng</h5>
                                                         <h3>{users.length}</h3>
                                                     </div>
                                                 </div>
@@ -86,7 +86,7 @@ const MainContent  = (props) => {
                                                 <div className="d-flex justify-content-between">
                                                     <i className="fas fa-theater-masks fa-3x text-success"></i>
                                                     <div className="text-right">
-                                                        <h5>Cinemas</h5>
+                                                        <h5>Rạp chiếu</h5>
                                                         <h3>{cinemas.length}</h3>
                                                     </div>
                                                 </div>
@@ -102,7 +102,7 @@ const MainContent  = (props) => {
                                                 <div className="d-flex justify-content-between">
                                                     <i className="fas fa-chart-line fa-3x text-danger"></i>
                                                     <div className="text-right">
-                                                        <h5>Genres</h5>
+                                                        <h5>Thể loại</h5>
                                                         <h3>{genres.length}</h3>
                                                     </div>
                                                 </div>
@@ -118,7 +118,7 @@ const MainContent  = (props) => {
                                                 <div className="d-flex justify-content-between">
                                                     <i className="fas fa-chart-line fa-3x text-danger"></i>
                                                     <div className="text-right">
-                                                        <h5>Ticket types</h5>
+                                                        <h5>Loại vé</h5>
                                                         <h3>{ticketTypes.length}</h3>
                                                     </div>
                                                 </div>
@@ -134,7 +134,7 @@ const MainContent  = (props) => {
                                                 <div className="d-flex justify-content-between">
                                                     <i className="fas fa-chart-line fa-3x text-danger"></i>
                                                     <div className="text-right">
-                                                        <h5>Sales</h5>
+                                                        <h5>Doanh thu</h5>
                                                         <h3>{countSalesTotal(saleAnalysis)}</h3>
                                                     </div>
                                                 </div>
