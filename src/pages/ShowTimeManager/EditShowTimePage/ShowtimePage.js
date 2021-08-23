@@ -194,7 +194,7 @@ export default function EnhancedTable() {
   useEffect(() => {
     dispatch(showtimeActions.actFetchCinemaRequest());
     dispatch(showtimeActions.actFetchAllShowtimesRequest());
-    console.log("userss", rows);
+    // console.log("userss", rows);
   }, []);
 
   const handleRequestSort = (event, property) => {
@@ -204,12 +204,12 @@ export default function EnhancedTable() {
   };
 
   const handleChangePage = (event, newPage) => {
-    console.log("page", newPage);
+    // console.log("page", newPage);
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    console.log("perpage", event.target.value);
+    // console.log("perpage", event.target.value);
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -234,7 +234,7 @@ export default function EnhancedTable() {
         row.movie.name.toLowerCase().includes(name.trim().toLowerCase()) &&
         row.room.cinema.name.toLowerCase().includes(cinema.trim().toLowerCase())
       ) {
-        console.log("search", row);
+        // console.log("search", row);
         return true;
       }
       return false;
