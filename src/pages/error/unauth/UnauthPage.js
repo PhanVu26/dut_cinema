@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
+
 import React from "react";
 import "./UnauthPage.css";
 function UnAuthPage() {
+  const history = useHistory();
   return (
     <div className="main">
       <div id="particles" className="particles">
@@ -29,9 +32,9 @@ function UnAuthPage() {
             Xin lỗi, bạn không có quyền truy cập vào trang này.
           </p>
           <div>
-            <Link to="/">
-              <button>Quay lại trang chủ</button>
-            </Link>
+            <a>
+              <button onClick={() => history.goBack()}>Quay lại trang trước</button>
+            </a>
           </div>
         </section>
       </main>
