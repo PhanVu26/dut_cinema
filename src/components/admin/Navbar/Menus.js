@@ -6,17 +6,17 @@ export const movie_manager_menus = [
     },
     {
         url: "/manager/movies",
-        label: "Movies",
+        label: "Phim",
         icon: "fa-film"
     },
     {
         url: "/manager/actors",
-        label: "Actors",
+        label: "Diễn viên",
         icon: "fa-walking"
     },
     {
         url: "/manager/profile",
-        label: "Profile",
+        label: "Cá nhân",
         icon: "fa-user"
     },
 ]
@@ -29,52 +29,52 @@ export const admin_menus = [
     },
     {
         url: "/admin/users",
-        label: "Users",
+        label: "Người dùng",
         icon: "fa-users"
     },
     {
         url: "/admin/transactions",
-        label: "Transactions",
+        label: "Giao dịch",
         icon: "fas fa-handshake"
     },
     {
         url: "/admin/movies",
-        label: "Movies",
+        label: "Phim",
         icon: "fa-film"
     },
     {
         url: "/admin/cinemas",
-        label: "Cinemas",
+        label: "Rạp chiếu",
         icon: "fa-theater-masks"
     },
     {
         url: "/admin/genres",
-        label: "Genres",
+        label: "Thể loại",
         icon: "fa-transgender-alt"
     },
     {
         url: "/admin/ticket-types",
-        label: "Ticket-types",
+        label: "Loại vé",
         icon: "fa-ticket-alt"
     },
     {
         url: "/admin/actors",
-        label: "Actors",
+        label: "Diễn viên",
         icon: "fa-walking"
     },
     {
         url: "/admin/sales",
-        label: "Sales",
+        label: "Thống kê",
         icon: "fa-chart-line"
     },
     {
         url: "/admin/movie-showtimes",
-        label: "Showtimes",
+        label: "Lịch chiếu",
         icon: "fa-calendar-alt"
     },
     {
         url: "/admin/profile",
-        label: "Profile",
+        label: "Cá nhân",
         icon: "fa-user"
     },
 ]
@@ -87,12 +87,12 @@ export const showtime_menus = [
     },
     {
         url: "/showtime-manager/movie-showtimes",
-        label: "Showtimes",
+        label: "Lịch chiếu",
         icon: "fa-calendar-alt"
     },
     {
         url: "/showtime-manager/profile",
-        label: "Profile",
+        label: "Cá nhân",
         icon: "fa-user"
     },
 ]
