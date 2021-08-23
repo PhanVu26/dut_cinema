@@ -15,6 +15,7 @@ import Loader from "react-loader-advanced";
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
+import { useHistory } from 'react-router-dom';
 
 import * as actions from "../../actions/seatAction/index";
 import SeatControl from "../../components/Control/SeatControl/SeatControl";
@@ -153,6 +154,8 @@ export default function EnhancedTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   var seats = useSelector((state) => state.seats.seats);
   const roomId = window.location.pathname.split('/')[3];
+  // const cinemaId = window.location.pathname.split('/')
+  const history = useHistory();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -228,9 +231,9 @@ export default function EnhancedTable() {
                       <HomeIcon className={classes.icon} />
                       Trang chủ
                     </NavLink>
-                    <Typography color="textPrimary" className={classes.link}>
+                    <NavLink to={"/admin/cinemas"} className={classes.link}>
                       Rạp chiếu
-                    </Typography>
+                    </NavLink>
                     <Typography color="textPrimary" className={classes.link}>
                       Phòng
                     </Typography>
