@@ -176,7 +176,7 @@ const useStyles = makeStyles((theme) => ({
     width: 1,
   },
   container: {
-    maxHeight: 289
+    maxHeight: 281
   },
   link: {
     display: 'flex',
@@ -288,7 +288,10 @@ export default function EnhancedTable() {
                 <div class="row ml-1">
                   <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumb}>
                     <NavLink           
-                      to="/showtime-manager"         
+                      to={(location) => {
+                        let path = location.pathname;
+                        return "/" + path.split('/')[1];
+                      }}         
                       className={classes.link}
                     >
                       <HomeIcon className={classes.icon} />
@@ -387,7 +390,7 @@ export default function EnhancedTable() {
                         stickyHeader aria-label="sticky table"
                         className={classes.table}
                         aria-labelledby="tableTitle"
-                        size={dense ? "small" : "medium"}
+                        size="small"
                         aria-label="enhanced table"
                       >
                         <EnhancedTableHead
