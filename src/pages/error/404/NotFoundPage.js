@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import React from "react";
 import "./NotFoundPage.css";
 function NotFoundPage() {
+  const history = useHistory();
   return (
     <div className="main">
       <div id="particles" className="particles">
@@ -27,14 +28,14 @@ function NotFoundPage() {
             <span>4</span>
           </div>
           <p>
-            We are unable to find the page
+            Chúng tôi không thể tìm thấy trang
             <br />
-            you're looking for.
+            bạn đang tìm kiếm
           </p>
           <div>
-            <Link to="/">
-              <button>Back to Home Page</button>
-            </Link>
+            <a>
+              <button onClick={() => history.goBack()}>Quay lại trang trước</button>
+            </a>
           </div>
         </section>
       </main>
