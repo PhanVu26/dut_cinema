@@ -57,7 +57,7 @@ class EditShowTimePage extends Component {
     event.preventDefault();
     if (this.validateMovie() === true) {
       this.props.onSaveMovie(this.state.movie);
-      
+
       this.props.onToggleMovieForm();
     } else {
       this.setState({
@@ -93,9 +93,9 @@ class EditShowTimePage extends Component {
         month +
         "-" +
         day;
-      // 
-      // 
-      // 
+      //
+      //
+      //
       this.props.onLoadShowtime(this.state.showtime.room, dateString);
       this.props.onLoadMovies();
       this.setState({
@@ -143,7 +143,7 @@ class EditShowTimePage extends Component {
           month +
           "-" +
           day;
-        
+
         const temp = {
           date: dateString,
           hour: this.state.addHour,
@@ -193,8 +193,32 @@ class EditShowTimePage extends Component {
     var result = window.confirm("Bạn muốn xóa lịch chiếu này?");
     if (result) {
       actions2.actDeleteShowtimeRequest(showtimeId);
+      let month = this.state.showtime.date.getMonth() + 1;
+      let day = this.state.showtime.date.getDate();
+      if (month < 10) {
+        month = "0" + month.toString();
+      } else {
+        month = month.toString();
+      }
+      if (day < 10) {
+        day = "0" + day.toString();
+      } else {
+        day = day.toString();
+      }
+      // let d = new Date();
+      // d.toISOString
+      let dateString =
+        this.state.showtime.date.getFullYear().toString() +
+        "-" +
+        month +
+        "-" +
+        day;
+      // console.log("dateString: ", dateString);
+      // console.log(this.state.showtime.date.toString());
+      // console.log(this.state.showtime.date.getDay());
+      this.props.onLoadShowtime(this.state.showtime.room, dateString);
+      this.props.onLoadMovies();
     }
-    this.setState({ showEdit: "hideMenu" });
   };
 
   render() {
@@ -255,7 +279,7 @@ class EditShowTimePage extends Component {
                               this.props.onLoadCinemaRooms(
                                 parseInt(e.target.value)
                               );
-                              
+
                               this.setState((prevState) => ({
                                 showtime: {
                                   ...prevState.showtime,
