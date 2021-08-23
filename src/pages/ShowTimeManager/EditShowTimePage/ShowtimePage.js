@@ -15,6 +15,12 @@ import * as showtimeActions from "../../../actions/showtimeManager/index";
 import { Link } from "react-router-dom";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import SearchIcon from "@material-ui/icons/Search";
+import { NavLink } from "react-router-dom";
+import Typography from '@material-ui/core/Typography';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import HomeIcon from '@material-ui/icons/Home';
+import GrainIcon from '@material-ui/icons/Grain';
+
 
 function descendingComparator(a, b, orderBy) {
   try {
@@ -169,6 +175,29 @@ const useStyles = makeStyles((theme) => ({
     top: 20,
     width: 1,
   },
+  container: {
+    maxHeight: 289
+  },
+  link: {
+    display: 'flex',
+  },
+  icon: {
+    marginRight: theme.spacing(0.5),
+    width: 20,
+    height: 20,
+  },
+  breadcrumb: {
+    height: '10px',
+    backgroundColor: '#f3f3f4',
+    paddingLeft: '0px'
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 export default function EnhancedTable() {
@@ -256,13 +285,20 @@ export default function EnhancedTable() {
           <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
             <div class={"row " + classes.searchBar}>
               <div class="col-xl-12 col-12 mb-xl-0 ">
-                <div class="row">
-                  <h3
-                    class="text-left mb-2 pt-3"
-                    style={{ marginLeft: "15px" }}
-                  >
-                    Danh sách lịch chiếu
-                  </h3>
+                <div class="row ml-1">
+                  <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumb}>
+                    <NavLink           
+                      to="/showtime-manager"         
+                      className={classes.link}
+                    >
+                      <HomeIcon className={classes.icon} />
+                      Trang chủ
+                    </NavLink>
+                    <Typography color="textPrimary" className={classes.link}>
+                      <GrainIcon className={classes.icon} />
+                      Lịch chiếu
+                    </Typography>
+                  </Breadcrumbs>
                   <Link
                     to={(location) => {
                       let path = location.pathname;
@@ -346,8 +382,9 @@ export default function EnhancedTable() {
                 {/*--------------------------------------*/}
                 <div className={classes.root}>
                   <Paper className={classes.paper}>
-                    <TableContainer>
+                    <TableContainer className={classes.container}>
                       <Table
+                        stickyHeader aria-label="sticky table"
                         className={classes.table}
                         aria-labelledby="tableTitle"
                         size={dense ? "small" : "medium"}
