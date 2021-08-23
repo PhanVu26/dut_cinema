@@ -20,7 +20,7 @@ class ManagerPage extends Component{
     render(){
         const account = JSON.parse(localStorage.getItem("account"));
         if(account.roleName !== "Movie Manager"){
-            window.location.href = "/login";
+            window.location.href = "/403";
         }
         return (
             // <Router>
