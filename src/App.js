@@ -1,7 +1,7 @@
 import "./App.css";
 
 import AdminPage from "./pages/admin/AdminPage";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Header from "./components/client/Header/Header";
 import Footer from "./components/client/Footer/Footer";
 import HomePage from "./pages/client/HomePage/HomePage";
@@ -18,14 +18,11 @@ import PromotionPage from "./pages/client/HomePage/Promotion/PromotionPage";
 import UserPage from "./pages/client/UserPage/UserPage";
 import MovieDetail from "./pages/client/TicketBooking/MovieInformation/MovieInfo";
 import SearchPage from "./pages/client/SearchPage/SearchPage";
-// import routes from "./routes/index.route";
-import UserManagementPage from "./pages/admin/UserManagementPage";
-import MovieManager from "./pages/manager/MovieManager";
-import ActorManager from "./pages/manager/ActorManager/index";
 import ManagerPage from "./pages/manager/index";
 import Login from "./pages/Login/Login";
 import ShowTimeManager from "./pages/ShowTimeManager/HomePage/HomePage";
-import EditShowTimePage from "./pages/ShowTimeManager/EditShowTimePage/EditShowTimePage";
+import NotFoundPage from "./pages/error/404/NotFoundPage";
+import UnAuthPage from "./pages/error/unauth/UnauthPage";
 function App() {
   return (
     <Router>
@@ -142,6 +139,10 @@ function App() {
                 <MovieDetail/>
                 <Footer />
         </Route>
+        <Route path='/403' exact component={UnAuthPage} />
+        <Route path='/404' component={NotFoundPage} />
+        <Redirect from='*' to='/404' />
+        <Route path='*' component={NotFoundPage} />
       </Switch>
     </Router>
   );

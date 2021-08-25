@@ -1,5 +1,8 @@
 import * as types from "../../constants/ActionType";
-var initialState = [];
+var initialState = {
+    users: [],
+    loading: false
+};
 
 const findIndex = (users, id) => {
     var result = -1;
@@ -19,26 +22,62 @@ var userReducer = (state = initialState, action) => {
     var index = -1;
     switch(action.type){
         case types.LIST_ALL_USERS:
-            state = action.users;
-            return state;
+            return {
+                ...state,
+                users: action.users,
+                loading: false
+            };
+        case types.USER_LOADING:
+            
+            return {
+                ...state,
+                loading: true
+            }     
         case types.SAVE_USER:
-            state.push(action.user);
-            return [...state];    
+            var users = [...state.users]
+            var newUser = {
+                id: action.user.user.id,
+                name: action.user.user.name,
+                email: action.user.user.email,
+                userRoles: [{id: action.user.role.id, role: {name: action.user.role.name}}],
+                isActive: action.user.status === 'true' ? true: false}
+            users.unshift(newUser);
+            
+            return {
+                ...state,
+                users: users,
+                loading: false
+            }   
         case types.DELETE_USER:
-            index = findIndex(state, action.id)
-            state.splice(index, 1);
-            return [...state];       
+            var users = [...state.users];
+            index = findIndex(users, action.id)
+            users.splice(index, 1);
+            return {
+                ...state,
+                users: users,
+                loading: false
+            }       
         case types.UPDATE_USER_STATUS:
-            index = findIndex(state, action.id);
-            state[index] = {
-                ...state[index],
-                isActive: !state[index].isActive
+            var users = [...state.users]
+            index = findIndex(users, action.id);
+            users[index] = {
+                ...users[index],
+                isActive: !users[index].isActive
             }
-            return [...state]; 
-        case types.UPDATE_USER:               
-            index = findIndex(state, action.user.id);
-            state[index] = action.user;
-            return [...state];  
+            return {
+                ...state,
+                users: users,
+                loading: false
+            } 
+        case types.UPDATE_USER:   
+            var users = [...state.users]            
+            index = findIndex(users, action.user.id);
+            users[index] = action.user;
+            return {
+                ...state,
+                users: users,
+                loading: false
+            } 
                           
         default: return state;     
     }

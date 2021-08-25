@@ -52,7 +52,7 @@ class MovieList extends Component {
 
   render() {
     // var{rowsPerPage} = this.props;
-    // console.log("list movies ", rowsPerPage)
+    // 
     var { rowsPerPage, filterMovie } = this.props;
     if (filterMovie.name) {
       rowsPerPage = rowsPerPage.filter((movie) => {
@@ -73,7 +73,7 @@ class MovieList extends Component {
     }
 
     // var{rowsPerPage} = this.props;
-    console.log("filter", this.state);
+    
     var{rowsPerPage, filterMovie} = this.props;
     if(filterMovie.name){
         rowsPerPage = rowsPerPage.filter((movie) => {
@@ -170,8 +170,8 @@ class MovieList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    movies: state.movies,
-    genres: state.genres,
+    movies: state.movies.movies,
+    genres: state.genres.genres,
     filterMovie: state.filterMovie,
     // pageInfo: state.pageInfo
   };

@@ -12,11 +12,12 @@ import "./UserPageStyles.css";
 import { actFetchDataTransactionRequest } from "../../../actions/index";
 import InforUser from "./UserInfo";
 import Deal from "./Deal";
+import Booked from "./Booked";
 import { connect } from "react-redux";
 
 class UserPage extends React.Component {
   componentDidMount() {
-    this.props.fetchDataTransaction();
+    this.props.fetchDataTransaction('["Cancel", "Book", "Buy"]');
   }
 
   render() {
@@ -31,8 +32,8 @@ class UserPage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchDataTransaction: () => {
-      dispatch(actFetchDataTransactionRequest());
+    fetchDataTransaction: (listType) => {
+      dispatch(actFetchDataTransactionRequest(listType));
     },
   };
 };
@@ -109,6 +110,7 @@ function FullWidthTabs(props) {
           >
             <Tab label="Thông Tin Thành Viên" {...a11yProps(0)} />
             <Tab label="Giao Dịch Của Tôi" {...a11yProps(1)} />
+            <Tab label="Vé đã đặt" {...a11yProps(2)} />
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -121,6 +123,9 @@ function FullWidthTabs(props) {
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
             <Deal account={props.account} />
+          </TabPanel>
+          <TabPanel value={value} index={2} dir={theme.direction}>
+            <Booked account={props.account} />
           </TabPanel>
         </SwipeableViews>
       </div>

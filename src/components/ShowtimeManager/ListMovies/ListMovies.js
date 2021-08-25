@@ -43,7 +43,7 @@ class MovieManager extends Component {
       endIndex,
     } = this.state;
     var rowsPerPage = movies.slice(startIndex, endIndex + 1);
-    console.log("rowPerPage: ", rowsPerPage);
+    
     return (
       <section>
         <div className="container-fluid mt-5">

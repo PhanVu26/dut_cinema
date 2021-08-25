@@ -34,12 +34,10 @@ class ActorForm extends Component {
         var target = e.target;
         var name = target.name;
         var value = target.value;
-        var image = e.target.files != null ? URL.createObjectURL(e.target.files[0]) : this.state.actor.image
         this.setState(prevState => ({
             actor: {
                 ...prevState.actor,
-                    [name]: value ,
-                    image: image              
+                    [name]: value ,            
             }
         }))
         
@@ -58,7 +56,7 @@ class ActorForm extends Component {
         event.preventDefault();
         if(this.validateActor() === true) {
             if(this.props.actorEditing.id){
-                console.log("update actorId", this.props.actorEditing.id, this.state.actor)
+                
                 this.props.onUpdateActor(this.state.actor)
                 this.props.onToggleActorForm()
             }else {
@@ -152,22 +150,7 @@ class ActorForm extends Component {
                                     />
                                 </div>
 
-                                <div className="form-group">
-                                    <label>Hình ảnh :</label>
-                                    <input
-                                        name = "image"
-                                        type="file"
-                                        className="form-control"
-                                        onChange={ this.onHandleChange }
-                                    
-                                    />
-                                    <img 
-                                        className='mt-3'
-                                        src={actor.image} 
-                                        height='300px'
-                                        width='300px'
-                                    ></img>
-                                </div>
+                               
                             </div>                      
                         </div>                       
                     </form>    

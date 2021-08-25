@@ -1,7 +1,7 @@
 import { Button, Modal } from 'react-bootstrap';
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../../actions/roomAction/index';
+import * as actions from '../../../actions/seatAction/index';
 import * as acts from '../../../actions/index';
 
 class SeatForm extends Component {
@@ -10,11 +10,12 @@ class SeatForm extends Component {
         super(props);
         this.state = {
             seat: {
-                type: "",
+                type: "Normal",
                 columns: 10,
                 row: ""
             },
-            room:""
+            room:"",
+            invalidMessage: ""
         }
     }
     
@@ -45,44 +46,32 @@ class SeatForm extends Component {
             },
             room: {...prevState.room}
         }))
-        console.log(this.state.seat)
+        
         
     }
 
     
 
-    // validateRoom = () => {
-    //     const room = this.state.room;
-    //     if(room.roomNumber === ""){
-    //             return false
-    //         }
-    //     return true;    
-    // }
+    validateSeat = () => {
+        const {seat} = this.state;
+        if(!seat.row || !seat.type){
+                return false
+            }
+        return true;    
+    }
     saveSeat = (event) => {
         event.preventDefault();
-        console.log(this.state)
-        this.props.onSaveSeat(this.state.seat, this.props.roomEditing.id)
-        this.props.onToggleSeatForm();
         
-        // if(this.validateRoom() === true) {
-        //     if(this.props.roomEditing.id){
-        //         console.log("update roomId", this.props.roomEditing.id, this.state.room)
-        //         this.props.onUpdateRoom(this.state.room)
-        //         this.props.onToggleSeatForm()
-        //     }else {
-        //         const saveRoom = {
-        //             roomNumber: this.state.room.roomNumber,
-        //         } 
-        //         const id = window.location.pathname.split('/')[3];
-        //         this.props.onSaveRoom(saveRoom, id)
-        //         this.props.onToggleSeatForm()
-        //     }
+        if(this.validateSeat() === true) {
+            const roomId = window.location.pathname.split('/')[3];
+            this.props.onSaveSeat(this.state.seat, roomId)
+            this.props.onToggleSeatForm();
             
-        // }else {
-        //     this.setState({
-        //         invalidMessage : "Vui lòng nhập đầy đủ thông tin"
-        //     })
-        // }
+        }else {
+            this.setState({
+                invalidMessage : "Vui lòng nhập đầy đủ thông tin"
+            })
+        }
     }
 
     onHandleSearchChange = (e) => {
@@ -126,13 +115,13 @@ class SeatForm extends Component {
                             <div className='col-md-12 col-lg-12'>
                              
                                     <div className="form-group">
-                                        <label>seat row :</label>
+                                        <label>Hàng ghế :</label>
                                         <select 
                                             name="row" 
                                             value={this.state.row}
                                             onChange={this.onHandleChange}
                                             className="form-control" >
-                                            <option>Row number</option>
+                                            <option>Chọn hàng ghế</option>
                                             <option value="A">A</option>
                                             <option value="B">B</option>
                                             <option value="C">C</option>
@@ -140,7 +129,7 @@ class SeatForm extends Component {
                                     </div>
                                 
                                 <div className="form-group">
-                                    <label>room number:</label>
+                                    <label>Số ghế/hàng:</label>
                                     <input
                                         type="text"
                                         className="form-control"
@@ -149,21 +138,21 @@ class SeatForm extends Component {
                                     
                                     />
                                 </div>
-                                <div className="form-group">
-                                    <label>Ticket type :</label>
+                                {/* <div className="form-group">
+                                    <label>Loại vé :</label>
                                     <select 
                                         value={this.state.type}
                                         onChange={this.onHandleChange}
                                         name="type" 
                                         className="form-control">
-                                        <option>Ticket types</option>
+                                        <option>Chọn loại vé</option>
                                         {this.showTicketTypes(this.props.ticketTypes)}
                                     </select>
-                                </div>
+                                </div> */}
                             </div>                      
                         </div>                       
                     </form>    
-                    {/* <h5 className="text-danger">{this.state.invalidMessage !== "" ? this.state.invalidMessage: ""}</h5> */}
+                    <h5 className="text-danger">{this.state.invalidMessage !== "" ? this.state.invalidMessage: ""}</h5>
                 </Modal.Body>
                 <Modal.Footer>
                     

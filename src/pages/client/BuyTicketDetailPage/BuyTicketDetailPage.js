@@ -23,8 +23,8 @@ class BuyTicketDetailPage extends Component {
     var showtimeId = movie.showtimes.filter((item)=>
       (item.startTime===startTime)
     );
-    console.log(showtimeId[0].id);
-    console.log(this.props);
+    
+    
     this.state = {
       showtime_id: showtimeId[0].id,
       ticketArr: [],
@@ -75,7 +75,7 @@ class BuyTicketDetailPage extends Component {
       let row = item % 10 == 0?item / 10-1:item/10
       return `${String.fromCharCode(row+ 65)}${col}`;
     });
-    console.log("nameSeat:", nameSeat);
+    
     this.setState({
       arrSeatChoosing: nameSeat,
     });
@@ -97,9 +97,12 @@ class BuyTicketDetailPage extends Component {
     let dataSeats = [];
     if(bookings.tickets!==undefined){
       for (let i = 0; i < num_seat; i++) {
-        if ( bookings.tickets[i].status === type) {
-          dataSeats.push(bookings.tickets[i].seat);
-        }
+	// check null
+	if(bookings.tickets[i]){
+          if ( bookings.tickets[i].status === type) {
+            dataSeats.push(bookings.tickets[i].seat);
+          }
+	}
       }
     }
     let seats = [];
@@ -138,10 +141,10 @@ class BuyTicketDetailPage extends Component {
     amountTicket,
     totalAllTicket,bookings
   ) => {
-    console.log("totalAllTicket", totalAllTicket);
+    
     if (this.state.arrSeatChoosing.length === amountTicket) {
       let tickCode = this.makeid(8);
-      console.log(this.state.arrSeatChoosing);
+      
       let data = {
         type_transac: type,
         idUser: choosing.idUser,
@@ -155,7 +158,7 @@ class BuyTicketDetailPage extends Component {
         tickCode,
         tickets: bookings.tickets,
       };
-      console.log("data:", data);
+      
       localStorage.setItem("booking", JSON.stringify(data));
       let infoMovie = JSON.parse(localStorage.getItem("booking"));
       let allTickets = infoMovie.tickets;
@@ -168,8 +171,8 @@ class BuyTicketDetailPage extends Component {
           if(checkRow === allTickets[ind].seat.row && Number(checkColumn) === allTickets[ind].seat.column){
             let type_Id = 1;
             if(allTickets[ind].seat.type!=="Normal") type_Id = 2;
-            console.log(allTickets[ind].id)
-            console.log(type_Id)
+            
+            
             BookedTickets.push({
                 "id": allTickets[ind].id,
                 "typeId": type_Id
@@ -191,18 +194,18 @@ class BuyTicketDetailPage extends Component {
     }
   };
   render() {
-    console.log(this.props);
+    
     let { bookings, choosing, classes, tickets} = this.props;
     const { movie, date, time } = choosing;
-    console.log(this.props);
-    console.log(tickets);
+    
+    
     let room = {
       numberSeat: 30,
       seatReserved: this.seatsDisabled(bookings,"Sold"),
       seatBooked: this.seatsDisabled(bookings,"Booked"),
       seatHold: this.seatsDisabled(bookings,"Hold")
     };
-    console.log("choosing:", choosing);
+    
 
     if (Object.keys(choosing).length !== 0) {
       localStorage.setItem("choosing", JSON.stringify(choosing));

@@ -72,24 +72,24 @@ function TabPanel(props) {
     const [user, setUser] = React.useState({})
     const [password, setPassword] = React.useState({})
     const userEditing = useSelector(state => state.userEditing)
-    console.log("userEditing", userEditing)
     
     useEffect(() => {
       const account =JSON.parse(localStorage.getItem("account"))
       dispatch(actions.actGetProfileRequest())
-      console.log("user info", userEditing)
-      setUser(account.user)
-      console.log("state user", user)
+      setUser(userEditing)
     },[])
+
+    useEffect(() => {
+      setUser(userEditing)
+    },[userEditing])
+
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
+
     const updateProfile = (e) => {
       e.preventDefault()
-      console.log("update user", user)
       dispatch(actions.actUpdateProfileRequest(user))
-      console.log("after update", userEditing)
-      setUser(userEditing)
 
     }
     const changePassword = (e) => {
@@ -98,12 +98,15 @@ function TabPanel(props) {
 
     const onHanndleChangeInfo = (e) =>{
       const {name, value} = e.target;
-      console.log(user)
-      setUser({...user,[name]: value})
+      if(name === 'age'){
+        const age = parseInt(value);
+        setUser({...user,[name]: age})
+      }
+      else setUser({...user,[name]: value})
     }
     const onHanndleChangePassword = (e) =>{
       const {name, value} = e.target;
-      console.log(password)
+      
       setPassword({...password,[name]: value})
     }
     return (
@@ -116,7 +119,7 @@ function TabPanel(props) {
                             <Col md="4">
                                 <Card className="card-user">
                                 <div className="card-image mt-2">
-                                    <h4>My Profile</h4>
+
                                 </div>
                                 <Card.Body>
                                     <div className="author">
@@ -125,14 +128,15 @@ function TabPanel(props) {
                                         alt="..."
                                         className="avatar border-gray"
                                         width="100px"
-                                        height="100px"
+                                        height="35px"
                                         src={testAvatar}
                                         ></img>
-                                        <h5 className="title mt-2">{user.name}</h5>
+                                        <h5 className="title mt-2">{"Tên: " + user.name}</h5>
                                     </a>
-                                    <p className="email">{user.email}</p>
-                                    <p className="phone">0967139958</p>
-                                    <p className="address">Gia Lai-Việt Nam</p>
+                                    <p className="email">{"Email: " + user.email}</p>
+                                    <p className="age">{"Tuổi: " + user.age}</p>
+                                    <p className="phone">Số điện thoại: </p>
+                                    <p className="address">Địa chỉ: </p>
                                     </div>
                                     
                                 </Card.Body>
@@ -216,7 +220,7 @@ function TabPanel(props) {
                                           type="text" 
                                           className="form-control" 
                                           id="address" 
-                                          value="Đà Nẵng"
+                                          value=""
                                           placeholder="Enter address"></input>
                                     </div>
                                     <div className="form-group row">
@@ -225,7 +229,7 @@ function TabPanel(props) {
                                           type="number" 
                                           className="form-control" 
                                           id="phone"
-                                          value="0967139956" 
+                                          value="" 
                                           placeholder="Enter phone number"></input>
                                     </div>
                                     <button 

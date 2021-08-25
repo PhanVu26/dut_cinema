@@ -17,12 +17,13 @@ class MovieForm extends Component {
                 genres: [],
                 producer:"",
                 country:"",
-                duration: 0,
+                duration: '',
                 actors: [],
                 releaseDate: "",
                 mainImage: "",
                 thumbnailImage:"",
-                description: ""
+                description: "",
+                trailer:""
             },
             selectedActors: [],
             selectedGenres: [],
@@ -55,14 +56,14 @@ class MovieForm extends Component {
     }
 
     onHandleChange = (e) => {
-        //console.log("e ,", e)
+        //
         var target = e.target;
         var name = target.name;
         var value = target.value;
         var id = e.target.id;
 
-        //console.log("value", e)
-        //console.log("checked", e.target.checked)
+        //
+        //
         var file = null;
         var image = null;
         if(e.target.files != null){
@@ -164,10 +165,10 @@ class MovieForm extends Component {
         
         var results = [];
         results = actors?.map((actor, index) => {
-            //console.log("showActorBox", this.state.selectedActors?.some(act => act.id == actor.id))
+            //
             return (
-                <div className="actor-item ml-3 row" key={index}>
-                    <div className="col-2">
+                <div className="actor-item ml-3 row " key={index}>
+                    <div className="col-1">
                         <input 
                             checked = {this.state.selectedActors?.some(act => act.id == actor.id)}
                             className="actor-checkbox"
@@ -187,7 +188,7 @@ class MovieForm extends Component {
     }
 
     removeSelectedActor = (id) =>{
-        //console.log("remove ", id)
+        //
         this.setState((prevState) => ({
             selectedActors: prevState.selectedActors.filter(actor => actor.id !== id),
             movie: {
@@ -208,9 +209,9 @@ class MovieForm extends Component {
     }
 
     showChoosedActor = (actors) => {
-        console.log("actors", actors)
+        
         let rs = []
-        //console.log("actors",actors);
+        //
         rs = actors?.map(actor => {
             return (
                 <div className="selected-actor ml-2  mt-2">
@@ -227,7 +228,7 @@ class MovieForm extends Component {
         results = genres?.map((genre, index) => {
             return (
                 <div className="genre-item ml-3 row" key={index}>
-                    <div className="col-2">
+                    <div className="col-1">
                         <input 
                             checked = {this.state.selectedGenres?.some(g => g.id == genre.id)}
                             className="genre-checkbox"
@@ -289,7 +290,7 @@ class MovieForm extends Component {
                 const newMovie = this.state.movie;
 
                 
-                console.log("newMovie", newMovie)
+                
                 data.append("name", newMovie.name)
                 data.append("genreIds", newMovie.genres)
                 // data.append("director", newMovie.director)
@@ -304,17 +305,18 @@ class MovieForm extends Component {
                 if(typeof newMovie.thumbnailImage !== 'string'){
                     data.append("thumbnailImage", newMovie.thumbnailImage)
                 }
+                data.append("trailer", newMovie.trailer)
                 data.append("description", newMovie.description)
 
-                console.log("form-data: ---", data)
-                console.log("image", data.mainImage);
+                
+                
             if(this.props.movieInfo.id == ""){
-                //console.log("edit moive id", this.props.movieInfo.id)
-                console.log("save movie", this.state.movie.duration)
+                //
+                
                 this.props.onAddMovie(data)
             }else {
                 //data.append("id", newMovie.id)
-                console.log("data update", data)
+                
                 this.props.onUpdateMovie(data, newMovie.id)
             }
             this.props.onToggleMovieForm();          
@@ -353,7 +355,7 @@ class MovieForm extends Component {
         const {movie} = this.state
         const movieInfo = this.props.movieInfo;
         var {genres, actors} = this.props
-        console.log("state", this.state);
+        
         genres = genres.filter((genre) => {
             return genre.name.toLowerCase().indexOf(this.state.filterGenre.toLowerCase()) !== -1
         });
@@ -365,7 +367,7 @@ class MovieForm extends Component {
         if(movie.id){
             showImage = movieInfo.image.thumbnailUrl
         }else showImage = this.state.previewImage;
-        console.log("show image", showImage, this.state.previewImage, movie.id)
+        
 
         return (
            <div>  
@@ -379,10 +381,10 @@ class MovieForm extends Component {
                     <form onSubmit={this.addMovie} encType="multipart/form-data">
                         <div className='row'>
                             <div className='col-md-6 col-lg-6'>
-                                <div className="form-group">
+                                {/* <div className="form-group">
                                     <label>ID phim :</label>
                                     <span className="form-control">{movie.id}</span>
-                                </div>
+                                </div> */}
                                 <div className="form-group">
                                     <label>Tên phim :</label>
                                     <input
@@ -447,11 +449,14 @@ class MovieForm extends Component {
                                         onChange={ this.onHandleChange }
                                     
                                     />
-                                    <img 
-                                        src={this.state.movie.previewImage} 
-                                        width='200px'
-                                        height='200px'
-                                    ></img>
+                                    <div className="image-preview">
+                                        <img 
+                                            src={this.state.movie.previewImage} 
+                                            width = '100%'
+                                            height = '100%'
+                                            
+                                            ></img>
+                                    </div>
                                 </div> 
                             </div>
 
@@ -499,6 +504,17 @@ class MovieForm extends Component {
                                     </div>    
                                 </div>
                                 <div className="form-group">
+                                    <label>Trailer phim :</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        name="trailer"
+                                        value={movie.trailer}
+                                        onChange={ this.onHandleChange }
+                                    
+                                    />
+                                </div>
+                                <div className="form-group">
                                     <label>Mô tả phim :</label>
                                     <textarea
                                         rows='5'
@@ -533,8 +549,8 @@ class MovieForm extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        genres : state.genres,
-        actors: state.actors,
+        genres : state.genres.genres,
+        actors: state.actors.actors,
         isDisplayMovieForm : state.isDisplayMovieForm,
         movieInfo: state.movieInfo
     }

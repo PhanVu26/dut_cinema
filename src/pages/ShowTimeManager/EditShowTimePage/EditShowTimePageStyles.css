@@ -21,7 +21,7 @@ body {
 
 .booklist {
   width: 90vw;
-  max-width: 1170px;
+  max-width: 1000px;
   margin: 5rem auto;
   display: grid;
   gap: 2rem;
@@ -33,7 +33,7 @@ body {
   }
 }
 .book {
-  background: #eeeeee;
+  background: #e7e0c9;
   border-radius: 1rem;
   padding: 1rem 2rem;
 }
@@ -43,8 +43,13 @@ body {
 }
 
 .book h4 {
-  color: #617d98;
-  font-size: 1.5rem;
+  color: black;
+  font-size: 2.5rem;
+  margin-top: 0.5rem;
+}
+
+.book h5 {
+  color: black;
   margin-top: 0.5rem;
 }
 

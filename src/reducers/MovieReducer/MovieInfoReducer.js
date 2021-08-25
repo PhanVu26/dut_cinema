@@ -10,7 +10,8 @@ var initialState = {
     releaseDate: "",
     image: "",
     releaseDate: "",
-    description: ""
+    description: "",
+    trailer:""
 };
 
 var myReducer = (state = initialState, action) => {
@@ -36,11 +37,12 @@ var myReducer = (state = initialState, action) => {
                 actors: actors,
                 image: action.movie.image,
                 releaseDate: action.movie.releaseDate,
+                trailer: action.movie.trailer
             }     
-            console.log("movie edit ", movieInfo)
+            
             return movieInfo
         case types.FETCH_MOVIE:
-            console.log("movie info ", action.movie)
+            
             return action.movie
         default: return state;     
     }

@@ -8,11 +8,13 @@ export const GET_USER_EDITING = "GET_USER_EDITING";
 export const UPDATE_USER_STATUS = "UPDATE_USER_STATUS";
 export const UPDATE_USER = "UPDATE_USER";
 export const FILTER_USER = "FILTER_USER";
+export const USER_LOADING = "USER_LOADING";
 
 // Movies manager
 
 export const LIST_ALL_MOVIES = "LIST_ALL_MOVIES";
 export const ADD_MOVIE = "ADD_MOVIE";
+export const MOVIE_LOADING = "MOVIE_LOADING";
 export const SAVE_MOVIE = "SAVE_MOVIE";
 export const TOGGLE_MOVIE_MODAL = "TOGGLE_MOVIE_MODAL";
 export const TOGGLE_MOVIE_FORM = "TOGGLE_MOVIE_FORM";
@@ -23,6 +25,14 @@ export const FILTER_MOVIE = "FILTER_MOVIE";
 export const GET_MOVIE_INFO = "GET_MOVIE_INFO";
 // Genres
 export const LIST_ALL_GENRES = "LIST_ALL_GENRES";
+export const SAVE_GENRE = "SAVE_GENRE";
+export const TOGGLE_GENRE_MODAL = "TOGGLE_GENRE_MODAL";
+export const TOGGLE_GENRE_FORM = "TOGGLE_GENRE_FORM";
+export const DELETE_GENRE = "DELETE_GENRE";
+export const GET_GENRE_INFO = "GET_GENRE_INFO";
+export const UPDATE_GENRE = "UPDATE_GENRE";
+export const FILTER_GENRE = "FILTER_GENRE";
+export const GENRE_LOADING = "GENRE_LOADING";
 
 // Actors
 
@@ -34,6 +44,7 @@ export const DELETE_ACTOR = "DELETE_ACTOR";
 export const GET_ACTOR_INFO = "GET_ACTOR_INFO";
 export const UPDATE_ACTOR = "UPDATE_ACTOR";
 export const FILTER_ACTOR = "FILTER_ACTOR";
+export const ACTOR_LOADING = "ACTOR_LOADING";
 
 export const FETCH_DATA_CINEMA = "FETCH_DATA_CINEMA";
 export const FETCH_DATA_SHOWTIME = "FETCH_DATA_SHOWTIME";
@@ -45,6 +56,8 @@ export const GET_CINEMA_ROOMS = "GET_CINEMA_ROOMS";
 export const GET_ALL_MOVIES_SHOWTIMES = "GET_ALL_MOVIES_SHOWTIMES";
 export const ADD_SHOWTIME = "ADD_SHOWTIME";
 export const DELETE_SHOWTIME = "DELETE_SHOWTIME";
+export const GET_ALL_SHOWTIMES = "GET_ALL_SHOWTIMES";
+export const GET_SHOWTIME_INFO = "GET_SHOWTIME_INFO";
 
 // Roles
 
@@ -78,13 +91,13 @@ export const FETCH_DATA_TICKETS = "FETCH_DATA_TICKETS";
 export const FETCH_DATA_FOOD = "FETCH_DATA_FOOD";
 export const FETCH_TRANSACTION = "FETCH_TRANSACTION";
 
-
 //transactions
 
 export const FETCH_DATA_TRANSACTION = "FETCH_DATA_TRANSACTION";
 export const TOGGLE_TRANSACTION_MODAL = "TOGGLE_TRANSACTION_MODAL";
 export const GET_TRANSACTION = "GET_TRANSACTION";
 export const DELETE_TRANSACTION = "DELETE_TRANSACTION";
+export const TRANSACTION_LOADING = "TRANSACTION_LOADING";
 
 // Cinemas
 
@@ -96,7 +109,7 @@ export const SAVE_CINEMA = "SAVE_CINEMA";
 export const TOGGLE_CINEMAS_MODAL = "TOGGLE_CINEMAS_MODAL";
 export const GET_CINEMA_INFO = "GET_CINEMA_INFO";
 export const UPDATE_CINEMA = "UPDATE_CINEMA";
-
+export const CINEMA_LOADING = "CINEMA_LOADING";
 
 // Rooms of cinema
 export const FETCH_DATA_ROOMS = "FETCH_DATA_ROOMS";
@@ -105,9 +118,27 @@ export const SAVE_ROOM = "SAVE_ROOM";
 export const GET_ROOM_INFO = "GET_ROOM_INFO";
 export const DELETE_ROOM = "DELETE_ROOM";
 export const UPDATE_ROOM = "UPDATE_ROOM";
-
+export const ROOM_LOADING = "ROOM_LOADING";
 
 // seats of room
-// Rooms of cinema
 export const ADD_SEATS = "ADD_SEATS";
+export const GET_SEATS = "GET_SEATS";
+export const SEAT_LOADING = "SEAT_LOADING";
 export const TOGGLE_SEAT_MODAL = "TOGGLE_SEAT_MODAL";
+
+// Ticket type
+export const LIST_ALL_TICKET_TYPE = "LIST_ALL_TICKET_TYPES";
+export const SAVE_TICKET_TYPE = "SAVE_TICKET_TYPE";
+export const TOGGLE_TICKET_TYPE_MODAL = "TOGGLE_TICKET_TYPE_MODAL";
+export const TOGGLE_TICKET_TYPE_FORM = "TOGGLE_TICKET_TYPE_FORM";
+export const DELETE_TICKET_TYPE = "DELETE_TICKET_TYPE";
+export const GET_TICKET_TYPE_INFO = "GET_TICKET_TYPE_INFO";
+export const UPDATE_TICKET_TYPE = "UPDATE_TICKET_TYPE";
+export const FILTER_TICKET_TYPE = "FILTER_TICKET_TYPE";
+export const TICKET_TYPE_LOADING = "TICKET_TYPE_LOADING";
+
+
+// Analysis
+export const MOVIE_ANALYSIS = "MOVIE_ANALYSIS";
+export const SERVICE_ANALYSIS = "SERVICE_ANALYSIS";
+export const SALE_ANALYSIS = "SALE_ANALYSIS";

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Loader from 'react-loader-advanced';
 import {connect} from 'react-redux';
 import Pagination from '../../../components/Pagination/Pagination';
 import ActorControl from '../../../components/Control/ActorControl/ActorControl';
@@ -32,7 +33,7 @@ class ActorManager extends Component{
         });
       };
     render(){
-        const {actors} = this.props;
+        const {actors, loading} = this.props;
         var {
             totalPages,
             currentPage,
@@ -41,7 +42,8 @@ class ActorManager extends Component{
             endIndex
           } = this.state;
         var rowsPerPage = actors.slice(startIndex, endIndex + 1);  
-        return (       
+        return (    
+            <Loader show={loading} message={'Loading.......'}> 
             <section>
                 <div className="container-fluid">
                     <div className="row">
@@ -101,14 +103,15 @@ class ActorManager extends Component{
                     </div>
                 </div>            
             </section> 
-                
+            </Loader>   
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        actors : state.actors
+        actors : state.actors.actors,
+        loading: state.actors.loading
     }
 }
 

@@ -5,8 +5,9 @@ import callApi from "../../utils/ApiCallerServer";
 
 export const actFetchDataRoomsRequest = (id) => {
     return (dispatch) => {
+        dispatch(loadRoom());
       return callApi(`cinemas/${id}/rooms?page=1&perPage=1000`, "GET", null).then((res) => {
-        console.log("cinemas", res.data)
+        
         dispatch(actFetchDataRooms(res.data.rooms));
       });
     };
@@ -22,6 +23,7 @@ export const actFetchDataRooms = (rooms) => {
 
 export const actSaveRoomRequest = (room, id) => {
     return (dispatch) => {
+        dispatch(loadRoom());
         return callApi(`cinemas/${id}/rooms`, "POST", room).then((res) => {
             alert("Thêm phòng thành công")
             dispatch(saveRoom(res.data.rooms));
@@ -39,44 +41,12 @@ export const saveRoom = (rooms) => {
     }
 }
 
-export const actSaveSeatRequest = (seat, id) => {
-    return (dispatch) => {
-        console.log(id)
-        return callApi(`rooms/${id}/seats`, "POST", seat).then((res) => {
-            if(res.statusCode !== 400){
-                alert("Thêm ghế thành công.")
-                dispatch(saveSeat(res.data));
-            }
-        })
-        .catch(err => {
-            alert("Lỗi kết nối !!!")
-        })
-    };
-};
-
-export const saveSeat = (room) => {
-    return {
-        type: types.ADD_SEATS,
-        room
-    }
-}
-
 export const toggleModal = () => {
     return {
         type: types.TOGGLE_ROOM_MODAL,
     }
 }
 
-export const toggleSeatModal = () => {
-    return {
-        type: types.TOGGLE_SEAT_MODAL,
-    }
-}
-// export const toggleActorForm = () => {
-//     return {
-//         type: types.TOGGLE_ACTOR_FORM,
-//     }
-// }
 
 export const getRoomInfo = (room) => {
     return {
@@ -88,6 +58,7 @@ export const getRoomInfo = (room) => {
 
 export const actDeleteRoomRequest = (id) => {
     return (dispatch) => {
+        dispatch(loadRoom());
         return callApi(`rooms/${id}`, "DELETE", null).then((res) => {
             alert("Xóa phòng thành công")
             dispatch(deleteRoom(id));
@@ -107,6 +78,7 @@ export const deleteRoom = (id) => {
 
 export const actUpdateRoomRequest = (room) => {
     return (dispatch) => {
+        dispatch(loadRoom());
         return callApi(`rooms/${room.id}`, "PATCH", room).then((res) => {
             alert("Cập nhật thành công.")
             dispatch(actUpdateRoom(res.data));
@@ -121,5 +93,11 @@ export const actUpdateRoom = (room) => {
     return {
         type: types.UPDATE_ROOM,
         room
+    }
+}
+
+export const loadRoom = () => {
+    return {
+        type: types.ROOM_LOADING,
     }
 }

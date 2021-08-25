@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../../actions/movieManager/index';
 
-import testImage from '../../../assets/images/logo.png';
-import style from '../MovieModal/MovieModal.css'
+
+import OpenVideo from '../../../pages/client/TicketBooking/OpenVideoMovie/OpenVideo'
 class MovieDetail extends Component {
 
     constructor(props) {
@@ -33,27 +33,14 @@ class MovieDetail extends Component {
         return results.toString();
     }
     showActors(actors){
-        console.log("actors", actors)
+        
         var results = [];
         actors?.forEach(actor => {
             results.push(actor.name)
         }) 
         return results.toString();
     }
-    
-    // componentDidMount(){   
-    //     this.setState({
-    //         id: this.props.movieInfo.id,
-    //         name: this.props.movieInfo.name,
-    //         genres: this.props.movieInfo.genres,
-    //         director: this.props.movieInfo.director,
-    //         producer: this.props.movieInfo.producer,
-    //         releaseDate: this.props.movieInfo.releaseDate,
-    //         actors: this.props.movieInfo.actors,
-    //         image: this.props.movieInfo.image
-    //     })
-        
-    // }
+
     render() {
         const {isDisplayMovieModal} = this.props;
         const movie = this.props.movieInfo;
@@ -107,14 +94,6 @@ class MovieDetail extends Component {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <span className="title-detail">Đạo diễn:</span>
-                                                </td>
-                                                <td>
-                                                    <span>{movie.director}</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
                                                     <span className="title-detail">Nhà sản xuất:</span>
                                                 </td>
                                                 <td>
@@ -153,7 +132,11 @@ class MovieDetail extends Component {
                                     <img 
                                         width="100%"                                        
                                         src={movie.image.thumbnailUrl}></img>
+                                    <div className="play-bt" style={{left:"15%", top:"35%"}}>
+                                        <OpenVideo info={movie} />
+                                    </div>
                                 </div>
+                                
                             </div>
                         </Modal.Body>
                         <Modal.Footer>

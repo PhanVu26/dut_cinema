@@ -23,7 +23,7 @@ class MovieItem extends Component {
     //     this.props.onUpdateUserStatus(this.props.user.id)
     // }
     // getUserEditing = () => {
-    //     console.log("get user editing", this.props.user)
+    //     
     //     this.props.onToggleUserForm();
     //     this.props.getUserEditing(this.props.user)
     // }

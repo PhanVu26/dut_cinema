@@ -51,7 +51,7 @@ export default function TableCustom({
   handleOpenpopupEdit,
 }) {
   const classes = useStyles();
-  console.log("movieee:", movie);
+  
 
   //   dataHead.map(item => {
   //       let value = movie.find(value => Object.keys(value) === item.field)

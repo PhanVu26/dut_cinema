@@ -3,9 +3,20 @@ import callApi from "../../utils/ApiCallerServer";
 
 export const actFetchDataTransactionsRequest = () => {
   return (dispatch) => {
+    dispatch(loadTransaction());
     return callApi(`transactions?page=1&perPage=1000&relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema`, "GET", null).then(
       (res) => {
-        console.log("res", res.data.results);
+        dispatch(fetchDataTransaction(res.data.results));
+      }
+    );
+  };
+};
+
+export const actFetchDataTransactionsFilterRequest = (query) => {
+  return (dispatch) => {
+    dispatch(loadTransaction());
+    return callApi(`transactions?${query}&page=1&perPage=1000&relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema`, "GET", null).then(
+      (res) => {
         dispatch(fetchDataTransaction(res.data.results));
       }
     );
@@ -19,6 +30,12 @@ export const fetchDataTransaction = (transactions) => {
     }
 }
 
+export const loadTransaction = () => {
+  return {
+      type: Types.TRANSACTION_LOADING,
+  }
+}
+
 export const onToggleModal = () => {
     return {
         type: Types.TOGGLE_TRANSACTION_MODAL,
@@ -27,9 +44,10 @@ export const onToggleModal = () => {
 
 export const actGetTransactionRequest = (id) => {
   return (dispatch) => {
+    dispatch(loadTransaction());
     return callApi(`transactions/${id}?relations=user,ticket,ticket.showtime,ticket.showtime.movie,ticket.seat,ticket.seat.room,ticket.seat.room.cinema`, "GET", null).then(
       (res) => {
-        console.log("res", res.data);
+        
         dispatch(getTransaction(res.data));
       }
     );
@@ -45,9 +63,11 @@ export const getTransaction = (transaction) => {
 
 export const actDeleteTransactionRequest = (id) => {
   return (dispatch) => {
+    dispatch(loadTransaction());
     return callApi(`transactions/${id}`, "DELETE", null).then(
       (res) => {
         dispatch(deleteTransaction(id));
+        alert("Xóa thành công");
       }
     );
   };

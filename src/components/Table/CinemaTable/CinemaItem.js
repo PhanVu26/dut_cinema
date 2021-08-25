@@ -46,13 +46,13 @@ class CinemaItem extends Component {
                         className="btn btn-danger ml-2 mr-2">
                         <span className="far fa-trash-alt"></span>
                     </button>
-                    <NavLink to={"/admin/cinemas/" + cinema.id}>
+                    <NavLink to={"/admin/cinemas/" + cinema.id+"/rooms"}>
                         <button 
                             type="button" 
                             className="btn btn-danger"
                             // onClick={this.getcinemaInfo}
                             >
-                            <span className="fas fa-eye"></span>
+                            <span className="fas fa-eye">DS phòng</span>
                         </button>
                     </NavLink>
                 </td>

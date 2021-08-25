@@ -29,9 +29,9 @@ class BuyTicketPage extends React.Component {
   }
 
   showTheaterToChoose = (arr, classes) => {
-    console.log(arr);
+    
     return arr.map((item, index) => {
-      console.log(this.state.active.id+", "+item.cinema.id+", "+classes.active);
+      
       let active = this.state.active.id === item.cinema.id ? classes.active : "";
       return (
         <div
@@ -64,7 +64,7 @@ class BuyTicketPage extends React.Component {
 
   showMovieToChoose = (arr, classes) => {
     return arr.map((item, index) => {
-      console.log(item);
+      
       let active = this.state.active.id === item.id ? classes.active : "";
       return (
         <div
@@ -114,19 +114,19 @@ class BuyTicketPage extends React.Component {
         showtimes: ShowTimes,
       }
       if(!dates.includes(item)){
-        console.log("a")
+        
         TiOfS.push(obj)
         dates.push(item)
       }
     });
     let TimeOfShowtime = Array.from(new Set(TiOfS));
-    console.log(TimeOfShowtime)
+    
     this.setState({
       timeOfMovie: TimeOfShowtime,
       isShow: true,
       active: mv,
     });
-    console.log(TiOfS);
+    
   };
   
   showTimeOfMovie = (arr, classes, account) => {
@@ -184,9 +184,9 @@ class BuyTicketPage extends React.Component {
   };
 
   render() {
-    console.log(this.props);
+    
     const { classes, theater } = this.props;
-    console.log(theater);
+    
     let account = JSON.parse(localStorage.getItem("account"));
     const { timeOfMovie,mv, isShow,isMovieShow } = this.state;
     return (

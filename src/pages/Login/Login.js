@@ -59,7 +59,7 @@ class Login extends Component {
     
     e.preventDefault();
     let { password, email } = this.state;
-    console.log(email.value+" "+email.isValid+" "+password.value+" "+password.isValid);
+    
     if (
       password.value !== "" &&
       password.isValid === true &&
@@ -73,12 +73,12 @@ class Login extends Component {
 
         actions.actLoginAccountRequest(account).then((res) => {
           let dataAccount = res.data;
-          console.log(dataAccount);
+          
             if (Object.keys(dataAccount).length !== 0) {
               localStorage.setItem("account", JSON.stringify(dataAccount));
             }
-            alert("Logged in successfully");
-            console.log("account", dataAccount)
+            // alert("Logged in successfully");
+            
             switch(dataAccount.roleName){
               case "Admin":
                 {
@@ -108,11 +108,11 @@ class Login extends Component {
         // axios.post(`https://cinema-nestjs.herokuapp.com/auth/login`, account)
         //     .then(res => {
         //         response = res;
-        //         console.log("response", response);
+        //         
         //         const user = res.data.user;
         //         localStorage.setItem("account", JSON.stringify(res.data))
-        //         console.log(res);
-        //         console.log(res.data.user);
+        //         
+        //         
                 
                 
         //     })
@@ -152,9 +152,9 @@ class Login extends Component {
       cursor: "pointer",
     };
     const role = sessionStorage.getItem("role");
-    console.log("role",role)
+    
     if(role !== null){
-      console.log("role2",role)
+      
       if(role == "Admin"){
         return <Redirect to = "/admin" />
       }else {
@@ -185,9 +185,6 @@ class Login extends Component {
           <Modal.Body>
             <div className="row">
               <div className="col-md-12">
-                <p style={text}>
-                  <span className="text-danger">Bạn không có quyền truy cập vào trang này</span>. Vui lòng đăng nhập trước khi sử dụng hệ thống.
-                </p>
               </div>
             </div>
             <form onSubmit={this.onSave} id="loginForm">

@@ -40,6 +40,18 @@ import roomEditing from "./RoomReducer/RoomEditingReducer";
 import isDisplaySeatModal from './SeatReducer/DisplaySeatFormReducer'
 import seatRoom from './SeatReducer/SeatReducer';
 
+import seats from './SeatReducer/SeatReducer';
+
+import isDisplayGenreForm from "./GenreReducer/DisplayGenreFormReducer";
+import genreEditing from "./GenreReducer/GenreEditingReducer";
+import filterGenre from "./GenreReducer/FilterGenreReducer";
+
+import ticketTypes from './TicketTypeReducer/TicketTypeReducer';
+import isDisplayTicketTypeForm from "./TicketTypeReducer/DisplayTicketTypeFormReducer";
+import ticketTypeEditing from "./TicketTypeReducer/TicketTypeEditingReducer";
+import filterTicketType from "./TicketTypeReducer/FilterTicketTypeReducer";
+import analysisReducer from "./AnalysisReducer/AnalysisReducer";
+
 const myReducer = combineReducers({
   users,
   genres,
@@ -71,7 +83,17 @@ const myReducer = combineReducers({
   isDisplayRoomModal,
   roomEditing,
   isDisplaySeatModal,
-  seatRoom
+  seatRoom,
+  seats,
+  isDisplayGenreForm,
+  genreEditing,
+  filterGenre,
+
+  ticketTypes,
+  isDisplayTicketTypeForm,
+  ticketTypeEditing,
+  filterTicketType,
+  analysisReducer
 
 });
 

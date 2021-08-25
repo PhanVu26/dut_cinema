@@ -3,9 +3,32 @@ import callApi from "../../utils/ApiCallerServer";
 
 export const actFetchDataActorsRequest = () => {
     return (dispatch) => {
+        dispatch(loadActor())
       return callApi("actors?page=1&perPage=1000", "GET", null).then((res) => {
         dispatch(actFetchDataActors(res.data.results));
       });
+    };
+};
+
+export const actFetchDataActorsFilterRequest = (query) => {
+    return (dispatch) => {
+        dispatch(loadActor())
+      return callApi(`actors?${query}&page=1&perPage=1000`, "GET", null).then((res) => {
+        dispatch(actFetchDataActors(res.data.results));
+      });
+    };
+};
+
+
+export const actGetActorRequest = (id) => {
+    return (dispatch) => {
+        dispatch(loadActor())
+      return callApi(`actors/${id}`, "GET", null).then((res) => {
+        dispatch(getActorInfo(res.data));
+      })
+      .catch(err => {
+        alert("Lỗi kết nối");
+      })
     };
 };
 
@@ -24,9 +47,10 @@ export const listAllActors = () => {
 
 export const actSaveActorsRequest = (actor) => {
     return (dispatch) => {
+        dispatch(loadActor())
         return callApi("actors", "POST", actor).then((res) => {
-            alert("Thêm thành công.")
             dispatch(saveActor(res.data));
+            alert("Thêm thành công.")
       })
       .catch(err => {
         alert("Lỗi kết nối !!!")
@@ -61,9 +85,10 @@ export const getActorInfo = (actor) => {
 }
 export const actDeleteActorsRequest = (id) => {
     return (dispatch) => {
+        dispatch(loadActor())
         return callApi(`actors/${id}`, "DELETE", null).then((res) => {
-            alert("Xóa thành công.")
             dispatch(deleteActor(id));
+            alert("Xóa thành công.")
         })
         .catch(err => {
             alert("Lỗi kết nối !!!")
@@ -86,9 +111,10 @@ export const filterActor = (filter) => {
 
 export const actUpdateActorsRequest = (actor) => {
     return (dispatch) => {
+        dispatch(loadActor())
         return callApi(`actors/${actor.id}`, "PATCH", actor).then((res) => {
-            alert("Cập nhật thành công.")
             dispatch(actUpdateActor(res.data));
+            alert("Cập nhật thành công.")
         })
         .catch(err => {
             alert("Lỗi kết nối !!!")
@@ -100,5 +126,11 @@ export const actUpdateActor = (actor) => {
     return {
         type: types.UPDATE_ACTOR,
         actor
+    }
+}
+
+export const loadActor = () => {
+    return {
+        type: types.ACTOR_LOADING,
     }
 }
