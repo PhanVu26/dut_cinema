@@ -147,7 +147,7 @@ class BuyTicketPage extends React.Component {
                     this.handleOnChooseSession(item, session, account)
                   }
                 >
-                  {session}
+                  {session.slice(0,5)}
                 </Box>
               );
             })}
