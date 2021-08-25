@@ -14,7 +14,7 @@ class MoviePage extends Component {
 
   isMovieShowing = (date) => {
     const now = new Date().setHours(0, 0, 0, 0);
-    if (Date.parse(date) <= now) return true;
+    if (Date.parse(date) < now) return true;
     else return false;
   };
 
