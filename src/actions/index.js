@@ -31,7 +31,7 @@ export const deleteUser = (id) => {
 
 export const actFetchDataMovieRequest = () => {
   return (dispatch) => {
-    return callApi("movies?relations=actors,genres", "GET", null).then(
+    return callApi("movies?page=1&perPage=1000&relations=actors,genres", "GET", null).then(
       (res) => {
         dispatch(actFetchDataMovie(res.data.results));
       }
