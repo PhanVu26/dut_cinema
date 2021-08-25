@@ -147,7 +147,7 @@ class BuyTicketPage extends React.Component {
                     this.handleOnChooseSession(item, session, account)
                   }
                 >
-                  {session}
+                  {session.slice(0,5)}
                 </Box>
               );
             })}
@@ -164,7 +164,6 @@ class BuyTicketPage extends React.Component {
       const slug = movie.name;
       this.props.history.push(`/buy-ticket-detail/${slug}`);
     } else {
-
       alert("Vui lòng đăng nhập!");
       window.location.href = "/login"
     }
