@@ -1,0 +1,124 @@
+.box1 {
+  font-family: "Cabin", sans-serif;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease 0s;
+}
+.box1:hover {
+  filter: drop-shadow(8px 8px 10px gray);
+}
+.box1:before,
+.box1:after {
+  content: "";
+  background: linear-gradient(45deg, #feac5e, #c779d0, #4bc0c8);
+  width: 50%;
+  height: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  opacity: 0.5;
+  transform: skewX(-40deg);
+  position: absolute;
+  top: 0;
+  left: 150%;
+  z-index: 1;
+  transition: all 0.4s;
+}
+.box1:hover:before {
+  left: 65%;
+}
+.box1:after {
+  left: -150%;
+  opacity: 0.4;
+}
+.box1:hover:after {
+  left: -35%;
+}
+.box1 img {
+  width: 100%;
+  height: 100%;
+  transform: scale(1.02);
+  transition: all 0.25s;
+}
+.box1:hover img {
+  transform: scale(1);
+  filter: blur(3px) hue-rotate(50deg);
+}
+.box1 .box-content {
+  color: #fff;
+  width: 70%;
+  transform: translateX(-50%) translateY(-50%) scale(0);
+  text-align: center;
+  padding: 10px;
+  opacity: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  transition: all 0.3s ease 0s;
+}
+.box1:hover .box-content {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-50%) scale(1);
+}
+.box1 .title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 0 0 4px #000;
+  margin: 0 0 3px 0;
+}
+.box1 .post {
+  font-size: 15px;
+  font-style: italic;
+  text-transform: capitalize;
+  text-shadow: 0 0 4px #000;
+  margin: 0 0 10px;
+  display: block;
+}
+.box1 .icon {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.box1 .icon li {
+  display: inline-block;
+  margin: 0 5px 0 0;
+}
+.box1 .icon li a {
+  color: #292929;
+  background: #fff;
+  font-size: 20px;
+  line-height: 35px;
+  text-align: center;
+  height: 35px;
+  width: 35px;
+  display: block;
+  transition: all 0.3s;
+}
+.box1 .icon li a:hover {
+  color: #fff;
+  background: #833ab4;
+  text-shadow: 0 0 2px #fff;
+}
+@media only screen and (max-width: 990px) {
+  .box1 {
+    margin-bottom: 30px;
+  }
+}
+@media only screen and (max-width: 479px) {
+  .box1 .title {
+    font-size: 20px;
+  }
+}
+.btn-orange {
+  border: 1px solid #f26b38;
+  color: white;
+}
+
+.underline {
+  width: 6rem;
+  height: 0.25rem;
+  background: var(--clr-primary-5);
+  margin-left: auto;
+  margin-right: auto;
+}
